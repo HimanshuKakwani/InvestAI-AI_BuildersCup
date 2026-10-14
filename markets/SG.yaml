@@ -1,0 +1,41 @@
+market: SG
+name: Singapore
+flag_emoji: "🇸🇬"
+currency: SGD
+currency_symbols: ["S$", "SGD"]
+regulator: MAS
+legal_framework: "Securities and Futures Act (SFA) / Financial Advisers Act (FAA) - Unlicensed Financial Advice"
+registry_name: "MAS Financial Institutions Directory"
+reporting:
+  name: "ScamShield"
+  url: "https://www.scamshield.gov.sg"
+supported_languages: ["en", "zh", "ms"]
+exchange:
+  names: ["SGX", "STI", "Catalist"]
+  ticker_suffixes: [".SI"]
+  default_suffix: ".SI"
+license_registry: registries/SG_mas_fid.json
+alert_lists:
+  - alerts/SG_mas_investor_alert_list.json
+red_flag_lexicon:
+  guaranteed_return:
+    - "guaranteed"
+    - "guaranteed monthly payout"
+    - "capital guaranteed"
+    - "稳赚不赔"
+    - "保本"
+    - "no risk"
+  insider:
+    - "insider tip"
+    - "内部消息"
+  urgency:
+    - "last chance"
+    - "limited slots"
+    - "名额有限"
+  paid_group_push:
+    - "exclusive vip whatsapp"
+    - "exclusive syndicate"
+    - "vip group"
+    - "带单"
+  fig_leaf_disclaimer:
+    - "not financial advice"

@@ -1,0 +1,78 @@
+{
+  "ticker": "INFY.NS",
+  "name": "Infosys",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Technology",
+  "trailing_eps": 73.64,
+  "forward_eps": 80.04155,
+  "market_cap": 4301869809664.0,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 18212000000.0,
+      "net_income": 2981000000.0,
+      "eps": 0.71
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 18562000000.0,
+      "net_income": 3167000000.0,
+      "eps": 0.76
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 19277000000.0,
+      "net_income": 3158000000.0,
+      "eps": 0.76
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 20158000000.0,
+      "net_income": 3313000000.0,
+      "eps": 0.8
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-06-30",
+      "revenue": 4941000000.0,
+      "net_income": 809000000.0,
+      "eps": 0.19
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 5076000000.0,
+      "net_income": 839000000.0,
+      "eps": null
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 5099000000.0,
+      "net_income": 747000000.0,
+      "eps": 0.18
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 5040000000.0,
+      "net_income": 919000000.0,
+      "eps": 0.23
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 5082000000.0,
+      "net_income": 819000000.0,
+      "eps": 0.2
+    }
+  ],
+  "pe_band_5y": null,
+  "analyst": {
+    "target_mean": 1179.9762,
+    "target_high": 1610.0,
+    "target_low": 940.0,
+    "num_analysts": 42,
+    "recommendation": "buy"
+  },
+  "source": "Yahoo Finance (yfinance)",
+  "as_of": "2026-10-13"
+}

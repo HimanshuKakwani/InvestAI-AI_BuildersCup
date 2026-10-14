@@ -1,0 +1,20 @@
+[
+  {
+    "reg_number": "INH000001234",
+    "name": "Motilal Oswal Financial Services Limited",
+    "entity_type": "Research Analyst",
+    "aliases": ["motilal oswal", "motilal", "mosl"]
+  },
+  {
+    "reg_number": "INH000000164",
+    "name": "HDFC Securities Limited",
+    "entity_type": "Research Analyst",
+    "aliases": ["hdfc securities", "hdfc sec"]
+  },
+  {
+    "reg_number": "INA000000001",
+    "name": "Kotak Investment Advisors Limited",
+    "entity_type": "Investment Adviser",
+    "aliases": ["kotak cherry", "kotak investment advisors"]
+  }
+]

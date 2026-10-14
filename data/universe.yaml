@@ -1,0 +1,39 @@
+# Curated stock universe across India, Singapore, and Australia.
+# Expandable list mapping ticker, formal name, and typical aliases used in chat tips.
+IN:
+  - {ticker: RELIANCE.NS, name: Reliance Industries, aliases: [reliance, ril]}
+  - {ticker: TCS.NS, name: Tata Consultancy Services, aliases: [tcs]}
+  - {ticker: HDFCBANK.NS, name: HDFC Bank, aliases: [hdfc bank, hdfcbank]}
+  - {ticker: INFY.NS, name: Infosys, aliases: [infosys, infy]}
+  - {ticker: ITC.NS, name: ITC Limited, aliases: [itc]}
+  - {ticker: SUZLON.NS, name: Suzlon Energy, aliases: [suzlon]}
+  - {ticker: IDEA.NS, name: Vodafone Idea, aliases: [vodafone idea, vi, idea]}
+  - {ticker: YESBANK.NS, name: Yes Bank, aliases: [yes bank, yesbank]}
+  - {ticker: RPOWER.NS, name: Reliance Power, aliases: [reliance power, rpower]}
+  - {ticker: IRFC.NS, name: Indian Railway Finance Corporation, aliases: [irfc]}
+  - {ticker: TATASTEEL.NS, name: Tata Steel, aliases: [tata steel, tatasteel]}
+  - {ticker: SBIN.NS, name: State Bank of India, aliases: [sbi, sbin]}
+  - {ticker: ZOMATO.NS, name: Zomato, aliases: [zomato]}
+  - {ticker: PAYTM.NS, name: One97 Communications (Paytm), aliases: [paytm]}
+  - {ticker: ADANIENT.NS, name: Adani Enterprises, aliases: [adani enterprises, adanient]}
+  - {ticker: TRENT.NS, name: Trent Limited, aliases: [trent, trent limited]}
+
+SG:
+  - {ticker: D05.SI, name: DBS Group Holdings, aliases: [dbs]}
+  - {ticker: O39.SI, name: OCBC Bank, aliases: [ocbc]}
+  - {ticker: U11.SI, name: United Overseas Bank (UOB), aliases: [uob]}
+  - {ticker: Z74.SI, name: Singtel, aliases: [singtel, singapore telecommunications]}
+  - {ticker: C6L.SI, name: Singapore Airlines, aliases: [sia, singapore airlines]}
+  - {ticker: 5E2.SI, name: Seatrium, aliases: [seatrium, sembcorp marine]}
+  - {ticker: S68.SI, name: Singapore Exchange (SGX), aliases: [sgx]}
+  - {ticker: BS6.SI, name: Yangzijiang Shipbuilding, aliases: [yzj, yangzijiang]}
+
+AU:
+  - {ticker: BHP.AX, name: BHP Group, aliases: [bhp]}
+  - {ticker: CBA.AX, name: Commonwealth Bank of Australia, aliases: [commbank, cba, commonwealth bank]}
+  - {ticker: CSL.AX, name: CSL Limited, aliases: [csl]}
+  - {ticker: PLS.AX, name: Pilbara Minerals, aliases: [pilbara, pilbara minerals, pls]}
+  - {ticker: LTR.AX, name: Liontown Resources, aliases: [liontown, ltr]}
+  - {ticker: PDN.AX, name: Paladin Energy, aliases: [paladin, pdn]}
+  - {ticker: BOE.AX, name: Boss Energy, aliases: [boss energy, boe]}
+  - {ticker: FMG.AX, name: Fortescue Metals Group, aliases: [fortescue, fmg]}

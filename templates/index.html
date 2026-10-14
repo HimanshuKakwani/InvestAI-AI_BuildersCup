@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvestPI — AI Forensic Shield for Retail Investors</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .badge-red { background: #fee2e2; color: #991b1b; border: 1px solid #f87171; }
+    .badge-orange { background: #ffedd5; color: #9a3412; border: 1px solid #fb923c; }
+    .badge-green { background: #dcfce7; color: #166534; border: 1px solid #4ade80; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+  <!-- Navigation -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <span class="text-2xl">🛡️</span>
+        <div>
+          <span class="font-extrabold text-xl tracking-tight text-white">Invest<span class="text-blue-500">PI</span></span>
+          <span class="text-xs ml-2 px-2 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800">BFSI Fraud Shield</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="/apidocs/" target="_blank" class="hidden sm:inline-flex items-center space-x-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+          <span>📖</span>
+          <span>Swagger Docs</span>
+        </a>
+        <div class="flex items-center space-x-2">
+          <label class="text-xs text-slate-400 font-medium">Jurisdiction:</label>
+          <select id="regionSelect" class="bg-slate-800 border border-slate-700 text-sm rounded-lg px-3 py-1.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="IN" selected>🇮🇳 India (SEBI)</option>
+            <option value="SG">🇸🇬 Singapore (MAS)</option>
+            <option value="AU">🇦🇺 Australia (ASIC)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero & Ingestion Section -->
+  <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div class="text-center max-w-2xl mx-auto space-y-3">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white">
+        Fact-Check Social Media Stock Tips <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Before You Buy</span>
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base">
+        Detect pump-and-dump claims, illegal return guarantees, and unlicensed finfluencers across JAPAC markets using multimodal AI audited against empirical market data.
+      </p>
+    </div>
+
+    <!-- Investigation Console -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
+      <!-- Modality Tabs -->
+      <div class="flex border-b border-slate-800 mb-6 space-x-4">
+        <button id="tabYt" onclick="switchTab('youtube_url')" class="pb-3 text-sm font-semibold text-blue-400 border-b-2 border-blue-500 flex items-center space-x-2">
+          <span>📺</span> <span>YouTube Video / Short</span>
+        </button>
+        <button id="tabImg" onclick="switchTab('screenshot')" class="pb-3 text-sm font-semibold text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+          <span>📸</span> <span>Chat Screenshot OCR</span>
+        </button>
+        <button id="tabText" onclick="switchTab('text')" class="pb-3 text-sm font-semibold text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+          <span>💬</span> <span>Tip Text / Forward</span>
+        </button>
+      </div>
+
+      <!-- YouTube URL Input -->
+      <div id="inputYtArea" class="space-y-4">
+        <label class="block text-xs font-medium text-slate-400">PASTE YOUTUBE URL (VIDEO OR SHORT)</label>
+        <div class="flex gap-3">
+          <input type="text" id="ytUrlInput" value="https://www.youtube.com/watch?v=sample_multibagger_tip" placeholder="https://www.youtube.com/watch?v=..." 
+                 class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <button onclick="runAudit('youtube_url')" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl text-sm transition flex items-center space-x-2">
+            <span>Audit Claim</span> <span>⚡</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Screenshot Dropzone Input -->
+      <div id="inputImgArea" class="space-y-4 hidden">
+        <label class="block text-xs font-medium text-slate-400">UPLOAD OR DRAG & DROP SCREENSHOT (TELEGRAM, WHATSAPP, TWITTER)</label>
+        <div id="dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)" onclick="document.getElementById('fileInput').click()"
+             class="border-2 border-dashed border-slate-700 hover:border-blue-500 rounded-2xl p-8 text-center cursor-pointer bg-slate-950/50 hover:bg-slate-950 transition flex flex-col items-center justify-center space-y-2">
+          <span class="text-3xl">📥</span>
+          <p class="text-sm font-medium text-slate-300">Click to upload or drag & drop image here</p>
+          <p class="text-xs text-slate-500">Supports PNG, JPG, WebP (English, Hindi, Mandarin text recognized)</p>
+          <input type="file" id="fileInput" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+        </div>
+        <div id="filePreviewContainer" class="hidden flex items-center justify-between p-3 bg-slate-950 border border-slate-800 rounded-xl">
+          <div class="flex items-center space-x-3">
+            <img id="filePreviewThumb" class="w-10 h-10 object-cover rounded-lg border border-slate-700" src="" alt="preview">
+            <span id="filePreviewName" class="text-xs text-slate-300 font-medium truncate max-w-xs">image.png</span>
+          </div>
+          <button onclick="runAudit('screenshot')" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-2 rounded-xl text-xs transition">
+            Scan & Audit ⚡
+          </button>
+        </div>
+      </div>
+
+      <!-- Text Input -->
+      <div id="inputTextArea" class="space-y-4 hidden">
+        <label class="block text-xs font-medium text-slate-400">PASTE FORWARDED TIP TEXT OR CHAT MESSAGE</label>
+        <textarea id="textTipInput" rows="3" placeholder="e.g. Buy Reliance now! 100% sure-shot profit in 10 days, operator entry confirmed! Join VIP group."
+                  class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        <button onclick="runAudit('text')" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition">
+          Audit Message ⚡
+        </button>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingBox" class="hidden text-center py-12 space-y-3">
+      <div class="inline-block animate-spin text-3xl">⚙️</div>
+      <p class="text-sm font-medium text-slate-300">Executing multimodal forensic audit...</p>
+      <p class="text-xs text-slate-500">Cross-referencing 5-year empirical distribution & regulator registries</p>
+    </div>
+
+    <!-- Results Display -->
+    <div id="resultsCard" class="hidden space-y-8">
+      
+      <!-- Multi-Stock Tab Selector (Shown when >= 2 stocks detected) -->
+      <div id="multiStockBar" class="hidden flex flex-wrap items-center justify-between gap-3 p-4 bg-slate-900 border border-slate-800 rounded-2xl shadow-lg">
+        <div class="flex items-center space-x-2">
+          <span class="text-sm font-bold text-white flex items-center space-x-1">
+            <span>📊</span>
+            <span>Audited Securities Detected in Media:</span>
+          </span>
+          <span id="detectedCountBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-blue-900/60 text-blue-400 border border-blue-700 font-bold">2 Stocks</span>
+        </div>
+        <div id="stockPillsContainer" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <!-- Container where Cards for all detected stocks will be rendered -->
+      <div id="cardsListContainer" class="space-y-10">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    let currentModality = 'youtube_url';
+
+    let selectedScreenshotFile = null;
+
+    function switchTab(modality) {
+      currentModality = modality;
+      const tabYt = document.getElementById('tabYt');
+      const tabImg = document.getElementById('tabImg');
+      const tabText = document.getElementById('tabText');
+      const ytArea = document.getElementById('inputYtArea');
+      const imgArea = document.getElementById('inputImgArea');
+      const textArea = document.getElementById('inputTextArea');
+
+      // Reset active tabs styling
+      const activeClass = "pb-3 text-sm font-semibold text-blue-400 border-b-2 border-blue-500 flex items-center space-x-2";
+      const inactiveClass = "pb-3 text-sm font-semibold text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+
+      tabYt.className = modality === 'youtube_url' ? activeClass : inactiveClass;
+      tabImg.className = modality === 'screenshot' ? activeClass : inactiveClass;
+      tabText.className = modality === 'text' ? activeClass : inactiveClass;
+
+      ytArea.classList.toggle('hidden', modality !== 'youtube_url');
+      imgArea.classList.toggle('hidden', modality !== 'screenshot');
+      textArea.classList.toggle('hidden', modality !== 'text');
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      document.getElementById('dropzone').classList.add('border-blue-500', 'bg-slate-900');
+    }
+
+    function handleDragLeave(e) {
+      e.preventDefault();
+      document.getElementById('dropzone').classList.remove('border-blue-500', 'bg-slate-900');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      document.getElementById('dropzone').classList.remove('border-blue-500', 'bg-slate-900');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        processSelectedFile(e.dataTransfer.files[0]);
+      }
+    }
+
+    function handleFileSelect(e) {
+      if (e.target.files && e.target.files[0]) {
+        processSelectedFile(e.target.files[0]);
+      }
+    }
+
+    function processSelectedFile(file) {
+      selectedScreenshotFile = file;
+      document.getElementById('filePreviewName').innerText = file.name;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        document.getElementById('filePreviewThumb').src = e.target.result;
+        document.getElementById('filePreviewContainer').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function runAudit(modality) {
+      const region = document.getElementById('regionSelect').value;
+      document.getElementById('loadingBox').classList.remove('hidden');
+      document.getElementById('resultsCard').classList.add('hidden');
+
+      try {
+        let res;
+        if (modality === 'screenshot') {
+          if (!selectedScreenshotFile) return alert("Please select or drop an image first.");
+          const formData = new FormData();
+          formData.append("screenshot", selectedScreenshotFile);
+          formData.append("region", region);
+
+          res = await fetch('/api/analyze', {
+            method: 'POST',
+            body: formData
+          });
+        } else {
+          const payload = modality === 'youtube_url' 
+            ? document.getElementById('ytUrlInput').value 
+            : document.getElementById('textTipInput').value;
+
+          if (!payload.trim()) return alert("Please enter a valid link or tip text");
+
+          res = await fetch('/api/analyze', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ modality, payload, region })
+          });
+        }
+
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          alert("Investigation error: " + (data.error || "Server returned an error"));
+          return;
+        }
+        renderResults(data);
+      } catch (err) {
+        alert("Investigation error: " + err);
+      } finally {
+        document.getElementById('loadingBox').classList.add('hidden');
+      }
+    }
+
+    let currentAuditData = null;
+
+    function renderResults(data) {
+      if (!data) {
+        alert("Investigation error: Server response did not contain valid data.");
+        return;
+      }
+      currentAuditData = data;
+
+      const reports = (data.reports && data.reports.length > 0) ? data.reports : [data];
+      const multiBar = document.getElementById('multiStockBar');
+      const pillsContainer = document.getElementById('stockPillsContainer');
+      const cardsContainer = document.getElementById('cardsListContainer');
+      const countBadge = document.getElementById('detectedCountBadge');
+
+      pillsContainer.innerHTML = '';
+      cardsContainer.innerHTML = '';
+
+      if (reports.length > 1) {
+        multiBar.classList.remove('hidden');
+        countBadge.innerText = `${reports.length} Stocks`;
+        reports.forEach((rep, idx) => {
+          const ticker = rep.resolved_stock?.ticker || `Stock ${idx+1}`;
+          const flag = rep.verdict?.flag_badge || '⚪';
+          const a = document.createElement('a');
+          a.href = `#stockCard_${idx}`;
+          a.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1.5";
+          a.innerHTML = `<span>${flag}</span> <span>${ticker}</span>`;
+          pillsContainer.appendChild(a);
+        });
+      } else {
+        multiBar.classList.add('hidden');
+      }
+
+      // Render a complete, independent forensic card for EACH stock
+      reports.forEach((rep, idx) => {
+        const cardHtml = buildStockCardHtml(rep, idx, reports.length > 1);
+        cardsContainer.appendChild(cardHtml);
+      });
+
+      document.getElementById('resultsCard').classList.remove('hidden');
+    }
+
+    function buildStockCardHtml(rep, idx, isMulti) {
+      const v = rep.verdict || {};
+      const flag = v.flag || 'NOT_ENOUGH_DATA';
+      const flagLabel = (v.flag_label || 'NOT ENOUGH DATA').toUpperCase();
+      const flagBadge = v.flag_badge || '⚪';
+      const score = (v.score !== null && v.score !== undefined) ? Number(v.score).toFixed(1) : 'N/A';
+
+      let bannerBg = "bg-amber-950/20 border-amber-900";
+      if (flag === 'HIGH_RISK') bannerBg = "bg-red-950/20 border-red-900";
+      if (flag === 'CONSISTENT') bannerBg = "bg-emerald-950/20 border-emerald-900";
+
+      const card = document.createElement('div');
+      card.id = `stockCard_${idx}`;
+      card.className = "space-y-6 pt-4 border-t border-slate-800 first:border-t-0 first:pt-0";
+
+      // Hard Gates
+      let hgHtml = '';
+      if (v.hard_gate_triggered && v.hard_gate_reasons && v.hard_gate_reasons.length) {
+        const items = v.hard_gate_reasons.map(r => `<li>${r}</li>`).join('');
+        hgHtml = `
+          <div class="mt-4 p-3.5 bg-red-950/60 border border-red-800 rounded-xl text-red-300 text-xs font-medium space-y-1">
+            <div class="font-bold flex items-center space-x-1.5">
+              <span>🚨</span> <span>HARD GATE REJECTION TRIGGERED</span>
+            </div>
+            <ul class="list-disc list-inside space-y-0.5 text-red-200">${items}</ul>
+          </div>
+        `;
+      }
+
+      // Claim Target
+      const ticker = rep.resolved_stock?.ticker || 'N/A';
+      const name = rep.resolved_stock?.name || ticker;
+      const claimedMove = rep.claim?.claimed_percentage_move;
+      const targetPrice = rep.claim?.target_price;
+      const horizon = rep.claim?.time_horizon_days;
+      let moveDesc = 'Directional Breakout Call';
+      if (targetPrice) {
+        moveDesc = `Target: ₹${targetPrice} ${horizon ? '(' + horizon + 'd horizon)' : ''}`;
+      } else if (claimedMove) {
+        moveDesc = `+${claimedMove}% ${horizon ? '(' + horizon + 'd horizon)' : ''}`;
+      }
+
+      const creator = rep.claim?.creator_claimed_name || '@Unknown';
+      const recName = rep.reporting_name || 'Regulator';
+      const recUrl = rep.reporting_url || '#';
+
+      // Parameter rows
+      let paramRows = '';
+      if (rep.parameters) {
+        rep.parameters.forEach(p => {
+          const badgeColor = p.status === 'PASS' ? 'text-emerald-400' : (p.status === 'FAIL' ? 'text-red-400 font-semibold' : 'text-amber-400');
+          const pScore = (p.score !== null && p.score !== undefined) ? Number(p.score).toFixed(1) + '/10' : 'N/A';
+          paramRows += `
+            <tr class="hover:bg-slate-900/50 transition">
+              <td class="px-6 py-4 font-medium text-white">${p.name}</td>
+              <td class="px-6 py-4 font-bold ${badgeColor}">${pScore}</td>
+              <td class="px-6 py-4 text-xs text-slate-300">${p.explanation}</td>
+              <td class="px-6 py-4 text-xs font-semibold ${badgeColor}">${p.status}</td>
+            </tr>
+          `;
+        });
+      }
+
+      const multiBadge = isMulti ? `<span class="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-blue-400 border border-slate-700 font-bold mr-2">Stock #${idx+1}</span>` : '';
+
+      card.innerHTML = `
+        <!-- Primary Banner -->
+        <div class="p-6 rounded-2xl border transition-all ${bannerBg}">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-center space-x-4">
+              <span class="text-5xl">${flagBadge}</span>
+              <div>
+                <div class="flex items-center space-x-2">
+                  ${multiBadge}
+                  <span class="text-2xl font-black tracking-tight text-white">${flagLabel}</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300">${rep.flag_emoji || ''} ${rep.market_name || ''} (${rep.regulator || ''})</span>
+                </div>
+                <p class="text-sm text-slate-400 mt-1">Claim contradicts verifiable market facts or triggers legal hard gates.</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Credibility Score</div>
+              <div class="text-4xl font-extrabold text-white">${score}<span class="text-lg text-slate-500">/10</span></div>
+            </div>
+          </div>
+          ${hgHtml}
+        </div>
+
+        <!-- Facts Breakdown -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
+            <div class="text-xs text-slate-400">AUDITED TARGET</div>
+            <div class="text-lg font-bold text-white mt-1">${ticker} <span class="text-xs font-normal text-slate-400 block">${name}</span></div>
+            <div class="text-xs text-blue-400 font-medium">${moveDesc}</div>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
+            <div class="text-xs text-slate-400">CREATOR CREDIBILITY</div>
+            <div class="text-lg font-bold text-white mt-1">${creator}</div>
+            <div class="text-xs text-amber-400 font-medium">Unregistered Entity</div>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
+            <div class="text-xs text-slate-400">OFFICIAL RECOURSE</div>
+            <div class="text-lg font-bold text-white mt-1">${recName}</div>
+            <a href="${recUrl}" target="_blank" class="text-xs text-blue-400 underline hover:text-blue-300">Report suspicious claim ↗</a>
+          </div>
+        </div>
+
+        <!-- 9-Parameter Forensic Audit Table -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+          <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center space-x-2">
+              <span>📋</span>
+              <span>Forensic Investigation Audit Table · ${ticker}</span>
+            </h3>
+            <span class="text-xs text-slate-500">Deterministic Calculations vs AI Analysis</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-950 text-xs text-slate-400 uppercase border-b border-slate-800">
+                <tr>
+                  <th class="px-6 py-3">Parameter</th>
+                  <th class="px-6 py-3">Score</th>
+                  <th class="px-6 py-3">Findings & Empirical Data</th>
+                  <th class="px-6 py-3">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800">
+                ${paramRows}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Download Brief Bar for this specific stock -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-slate-900 border border-slate-800 rounded-2xl">
+          <div class="flex items-center space-x-3 text-xs text-slate-400">
+            <span class="text-lg">📄</span>
+            <span>Verified PDF Brief for <b>${ticker}</b> with 5-year empirical chart and citations.</span>
+          </div>
+          <div class="flex items-center space-x-3 w-full sm:w-auto">
+            <a href="${rep.pdf_url || '#'}" target="_blank"
+               class="flex-1 sm:flex-initial inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition shadow-lg shadow-blue-500/20">
+              <span>Download Audit Brief (${ticker})</span>
+              <span>⬇️</span>
+            </a>
+          </div>
+        </div>
+      `;
+
+      return card;
+    }
+  </script>
+</body>
+</html>

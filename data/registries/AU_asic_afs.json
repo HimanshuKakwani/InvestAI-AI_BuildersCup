@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Macquarie Equities Limited",
+    "reg_number": "AFS-237504",
+    "entity_type": "Australian Financial Services Licensee",
+    "aliases": ["macquarie", "macquarie equities"]
+  },
+  {
+    "name": "CommSec (Commonwealth Securities Limited)",
+    "reg_number": "AFS-238814",
+    "entity_type": "Australian Financial Services Licensee",
+    "aliases": ["commsec", "commonwealth securities"]
+  },
+  {
+    "name": "Morgans Financial Limited",
+    "reg_number": "AFS-235410",
+    "entity_type": "Australian Financial Services Licensee",
+    "aliases": ["morgans", "morgans financial"]
+  }
+]

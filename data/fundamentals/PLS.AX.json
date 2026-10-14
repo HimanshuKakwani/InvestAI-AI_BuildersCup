@@ -1,0 +1,52 @@
+{
+  "ticker": "PLS.AX",
+  "name": "Pilbara Minerals",
+  "market": "AU",
+  "currency": "AUD",
+  "sector": "Basic Materials",
+  "trailing_eps": 0.16,
+  "forward_eps": 0.23117,
+  "market_cap": 9935916032.0,
+  "annual": [
+    {
+      "period_end": "2023-06-30",
+      "revenue": 4315533000.0,
+      "net_income": 2391135000.0,
+      "eps": 0.7893
+    },
+    {
+      "period_end": "2024-06-30",
+      "revenue": 1792977000.0,
+      "net_income": 256883000.0,
+      "eps": 0.0845
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 890207000.0,
+      "net_income": -195766000.0,
+      "eps": -0.0633
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 1539710000.0,
+      "net_income": 525761000.0,
+      "eps": 0.1614
+    }
+  ],
+  "quarterly": [],
+  "pe_band_5y": {
+    "min": 4.1,
+    "median": 16.65,
+    "max": 36.12,
+    "method": "price / latest fiscal-year diluted EPS (2nd-98th percentile)"
+  },
+  "analyst": {
+    "target_mean": 4.98333,
+    "target_high": 6.7,
+    "target_low": 3.1,
+    "num_analysts": 18,
+    "recommendation": "buy"
+  },
+  "source": "Yahoo Finance (yfinance)",
+  "as_of": "2026-10-13"
+}

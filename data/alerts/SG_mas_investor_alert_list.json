@@ -1,0 +1,14 @@
+[
+  {
+    "entity_name": "SG Wealth Syndicate Telegram",
+    "order_date": "2024-02-10",
+    "reason": "Unlicensed financial advice and fraudulent scheme targeting retail investors",
+    "aliases": ["sg wealth syndicate", "@sg_wealth_guru", "稳赚投资群"]
+  },
+  {
+    "entity_name": "Golden Return Asset Management (Unlicensed)",
+    "order_date": "2023-09-18",
+    "reason": "Impersonating MAS licensed fund manager",
+    "aliases": ["golden return", "golden return assets"]
+  }
+]

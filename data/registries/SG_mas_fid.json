@@ -1,0 +1,20 @@
+[
+  {
+    "name": "DBS Bank Ltd",
+    "reg_number": "MAS-FID-001",
+    "entity_type": "Licensed Bank / Financial Adviser",
+    "aliases": ["dbs bank", "dbs vickers"]
+  },
+  {
+    "name": "Phillip Securities Pte Ltd",
+    "reg_number": "MAS-FID-042",
+    "entity_type": "Capital Markets Services Licensee",
+    "aliases": ["phillip securities", "poems"]
+  },
+  {
+    "name": "OCBC Securities Private Limited",
+    "reg_number": "MAS-FID-018",
+    "entity_type": "Capital Markets Services Licensee",
+    "aliases": ["ocbc securities", "iocbc"]
+  }
+]

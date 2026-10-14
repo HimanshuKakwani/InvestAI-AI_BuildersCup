@@ -1,0 +1,83 @@
+{
+  "ticker": "SUZLON.NS",
+  "name": "Suzlon Energy",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Industrials",
+  "trailing_eps": 2.17,
+  "forward_eps": 2.11618,
+  "market_cap": 552468742144.0,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 58542900000.0,
+      "net_income": 28490100000.0,
+      "eps": 2.64
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 64025700000.0,
+      "net_income": 6603500000.0,
+      "eps": 0.5
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 107633700000.0,
+      "net_income": 20716300000.0,
+      "eps": 1.51
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 165466500000.0,
+      "net_income": 31633900000.0,
+      "eps": 2.31
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 37735400000.0,
+      "net_income": 11822200000.0,
+      "eps": 0.86
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 31173300000.0,
+      "net_income": 3243200000.0,
+      "eps": 0.24
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 42281800000.0,
+      "net_income": 4452800000.0,
+      "eps": 0.32
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 54680600000.0,
+      "net_income": 11143500000.0,
+      "eps": 0.81
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 38193600000.0,
+      "net_income": 3052200000.0,
+      "eps": 0.22
+    }
+  ],
+  "pe_band_5y": {
+    "min": 3.11,
+    "median": 34.29,
+    "max": 159.73,
+    "method": "price / latest fiscal-year diluted EPS (2nd-98th percentile)"
+  },
+  "analyst": {
+    "target_mean": 62.23077,
+    "target_high": 74.0,
+    "target_low": 51.0,
+    "num_analysts": 13,
+    "recommendation": "strong_buy"
+  },
+  "source": "Yahoo Finance (yfinance)",
+  "as_of": "2026-10-13"
+}

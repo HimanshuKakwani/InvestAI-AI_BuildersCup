@@ -1,0 +1,56 @@
+market: IN
+name: India
+flag_emoji: "🇮🇳"
+currency: INR
+currency_symbols: ["₹", "Rs", "INR", "rupee"]
+regulator: SEBI
+legal_framework: "SEBI (Research Analysts) Regulations 2014 / SEBI (Investment Advisers) Regulations 2013"
+registry_name: "SEBI RA/IA register"
+reporting:
+  name: "National Cybercrime Portal / 1930"
+  url: "https://cybercrime.gov.in"
+supported_languages: ["en", "hi"]
+exchange:
+  names: ["NSE", "BSE", "Nifty", "Sensex"]
+  ticker_suffixes: [".NS", ".BO"]
+  default_suffix: ".NS"
+license_registry: registries/IN_sebi_ra_ia.json
+alert_lists:
+  - alerts/IN_sebi_debarred.json
+red_flag_lexicon:
+  guaranteed_return:
+    - "guaranteed"
+    - "guarantee"
+    - "sure-shot"
+    - "sure shot"
+    - "100% profit"
+    - "jackpot call"
+    - "pakka"
+    - "fixed return"
+    - "no risk"
+    - "zero risk"
+  urgency:
+    - "buy before tomorrow"
+    - "last chance"
+    - "abhi kharido"
+    - "don't miss"
+    - "limited time"
+    - "before it's too late"
+  operator:
+    - "operator stock"
+    - "operator game"
+    - "operator entry"
+  hype:
+    - "multibagger"
+    - "rocket"
+    - "to the moon"
+    - "10x"
+  paid_group_push:
+    - "join vip"
+    - "premium telegram"
+    - "paid group"
+    - "telegram tip"
+    - "join my telegram"
+  fig_leaf_disclaimer:
+    - "not financial advice"
+    - "for educational purpose"

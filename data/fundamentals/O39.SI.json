@@ -1,0 +1,83 @@
+{
+  "ticker": "O39.SI",
+  "name": "OCBC Bank",
+  "market": "SG",
+  "currency": "SGD",
+  "sector": "Financial Services",
+  "trailing_eps": 1.74,
+  "forward_eps": 1.93973,
+  "market_cap": 131270230016.0,
+  "annual": [
+    {
+      "period_end": "2022-12-31",
+      "revenue": 11187000000.0,
+      "net_income": 5526000000.0,
+      "eps": 1.22
+    },
+    {
+      "period_end": "2023-12-31",
+      "revenue": 13436000000.0,
+      "net_income": 7021000000.0,
+      "eps": 1.55
+    },
+    {
+      "period_end": "2024-12-31",
+      "revenue": 14437000000.0,
+      "net_income": 7587000000.0,
+      "eps": 1.67
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 14533000000.0,
+      "net_income": 7422000000.0,
+      "eps": 1.63
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-06-30",
+      "revenue": 3530000000.0,
+      "net_income": 1816000000.0,
+      "eps": null
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": null,
+      "net_income": null,
+      "eps": null
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 3552000000.0,
+      "net_income": 1745000000.0,
+      "eps": null
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 3828000000.0,
+      "net_income": 1974000000.0,
+      "eps": 0.439918
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 4134000000.0,
+      "net_income": 2221000000.0,
+      "eps": null
+    }
+  ],
+  "pe_band_5y": {
+    "min": 7.08,
+    "median": 9.03,
+    "max": 19.36,
+    "method": "price / latest fiscal-year diluted EPS (2nd-98th percentile)"
+  },
+  "analyst": {
+    "target_mean": 31.50294,
+    "target_high": 37.23,
+    "target_low": 24.63,
+    "num_analysts": 17,
+    "recommendation": "buy"
+  },
+  "source": "Yahoo Finance (yfinance)",
+  "as_of": "2026-10-13"
+}

@@ -1,0 +1,43 @@
+market: AU
+name: Australia
+flag_emoji: "🇦🇺"
+currency: AUD
+currency_symbols: ["A$", "AUD"]
+regulator: ASIC
+legal_framework: "Corporations Act 2001 / ASIC INFO 269 (Discussing financial products and services online)"
+registry_name: "ASIC Financial Services register"
+reporting:
+  name: "Scamwatch / ReportCyber"
+  url: "https://www.scamwatch.gov.au/report-a-scam"
+supported_languages: ["en"]
+exchange:
+  names: ["ASX", "ASX 200", "ASX200"]
+  ticker_suffixes: [".AX"]
+  default_suffix: ".AX"
+license_registry: registries/AU_asic_afs.json
+alert_lists:
+  - alerts/AU_asic_moneysmart_alert_list.json
+red_flag_lexicon:
+  guaranteed_return:
+    - "guaranteed"
+    - "can't lose"
+    - "cannot lose"
+    - "risk-free"
+  hype:
+    - "next 10-bagger"
+    - "10-bagger"
+    - "ten bagger"
+    - "lithium moonshot"
+    - "uranium rocket"
+    - "moonshot"
+  urgency:
+    - "get in now"
+    - "before it rips"
+  paid_group_push:
+    - "dm for signals"
+    - "join my discord"
+    - "signals group"
+  fig_leaf_disclaimer:
+    - "not financial advice"
+    - "nfa"
+    - "dyor"

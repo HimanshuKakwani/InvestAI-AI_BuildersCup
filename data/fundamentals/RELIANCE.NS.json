@@ -1,0 +1,83 @@
+{
+  "ticker": "RELIANCE.NS",
+  "name": "Reliance Industries",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Energy",
+  "trailing_eps": 55.76,
+  "forward_eps": 71.05281,
+  "market_cap": 15788334383104.0,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 8778350000000.0,
+      "net_income": 667020000000.0,
+      "eps": 49.295
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 9010640000000.0,
+      "net_income": 696210000000.0,
+      "eps": 51.45
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 9646930000000.0,
+      "net_income": 696480000000.0,
+      "eps": 51.47
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 10572190000000.0,
+      "net_income": 807750000000.0,
+      "eps": 59.69
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 2613880000000.0,
+      "net_income": 194070000000.0,
+      "eps": 14.34
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 2436320000000.0,
+      "net_income": 269940000000.0,
+      "eps": 19.95
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 2649050000000.0,
+      "net_income": 186450000000.0,
+      "eps": 13.78
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 2940590000000.0,
+      "net_income": 169710000000.0,
+      "eps": 12.54
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 3094680000000.0,
+      "net_income": 209460000000.0,
+      "eps": 15.48
+    }
+  ],
+  "pe_band_5y": {
+    "min": 20.9,
+    "median": 25.89,
+    "max": 30.27,
+    "method": "price / latest fiscal-year diluted EPS (2nd-98th percentile)"
+  },
+  "analyst": {
+    "target_mean": 1666.8,
+    "target_high": 1890.0,
+    "target_low": 1350.0,
+    "num_analysts": 25,
+    "recommendation": "strong_buy"
+  },
+  "source": "Yahoo Finance (yfinance)",
+  "as_of": "2026-10-13"
+}

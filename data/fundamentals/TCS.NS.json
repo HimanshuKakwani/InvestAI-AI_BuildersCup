@@ -1,0 +1,83 @@
+{
+  "ticker": "TCS.NS",
+  "name": "Tata Consultancy Services",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Technology",
+  "trailing_eps": 144.74,
+  "forward_eps": 161.13028,
+  "market_cap": 8210525716480.0,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 2254580000000.0,
+      "net_income": 421470000000.0,
+      "eps": 115.19
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 2408930000000.0,
+      "net_income": 459080000000.0,
+      "eps": 125.88
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 2553240000000.0,
+      "net_income": 485530000000.0,
+      "eps": 134.19
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 2670210000000.0,
+      "net_income": 492100000000.0,
+      "eps": 136.01
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 644790000000.0,
+      "net_income": 122240000000.0,
+      "eps": 33.79
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 634370000000.0,
+      "net_income": 127600000000.0,
+      "eps": 35.27
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 670870000000.0,
+      "net_income": 106570000000.0,
+      "eps": 29.45
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 706980000000.0,
+      "net_income": 137180000000.0,
+      "eps": 37.94
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 722750000000.0,
+      "net_income": 133490000000.0,
+      "eps": 36.9
+    }
+  ],
+  "pe_band_5y": {
+    "min": 15.33,
+    "median": 25.83,
+    "max": 33.18,
+    "method": "price / latest fiscal-year diluted EPS (2nd-98th percentile)"
+  },
+  "analyst": {
+    "target_mean": 2390.262,
+    "target_high": 3266.0,
+    "target_low": 1800.0,
+    "num_analysts": 42,
+    "recommendation": "buy"
+  },
+  "source": "Yahoo Finance (yfinance)",
+  "as_of": "2026-10-13"
+}
