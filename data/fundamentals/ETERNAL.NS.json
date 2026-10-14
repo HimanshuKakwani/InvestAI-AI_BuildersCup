@@ -1,0 +1,87 @@
+{
+  "ticker": "ETERNAL.NS",
+  "name": "Eternal Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Consumer Cyclical",
+  "trailing_eps": 0.47,
+  "forward_eps": 3.73854,
+  "market_cap": 2908904226816,
+  "current_price": 316.0,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 70350000000.0,
+      "net_income": -9710000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 121140000000.0,
+      "net_income": 3510000000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 202430000000.0,
+      "net_income": 5270000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 543640000000.0,
+      "net_income": 3660000000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 58330000000.0,
+      "net_income": 390000000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 71670000000.0,
+      "net_income": 250000000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 163150000000.0,
+      "net_income": 1020000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 172920000000.0,
+      "net_income": 1740000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 202110000000.0,
+      "net_income": 920000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 108.27,
+    "median": 139.04,
+    "max": 228.97,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 370.1875,
+    "target_high": 506.0,
+    "target_low": 220.0,
+    "num_analysts": 32,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 21.78,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

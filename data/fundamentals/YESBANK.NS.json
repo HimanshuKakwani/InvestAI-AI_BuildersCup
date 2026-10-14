@@ -1,0 +1,87 @@
+{
+  "ticker": "YESBANK.NS",
+  "name": "Yes Bank Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Financial Services",
+  "trailing_eps": 1.19,
+  "forward_eps": 1.82086,
+  "market_cap": 665463029760,
+  "current_price": 21.2,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 93697163000.0,
+      "net_income": 7358186000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 139782765000.0,
+      "net_income": 12852015000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 168299614000.0,
+      "net_income": 24464926000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 184369556000.0,
+      "net_income": 35117146000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 40859000000.0,
+      "net_income": 7445300000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 41942500000.0,
+      "net_income": 8086500000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 41792800000.0,
+      "net_income": 9565500000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 44484400000.0,
+      "net_income": 10821900000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 46559800000.0,
+      "net_income": 10718000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 10.88,
+    "median": 16.28,
+    "max": 20.82,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 21.07692,
+    "target_high": 28.0,
+    "target_low": 15.0,
+    "num_analysts": 13,
+    "recommendation": "underperform"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 44.16,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

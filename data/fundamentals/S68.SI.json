@@ -1,0 +1,61 @@
+{
+  "ticker": "S68.SI",
+  "name": "Singapore Exchange Limited",
+  "market": "SG",
+  "currency": "SGD",
+  "sector": "Financial Services",
+  "trailing_eps": 0.63,
+  "forward_eps": 0.8318,
+  "market_cap": 22444877824,
+  "current_price": 20.96,
+  "annual": [
+    {
+      "period_end": "2022-06-30",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-06-30",
+      "revenue": 1194408000.0,
+      "net_income": 570895000.0
+    },
+    {
+      "period_end": "2024-06-30",
+      "revenue": 1231675000.0,
+      "net_income": 597907000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 1370625000.0,
+      "net_income": 647983000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 1559469000.0,
+      "net_income": 698411000.0
+    }
+  ],
+  "quarterly": [],
+  "pe_band_5y": {
+    "min": 12.83,
+    "median": 14.29,
+    "max": 36.98,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 23.83294,
+    "target_high": 28.33,
+    "target_low": 17.7,
+    "num_analysts": 17,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 23.9,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

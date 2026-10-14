@@ -73,9 +73,9 @@ def evaluate_price_move(
         }
 
     # Score out of 10 based on percentile rank
-    percentile = (rolling_returns < target_move).mean() * 100.0
+    percentile = float((rolling_returns < target_move).mean() * 100.0)
     # Higher move rarity = lower confidence score
-    score = round(max(0.0, 10.0 * (1.0 - (percentile / 100.0))), 1)
+    score = float(round(max(0.0, 10.0 * (1.0 - (percentile / 100.0))), 1))
 
     status = "PASS" if score >= 7.0 else ("WARN" if score >= 4.0 else "FAIL")
 

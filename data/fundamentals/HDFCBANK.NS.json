@@ -1,0 +1,72 @@
+{
+  "ticker": "HDFCBANK.NS",
+  "name": "HDFC Bank Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Financial Services",
+  "trailing_eps": 45.75,
+  "forward_eps": 62.63304,
+  "market_cap": 10957913849856,
+  "current_price": 710.7,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 1205375000000.0,
+      "net_income": 495446900000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 1604968500000.0,
+      "net_income": 622656600000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 1838641100000.0,
+      "net_income": 673508300000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 1925667800000.0,
+      "net_income": 704793400000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 953058900000.0,
+      "net_income": 153934600000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 853464600000.0,
+      "net_income": 162579100000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 14.26,
+    "median": 16.91,
+    "max": 21.33,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 978.5122,
+    "target_high": 1270.0,
+    "target_low": 800.0,
+    "num_analysts": 41,
+    "recommendation": "strong_buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 0.18,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

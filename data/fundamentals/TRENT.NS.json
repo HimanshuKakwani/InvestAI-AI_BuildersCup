@@ -1,0 +1,92 @@
+{
+  "ticker": "TRENT.NS",
+  "name": "Trent Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Consumer Cyclical",
+  "trailing_eps": 33.98,
+  "forward_eps": 50.44158,
+  "market_cap": 1584233185280,
+  "current_price": 2971.0,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 81123300000.0,
+      "net_income": 4446300000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 122053100000.0,
+      "net_income": 14868000000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 168737200000.0,
+      "net_income": 15467200000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 198501100000.0,
+      "net_income": 17196500000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 48834800000.0,
+      "net_income": 4296900000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 48176800000.0,
+      "net_income": 3768600000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 53450600000.0,
+      "net_income": 5127700000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 50279900000.0,
+      "net_income": 4003300000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 57547100000.0,
+      "net_income": 5190100000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 31.07,
+    "median": 81.9,
+    "max": 205.54,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 3391.4321,
+    "target_high": 4455.0,
+    "target_low": 2950.0,
+    "num_analysts": 27,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 41.86,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

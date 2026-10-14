@@ -1,0 +1,87 @@
+{
+  "ticker": "TATASTEEL.NS",
+  "name": "Tata Steel Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Basic Materials",
+  "trailing_eps": 8.85,
+  "forward_eps": 17.9,
+  "market_cap": 2176643366912,
+  "current_price": 174.49,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 2416362500000.0,
+      "net_income": 87604000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 2272962000000.0,
+      "net_income": -44374400000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 2168403500000.0,
+      "net_income": 34205100000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 2302934700000.0,
+      "net_income": 107938700000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-06-30",
+      "revenue": 527440700000.0,
+      "net_income": 20776800000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 582160400000.0,
+      "net_income": 31017500000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 566460500000.0,
+      "net_income": 26887000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 626873100000.0,
+      "net_income": 29257400000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 604117800000.0,
+      "net_income": 23183500000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 10.39,
+    "median": 14.93,
+    "max": 22.37,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 216.97144,
+    "target_high": 260.0,
+    "target_low": 175.0,
+    "num_analysts": 35,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 35.4,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

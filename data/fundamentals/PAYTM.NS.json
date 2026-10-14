@@ -1,0 +1,82 @@
+{
+  "ticker": "PAYTM.NS",
+  "name": "One97 Communications Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Technology",
+  "trailing_eps": 10.01,
+  "forward_eps": 37.09136,
+  "market_cap": 1095777648640,
+  "current_price": 1712.4,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 79044000000.0,
+      "net_income": -17759000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 98699000000.0,
+      "net_income": -14170000000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 67410000000.0,
+      "net_income": -6590000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 81920000000.0,
+      "net_income": 5530000000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 19120000000.0,
+      "net_income": -5400000000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 19180000000.0,
+      "net_income": 1230000000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 21940000000.0,
+      "net_income": 2250000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 22640000000.0,
+      "net_income": 1840000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 24480000000.0,
+      "net_income": 2200000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 40.2,
+    "median": 81.04,
+    "max": 151.46,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 1870.9524,
+    "target_high": 2400.0,
+    "target_low": 1302.0,
+    "num_analysts": 21,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 23.89,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

@@ -3,18 +3,289 @@
     "reg_number": "INH000001234",
     "name": "Motilal Oswal Financial Services Limited",
     "entity_type": "Research Analyst",
-    "aliases": ["motilal oswal", "motilal", "mosl"]
+    "aliases": [
+      "motilal oswal",
+      "motilal",
+      "mosl"
+    ]
   },
   {
     "reg_number": "INH000000164",
     "name": "HDFC Securities Limited",
     "entity_type": "Research Analyst",
-    "aliases": ["hdfc securities", "hdfc sec"]
+    "aliases": [
+      "hdfc securities",
+      "hdfc sec"
+    ]
   },
   {
     "reg_number": "INA000000001",
     "name": "Kotak Investment Advisors Limited",
     "entity_type": "Investment Adviser",
-    "aliases": ["kotak cherry", "kotak investment advisors"]
+    "aliases": [
+      "kotak cherry",
+      "kotak investment advisors"
+    ]
+  },
+  {
+    "reg_number": "INH300000211",
+    "name": "360 ONE Capital Market Private Limited",
+    "entity_type": "Research Analyst",
+    "validity": "Apr 13, 2026 - Perpetual",
+    "address": "7, Lyons Range, 3rd Floor, Room No. 3  4, KOLKATA, WEST BENGAL, 700001",
+    "aliases": [
+      "360 one capital market private limited",
+      "360 one capital market"
+    ]
+  },
+  {
+    "reg_number": "INH000011431",
+    "name": "360 ONE Distribution Services Limited",
+    "entity_type": "Research Analyst",
+    "validity": "Feb 16, 2023 - Perpetual",
+    "address": "360 ONE Centre, Kamla City, Senapati Bapat Marg Lower Parel, MUMBAI, MAHARASHTRA, 400013",
+    "aliases": [
+      "360 one distribution services limited",
+      "360 one distribution"
+    ]
+  },
+  {
+    "reg_number": "INH000020004",
+    "name": "5 CIRCLES PRIVATE LIMITED",
+    "entity_type": "Research Analyst",
+    "validity": "Mar 06, 2025 - Perpetual",
+    "address": "G 22, EXPRESS ZONE MALL, A WING,, NEXT TO PATEL VANIKA, W E HIGHWAY, Malad East,, MUMBAI, MAHARASHTRA, 400063",
+    "aliases": [
+      "5 circles private limited",
+      "5 circles"
+    ]
+  },
+  {
+    "reg_number": "INH000025188",
+    "name": "5paisa Capital Limited",
+    "entity_type": "Research Analyst",
+    "validity": "Feb 26, 2026 - Perpetual",
+    "address": "IIFL House, Sun Infotech Park, Road No. 16V, B 23, MIDC, thane Industrial Area, Wagle Estate, THANE, MAHARASHTRA, 400604",
+    "aliases": [
+      "5paisa capital limited",
+      "5paisa capital"
+    ]
+  },
+  {
+    "reg_number": "INH000029722",
+    "name": "72 STREET RA PRIVATE LIMITED",
+    "entity_type": "Research Analyst",
+    "validity": "Aug 14, 2026 - Perpetual",
+    "address": "505-6 ECOHOUSE COMMERCIAL BLDG, VISHWESWAR NAGAR RD, GOREGAON EAST., MUMBAI, MAHARASHTRA, 400063",
+    "aliases": [
+      "72 street ra private limited",
+      "72 street ra"
+    ]
+  },
+  {
+    "reg_number": "INH000023913",
+    "name": "A C Agarwal Share Brokers Private Limited",
+    "entity_type": "Research Analyst",
+    "validity": "Nov 28, 2025 - Perpetual",
+    "address": "406, PAYAL CO OP SOC, VADODARA, GUJARAT, 390020",
+    "aliases": [
+      "a c agarwal share brokers private limited",
+      "a c agarwal share brokers"
+    ]
+  },
+  {
+    "reg_number": "INH000025692",
+    "name": "A K EQUITIES PRIVATE LIMITED",
+    "entity_type": "Research Analyst",
+    "validity": "Apr 01, 2026 - Perpetual",
+    "address": "4th Floor, Kalpataru Heritage, 127, M G Road, Fort, MUMBAI, MAHARASHTRA, 400001",
+    "aliases": [
+      "a k equities private limited",
+      "a k equities"
+    ]
+  },
+  {
+    "reg_number": "INH000015419",
+    "name": "A&Y MARKET RESEARCH",
+    "entity_type": "Research Analyst",
+    "validity": "Mar 13, 2024 - Perpetual",
+    "address": "512 , SUN AVENUE ONE, MANEKBAUG SHYAMAL ROAD, AMBAWADI, AHMEDABAD, GUJARAT, 380006",
+    "aliases": [
+      "a&y market research"
+    ]
+  },
+  {
+    "reg_number": "INH200009193",
+    "name": "AAA PROFIT ANALYTICS PRIVATE LIMITED",
+    "entity_type": "Research Analyst",
+    "validity": "Mar 10, 2022 - Perpetual",
+    "address": "10/826 Alma Complex,, Lions Club Road, Poly Junction, Triprayar, THRISSUR, KERALA, 680567",
+    "aliases": [
+      "aaa profit analytics private limited",
+      "aaa profit analytics"
+    ]
+  },
+  {
+    "reg_number": "INH000013457",
+    "name": "AAKANKSHA GUPTA",
+    "entity_type": "Research Analyst",
+    "validity": "Oct 16, 2023 - Perpetual",
+    "address": "D 116, Crystal Plaza, New Link Road, opposite Infiniti Mall, Andheri West, MUMBAI, MAHARASHTRA, 400058",
+    "aliases": [
+      "aakanksha gupta"
+    ]
+  },
+  {
+    "reg_number": "INH000026372",
+    "name": "AAKANKSHA PRASHANT THAKKAR Proprietor of PORTFOLIO MANTRA",
+    "entity_type": "Research Analyst",
+    "validity": "Apr 20, 2026 - Perpetual",
+    "address": "THAKKAR HOUSE OFFICE NO. 1, A WING, OPP K VILLA, THANE, MAHARASHTRA, 400601",
+    "aliases": [
+      "aakanksha prashant thakkar proprietor of portfolio mantra"
+    ]
+  },
+  {
+    "reg_number": "INH000030056",
+    "name": "Aakash Abhigyanam Rathore Proprietor of Capital Scope Research",
+    "entity_type": "Research Analyst",
+    "validity": "Sep 07, 2026 - Perpetual",
+    "address": "Trimurti Nagar Near Kanti Palace , 2nd Floor Dhar Dist. Dhar, DHAR, MADHYA PRADESH, 454001",
+    "aliases": [
+      "aakash abhigyanam rathore proprietor of capital scope research"
+    ]
+  },
+  {
+    "reg_number": "INH000015312",
+    "name": "Aakash Ashok Jajoo",
+    "entity_type": "Research Analyst",
+    "validity": "Mar 01, 2024 - Perpetual",
+    "address": "Shed No 143 6 GIDC, Makarpura Road, VADODARA, GUJARAT, 390010",
+    "aliases": [
+      "aakash ashok jajoo"
+    ]
+  },
+  {
+    "reg_number": "INH000013642",
+    "name": "Aakash Rathore Proprietor of Kuber Alpha Research",
+    "entity_type": "Research Analyst",
+    "validity": "Nov 29, 2023 - Perpetual",
+    "address": "151/6, Samajwad Nagar,, Indore, INDORE, MADHYA PRADESH, 452002",
+    "aliases": [
+      "aakash rathore proprietor of kuber alpha research"
+    ]
+  },
+  {
+    "reg_number": "INH000022172",
+    "name": "Aaritya Broking Private Limited",
+    "entity_type": "Research Analyst",
+    "validity": "Jul 30, 2025 - Perpetual",
+    "address": "72, Service Road, LRDE Layout, Doddanekkundi, , Bangalore, Bangalore North,, BANGALORE, KARNATAKA, 560037",
+    "aliases": [
+      "aaritya broking private limited",
+      "aaritya broking"
+    ]
+  },
+  {
+    "reg_number": "INH000018832",
+    "name": "Aarohi Palak Shah",
+    "entity_type": "Research Analyst",
+    "validity": "Nov 11, 2024 - Perpetual",
+    "address": "1105, Safal Prelude, BH Ashwaraj Bunglows, 100 Ft Road, Prahaladnagar Satellite, AHMEDABAD, GUJARAT, 380015",
+    "aliases": [
+      "aarohi palak shah"
+    ]
+  },
+  {
+    "reg_number": "INH000013174",
+    "name": "Aashish",
+    "entity_type": "Research Analyst",
+    "validity": "Oct 09, 2023 - Perpetual",
+    "address": "138 Village Hiranki , Hiranki, DELHI, NATIONAL CAPITAL TERRITORY OF DELHI, 110036",
+    "aliases": [
+      "aashish"
+    ]
+  },
+  {
+    "reg_number": "INH000023533",
+    "name": "Aashish bansal",
+    "entity_type": "Research Analyst",
+    "validity": "Oct 07, 2025 - Perpetual",
+    "address": "Flat no. 202B, GH-10, The Bihta appartments, Sector 24, Panchkula, Panchkula, HARYANA, 134116",
+    "aliases": [
+      "aashish bansal"
+    ]
+  },
+  {
+    "reg_number": "INH000021678",
+    "name": "Aastha Fintech Private Limited",
+    "entity_type": "Research Analyst",
+    "validity": "Jul 10, 2025 - Perpetual",
+    "address": "OFFICE NO. 307 3RD FLOOR MILESTONE MILLAGRO,, UNIVERSITY ROAD, VESU, SURAT, SURAT, GUJARAT, 395007",
+    "aliases": [
+      "aastha fintech private limited",
+      "aastha fintech"
+    ]
+  },
+  {
+    "reg_number": "INH000027229",
+    "name": "Aayush Deepak Badade",
+    "entity_type": "Research Analyst",
+    "validity": "May 18, 2026 - Perpetual",
+    "address": "304 Vaity Villa, Gokhale Road Opp. Mulund Railway Station Mulund E, Greater Mumbai M Corp, MUMBAI, MAHARASHTRA, 400081",
+    "aliases": [
+      "aayush deepak badade"
+    ]
+  },
+  {
+    "reg_number": "INH000006369",
+    "name": "ABANS BROKING SERVICES PRIVATE LIMITED",
+    "entity_type": "Research Analyst",
+    "validity": "Sep 11, 2018 - Perpetual",
+    "address": "13A 13B 13C, 1st Floor, Mittal Chambers, Barrister Rajni Patel Marg, Nariman Point,, MUMBAI, MAHARASHTRA, 400021",
+    "aliases": [
+      "abans broking services private limited",
+      "abans broking"
+    ]
+  },
+  {
+    "reg_number": "INH000013244",
+    "name": "Abdullah Zaman",
+    "entity_type": "Research Analyst",
+    "validity": "Oct 09, 2023 - Perpetual",
+    "address": "S1, Azim Green Home, New SS Nagar, PS Civil Line, ALIGARH, UTTAR PRADESH, 202001",
+    "aliases": [
+      "abdullah zaman"
+    ]
+  },
+  {
+    "reg_number": "INH300008465",
+    "name": "Abhay Kumar",
+    "entity_type": "Research Analyst",
+    "validity": "Jun 07, 2021 - Perpetual",
+    "address": "Village- Chari Durg, P.O.- Semra Bazar, PATNA, BIHAR, 841503",
+    "aliases": [
+      "abhay kumar"
+    ]
+  },
+  {
+    "reg_number": "INH000028459",
+    "name": "Abhay Kumar Sharma Proprietor of Wealth Grow Research",
+    "entity_type": "Research Analyst",
+    "validity": "Jun 24, 2026 - Perpetual",
+    "address": "Block A Third Floor Sanghi Residence Near Manas Bhavan Wright Town, In Front Of Bank Of Baroda, JABALPUR, MADHYA PRADESH, 482001",
+    "aliases": [
+      "abhay kumar sharma proprietor of wealth grow research"
+    ]
+  },
+  {
+    "reg_number": "INH000018443",
+    "name": "Abhijeet Ranganathan Ramachandran",
+    "entity_type": "Research Analyst",
+    "validity": "Aug 30, 2024 - Perpetual",
+    "address": "B4 Shrijiniketan CHS, MUMBAI, MAHARASHTRA, 400019",
+    "aliases": [
+      "abhijeet ranganathan ramachandran"
+    ]
   }
 ]

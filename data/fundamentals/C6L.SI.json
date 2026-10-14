@@ -1,0 +1,87 @@
+{
+  "ticker": "C6L.SI",
+  "name": "Singapore Airlines Limited",
+  "market": "SG",
+  "currency": "SGD",
+  "sector": "Industrials",
+  "trailing_eps": 0.29,
+  "forward_eps": 0.37225,
+  "market_cap": 20624992256,
+  "current_price": 6.54,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 17774800000.0,
+      "net_income": 2156800000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 19012700000.0,
+      "net_income": 2674800000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 19539800000.0,
+      "net_income": 2778000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 20522000000.0,
+      "net_income": 1184000000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-06-30",
+      "revenue": 4790400000.0,
+      "net_income": 186100000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 4884800000.0,
+      "net_income": 52400000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 5506200000.0,
+      "net_income": 504600000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 5340600000.0,
+      "net_income": 440900000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 5714200000.0,
+      "net_income": -75800000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 13.75,
+    "median": 19.65,
+    "max": 23.35,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 7.02214,
+    "target_high": 8.0,
+    "target_low": 5.8,
+    "num_analysts": 14,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 0.21,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

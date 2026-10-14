@@ -1,0 +1,87 @@
+{
+  "ticker": "ITC.NS",
+  "name": "ITC Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Consumer Defensive",
+  "trailing_eps": 15.84,
+  "forward_eps": 16.82939,
+  "market_cap": 3276730269696,
+  "current_price": 261.5,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 702452200000.0,
+      "net_income": 191916600000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 673910400000.0,
+      "net_income": 204587800000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 746533200000.0,
+      "net_income": 347466300000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 782132800000.0,
+      "net_income": 206894700000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 199182400000.0,
+      "net_income": 49311900000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 213729300000.0,
+      "net_income": 52442000000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 199182400000.0,
+      "net_income": 49311900000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 176288900000.0,
+      "net_income": 53879700000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 190008900000.0,
+      "net_income": 43941300000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 11.35,
+    "median": 23.01,
+    "max": 27.36,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 324.72726,
+    "target_high": 440.0,
+    "target_low": 285.0,
+    "num_analysts": 33,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 29.49,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

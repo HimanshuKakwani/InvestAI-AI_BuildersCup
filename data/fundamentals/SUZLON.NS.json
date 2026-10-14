@@ -1,75 +1,72 @@
 {
   "ticker": "SUZLON.NS",
-  "name": "Suzlon Energy",
+  "name": "Suzlon Energy Limited",
   "market": "IN",
   "currency": "INR",
   "sector": "Industrials",
-  "trailing_eps": 2.17,
+  "trailing_eps": 2.28,
   "forward_eps": 2.11618,
-  "market_cap": 552468742144.0,
+  "market_cap": 560854007808,
+  "current_price": 40.8,
   "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
     {
       "period_end": "2023-03-31",
       "revenue": 58542900000.0,
-      "net_income": 28490100000.0,
-      "eps": 2.64
+      "net_income": 28490100000.0
     },
     {
       "period_end": "2024-03-31",
       "revenue": 64025700000.0,
-      "net_income": 6603500000.0,
-      "eps": 0.5
+      "net_income": 6603500000.0
     },
     {
       "period_end": "2025-03-31",
       "revenue": 107633700000.0,
-      "net_income": 20716300000.0,
-      "eps": 1.51
+      "net_income": 20716300000.0
     },
     {
       "period_end": "2026-03-31",
       "revenue": 165466500000.0,
-      "net_income": 31633900000.0,
-      "eps": 2.31
+      "net_income": 31633900000.0
     }
   ],
   "quarterly": [
     {
       "period_end": "2025-03-31",
       "revenue": 37735400000.0,
-      "net_income": 11822200000.0,
-      "eps": 0.86
+      "net_income": 11822200000.0
     },
     {
       "period_end": "2025-06-30",
       "revenue": 31173300000.0,
-      "net_income": 3243200000.0,
-      "eps": 0.24
+      "net_income": 3243200000.0
     },
     {
       "period_end": "2025-12-31",
       "revenue": 42281800000.0,
-      "net_income": 4452800000.0,
-      "eps": 0.32
+      "net_income": 4452800000.0
     },
     {
       "period_end": "2026-03-31",
       "revenue": 54680600000.0,
-      "net_income": 11143500000.0,
-      "eps": 0.81
+      "net_income": 11143500000.0
     },
     {
       "period_end": "2026-06-30",
       "revenue": 38193600000.0,
-      "net_income": 3052200000.0,
-      "eps": 0.22
+      "net_income": 3052200000.0
     }
   ],
   "pe_band_5y": {
-    "min": 3.11,
-    "median": 34.29,
-    "max": 159.73,
-    "method": "price / latest fiscal-year diluted EPS (2nd-98th percentile)"
+    "min": 2.86,
+    "median": 18.25,
+    "max": 30.1,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
   "analyst": {
     "target_mean": 62.23077,
@@ -78,6 +75,13 @@
     "num_analysts": 13,
     "recommendation": "strong_buy"
   },
-  "source": "Yahoo Finance (yfinance)",
-  "as_of": "2026-10-13"
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 17.64,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
 }

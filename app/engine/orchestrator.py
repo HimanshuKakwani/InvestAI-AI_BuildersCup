@@ -36,7 +36,11 @@ class AnalysisService:
         # Load empirical data
         prices_df = self.loader.get_price_history(ticker)
         fundamentals = self.loader.get_fundamentals(ticker)
-        current_price = float(prices_df["Close"].iloc[-1]) if (prices_df is not None and not prices_df.empty) else None
+        current_price = None
+        if prices_df is not None and not prices_df.empty and "Close" in prices_df.columns:
+            current_price = float(prices_df["Close"].iloc[-1])
+        elif fundamentals and fundamentals.get("current_price"):
+            current_price = float(fundamentals["current_price"])
 
         # Evaluate 9 Parameters
         claimed_pct = claim.get("claimed_percentage_move")
@@ -44,7 +48,11 @@ class AnalysisService:
             claimed_pct = ((claim["target_price"] - current_price) / current_price) * 100.0
 
         target_price = claim.get("target_price")
-        horizon = claim.get("time_horizon_days", 14)
+        raw_horizon = claim.get("time_horizon_days")
+        try:
+            horizon = max(int(raw_horizon), 1) if raw_horizon is not None else 14
+        except Exception:
+            horizon = 14
         direction = claim.get("direction", "BUY")
 
         # P1: Price-Move Plausibility
@@ -86,7 +94,8 @@ class AnalysisService:
             creator_name=claim.get("creator_claimed_name"),
             registry_data=reg_data,
             alert_lists_data=alerts_data,
-            regulator_name=market_cfg.get("regulator", "Regulator")
+            regulator_name=market_cfg.get("regulator", "Regulator"),
+            claimed_reg_no=claim.get("creator_claimed_reg_no")
         )
 
         # P9: Manipulative & Hype Language

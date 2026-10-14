@@ -1,83 +1,82 @@
 {
   "ticker": "D05.SI",
-  "name": "DBS Group",
+  "name": "DBS Group Holdings Ltd",
   "market": "SG",
   "currency": "SGD",
   "sector": "Financial Services",
-  "trailing_eps": 5.93,
-  "forward_eps": 4.45188,
-  "market_cap": 211792723968.0,
+  "trailing_eps": 5.98,
+  "forward_eps": 4.4396,
+  "market_cap": 211422986240,
+  "current_price": 74.34,
   "annual": [
     {
       "period_end": "2022-12-31",
       "revenue": 16494000000.0,
-      "net_income": 8193000000.0,
-      "eps": 2.863636
+      "net_income": 8193000000.0
     },
     {
       "period_end": "2023-12-31",
       "revenue": 20134000000.0,
-      "net_income": 10062000000.0,
-      "eps": 3.52
+      "net_income": 10062000000.0
     },
     {
       "period_end": "2024-12-31",
       "revenue": 22217000000.0,
-      "net_income": 11290000000.0,
-      "eps": 3.94
+      "net_income": 11290000000.0
     },
     {
       "period_end": "2025-12-31",
       "revenue": 22895000000.0,
-      "net_income": 10934000000.0,
-      "eps": 3.82
+      "net_income": 10934000000.0
     }
   ],
   "quarterly": [
     {
       "period_end": "2025-03-31",
       "revenue": 5905000000.0,
-      "net_income": 2897000000.0,
-      "eps": 1.01791
+      "net_income": 2897000000.0
     },
     {
       "period_end": "2025-06-30",
       "revenue": 5732000000.0,
-      "net_income": 2824000000.0,
-      "eps": null
+      "net_income": 2824000000.0
     },
     {
       "period_end": "2025-12-31",
       "revenue": 5331000000.0,
-      "net_income": 2258000000.0,
-      "eps": null
+      "net_income": 2258000000.0
     },
     {
       "period_end": "2026-03-31",
       "revenue": 5948000000.0,
-      "net_income": 2930000000.0,
-      "eps": 1.03256
+      "net_income": 2930000000.0
     },
     {
       "period_end": "2026-06-30",
       "revenue": 6093000000.0,
-      "net_income": 3079000000.0,
-      "eps": null
+      "net_income": 3079000000.0
     }
   ],
   "pe_band_5y": {
-    "min": 7.18,
-    "median": 9.97,
-    "max": 20.25,
-    "method": "price / latest fiscal-year diluted EPS (2nd-98th percentile)"
+    "min": 3.69,
+    "median": 4.76,
+    "max": 11.91,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
   "analyst": {
-    "target_mean": 79.32941,
+    "target_mean": 79.27647,
     "target_high": 91.0,
     "target_low": 63.0,
     "num_analysts": 17,
     "recommendation": "buy"
   },
-  "source": "Yahoo Finance (yfinance)",
-  "as_of": "2026-10-13"
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 0.6,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
 }
