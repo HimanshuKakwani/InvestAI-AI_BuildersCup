@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Python cache & artifacts
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.env
+
+# Testing & Coverage
+tests/
+.pytest_cache/
+
+# Local reports & temp outputs
+reports_out/
+
+# Markdown Docs & System Files
+InvestPI_Planning_Document.md
+DEPLOYMENT_GUIDE.md
+.DS_Store
+.idea/
+.vscode/
