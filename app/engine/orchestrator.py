@@ -153,17 +153,28 @@ class AnalysisService:
             claims_raw = self.gemini.analyze_text_or_screenshot(str(payload), market_hint=region)
             raw_text_for_p9 = str(payload)
 
-        # Normalize claims into a list
+        # Check if classified as irrelevant or non-financial content
+        if isinstance(claims_raw, dict) and claims_raw.get("is_financial_advice") is False:
+            return {
+                "is_financial_advice": False,
+                "message": claims_raw.get("message") or "Not a financial advice, kindly provide relevant input",
+                "error": claims_raw.get("message") or "Not a financial advice, kindly provide relevant input"
+            }
+
+        # Normalize claims into a list of genuine securities claims
         claims_list = []
         if isinstance(claims_raw, list):
-            claims_list = [c for c in claims_raw if isinstance(c, dict) and (c.get("ticker") or c.get("company_name"))]
-            if not claims_list and len(claims_raw) > 0 and isinstance(claims_raw[0], dict):
-                claims_list = [claims_raw[0]]
+            claims_list = [c for c in claims_raw if isinstance(c, dict) and (c.get("ticker") or c.get("company_name")) and c.get("is_financial_advice") is not False]
         elif isinstance(claims_raw, dict):
-            claims_list = [claims_raw]
+            if (claims_raw.get("ticker") or claims_raw.get("company_name")) and claims_raw.get("is_financial_advice") is not False:
+                claims_list = [claims_raw]
 
         if not claims_list:
-            claims_list = [{}]
+            return {
+                "is_financial_advice": False,
+                "message": "Not a financial advice, kindly provide relevant input",
+                "error": "Not a financial advice, kindly provide relevant input"
+            }
 
         # Audit each claim
         evaluated_reports = []
