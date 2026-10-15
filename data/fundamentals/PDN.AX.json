@@ -1,0 +1,61 @@
+{
+  "ticker": "PDN.AX",
+  "name": "Paladin Energy Ltd",
+  "market": "AU",
+  "currency": "AUD",
+  "sector": "Energy",
+  "trailing_eps": 0.02,
+  "forward_eps": 0.37273028,
+  "market_cap": 3271329536,
+  "current_price": 7.28,
+  "annual": [
+    {
+      "period_end": "2022-06-30",
+      "revenue": 4700000.0,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-06-30",
+      "revenue": null,
+      "net_income": -10572000.0
+    },
+    {
+      "period_end": "2024-06-30",
+      "revenue": null,
+      "net_income": 53628000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 177676000.0,
+      "net_income": -44639000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 304320000.0,
+      "net_income": 5336000.0
+    }
+  ],
+  "quarterly": [],
+  "pe_band_5y": {
+    "min": 307.1,
+    "median": 424.0,
+    "max": 691.7,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 13.170605,
+    "target_high": 19.15624,
+    "target_low": 9.026695,
+    "num_analysts": 15,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 2.8,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

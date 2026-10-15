@@ -1,0 +1,61 @@
+{
+  "ticker": "Z74.SI",
+  "name": "Singapore Telecommunications Limited",
+  "market": "SG",
+  "currency": "SGD",
+  "sector": "Communication Services",
+  "trailing_eps": 0.34,
+  "forward_eps": 0.21433,
+  "market_cap": 67465109504,
+  "current_price": 4.14,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 14624400000.0,
+      "net_income": 2225100000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 14127500000.0,
+      "net_income": 795000000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 14146100000.0,
+      "net_income": 4017400000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 14260600000.0,
+      "net_income": 5606100000.0
+    }
+  ],
+  "quarterly": [],
+  "pe_band_5y": {
+    "min": 6.03,
+    "median": 6.75,
+    "max": 13.74,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 5.31333,
+    "target_high": 6.2,
+    "target_low": 4.57,
+    "num_analysts": 15,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 4.67,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

@@ -82,13 +82,13 @@
 
       <!-- Screenshot Dropzone Input -->
       <div id="inputImgArea" class="space-y-4 hidden">
-        <label class="block text-xs font-medium text-slate-400">UPLOAD OR DRAG & DROP SCREENSHOT (TELEGRAM, WHATSAPP, TWITTER)</label>
+        <label class="block text-xs font-medium text-slate-400">UPLOAD OR DRAG & DROP MEDIA (SCREENSHOT OR MP4 VIDEO CLIP)</label>
         <div id="dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)" onclick="document.getElementById('fileInput').click()"
              class="border-2 border-dashed border-slate-700 hover:border-blue-500 rounded-2xl p-8 text-center cursor-pointer bg-slate-950/50 hover:bg-slate-950 transition flex flex-col items-center justify-center space-y-2">
           <span class="text-3xl">📥</span>
-          <p class="text-sm font-medium text-slate-300">Click to upload or drag & drop image here</p>
-          <p class="text-xs text-slate-500">Supports PNG, JPG, WebP (English, Hindi, Mandarin text recognized)</p>
-          <input type="file" id="fileInput" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+          <p class="text-sm font-medium text-slate-300">Click to upload or drag & drop image or video here</p>
+          <p class="text-xs text-slate-500">Supports PNG, JPG, WebP, MP4 video (English, Hindi, Mandarin text recognized)</p>
+          <input type="file" id="fileInput" accept="image/*,video/mp4,video/*" class="hidden" onchange="handleFileSelect(event)">
         </div>
         <div id="filePreviewContainer" class="hidden flex items-center justify-between p-3 bg-slate-950 border border-slate-800 rounded-xl">
           <div class="flex items-center space-x-3">
@@ -117,6 +117,13 @@
       <div class="inline-block animate-spin text-3xl">⚙️</div>
       <p class="text-sm font-medium text-slate-300">Executing multimodal forensic audit...</p>
       <p class="text-xs text-slate-500">Cross-referencing 5-year empirical distribution & regulator registries</p>
+    </div>
+
+    <!-- Irrelevant / Not Financial Advice Alert -->
+    <div id="irrelevantBox" class="hidden p-8 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-center space-y-3 shadow-2xl max-w-2xl mx-auto backdrop-blur-sm">
+      <div class="text-4xl">⚠️</div>
+      <h3 id="irrelevantMessage" class="text-lg font-bold text-amber-300">Not a financial advice, kindly provide relevant input</h3>
+      <p class="text-xs text-slate-400 leading-relaxed">Our AI compliance engine analyzed the submitted media and confirmed it does not contain securities recommendations, stock tips, price targets, or financial advice.</p>
     </div>
 
     <!-- Results Display -->
@@ -196,16 +203,23 @@
     function processSelectedFile(file) {
       selectedScreenshotFile = file;
       document.getElementById('filePreviewName').innerText = file.name;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        document.getElementById('filePreviewThumb').src = e.target.result;
+      if (file.type && file.type.startsWith('video/')) {
+        document.getElementById('filePreviewThumb').src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='%2360a5fa'><path d='M4 4h10a2 2 0 0 1 2 2v2.586l3.707-3.707A1 1 0 0 1 21 5.586v12.828a1 1 0 0 1-1.293.974L16 15.414V18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z'/></svg>";
         document.getElementById('filePreviewContainer').classList.remove('hidden');
-      };
-      reader.readAsDataURL(file);
+      } else {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.getElementById('filePreviewThumb').src = e.target.result;
+          document.getElementById('filePreviewContainer').classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
     }
 
     async function runAudit(modality) {
       const region = document.getElementById('regionSelect').value;
+      const irrelevantBox = document.getElementById('irrelevantBox');
+      if (irrelevantBox) irrelevantBox.classList.add('hidden');
       document.getElementById('loadingBox').classList.remove('hidden');
       document.getElementById('resultsCard').classList.add('hidden');
 
@@ -236,6 +250,16 @@
         }
 
         const data = await res.json();
+        if (data && data.is_financial_advice === false) {
+          if (irrelevantBox) {
+            irrelevantBox.classList.remove('hidden');
+            const msgEl = document.getElementById('irrelevantMessage');
+            if (msgEl) msgEl.innerText = data.message || "Not a financial advice, kindly provide relevant input";
+          }
+          document.getElementById('resultsCard').classList.add('hidden');
+          return;
+        }
+
         if (!res.ok || data.error) {
           alert("Investigation error: " + (data.error || "Server returned an error"));
           return;

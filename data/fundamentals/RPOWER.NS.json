@@ -1,0 +1,87 @@
+{
+  "ticker": "RPOWER.NS",
+  "name": "Reliance Power Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Utilities",
+  "trailing_eps": -0.77,
+  "forward_eps": 4.51,
+  "market_cap": 82012340224,
+  "current_price": 19.83,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 70326000000.0,
+      "net_income": -4707700000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 74264500000.0,
+      "net_income": -20683800000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 71532100000.0,
+      "net_income": 29478300000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 72042300000.0,
+      "net_income": -3368900000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 18855800000.0,
+      "net_income": 446800000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 19740300000.0,
+      "net_income": 873200000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 18728400000.0,
+      "net_income": 251100000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 18872600000.0,
+      "net_income": -4940000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 19563200000.0,
+      "net_income": 647100000.0
+    }
+  ],
+  "pe_band_5y": null,
+  "analyst": {
+    "target_mean": null,
+    "target_high": null,
+    "target_low": null,
+    "num_analysts": 0,
+    "recommendation": "none"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 29.81,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

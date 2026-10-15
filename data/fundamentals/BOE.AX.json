@@ -1,0 +1,61 @@
+{
+  "ticker": "BOE.AX",
+  "name": "Boss Energy Limited",
+  "market": "AU",
+  "currency": "AUD",
+  "sector": "Energy",
+  "trailing_eps": 0.01,
+  "forward_eps": 0.13855,
+  "market_cap": 516922752,
+  "current_price": 1.245,
+  "annual": [
+    {
+      "period_end": "2022-06-30",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-06-30",
+      "revenue": null,
+      "net_income": 12547000.0
+    },
+    {
+      "period_end": "2024-06-30",
+      "revenue": null,
+      "net_income": 44592000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 75596000.0,
+      "net_income": -34168000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 151072000.0,
+      "net_income": 2544000.0
+    }
+  ],
+  "quarterly": [],
+  "pe_band_5y": {
+    "min": 135.0,
+    "median": 252.0,
+    "max": 485.0,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 1.56596,
+    "target_high": 2.77019,
+    "target_low": 1.0,
+    "num_analysts": 14,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 2.78,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

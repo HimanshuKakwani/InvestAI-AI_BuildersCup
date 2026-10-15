@@ -1,0 +1,61 @@
+{
+  "ticker": "5E2.SI",
+  "name": "Seatrium Limited",
+  "market": "SG",
+  "currency": "SGD",
+  "sector": "Energy",
+  "trailing_eps": 0.16,
+  "forward_eps": 0.15039,
+  "market_cap": 6574154752,
+  "current_price": 1.94,
+  "annual": [
+    {
+      "period_end": "2021-12-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2022-12-31",
+      "revenue": 1947195000.0,
+      "net_income": -261141000.0
+    },
+    {
+      "period_end": "2023-12-31",
+      "revenue": 7291488000.0,
+      "net_income": -2016717000.0
+    },
+    {
+      "period_end": "2024-12-31",
+      "revenue": 9230702000.0,
+      "net_income": 156838000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 11471675000.0,
+      "net_income": 323621000.0
+    }
+  ],
+  "quarterly": [],
+  "pe_band_5y": {
+    "min": 9.61,
+    "median": 13.2,
+    "max": 16.9,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 2.508,
+    "target_high": 3.0,
+    "target_low": 1.6,
+    "num_analysts": 10,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 0.36,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

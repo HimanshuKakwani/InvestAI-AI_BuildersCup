@@ -1,52 +1,61 @@
 {
   "ticker": "BHP.AX",
-  "name": "BHP Group",
+  "name": "BHP Group Limited",
   "market": "AU",
   "currency": "AUD",
   "sector": "Basic Materials",
-  "trailing_eps": 2.85,
-  "forward_eps": 3.7194786,
-  "market_cap": 311483400192.0,
+  "trailing_eps": 2.83,
+  "forward_eps": 3.7322052,
+  "market_cap": 309348564992,
+  "current_price": 60.86,
   "annual": [
+    {
+      "period_end": "2022-06-30",
+      "revenue": null,
+      "net_income": null
+    },
     {
       "period_end": "2023-06-30",
       "revenue": 53817000000.0,
-      "net_income": 12921000000.0,
-      "eps": 2.547
+      "net_income": 12921000000.0
     },
     {
       "period_end": "2024-06-30",
       "revenue": 55658000000.0,
-      "net_income": 7897000000.0,
-      "eps": 1.555
+      "net_income": 7897000000.0
     },
     {
       "period_end": "2025-06-30",
       "revenue": 51262000000.0,
-      "net_income": 9019000000.0,
-      "eps": 1.774
+      "net_income": 9019000000.0
     },
     {
       "period_end": "2026-06-30",
       "revenue": 58760000000.0,
-      "net_income": 9833000000.0,
-      "eps": 1.932
+      "net_income": 9833000000.0
     }
   ],
   "quarterly": [],
   "pe_band_5y": {
-    "min": 14.79,
-    "median": 23.23,
-    "max": 33.86,
-    "method": "price / latest fiscal-year diluted EPS (2nd-98th percentile)"
+    "min": 10.1,
+    "median": 13.51,
+    "max": 21.17,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
   "analyst": {
-    "target_mean": 59.81057,
-    "target_high": 70.67971,
-    "target_low": 43.27408,
+    "target_mean": 59.965076,
+    "target_high": 70.86229,
+    "target_low": 43.385868,
     "num_analysts": 17,
     "recommendation": "hold"
   },
-  "source": "Yahoo Finance (yfinance)",
-  "as_of": "2026-10-13"
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 0.04,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
 }

@@ -1,0 +1,82 @@
+{
+  "ticker": "IRFC.NS",
+  "name": "Indian Railway Finance Corporation Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Financial Services",
+  "trailing_eps": 5.5,
+  "forward_eps": 7.3,
+  "market_cap": 1042213371904,
+  "current_price": 79.75,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 236506980000.0,
+      "net_income": 61671560000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 265304200000.0,
+      "net_income": 64121100000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 270597800000.0,
+      "net_income": 65020000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 270752700000.0,
+      "net_income": 70091700000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 67187300000.0,
+      "net_income": 16818700000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 69010700000.0,
+      "net_income": 17456900000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 66571200000.0,
+      "net_income": 18021900000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 73357500000.0,
+      "net_income": 16843100000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 82420300000.0,
+      "net_income": 19272100000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 3.47,
+    "median": 16.66,
+    "max": 30.75,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 60.0,
+    "target_high": 60.0,
+    "target_low": 60.0,
+    "num_analysts": 1,
+    "recommendation": "none"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 82.9,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

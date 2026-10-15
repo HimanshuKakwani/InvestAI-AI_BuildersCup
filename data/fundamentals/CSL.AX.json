@@ -1,0 +1,51 @@
+{
+  "ticker": "CSL.AX",
+  "name": "CSL Limited",
+  "market": "AU",
+  "currency": "AUD",
+  "sector": "Healthcare",
+  "trailing_eps": -7.9,
+  "forward_eps": 9.527208,
+  "market_cap": 88581840896,
+  "current_price": 184.59,
+  "annual": [
+    {
+      "period_end": "2023-06-30",
+      "revenue": 13174000000.0,
+      "net_income": 2194000000.0
+    },
+    {
+      "period_end": "2024-06-30",
+      "revenue": 14690000000.0,
+      "net_income": 2642000000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 15430000000.0,
+      "net_income": 3002000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 15698000000.0,
+      "net_income": -2579000000.0
+    }
+  ],
+  "quarterly": [],
+  "pe_band_5y": null,
+  "analyst": {
+    "target_mean": 185.29865,
+    "target_high": 214.89597,
+    "target_low": 153.16808,
+    "num_analysts": 17,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 0.02,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

@@ -1,0 +1,56 @@
+{
+  "ticker": "FMG.AX",
+  "name": "Fortescue Ltd",
+  "market": "AU",
+  "currency": "AUD",
+  "sector": "Basic Materials",
+  "trailing_eps": 1.37,
+  "forward_eps": 1.0084679,
+  "market_cap": 47169740800,
+  "current_price": 15.32,
+  "annual": [
+    {
+      "period_end": "2023-06-30",
+      "revenue": 16780000000.0,
+      "net_income": 4798000000.0
+    },
+    {
+      "period_end": "2024-06-30",
+      "revenue": 18109000000.0,
+      "net_income": 5683000000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 15420000000.0,
+      "net_income": 3373000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 16835000000.0,
+      "net_income": 2870000000.0
+    }
+  ],
+  "quarterly": [],
+  "pe_band_5y": {
+    "min": 8.76,
+    "median": 12.21,
+    "max": 16.08,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 16.554121,
+    "target_high": 21.989468,
+    "target_low": 13.482604,
+    "num_analysts": 17,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 48.84,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

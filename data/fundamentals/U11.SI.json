@@ -1,0 +1,61 @@
+{
+  "ticker": "U11.SI",
+  "name": "United Overseas Bank Limited",
+  "market": "SG",
+  "currency": "SGD",
+  "sector": "Financial Services",
+  "trailing_eps": 5.62,
+  "forward_eps": 3.60127,
+  "market_cap": 67689902080,
+  "current_price": 41.06,
+  "annual": [
+    {
+      "period_end": "2021-12-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2022-12-31",
+      "revenue": 11577000000.0,
+      "net_income": 4573000000.0
+    },
+    {
+      "period_end": "2023-12-31",
+      "revenue": 13935000000.0,
+      "net_income": 5711000000.0
+    },
+    {
+      "period_end": "2024-12-31",
+      "revenue": 14303000000.0,
+      "net_income": 6045000000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 13807000000.0,
+      "net_income": 4682000000.0
+    }
+  ],
+  "quarterly": [],
+  "pe_band_5y": {
+    "min": 3.74,
+    "median": 4.51,
+    "max": 7.25,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 43.28,
+    "target_high": 48.0,
+    "target_low": 35.7,
+    "num_analysts": 16,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 21.79,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

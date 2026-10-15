@@ -1,0 +1,87 @@
+{
+  "ticker": "SBIN.NS",
+  "name": "State Bank of India",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Financial Services",
+  "trailing_eps": 93.3,
+  "forward_eps": 105.50033,
+  "market_cap": 8814317273088,
+  "current_price": 954.9,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 2703369068000.0,
+      "net_income": 556481728000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 3236135037000.0,
+      "net_income": 670846661000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 3495234156000.0,
+      "net_income": 775613371000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 3817091770000.0,
+      "net_income": 832987824000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 1013352700000.0,
+      "net_income": 196004600000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 887253600000.0,
+      "net_income": 212014700000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 1068657800000.0,
+      "net_income": 213171100000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 1011255900000.0,
+      "net_income": 196428700000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 978142900000.0,
+      "net_income": 241130000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 4.67,
+    "median": 7.61,
+    "max": 11.23,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 1255.4103,
+    "target_high": 1390.0,
+    "target_low": 1020.0,
+    "num_analysts": 39,
+    "recommendation": "strong_buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 57.23,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

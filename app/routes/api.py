@@ -252,8 +252,21 @@ def create_app():
                 
                 image_bytes = file.read()
                 mime_type = file.mimetype or "image/png"
+                fn = (file.filename or "").lower()
+                if fn.endswith(".mp4"):
+                    mime_type = "video/mp4"
+                elif fn.endswith(".mov"):
+                    mime_type = "video/quicktime"
+                elif fn.endswith((".jpg", ".jpeg")):
+                    mime_type = "image/jpeg"
+                elif fn.endswith(".webp"):
+                    mime_type = "image/webp"
+
                 region = request.form.get("region", "IN")
                 result = analysis_service.run_investigation("screenshot", image_bytes, region_override=region, image_mime=mime_type)
+
+                if result.get("is_financial_advice") is False:
+                    return jsonify(result), 200
 
                 # Process all audited stock reports
                 all_reports = result.get("reports", [result])
@@ -284,6 +297,9 @@ def create_app():
                 return jsonify({"error": "Payload content (URL or text) is required"}), 400
 
             result = analysis_service.run_investigation(modality, payload, region_override=region)
+
+            if result.get("is_financial_advice") is False:
+                return jsonify(result), 200
 
             # Process all audited stock reports
             all_reports = result.get("reports", [result])

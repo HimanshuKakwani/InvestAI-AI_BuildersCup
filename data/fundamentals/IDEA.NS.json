@@ -1,0 +1,87 @@
+{
+  "ticker": "IDEA.NS",
+  "name": "Vodafone Idea Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Communication Services",
+  "trailing_eps": 3.45,
+  "forward_eps": -1.45193,
+  "market_cap": 1372706308096,
+  "current_price": 12.67,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 421426000000.0,
+      "net_income": -293011000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 425727000000.0,
+      "net_income": -312384000000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 434560000000.0,
+      "net_income": -273840000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 447890000000.0,
+      "net_income": 345520000000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-06-30",
+      "revenue": 110080000000.0,
+      "net_income": -66080000000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 111696000000.0,
+      "net_income": -55242000000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 113080000000.0,
+      "net_income": -52860000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 113030000000.0,
+      "net_income": 519700000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 116820000000.0,
+      "net_income": -37540000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 1.95,
+    "median": 2.77,
+    "max": 4.6,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 12.23455,
+    "target_high": 20.0,
+    "target_low": 5.5,
+    "num_analysts": 22,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 74.64,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}

@@ -4,41 +4,43 @@
   "market": "AU",
   "currency": "AUD",
   "sector": "Financial Services",
-  "trailing_eps": 6.52,
+  "trailing_eps": 6.38,
   "forward_eps": 6.78579,
-  "market_cap": 258297839616.0,
+  "market_cap": 252730638336,
+  "current_price": 151.17,
   "annual": [
+    {
+      "period_end": "2022-06-30",
+      "revenue": null,
+      "net_income": null
+    },
     {
       "period_end": "2023-06-30",
       "revenue": 26779000000.0,
-      "net_income": 9998000000.0,
-      "eps": 5.787
+      "net_income": 9998000000.0
     },
     {
       "period_end": "2024-06-30",
       "revenue": 27469000000.0,
-      "net_income": 9394000000.0,
-      "eps": 5.578
+      "net_income": 9394000000.0
     },
     {
       "period_end": "2025-06-30",
       "revenue": 28657000000.0,
-      "net_income": 10116000000.0,
-      "eps": 6.042
+      "net_income": 10116000000.0
     },
     {
       "period_end": "2026-06-30",
       "revenue": 29901000000.0,
-      "net_income": 10866000000.0,
-      "eps": 6.49
+      "net_income": 10866000000.0
     }
   ],
   "quarterly": [],
   "pe_band_5y": {
-    "min": 15.46,
-    "median": 24.71,
-    "max": 30.63,
-    "method": "price / latest fiscal-year diluted EPS (2nd-98th percentile)"
+    "min": 12.75,
+    "median": 17.12,
+    "max": 26.92,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
   "analyst": {
     "target_mean": 125.64014,
@@ -47,6 +49,13 @@
     "num_analysts": 14,
     "recommendation": "sell"
   },
-  "source": "Yahoo Finance (yfinance)",
-  "as_of": "2026-10-13"
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 0.33,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
 }

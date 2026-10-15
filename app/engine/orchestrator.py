@@ -36,7 +36,11 @@ class AnalysisService:
         # Load empirical data
         prices_df = self.loader.get_price_history(ticker)
         fundamentals = self.loader.get_fundamentals(ticker)
-        current_price = float(prices_df["Close"].iloc[-1]) if (prices_df is not None and not prices_df.empty) else None
+        current_price = None
+        if prices_df is not None and not prices_df.empty and "Close" in prices_df.columns:
+            current_price = float(prices_df["Close"].iloc[-1])
+        elif fundamentals and fundamentals.get("current_price"):
+            current_price = float(fundamentals["current_price"])
 
         # Evaluate 9 Parameters
         claimed_pct = claim.get("claimed_percentage_move")
@@ -44,7 +48,11 @@ class AnalysisService:
             claimed_pct = ((claim["target_price"] - current_price) / current_price) * 100.0
 
         target_price = claim.get("target_price")
-        horizon = claim.get("time_horizon_days", 14)
+        raw_horizon = claim.get("time_horizon_days")
+        try:
+            horizon = max(int(raw_horizon), 1) if raw_horizon is not None else 14
+        except Exception:
+            horizon = 14
         direction = claim.get("direction", "BUY")
 
         # P1: Price-Move Plausibility
@@ -86,7 +94,8 @@ class AnalysisService:
             creator_name=claim.get("creator_claimed_name"),
             registry_data=reg_data,
             alert_lists_data=alerts_data,
-            regulator_name=market_cfg.get("regulator", "Regulator")
+            regulator_name=market_cfg.get("regulator", "Regulator"),
+            claimed_reg_no=claim.get("creator_claimed_reg_no")
         )
 
         # P9: Manipulative & Hype Language
@@ -144,17 +153,28 @@ class AnalysisService:
             claims_raw = self.gemini.analyze_text_or_screenshot(str(payload), market_hint=region)
             raw_text_for_p9 = str(payload)
 
-        # Normalize claims into a list
+        # Check if classified as irrelevant or non-financial content
+        if isinstance(claims_raw, dict) and claims_raw.get("is_financial_advice") is False:
+            return {
+                "is_financial_advice": False,
+                "message": claims_raw.get("message") or "Not a financial advice, kindly provide relevant input",
+                "error": claims_raw.get("message") or "Not a financial advice, kindly provide relevant input"
+            }
+
+        # Normalize claims into a list of genuine securities claims
         claims_list = []
         if isinstance(claims_raw, list):
-            claims_list = [c for c in claims_raw if isinstance(c, dict) and (c.get("ticker") or c.get("company_name"))]
-            if not claims_list and len(claims_raw) > 0 and isinstance(claims_raw[0], dict):
-                claims_list = [claims_raw[0]]
+            claims_list = [c for c in claims_raw if isinstance(c, dict) and (c.get("ticker") or c.get("company_name")) and c.get("is_financial_advice") is not False]
         elif isinstance(claims_raw, dict):
-            claims_list = [claims_raw]
+            if (claims_raw.get("ticker") or claims_raw.get("company_name")) and claims_raw.get("is_financial_advice") is not False:
+                claims_list = [claims_raw]
 
         if not claims_list:
-            claims_list = [{}]
+            return {
+                "is_financial_advice": False,
+                "message": "Not a financial advice, kindly provide relevant input",
+                "error": "Not a financial advice, kindly provide relevant input"
+            }
 
         # Audit each claim
         evaluated_reports = []

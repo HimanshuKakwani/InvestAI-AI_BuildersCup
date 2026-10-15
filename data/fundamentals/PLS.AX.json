@@ -1,52 +1,56 @@
 {
   "ticker": "PLS.AX",
-  "name": "Pilbara Minerals",
+  "name": "PLS Group Limited",
   "market": "AU",
   "currency": "AUD",
   "sector": "Basic Materials",
-  "trailing_eps": 0.16,
-  "forward_eps": 0.23117,
-  "market_cap": 9935916032.0,
+  "trailing_eps": 0.17,
+  "forward_eps": 0.22736,
+  "market_cap": 10226251776,
+  "current_price": 3.17,
   "annual": [
     {
       "period_end": "2023-06-30",
       "revenue": 4315533000.0,
-      "net_income": 2391135000.0,
-      "eps": 0.7893
+      "net_income": 2391135000.0
     },
     {
       "period_end": "2024-06-30",
       "revenue": 1792977000.0,
-      "net_income": 256883000.0,
-      "eps": 0.0845
+      "net_income": 256883000.0
     },
     {
       "period_end": "2025-06-30",
       "revenue": 890207000.0,
-      "net_income": -195766000.0,
-      "eps": -0.0633
+      "net_income": -195766000.0
     },
     {
       "period_end": "2026-06-30",
       "revenue": 1539710000.0,
-      "net_income": 525761000.0,
-      "eps": 0.1614
+      "net_income": 525761000.0
     }
   ],
   "quarterly": [],
   "pe_band_5y": {
-    "min": 4.1,
-    "median": 16.65,
-    "max": 36.12,
-    "method": "price / latest fiscal-year diluted EPS (2nd-98th percentile)"
+    "min": 9.01,
+    "median": 20.71,
+    "max": 30.6,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
   "analyst": {
-    "target_mean": 4.98333,
+    "target_mean": 4.85,
     "target_high": 6.7,
     "target_low": 3.1,
     "num_analysts": 18,
     "recommendation": "buy"
   },
-  "source": "Yahoo Finance (yfinance)",
-  "as_of": "2026-10-13"
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 8.05,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
 }

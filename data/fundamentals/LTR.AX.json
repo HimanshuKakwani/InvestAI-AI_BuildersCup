@@ -1,0 +1,61 @@
+{
+  "ticker": "LTR.AX",
+  "name": "Liontown Limited",
+  "market": "AU",
+  "currency": "AUD",
+  "sector": "Basic Materials",
+  "trailing_eps": 0.03,
+  "forward_eps": 0.07763,
+  "market_cap": 2298226432,
+  "current_price": 0.72,
+  "annual": [
+    {
+      "period_end": "2022-06-30",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-06-30",
+      "revenue": null,
+      "net_income": -22213000.0
+    },
+    {
+      "period_end": "2024-06-30",
+      "revenue": null,
+      "net_income": -64918000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 297565000.0,
+      "net_income": -193277000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 639136000.0,
+      "net_income": 92552000.0
+    }
+  ],
+  "quarterly": [],
+  "pe_band_5y": {
+    "min": 20.5,
+    "median": 46.5,
+    "max": 93.33,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 1.13046,
+    "target_high": 1.9,
+    "target_low": 0.746,
+    "num_analysts": 13,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 33.28,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-14"
+}
