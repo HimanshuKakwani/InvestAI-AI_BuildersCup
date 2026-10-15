@@ -69,7 +69,30 @@ If you deploy InvestPI today, **you will consume almost none of your $300 credit
 
 ## 2. Prerequisites & Current Account Status
 
-Audited state of your environment:
+### Initial CLI Setup (if starting on a fresh machine):
+
+**macOS:**
+```bash
+# Install Google Cloud SDK via Homebrew
+brew install --cask google-cloud-sdk
+
+# Authenticate with your Google Cloud account
+gcloud auth login
+```
+
+**Windows:**
+```powershell
+# Install Google Cloud SDK via Windows Package Manager (PowerShell / Command Prompt)
+winget install Google.CloudSDK
+
+# Or download the official installer:
+# https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe
+
+# Open a NEW PowerShell window and authenticate
+gcloud auth login
+```
+
+### Audited state of your environment:
 - **Authenticated Account**: `himanshukakwani14@gmail.com`
 - **Active Billing Account ID**: `014373-1D99E4-9DAB78` (`My Billing Account`)
 - **Codebase State**: Flask web app with ReportLab PDF generator, Swagger UI (`/apidocs/`), and 9-parameter engine is ready.
