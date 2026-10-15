@@ -104,14 +104,25 @@ def verify_sebi_creator(
             "reason": "Creator identity undisclosed or anonymous"
         }
 
-    # 1. Local Registry Check
+    # 1. Local / Cloud Registry Check
     candidates = local_registry or []
+    if not candidates:
+        try:
+            from app.data.storage import ReportStorage
+            storage = ReportStorage()
+            cloud_reg = storage.get_registry("IN_sebi_ra_ia")
+            if cloud_reg:
+                candidates = cloud_reg
+        except Exception:
+            pass
+
     if not candidates and REGISTRY_FILE.exists():
         try:
             with open(REGISTRY_FILE, "r", encoding="utf-8") as f:
                 candidates = json.load(f)
         except Exception:
             candidates = []
+
 
     c_lower = clean_name.lower()
     for item in candidates:
@@ -192,8 +203,18 @@ def _cache_new_sebi_entry(entry: Dict[str, Any]):
             if short_name and short_name not in aliases:
                 aliases.append(short_name)
 
-            data.append({**entry, "aliases": aliases})
+            new_record = {**entry, "aliases": aliases}
+            data.append(new_record)
             with open(REGISTRY_FILE, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
+
+            # Persist to Firestore across Cloud Run instances
+            try:
+                from app.data.storage import ReportStorage
+                storage = ReportStorage()
+                storage.append_registry_entry("IN_sebi_ra_ia", new_record)
+            except Exception:
+                pass
     except Exception as e:
         logger.warning(f"Failed to append SEBI entry to cache: {e}")
+

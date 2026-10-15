@@ -14,7 +14,14 @@ exchange:
   names: ["SGX", "STI", "Catalist"]
   ticker_suffixes: [".SI"]
   default_suffix: ".SI"
+schedule:
+  timezone: "Asia/Singapore"
+  trading_hours: "09:00-17:00"
+  market_close_local: "17:00"
+  sync_window_start: "17:30"
+  recommended_cron_utc: "30 9 * * 1-5"
 license_registry: registries/SG_mas_fid.json
+
 alert_lists:
   - alerts/SG_mas_investor_alert_list.json
 red_flag_lexicon:

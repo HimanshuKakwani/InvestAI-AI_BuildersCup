@@ -36,18 +36,37 @@ class AnalysisService:
         # Load empirical data
         prices_df = self.loader.get_price_history(ticker)
         fundamentals = self.loader.get_fundamentals(ticker)
-        current_price = None
-        if prices_df is not None and not prices_df.empty and "Close" in prices_df.columns:
-            current_price = float(prices_df["Close"].iloc[-1])
-        elif fundamentals and fundamentals.get("current_price"):
-            current_price = float(fundamentals["current_price"])
+
+        # 1. Real-time Live Market Price (10-min intraday cache)
+        current_price = self.loader.get_live_price(ticker)
+
+        # 2. Fallback to latest close if live price is unavailable
+        if current_price is None:
+            if prices_df is not None and not prices_df.empty and "Close" in prices_df.columns:
+                current_price = float(prices_df["Close"].iloc[-1])
+            elif fundamentals and fundamentals.get("current_price"):
+                current_price = float(fundamentals["current_price"])
+
 
         # Evaluate 9 Parameters
         claimed_pct = claim.get("claimed_percentage_move")
-        if claimed_pct is None and claim.get("target_price") and current_price:
-            claimed_pct = ((claim["target_price"] - current_price) / current_price) * 100.0
+        if claimed_pct is not None:
+            try:
+                claimed_pct = float(claimed_pct)
+            except Exception:
+                claimed_pct = None
 
-        target_price = claim.get("target_price")
+        if claimed_pct is None and claim.get("target_price") and current_price:
+            try:
+                t_price = float(claim["target_price"])
+                claimed_pct = ((t_price - current_price) / current_price) * 100.0
+            except Exception:
+                claimed_pct = None
+
+        try:
+            target_price = float(claim["target_price"]) if claim.get("target_price") is not None else None
+        except Exception:
+            target_price = None
         raw_horizon = claim.get("time_horizon_days")
         try:
             horizon = max(int(raw_horizon), 1) if raw_horizon is not None else 14

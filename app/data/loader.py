@@ -1,4 +1,5 @@
 """Dataset & Market Pack loader for InvestPI with live financial data integration."""
+from datetime import datetime, timezone
 import json
 import logging
 import time
@@ -20,6 +21,7 @@ class DataLoader:
         self._prices_cache: Dict[str, pd.DataFrame] = {}
         self._fundamentals_cache: Dict[str, Dict[str, Any]] = {}
         self._resolution_cache: Dict[str, Optional[Dict[str, Any]]] = {}
+        self._live_price_cache: Dict[str, Any] = {}
         self._storage = None
         self._load_markets()
         self._load_universe()
@@ -118,39 +120,155 @@ class DataLoader:
         }
         return TICKER_YFINANCE_MAP.get(ticker.upper(), ticker)
 
-    def get_price_history(self, ticker: str, force_refresh: bool = False) -> Optional[pd.DataFrame]:
+    def get_live_price(self, ticker: str) -> Optional[float]:
         """
-        Returns 5-year daily OHLCV price history DataFrame.
-        Uses in-memory cache and cached CSV if fresh (<24h); otherwise dynamically fetches live from exchange.
+        Returns real-time or near-real-time current market price (CMP).
+        Uses a fast 10-minute (600s) intraday cache to prevent provider rate-limiting.
         """
-        if not force_refresh and ticker in self._prices_cache:
-            return self._prices_cache[ticker]
-
-        p_path = DATA_DIR / "prices" / f"{ticker}.csv"
         now = time.time()
+        cached = self._live_price_cache.get(ticker)
+        if cached:
+            val, ts = cached
+            if (now - ts) < 600:
+                return val
 
-        # Check local cache freshness (TTL = 24 hours)
-        if p_path.exists() and not force_refresh:
-            mtime = p_path.stat().st_mtime
-            if (now - mtime) < 86400:
-                try:
-                    df = pd.read_csv(p_path, parse_dates=["Date"], index_col="Date")
-                    if not df.empty and "Close" in df.columns:
-                        self._prices_cache[ticker] = df
-                        return df
-                except Exception as e:
-                    logger.warning(f"Error reading cached prices for {ticker}: {e}")
-
-        # Live fetch via yfinance
         try:
             import yfinance as yf
             yf_ticker = self._map_yf_ticker(ticker)
-            logger.info(f"Fetching live 5-year price history for {ticker} (yf: {yf_ticker})...")
+            t = yf.Ticker(yf_ticker)
+
+            price = None
+            fast_info = getattr(t, "fast_info", None)
+            if fast_info:
+                try:
+                    price = getattr(fast_info, "last_price", None) or getattr(fast_info, "previous_close", None)
+                except Exception:
+                    pass
+
+            if not price:
+                info = getattr(t, "info", {}) or {}
+                price = info.get("currentPrice") or info.get("regularMarketPrice")
+
+            if price and float(price) > 0:
+                float_p = round(float(price), 2)
+                self._live_price_cache[ticker] = (float_p, now)
+                return float_p
+        except Exception as e:
+            logger.debug(f"Could not fetch live tick price for {ticker}: {e}")
+
+        # Fallback to last close in existing price history
+        hist = self.get_price_history(ticker)
+        if hist is not None and not hist.empty and "Close" in hist.columns:
+            fallback_val = round(float(hist["Close"].iloc[-1]), 2)
+            self._live_price_cache[ticker] = (fallback_val, now)
+            return fallback_val
+
+        return None
+
+    def get_price_history(self, ticker: str, force_refresh: bool = False) -> Optional[pd.DataFrame]:
+        """
+        Returns 5-year daily OHLCV price history DataFrame.
+        Reads from memory/cached CSV and incrementally appends only missing latest days.
+        """
+        df = None
+        if not force_refresh and ticker in self._prices_cache:
+            df = self._prices_cache[ticker]
+
+        p_path = DATA_DIR / "prices" / f"{ticker}.csv"
+        if df is None and p_path.exists():
+            try:
+                df = pd.read_csv(p_path, parse_dates=["Date"], index_col="Date")
+            except Exception as e:
+                logger.warning(f"Error reading cached prices for {ticker}: {e}")
+
+        # If existing historical data exists, incrementally append missing days
+        if df is not None and not df.empty and "Close" in df.columns:
+            try:
+                # Robustly extract the last date from index (handles DatetimeIndex, mixed DST timezones, and strings)
+                last_idx_val = df.index[-1]
+                if hasattr(last_idx_val, "date"):
+                    last_dt = last_idx_val.date()
+                else:
+                    date_part = str(last_idx_val).split()[0]
+                    last_dt = pd.to_datetime(date_part).date()
+
+                # Fetch recent days to check for new settled trading candles (adapts to cover all missing days)
+                try:
+                    import yfinance as yf
+                    yf_ticker = self._map_yf_ticker(ticker)
+                    t = yf.Ticker(yf_ticker)
+
+                    # Dynamically adapt fetch window so all missing dates are captured
+                    today = pd.Timestamp.now().date()
+                    gap_days = max((today - last_dt).days, 1)
+                    if gap_days <= 5:
+                        fetch_period = "5d"
+                    elif gap_days <= 25:
+                        fetch_period = "1mo"
+                    else:
+                        fetch_period = "3mo"
+
+                    delta_df = t.history(period=fetch_period)
+                    if delta_df is not None and not delta_df.empty:
+                        # Drop incomplete/unsettled rows with NaN or non-positive Close/Open/High/Low
+                        delta_df = delta_df.dropna(subset=["Close", "Open", "High", "Low"])
+                        delta_df = delta_df[(delta_df["Close"] > 0) & (delta_df["Volume"] > 0)]
+
+                        if not delta_df.empty:
+                            if not isinstance(delta_df.index, pd.DatetimeIndex):
+                                delta_df.index = pd.to_datetime(delta_df.index)
+
+                            new_rows = delta_df[delta_df.index.date > last_dt]
+                            if not new_rows.empty:
+                                # Ensure timezone format matches existing CSV
+                                last_str = str(df.index[-1])
+                                file_has_tz = ("+" in last_str or "-" in last_str[10:])
+                                if not file_has_tz and getattr(new_rows.index, "tz", None) is not None:
+                                    new_rows.index = new_rows.index.tz_localize(None)
+
+                                # Append ONLY new rows to CSV without modifying or rewriting previous rows
+                                p_path.parent.mkdir(parents=True, exist_ok=True)
+                                if p_path.exists():
+                                    with open(p_path, "rb+") as f:
+                                        f.seek(0, 2)
+                                        size = f.tell()
+                                        if size > 0:
+                                            f.seek(size - 1)
+                                            if f.read(1) not in (b"\n", b"\r"):
+                                                f.write(b"\n")
+                                new_rows.to_csv(p_path, mode="a", header=False)
+
+                                # Update in-memory cache
+                                df = pd.concat([df, new_rows])
+                                df = df[~df.index.duplicated(keep="last")]
+                                logger.info(f"Appended {len(new_rows)} settled daily candle(s) for {ticker}.")
+                except Exception as e_delta:
+                    logger.debug(f"Could not append delta prices for {ticker}: {e_delta}")
+
+                self._prices_cache[ticker] = df
+                return df
+            except Exception as e_parse:
+                logger.debug(f"Price history check issue for {ticker}: {e_parse}")
+                self._prices_cache[ticker] = df
+                return df
+
+        # Full 5-year fetch if no existing history exists
+        try:
+            import yfinance as yf
+            yf_ticker = self._map_yf_ticker(ticker)
+            logger.info(f"Fetching full 5-year price history for {ticker} (yf: {yf_ticker})...")
             t = yf.Ticker(yf_ticker)
             df = t.history(period="5y")
             if df is not None and not df.empty and "Close" in df.columns:
-                p_path.parent.mkdir(parents=True, exist_ok=True)
-                df.to_csv(p_path)
+                if not isinstance(df.index, pd.DatetimeIndex):
+                    df.index = pd.to_datetime(df.index)
+                if df.index.tz is not None:
+                    df.index = df.index.tz_localize(None)
+                try:
+                    p_path.parent.mkdir(parents=True, exist_ok=True)
+                    df.to_csv(p_path)
+                except Exception:
+                    pass
                 self._prices_cache[ticker] = df
                 return df
         except Exception as e:
@@ -169,6 +287,7 @@ class DataLoader:
         return None
 
 
+
     def get_fundamentals(self, ticker: str, force_refresh: bool = False) -> Optional[Dict[str, Any]]:
         """
         Returns fundamental financial metrics, valuation envelope, analyst consensus,
@@ -177,13 +296,38 @@ class DataLoader:
         if not force_refresh and ticker in self._fundamentals_cache:
             return self._fundamentals_cache[ticker]
 
+        fallback_cloud_data = None
+
         # 1. Check Firebase Firestore L2 cache (shared across all Cloud Run instances)
         storage = self._get_storage()
-        if not force_refresh and storage and storage.is_firestore_connected():
+        if storage and storage.is_firestore_connected():
             cloud_data = storage.get_fundamental(ticker)
             if cloud_data and cloud_data.get("trailing_eps") is not None:
-                self._fundamentals_cache[ticker] = cloud_data
-                return cloud_data
+                fallback_cloud_data = cloud_data
+                if not force_refresh:
+                    # Check TTL freshness (TTL = 24 hours / 86400 seconds)
+                    is_fresh = True
+                    updated_str = cloud_data.get("updated_at")
+                    if updated_str:
+                        try:
+                            up_dt = datetime.fromisoformat(updated_str.replace("Z", "+00:00"))
+                            if (datetime.now(timezone.utc) - up_dt).total_seconds() > 86400:
+                                is_fresh = False
+                        except Exception:
+                            pass
+                    elif cloud_data.get("as_of"):
+                        try:
+                            as_of_date = pd.to_datetime(cloud_data["as_of"]).date()
+                            if (pd.Timestamp.now().date() - as_of_date).days >= 1:
+                                is_fresh = False
+                        except Exception:
+                            pass
+
+                    if is_fresh:
+                        self._fundamentals_cache[ticker] = cloud_data
+                        return cloud_data
+                    else:
+                        logger.info(f"Firestore fundamentals for {ticker} are older than 24h. Triggering live refresh...")
 
         f_path = DATA_DIR / "fundamentals" / f"{ticker}.json"
         now = time.time()
@@ -360,7 +504,12 @@ class DataLoader:
             except Exception:
                 pass
 
+        if fallback_cloud_data:
+            self._fundamentals_cache[ticker] = fallback_cloud_data
+            return fallback_cloud_data
+
         return None
+
 
 
     def get_registry(self, rel_path: str) -> List[Dict[str, Any]]:

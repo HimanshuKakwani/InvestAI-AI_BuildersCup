@@ -14,7 +14,14 @@ exchange:
   names: ["ASX", "ASX 200", "ASX200"]
   ticker_suffixes: [".AX"]
   default_suffix: ".AX"
+schedule:
+  timezone: "Australia/Sydney"
+  trading_hours: "10:00-16:00"
+  market_close_local: "16:00"
+  sync_window_start: "16:30"
+  recommended_cron_utc: "30 6 * * 1-5"
 license_registry: registries/AU_asic_afs.json
+
 alert_lists:
   - alerts/AU_asic_moneysmart_alert_list.json
 red_flag_lexicon:

@@ -188,6 +188,68 @@ def create_app():
         """
         return jsonify(analysis_service.loader.markets)
 
+    @app.route("/api/markets/schedule")
+    def get_markets_schedule():
+        """
+        Market Schedule & Cloud Scheduler Registry
+        ---
+        tags:
+          - System & Data
+        responses:
+          200:
+            description: Live schedule status and Cloud Scheduler commands for all onboarded markets.
+        """
+        from app.data.market_sync import MarketSyncService
+        service = MarketSyncService(analysis_service.loader)
+        req_host = request.host_url
+        return jsonify(service.get_all_schedules(service_url=req_host)), 200
+
+    @app.route("/api/jobs/sync-market", methods=["GET", "POST"])
+    def sync_market_job():
+        """
+        Automated Market-Close Data Synchronization
+        ---
+        tags:
+          - System & Data
+        parameters:
+          - name: market
+            in: query
+            type: string
+            required: true
+            description: Target market code (IN, SG, AU)
+            example: IN
+          - name: force
+            in: query
+            type: boolean
+            required: false
+            description: Force sync even if outside the scheduled market-close window
+        responses:
+          200:
+            description: Synchronization execution summary.
+          400:
+            description: Missing or invalid market parameter or rejected timing.
+          403:
+            description: Unauthorized cron secret.
+        """
+        cron_secret = getattr(Config, "CRON_SECRET", "")
+        if cron_secret:
+            token = request.headers.get("X-Cron-Secret") or request.args.get("secret")
+            if token != cron_secret:
+                return jsonify({"status": "unauthorized", "message": "Invalid cron secret"}), 403
+
+        market = request.args.get("market") or (request.get_json(silent=True) or {}).get("market")
+        if not market:
+            return jsonify({"status": "error", "message": "Missing required 'market' parameter (e.g. IN, SG, AU)"}), 400
+
+        force_param = request.args.get("force", "").lower() in ("1", "true", "yes")
+        from app.data.market_sync import MarketSyncService
+        service = MarketSyncService(analysis_service.loader)
+        result = service.sync_market(market, force=force_param)
+
+        status_code = 200 if result.get("status") in ("success", "skipped") else 400
+        return jsonify(result), status_code
+
+
     @app.route("/api/report/<report_id>.pdf")
     def download_pdf(report_id):
         """

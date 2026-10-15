@@ -9,7 +9,7 @@ import logging
 from collections import OrderedDict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from app.config import Config
 
@@ -61,7 +61,7 @@ class ReportStorage:
     def _init_firebase(self):
         """Initializes Firebase Admin SDK / Firestore client if available."""
         if not getattr(Config, "USE_FIREBASE", True):
-            logger.info("Firebase integration disabled via USE_FIREBASE=0.")
+            logger.info("Firebase integration disabled for local environment (updates apply to local data/ folder).")
             return
 
         try:
@@ -154,7 +154,9 @@ class ReportStorage:
         """Persists company fundamentals to Firebase Firestore."""
         if self._firestore_available and self.db:
             try:
-                self.db.collection("investpi_fundamentals").document(ticker).set(data)
+                payload = dict(data)
+                payload["updated_at"] = datetime.now(timezone.utc).isoformat()
+                self.db.collection("investpi_fundamentals").document(ticker).set(payload)
                 logger.info(f"Persisted fundamentals for {ticker} to Firebase Firestore.")
             except Exception as e:
                 logger.warning(f"Could not persist fundamentals for {ticker} to Firestore: {e}")
@@ -170,6 +172,44 @@ class ReportStorage:
             except Exception as e:
                 logger.warning(f"Error querying Firestore fundamentals for {ticker}: {e}")
         return None
+
+    def get_registry(self, registry_id: str) -> Optional[List[Dict[str, Any]]]:
+        """Retrieves verified registry entries from Firestore."""
+        if self._firestore_available and self.db:
+            try:
+                doc = self.db.collection("investpi_registries").document(registry_id).get()
+                if doc.exists:
+                    return doc.to_dict().get("records", [])
+            except Exception as e:
+                logger.warning(f"Error reading registry {registry_id} from Firestore: {e}")
+        return None
+
+    def append_registry_entry(self, registry_id: str, entry: Dict[str, Any]):
+        """Appends a newly verified entity to Firestore registry."""
+        if self._firestore_available and self.db:
+            try:
+                doc_ref = self.db.collection("investpi_registries").document(registry_id)
+                doc = doc_ref.get()
+                if doc.exists:
+                    existing = doc.to_dict().get("records", [])
+                    # Avoid duplicate reg_number
+                    rn = entry.get("reg_number")
+                    if not any(r.get("reg_number") == rn for r in existing if rn):
+                        existing.append(entry)
+                        doc_ref.update({
+                            "records": existing,
+                            "count": len(existing)
+                        })
+                else:
+                    doc_ref.set({
+                        "registry_id": registry_id,
+                        "count": 1,
+                        "records": [entry]
+                    })
+                logger.info(f"Persisted newly verified registry entry {entry.get('name')} to Firestore.")
+            except Exception as e:
+                logger.warning(f"Could not append registry entry to Firestore: {e}")
+
 
 
     # Dict-like interface for backward compatibility

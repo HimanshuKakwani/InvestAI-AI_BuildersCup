@@ -14,7 +14,14 @@ exchange:
   names: ["NSE", "BSE", "Nifty", "Sensex"]
   ticker_suffixes: [".NS", ".BO"]
   default_suffix: ".NS"
+schedule:
+  timezone: "Asia/Kolkata"
+  trading_hours: "09:15-15:30"
+  market_close_local: "15:30"
+  sync_window_start: "15:45"
+  recommended_cron_utc: "15 10 * * 1-5"
 license_registry: registries/IN_sebi_ra_ia.json
+
 alert_lists:
   - alerts/IN_sebi_debarred.json
 red_flag_lexicon:

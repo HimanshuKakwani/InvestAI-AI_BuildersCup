@@ -25,9 +25,19 @@ class Config:
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10 MB uploads
     TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 
-    # Firebase / Firestore persistence configuration
-    USE_FIREBASE = os.getenv("USE_FIREBASE", "1").lower() in ("1", "true", "yes")
+    # Environment detection: True when running on Cloud Run / GCP runtime
+    IS_CLOUD = bool(os.getenv("K_SERVICE") or os.getenv("K_REVISION") or os.getenv("GAE_SERVICE"))
+
+    # Firebase / Firestore persistence configuration:
+    # - Cloud Run: Enabled by default (persists across instances & scale-to-zero)
+    # - Local: Disabled by default (all updates apply strictly to local data/ folder)
+    USE_FIREBASE = (
+        os.getenv("USE_FIREBASE", "1").lower() in ("1", "true", "yes")
+        if IS_CLOUD
+        else os.getenv("FORCE_FIREBASE_LOCAL", "0").lower() in ("1", "true", "yes")
+    )
     FIREBASE_PROJECT_ID = os.getenv("FIREBASE_PROJECT_ID", os.getenv("GOOGLE_CLOUD_PROJECT", ""))
     FIREBASE_CREDENTIALS_PATH = os.getenv("FIREBASE_CREDENTIALS_PATH", "")
     FIREBASE_COLLECTION = os.getenv("FIREBASE_COLLECTION", "investpi_reports")
+    CRON_SECRET = os.getenv("CRON_SECRET", "")
 
