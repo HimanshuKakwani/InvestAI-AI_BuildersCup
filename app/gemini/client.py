@@ -90,13 +90,16 @@ class GeminiAuditor:
         universe_stocks = loader.universe.get(market_hint, []) or loader.universe.get("IN", [])
         text_corpus = (video_title + " " + channel_name + " " + youtube_url).lower()
 
+        # Instant relevance filter: reject obvious non-financial content (sports, cooking, music, etc.)
+        # immediately without waiting for slow LLM calls or wasting API quota
+        if not is_likely_financial_text(text_corpus, universe_stocks):
+            return {
+                "is_financial_advice": False,
+                "message": NOT_FINANCIAL_ADVICE_MSG
+            }
+
         # Offline / Demo Mode Check
         if Config.DEMO_MODE or not self.client:
-            if not is_likely_financial_text(text_corpus, universe_stocks):
-                return {
-                    "is_financial_advice": False,
-                    "message": NOT_FINANCIAL_ADVICE_MSG
-                }
 
             # Check if any known stock matches
             for s in universe_stocks:

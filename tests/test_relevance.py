@@ -25,6 +25,15 @@ def test_irrelevant_youtube_url_returns_not_financial_advice():
     assert "resolved_stock" not in res
 
 
+def test_f1_racing_video_rejected_immediately():
+    """Formula 1 official racing video must be rejected instantly without treating numbers as tickers."""
+    res = service.run_investigation("youtube_url", "https://youtu.be/WtlHPTO0VDM?si=uDMdRGcWyZ54NmLp", region_override="IN")
+    assert res.get("is_financial_advice") is False
+    assert res.get("message") == "Not a financial advice, kindly provide relevant input"
+    assert "15.NS" not in str(res)
+    assert "resolved_stock" not in res
+
+
 def test_irrelevant_image_returns_not_financial_advice():
     """Uploading an arbitrary non-financial image should not audit Reliance or fake stocks."""
     img = Image.new("RGB", (200, 200), color=(128, 128, 128))

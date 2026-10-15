@@ -41,6 +41,9 @@ class DataLoader:
         Checks curated universe first; dynamically verifies with live exchange if unknown.
         """
         q = query.strip().upper()
+        if not q or q.isdigit() or len(q) < 2:
+            return None
+
         # 1. Curated universe check
         for m_code, stocks in self.universe.items():
             if market_hint and m_code != market_hint:
