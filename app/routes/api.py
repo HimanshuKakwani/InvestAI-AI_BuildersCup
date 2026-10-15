@@ -11,16 +11,8 @@ from app.engine.orchestrator import AnalysisService
 from app.reporting.chart_generator import generate_price_target_chart
 from app.reporting.pdf_generator import build_pdf_report
 
-import sys
-# Configure detailed API logger
+# API logger inheriting from parent InvestPI
 logger = logging.getLogger("InvestPI.API")
-logger.setLevel(logging.INFO)
-if not logger.handlers:
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setLevel(logging.INFO)
-    handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] [%(name)s] %(message)s"))
-    logger.addHandler(handler)
-    logger.propagate = True
 
 analysis_service = AnalysisService()
 # Hybrid in-memory bounded LRU cache with Firebase Firestore multi-instance persistence
@@ -417,6 +409,7 @@ def create_app():
                     reports_cache[rep_id] = {"data": rep, "chart_b64": chart_b64}
                     rep["pdf_url"] = f"/api/report/{rep_id}.pdf"
                     rep["chart_b64"] = chart_b64
+                    logger.info(f"[REPORT_READY] Cached report {rep_id} for {ticker} | Chart: {bool(chart_b64)} | PDF: {rep['pdf_url']}")
 
                 result["pdf_url"] = all_reports[0].get("pdf_url")
                 return jsonify(result)
@@ -450,6 +443,7 @@ def create_app():
                 reports_cache[rep_id] = {"data": rep, "chart_b64": chart_b64}
                 rep["pdf_url"] = f"/api/report/{rep_id}.pdf"
                 rep["chart_b64"] = chart_b64
+                logger.info(f"[REPORT_READY] Cached report {rep_id} for {ticker} | Chart: {bool(chart_b64)} | PDF: {rep['pdf_url']}")
 
             result["pdf_url"] = all_reports[0].get("pdf_url")
             return jsonify(result)

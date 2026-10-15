@@ -1,4 +1,5 @@
 """Core Forensic Analysis Orchestrator."""
+import logging
 import uuid
 from typing import Dict, Any, Optional
 from app.data.loader import DataLoader
@@ -13,6 +14,8 @@ from app.engine.parameters.p7_surveillance import evaluate_surveillance_and_volu
 from app.engine.parameters.p8_licensing import evaluate_licensing
 from app.engine.parameters.p9_hype_language import evaluate_language_hype
 from app.engine.scoring import calculate_verdict
+
+logger = logging.getLogger("InvestPI.Orchestrator")
 
 class AnalysisService:
     def __init__(self):
@@ -32,6 +35,7 @@ class AnalysisService:
         resolved = self.loader.resolve_ticker(raw_ticker, market_hint=region)
         ticker = resolved["ticker"] if resolved else raw_ticker
         company_name = resolved["name"] if resolved else claim.get("company_name", ticker)
+        logger.info(f"[CLAIM_EVAL_START] Auditing claim: Raw '{raw_ticker}' -> Resolved: {ticker} ({company_name})")
 
         # Load empirical data
         prices_df = self.loader.get_price_history(ticker)
@@ -74,20 +78,27 @@ class AnalysisService:
             horizon = 14
         direction = claim.get("direction", "BUY")
 
+        logger.info(f"[PRICE_FETCH] Current price: {current_price} | Claimed target: {target_price} ({claimed_pct}%) | Horizon: {horizon}d | Dir: {direction}")
+
         # P1: Price-Move Plausibility
         p1 = evaluate_price_move(prices_df, claimed_pct, horizon)
+        logger.info(f"[PARAM_P1] Price-Move: Score {p1.get('score')}/10 [{p1.get('status')}] (Gate: {p1.get('hard_gate')}) - {p1.get('explanation', '')[:80]}")
         
         # P2: Valuation Envelope
         p2 = evaluate_valuation_range(fundamentals, current_price, target_price)
+        logger.info(f"[PARAM_P2] Valuation: Score {p2.get('score')}/10 [{p2.get('status')}] (Gate: {p2.get('hard_gate')}) - {p2.get('explanation', '')[:80]}")
 
         # P3: Earnings Trajectory
         p3 = evaluate_earnings_trajectory(fundamentals, direction=direction)
+        logger.info(f"[PARAM_P3] Earnings: Score {p3.get('score')}/10 [{p3.get('status')}] - {p3.get('explanation', '')[:80]}")
 
         # P4: Analyst Consensus Alignment
         p4 = evaluate_analyst_consensus(fundamentals, target_price, current_price)
+        logger.info(f"[PARAM_P4] Analyst: Score {p4.get('score')}/10 [{p4.get('status')}] - {p4.get('explanation', '')[:80]}")
 
         # P5: Promoter & Insider Stability
         p5 = evaluate_promoter_holding(fundamentals, direction=direction)
+        logger.info(f"[PARAM_P5] Promoter: Score {p5.get('score')}/10 [{p5.get('status')}] - {p5.get('explanation', '')[:80]}")
 
         # Load registries & alerts
         reg_data = self.loader.get_registry(market_cfg.get("license_registry", ""))
@@ -103,10 +114,12 @@ class AnalysisService:
             alert_lists_data=alerts_data,
             regulator_name=market_cfg.get("regulator", "Regulator")
         )
+        logger.info(f"[PARAM_P6] Regulatory: Score {p6.get('score')}/10 [{p6.get('status')}] (Gate: {p6.get('hard_gate')}) - {p6.get('explanation', '')[:80]}")
 
         # P7: Surveillance & Volume Anomalies
         surveillance_info = fundamentals.get("surveillance") if fundamentals else None
         p7 = evaluate_surveillance_and_volume(prices_df, surveillance_info=surveillance_info)
+        logger.info(f"[PARAM_P7] Surveillance: Score {p7.get('score')}/10 [{p7.get('status')}] (Gate: {p7.get('hard_gate')}) - {p7.get('explanation', '')[:80]}")
 
         # P8: Licensing & Alerts Verification
         p8 = evaluate_licensing(
@@ -116,19 +129,22 @@ class AnalysisService:
             regulator_name=market_cfg.get("regulator", "Regulator"),
             claimed_reg_no=claim.get("creator_claimed_reg_no")
         )
+        logger.info(f"[PARAM_P8] Licensing: Score {p8.get('score')}/10 [{p8.get('status')}] (Gate: {p8.get('hard_gate')}) - Creator: '{claim.get('creator_claimed_name')}' | Registered: {p8.get('facts', {}).get('is_registered')}")
 
         # P9: Manipulative & Hype Language
         p9 = evaluate_language_hype(
             text_content=claim.get("exact_quote", "") + " " + raw_text_for_p9,
             lexicon_dict=market_cfg.get("red_flag_lexicon", {})
         )
+        logger.info(f"[PARAM_P9] Hype Language: Score {p9.get('score')}/10 [{p9.get('status')}] (Gate: {p9.get('hard_gate')}) - Flagged Matches: {len(p9.get('facts', {}).get('flagged_matches', []))}")
 
         evaluated_params = [p1, p2, p3, p4, p5, p6, p7, p8, p9]
 
         is_registered = p8.get("facts", {}).get("is_registered", False)
         verdict = calculate_verdict(evaluated_params, is_source_registered=is_registered)
-
         report_id = f"rep_{uuid.uuid4().hex[:8]}"
+
+        logger.info(f"[CLAIM_EVAL_DONE] Finished audit for {ticker} -> Report ID: {report_id} | Flag: {verdict.get('flag_badge')} {verdict.get('flag')} | Score: {verdict.get('score')}/10")
 
         return {
             "report_id": report_id,
@@ -160,6 +176,9 @@ class AnalysisService:
         region = region_override or "IN"
         market_cfg = self.loader.get_market_config(region) or self.loader.get_market_config("IN")
         
+        payload_summary = f"Binary ({len(payload)} bytes)" if modality == "screenshot" else str(payload)[:90].replace('\n', ' ')
+        logger.info(f"[AUDIT_START] Modality: {modality} | Region: {region} | Payload: {payload_summary}")
+
         # 1. Extraction via Gemini
         raw_text_for_p9 = ""
         if modality == "youtube_url":
@@ -174,6 +193,7 @@ class AnalysisService:
 
         # Check if classified as irrelevant or non-financial content
         if isinstance(claims_raw, dict) and claims_raw.get("is_financial_advice") is False:
+            logger.info(f"[AUDIT_REJECTED] Input evaluated as NOT financial advice: {claims_raw.get('message')}")
             return {
                 "is_financial_advice": False,
                 "message": claims_raw.get("message") or "Not a financial advice, kindly provide relevant input",
@@ -189,11 +209,14 @@ class AnalysisService:
                 claims_list = [claims_raw]
 
         if not claims_list:
+            logger.info(f"[AUDIT_REJECTED] No actionable securities claims extracted from input.")
             return {
                 "is_financial_advice": False,
                 "message": "Not a financial advice, kindly provide relevant input",
                 "error": "Not a financial advice, kindly provide relevant input"
             }
+
+        logger.info(f"[AUDIT_CLAIMS_FOUND] Extracted {len(claims_list)} securities claim(s) to verify: {[c.get('ticker') or c.get('company_name') for c in claims_list]}")
 
         # Audit each claim
         evaluated_reports = []
@@ -202,6 +225,7 @@ class AnalysisService:
             evaluated_reports.append(audit)
 
         primary = evaluated_reports[0]
+        logger.info(f"[AUDIT_FINISHED] Total stocks audited: {len(evaluated_reports)} | Primary: {primary['resolved_stock'].get('ticker')} -> Report: {primary['report_id']} ({primary['verdict']['flag']})")
         # Return container without circular self-reference
         return {
             "report_id": primary["report_id"],

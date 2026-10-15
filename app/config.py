@@ -12,6 +12,23 @@ except ImportError:
 
 
 
+import logging
+import sys
+
+# Configure central InvestPI parent logger with stream to stdout for Google Cloud Logging
+def setup_logging():
+    parent_logger = logging.getLogger("InvestPI")
+    parent_logger.setLevel(logging.INFO)
+    if not parent_logger.handlers:
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setLevel(logging.INFO)
+        handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] [%(name)s] %(message)s"))
+        parent_logger.addHandler(handler)
+    parent_logger.propagate = False
+    return parent_logger
+
+setup_logging()
+
 DATA_DIR = ROOT_DIR / "data"
 MARKETS_DIR = ROOT_DIR / "markets"
 REPORTS_DIR = ROOT_DIR / "reports_out"

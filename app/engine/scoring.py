@@ -1,5 +1,8 @@
 """InvestPI Deterministic Scoring Matrix & Flag Decision Engine."""
+import logging
 from typing import List, Dict, Any, Tuple
+
+logger = logging.getLogger("InvestPI.Scoring")
 
 def calculate_verdict(
     evaluated_params: List[Dict[str, Any]],
@@ -26,11 +29,13 @@ def calculate_verdict(
     # 1. Hard Gate Evaluation -> Instant 🔴 High Risk
     if hard_gates_triggered:
         avg_score = round(sum(valid_scores) / len(valid_scores), 1) if valid_scores else 1.0
+        final_score = min(avg_score, 3.0)
+        logger.warning(f"[HARD_GATE_TRIGGERED] Instant 🔴 High Risk activated! Gates: {hard_gates_triggered} | Capped Score: {final_score}")
         return {
             "flag": "HIGH_RISK",
             "flag_label": "High Risk",
             "flag_badge": "🔴",
-            "score": min(avg_score, 3.0),
+            "score": final_score,
             "hard_gate_triggered": True,
             "hard_gate_reasons": hard_gates_triggered,
             "evaluated_count": len(valid_scores),
@@ -41,6 +46,7 @@ def calculate_verdict(
     # If fewer than 4 parameters could be evaluated with valid data
     if len(valid_scores) < 4:
         avg_score = round(sum(valid_scores) / len(valid_scores), 1) if valid_scores else 0.0
+        logger.info(f"[DATA_SUFFICIENCY] Fewer than 4 parameters evaluable ({len(valid_scores)} evaluated). Flag -> ⚪ NOT_ENOUGH_DATA.")
         return {
             "flag": "NOT_ENOUGH_DATA",
             "flag_label": "Not Enough Data",
@@ -76,6 +82,9 @@ def calculate_verdict(
             flag = "CAUTION"
             flag_label = "Caution (Unregistered Source)"
             flag_badge = "🟠"
+            logger.info(f"[SOURCE_CAP_APPLIED] Score qualified for 🟢 CONSISTENT ({round(pos_ratio*100)}% positive), but source is unregistered. Capped at 🟠 CAUTION.")
+
+    logger.info(f"[VERDICT_DECIDED] Result: {flag_badge} {flag} | Score: {avg_score}/10 | PosRatio: {round(pos_ratio*100)}% ({positive_count}/{len(valid_scores)})")
 
     return {
         "flag": flag,
