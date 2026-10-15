@@ -150,6 +150,28 @@ class ReportStorage:
 
         return None
 
+    def save_fundamental(self, ticker: str, data: Dict[str, Any]):
+        """Persists company fundamentals to Firebase Firestore."""
+        if self._firestore_available and self.db:
+            try:
+                self.db.collection("investpi_fundamentals").document(ticker).set(data)
+                logger.info(f"Persisted fundamentals for {ticker} to Firebase Firestore.")
+            except Exception as e:
+                logger.warning(f"Could not persist fundamentals for {ticker} to Firestore: {e}")
+
+    def get_fundamental(self, ticker: str) -> Optional[Dict[str, Any]]:
+        """Retrieves company fundamentals from Firebase Firestore if available."""
+        if self._firestore_available and self.db:
+            try:
+                doc = self.db.collection("investpi_fundamentals").document(ticker).get()
+                if doc.exists:
+                    logger.info(f"Retrieved fundamentals for {ticker} from Firebase Firestore.")
+                    return doc.to_dict()
+            except Exception as e:
+                logger.warning(f"Error querying Firestore fundamentals for {ticker}: {e}")
+        return None
+
+
     # Dict-like interface for backward compatibility
     def __getitem__(self, key: str) -> Dict[str, Any]:
         item = self.get_report(key)

@@ -19,8 +19,19 @@ class DataLoader:
         self.universe: Dict[str, List[Dict[str, Any]]] = {}
         self._prices_cache: Dict[str, pd.DataFrame] = {}
         self._fundamentals_cache: Dict[str, Dict[str, Any]] = {}
+        self._resolution_cache: Dict[str, Optional[Dict[str, Any]]] = {}
+        self._storage = None
         self._load_markets()
         self._load_universe()
+
+    def _get_storage(self):
+        if self._storage is None:
+            try:
+                from app.data.storage import ReportStorage
+                self._storage = ReportStorage()
+            except Exception:
+                self._storage = False
+        return self._storage if self._storage else None
 
 
     def _load_markets(self):
@@ -47,17 +58,27 @@ class DataLoader:
         if not q or q.isdigit() or len(q) < 2:
             return None
 
+        cache_key = f"{q}_{market_hint or ''}"
+        if cache_key in self._resolution_cache:
+            return self._resolution_cache[cache_key]
+
         # 1. Curated universe check
         for m_code, stocks in self.universe.items():
             if market_hint and m_code != market_hint:
                 continue
             for s in stocks:
                 if s["ticker"].upper() == q:
-                    return {**s, "market": m_code}
+                    res = {**s, "market": m_code}
+                    self._resolution_cache[cache_key] = res
+                    return res
                 if q in [a.upper() for a in s.get("aliases", [])]:
-                    return {**s, "market": m_code}
+                    res = {**s, "market": m_code}
+                    self._resolution_cache[cache_key] = res
+                    return res
                 if q in s.get("name", "").upper():
-                    return {**s, "market": m_code}
+                    res = {**s, "market": m_code}
+                    self._resolution_cache[cache_key] = res
+                    return res
 
         # 2. Dynamic live ticker resolution fallback
         candidates = [q]
@@ -74,16 +95,20 @@ class DataLoader:
                 name = info.get("longName") or info.get("shortName")
                 if name:
                     m = "IN" if cand.endswith((".NS", ".BO")) else ("AU" if cand.endswith(".AX") else ("SG" if cand.endswith(".SI") else (market_hint or "IN")))
-                    return {
+                    res = {
                         "ticker": cand,
                         "name": name,
                         "market": m,
                         "aliases": [q.lower()]
                     }
+                    self._resolution_cache[cache_key] = res
+                    return res
             except Exception:
                 continue
 
+        self._resolution_cache[cache_key] = None
         return None
+
 
     def _map_yf_ticker(self, ticker: str) -> str:
         TICKER_YFINANCE_MAP = {
@@ -152,10 +177,18 @@ class DataLoader:
         if not force_refresh and ticker in self._fundamentals_cache:
             return self._fundamentals_cache[ticker]
 
+        # 1. Check Firebase Firestore L2 cache (shared across all Cloud Run instances)
+        storage = self._get_storage()
+        if not force_refresh and storage and storage.is_firestore_connected():
+            cloud_data = storage.get_fundamental(ticker)
+            if cloud_data and cloud_data.get("trailing_eps") is not None:
+                self._fundamentals_cache[ticker] = cloud_data
+                return cloud_data
+
         f_path = DATA_DIR / "fundamentals" / f"{ticker}.json"
         now = time.time()
 
-        # Check local cache freshness and completeness
+        # 2. Check local file cache freshness and completeness (<24h)
         if f_path.exists() and not force_refresh:
             mtime = f_path.stat().st_mtime
             if (now - mtime) < 86400:
@@ -297,13 +330,22 @@ class DataLoader:
                 "as_of": str(pd.Timestamp.now().date())
             }
 
-            # Cache to JSON file
-            f_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(f_path, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=2)
+            # 1. Persist to Firebase Firestore if connected (shared across instances)
+            storage = self._get_storage()
+            if storage and storage.is_firestore_connected():
+                storage.save_fundamental(ticker, data)
+
+            # 2. Cache to local JSON file as fallback
+            try:
+                f_path.parent.mkdir(parents=True, exist_ok=True)
+                with open(f_path, "w", encoding="utf-8") as f:
+                    json.dump(data, f, indent=2)
+            except Exception:
+                pass
 
             self._fundamentals_cache[ticker] = data
             return data
+
 
         except Exception as e:
             logger.warning(f"Failed to fetch live fundamentals for {ticker}: {e}")

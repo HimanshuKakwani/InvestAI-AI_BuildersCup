@@ -5,3 +5,9 @@ __pycache__/
 .pytest_cache/
 reports_out/
 *.log
+# Firebase & GCP service account keys
+*firebase*.json
+*serviceAccountKey*.json
+gcp-key*.json
+credentials.json
+
