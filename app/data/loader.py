@@ -175,6 +175,20 @@ class DataLoader:
             df = self._prices_cache[ticker]
 
         p_path = DATA_DIR / "prices" / f"{ticker}.csv"
+
+        # 1. Check Firebase Firestore 'investpi_prices' if connected
+        storage = self._get_storage()
+        if df is None and storage and storage.is_firestore_connected():
+            cloud_price = storage.get_prices(ticker)
+            if cloud_price and cloud_price.get("csv_content"):
+                try:
+                    import io
+                    df = pd.read_csv(io.StringIO(cloud_price["csv_content"]), parse_dates=["Date"], index_col="Date")
+                    logger.info(f"Loaded price history for {ticker} from Firestore (investpi_prices).")
+                except Exception as e_fs:
+                    logger.debug(f"Could not parse Firestore prices for {ticker}: {e_fs}")
+
+        # 2. Check local CSV file if not in memory or Firestore
         if df is None and p_path.exists():
             try:
                 df = pd.read_csv(p_path, parse_dates=["Date"], index_col="Date")
@@ -238,6 +252,22 @@ class DataLoader:
                                                 f.write(b"\n")
                                 new_rows.to_csv(p_path, mode="a", header=False)
 
+                                # Also append new candle to Firestore 'investpi_prices' if connected
+                                if storage and storage.is_firestore_connected():
+                                    try:
+                                        import io
+                                        buf = io.StringIO()
+                                        new_rows.to_csv(buf, header=False)
+                                        last_new_date = str(new_rows.index[-1].date() if hasattr(new_rows.index[-1], "date") else str(new_rows.index[-1]).split()[0])
+                                        storage.append_price_candle(
+                                            ticker=ticker,
+                                            new_candle_line=buf.getvalue(),
+                                            new_date=last_new_date,
+                                            new_count=len(df) + len(new_rows)
+                                        )
+                                    except Exception as e_fs:
+                                        logger.debug(f"Could not append price candle to Firestore for {ticker}: {e_fs}")
+
                                 # Update in-memory cache
                                 df = pd.concat([df, new_rows])
                                 df = df[~df.index.duplicated(keep="last")]
@@ -260,15 +290,25 @@ class DataLoader:
             t = yf.Ticker(yf_ticker)
             df = t.history(period="5y")
             if df is not None and not df.empty and "Close" in df.columns:
-                if not isinstance(df.index, pd.DatetimeIndex):
-                    df.index = pd.to_datetime(df.index)
-                if df.index.tz is not None:
-                    df.index = df.index.tz_localize(None)
+                df = df.dropna(subset=["Close", "Open", "High", "Low"])
+                df = df[(df["Close"] > 0) & (df["Volume"] > 0)]
                 try:
                     p_path.parent.mkdir(parents=True, exist_ok=True)
                     df.to_csv(p_path)
                 except Exception:
                     pass
+
+                # Also persist full 5-year CSV to Firestore 'investpi_prices'
+                if storage and storage.is_firestore_connected():
+                    try:
+                        import io
+                        buf = io.StringIO()
+                        df.to_csv(buf)
+                        last_d = str(df.index[-1].date() if hasattr(df.index[-1], "date") else str(df.index[-1]).split()[0])
+                        storage.save_prices(ticker, buf.getvalue(), last_date=last_d, count=len(df))
+                    except Exception as e_fs:
+                        logger.debug(f"Could not save 5y price CSV to Firestore for {ticker}: {e_fs}")
+
                 self._prices_cache[ticker] = df
                 return df
         except Exception as e:

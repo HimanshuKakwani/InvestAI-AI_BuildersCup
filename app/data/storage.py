@@ -210,6 +210,59 @@ class ReportStorage:
             except Exception as e:
                 logger.warning(f"Could not append registry entry to Firestore: {e}")
 
+    def save_prices(self, ticker: str, csv_content: str, last_date: str = "", count: int = 0, market: str = ""):
+        """Persists historical price CSV content to Firebase Firestore collection 'investpi_prices'."""
+        if self._firestore_available and self.db:
+            try:
+                m = market or ("IN" if ticker.endswith((".NS", ".BO")) else ("AU" if ticker.endswith(".AX") else ("SG" if ticker.endswith(".SI") else "GLOBAL")))
+                payload = {
+                    "ticker": ticker,
+                    "market": m,
+                    "csv_content": csv_content,
+                    "last_date": last_date,
+                    "candle_count": count,
+                    "updated_at": datetime.now(timezone.utc).isoformat()
+                }
+                self.db.collection("investpi_prices").document(ticker).set(payload)
+                logger.info(f"Persisted price CSV for {ticker} to Firebase Firestore (collection: investpi_prices).")
+            except Exception as e:
+                logger.warning(f"Could not persist price CSV for {ticker} to Firestore: {e}")
+
+    def get_prices(self, ticker: str) -> Optional[Dict[str, Any]]:
+        """Retrieves historical price CSV document from Firestore if available."""
+        if self._firestore_available and self.db:
+            try:
+                doc = self.db.collection("investpi_prices").document(ticker).get()
+                if doc.exists:
+                    return doc.to_dict()
+            except Exception as e:
+                logger.warning(f"Error querying Firestore prices for {ticker}: {e}")
+        return None
+
+    def append_price_candle(self, ticker: str, new_candle_line: str, new_date: str, new_count: int):
+        """Appends new daily candle to Firestore price CSV document."""
+        if self._firestore_available and self.db:
+            try:
+                doc_ref = self.db.collection("investpi_prices").document(ticker)
+                doc = doc_ref.get()
+                if doc.exists:
+                    existing = doc.to_dict().get("csv_content", "")
+                    if existing and not existing.endswith("\n"):
+                        existing += "\n"
+                    updated_csv = existing + new_candle_line.strip() + "\n"
+                    doc_ref.update({
+                        "csv_content": updated_csv,
+                        "last_date": new_date,
+                        "candle_count": new_count,
+                        "updated_at": datetime.now(timezone.utc).isoformat()
+                    })
+                    logger.info(f"Appended daily price candle for {ticker} to Firestore 'investpi_prices'.")
+                else:
+                    self.save_prices(ticker, new_candle_line, last_date=new_date, count=new_count)
+            except Exception as e:
+                logger.warning(f"Could not append price candle to Firestore for {ticker}: {e}")
+
+
 
 
     # Dict-like interface for backward compatibility

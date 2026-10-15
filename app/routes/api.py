@@ -249,6 +249,45 @@ def create_app():
         status_code = 200 if result.get("status") in ("success", "skipped") else 400
         return jsonify(result), status_code
 
+    @app.route("/api/admin/seed-prices", methods=["GET", "POST"])
+    def admin_seed_prices():
+        """
+        Seed Price CSVs to Firestore
+        ---
+        tags:
+          - System & Data
+        responses:
+          200:
+            description: Successfully seeded all price CSVs to Firestore 'investpi_prices'.
+        """
+        storage = analysis_service.loader._get_storage()
+        if not storage or not storage.is_firestore_connected():
+            return jsonify({"status": "error", "message": "Firestore is not connected."}), 503
+
+        from app.config import DATA_DIR
+        import pandas as pd
+        p_dir = DATA_DIR / "prices"
+        seeded = []
+        if p_dir.exists():
+            for pf in p_dir.glob("*.csv"):
+                ticker = pf.stem
+                try:
+                    with open(pf, "r", encoding="utf-8") as f:
+                        csv_text = f.read()
+                    df = pd.read_csv(pf, index_col="Date")
+                    last_dt_str = str(df.index[-1].date() if hasattr(df.index[-1], "date") else str(df.index[-1]).split()[0])
+                    storage.save_prices(ticker, csv_text, last_date=last_dt_str, count=len(df))
+                    seeded.append(ticker)
+                except Exception as e:
+                    logger.warning(f"Error seeding price CSV for {ticker}: {e}")
+
+        return jsonify({
+            "status": "success",
+            "message": f"Successfully seeded {len(seeded)} price CSVs into Firestore 'investpi_prices'.",
+            "total_seeded": len(seeded),
+            "tickers": seeded
+        }), 200
+
 
     @app.route("/api/report/<report_id>.pdf")
     def download_pdf(report_id):
