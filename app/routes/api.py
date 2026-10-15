@@ -41,17 +41,6 @@ def create_app():
         x_prefix=1
     )
 
-    # Auto-seed Firestore datasets in background if connected
-    if reports_cache.is_firestore_connected():
-        import threading
-        from app.data.seeder import seed_all_datasets_if_needed
-        threading.Thread(
-            target=seed_all_datasets_if_needed,
-            args=(reports_cache.db,),
-            name="investpi-firestore-seeder",
-            daemon=True
-        ).start()
-
 
     # Swagger / OpenAPI Configuration
     swagger_config = {
@@ -198,34 +187,6 @@ def create_app():
             description: List of supported market packs (IN, SG, AU) with regulator metadata
         """
         return jsonify(analysis_service.loader.markets)
- 
-    @app.route("/api/admin/seed-firestore", methods=["GET", "POST"])
-    def admin_seed_firestore():
-        """
-        Seed Firestore Datasets
-        ---
-        tags:
-          - System & Data
-        responses:
-          200:
-            description: Result summary of the Firestore seeding operation.
-          503:
-            description: Firestore is not connected.
-        """
-        if not reports_cache.is_firestore_connected():
-            return jsonify({
-                "status": "error",
-                "message": "Firestore is not connected."
-            }), 503
-
-        from app.data.seeder import seed_all_datasets
-        results = seed_all_datasets(reports_cache.db)
-        return jsonify({
-            "status": "success",
-            "message": "Firestore datasets successfully seeded.",
-            "results": results
-        }), 200
-
 
     @app.route("/api/report/<report_id>.pdf")
     def download_pdf(report_id):
