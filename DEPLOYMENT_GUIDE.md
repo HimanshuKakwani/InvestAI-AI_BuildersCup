@@ -24,6 +24,7 @@ If you deploy InvestPI today, **you will consume almost none of your $300 credit
 |                        | 180,000 vCPU-seconds                          |                      |
 | Secret Manager         | 6 active secret versions free                 | $0.00 (1 secret used)|
 |                        | 10,000 access operations/month free           |                      |
+| Firebase / Firestore   | 1 GiB storage, 50k reads/day, 20k writes/day   | $0.00 (Spark Tier)   |
 | Cloud Build (Deploy)   | 120 build-minutes per day                     | $0.00 (~2 min/build) |
 | Artifact Registry      | 0.5 GB storage per month                      | ~$0.02 - $0.05/month |
 | Gemini API (AI Studio) | 15 Requests/Min, 1,500 Requests/Day           | $0.00 (Zero-cost tier)|
@@ -43,15 +44,20 @@ If you deploy InvestPI today, **you will consume almost none of your $300 credit
    - Secret Manager stores sensitive credentials (like `GEMINI_API_KEY`) encrypted at rest with Google-managed encryption keys.
    - Google gives **6 active secret versions free every month** and **10,000 free access calls**. InvestPI uses exactly 1 secret (`GEMINI_API_KEY`), meaning your Secret Manager cost is **$0.00**.
 
-3. **Cloud Build (Container Building)**:
+3. **Firebase / Firestore (Multi-Instance Persistent Storage at $0 Cost)**:
+   - Cloud Run instances scale down to 0 when idle and scale out to multiple containers under concurrent traffic.
+   - By integrating **Firebase Firestore** as an L2 persistence layer behind an in-memory L1 cache, audit reports and PDF downloads persist permanently across container restarts and can be retrieved by any Cloud Run instance.
+   - The Firebase Spark Plan gives **1 GiB storage, 50,000 document reads/day, and 20,000 document writes/day for $0.00/month**. Under demo and hackathon usage, 100% of Firestore usage falls completely within the Always-Free tier.
+
+4. **Cloud Build (Container Building)**:
    - When you execute `gcloud run deploy --source .`, Google Cloud Build compiles your container image.
    - Google gives **120 free build-minutes every day**. Building InvestPI takes ~90 seconds. You could redeploy 50+ times in a single day without paying anything.
 
-4. **Google AI Studio (Gemini 2.5 / 1.5 Flash API)**:
+5. **Google AI Studio (Gemini 2.5 / 1.5 Flash API)**:
    - By obtaining your API key from [aistudio.google.com](https://aistudio.google.com), all LLM forensic calls run under the **Developer Free Tier** (15 RPM / 1,500 requests/day).
    - This API tier is completely free and **does not deduct a single cent** from your $300 GCP credit.
 
-5. **Container Storage (Artifact Registry)**:
+6. **Container Storage (Artifact Registry)**:
    - Each build saves a Docker image in Artifact Registry.
    - The first 0.5 GB per month is free; beyond that, storage costs ~$0.10 per GB per month. Even storing 2–3 image revisions will cost only pennies (~$0.05).
 
@@ -136,20 +142,27 @@ gcloud config set run/region us-central1
 ```
 
 ### Step 1.4: Enable Required Google Cloud Services
-Enable Cloud Run, Cloud Build, Artifact Registry, and Secret Manager:
+Enable Cloud Run, Cloud Build, Artifact Registry, Secret Manager, and Cloud Firestore:
 ```bash
 gcloud services enable \
   run.googleapis.com \
   cloudbuild.googleapis.com \
   artifactregistry.googleapis.com \
-  secretmanager.googleapis.com
+  secretmanager.googleapis.com \
+  firestore.googleapis.com
+```
+
+### Step 1.5: Initialize Firebase Firestore Database (Native Mode)
+Create your Firestore database in `us-central1` (eligible for the permanent Spark Free Tier):
+```bash
+gcloud firestore databases create --location=us-central1 --type=firestore-native
 ```
 
 ---
 
-## 5. Phase 2: Secret Manager Configuration
+## 5. Phase 2: Secret Manager & IAM Configuration
 
-Store your Gemini API Key securely so it is never exposed in git, build logs, or container layers.
+Store your Gemini API Key securely so it is never exposed in git, build logs, or container layers, and grant Cloud Run permissions to both Secret Manager and Firestore.
 
 ### Step 2.1: Create the Secret
 ```bash
@@ -162,7 +175,7 @@ Replace `AIzaSy...` with your actual key from Google AI Studio:
 echo -n "AIzaSyYOUR_ACTUAL_API_KEY_HERE" | gcloud secrets versions add GEMINI_API_KEY --data-file=-
 ```
 
-### Step 2.3: Grant Cloud Run Service Account Access to the Secret
+### Step 2.3: Grant Cloud Run Access to Secret Manager
 Cloud Run runs under the default Compute Engine service account. Grant it permission to read the secret:
 ```bash
 # Fetch your numeric Project Number
@@ -174,9 +187,17 @@ gcloud secrets add-iam-policy-binding GEMINI_API_KEY \
     --role="roles/secretmanager.secretAccessor"
 ```
 
+### Step 2.4: Grant Cloud Run Access to Firebase Firestore
+Grant the service account permission to read and write audit records to Firestore using Application Default Credentials (ADC), requiring zero JSON key files:
+```bash
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:${PROJECT_NUMBER}-compute@developer.gserviceaccount.com" \
+    --role="roles/datastore.user"
+```
+
 ---
 
-## 6. Phase 3: Deploy to Cloud Run with Secret Manager
+## 6. Phase 3: Deploy to Cloud Run with Secret Manager & Firebase
 
 Run this single command from your project root (`InvestAI-AI_BuildersCup`):
 
@@ -189,14 +210,14 @@ gcloud run deploy investpi-service \
   --memory 1Gi \
   --cpu 1 \
   --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest" \
-  --set-env-vars="DEMO_MODE=0,FLASK_DEBUG=0"
+  --set-env-vars="DEMO_MODE=0,FLASK_DEBUG=0,USE_FIREBASE=1,FIREBASE_COLLECTION=investpi_reports"
 ```
 
-### How Secret Manager Works with the Code:
-- Cloud Run fetches `GEMINI_API_KEY` directly from Secret Manager at container startup.
-- It exposes it inside the container as the environment variable `GEMINI_API_KEY`.
-- In `app/config.py`, InvestPI reads `os.getenv("GEMINI_API_KEY")` seamlessly.
-- **Result**: Zero code changes required, zero secret exposure.
+### How Secret Manager & Firebase Work with the Code:
+- **Secret Manager**: Cloud Run fetches `GEMINI_API_KEY` directly from Secret Manager at container startup and injects it into `os.environ["GEMINI_API_KEY"]`. Zero secret exposure in code or git.
+- **Firebase Firestore**: InvestPI connects to Firestore using Google Cloud Application Default Credentials automatically. Audit reports, extracted claims, and scores are stored in the collection `investpi_reports`.
+- **Hybrid Storage**: Fast requests read from the in-memory L1 cache (`BoundedReportCache`). If an instance restarts or scales down to zero, reports are transparently retrieved from Firestore, ensuring users can always download their PDF reports even days later.
+- **Result**: Zero secret exposure, fully persistent cross-instance storage, 100% within the free tier.
 
 ---
 
@@ -208,13 +229,14 @@ Once deployed, you can access all features through your Cloud Run URL (`https://
    - Form for YouTube URLs, screenshot uploads, and direct text claims.
    - Real-time audit scoring with traffic-light verdicts (Green, Caution, High Risk).
 2. **Interactive Swagger/OpenAPI Docs**: `https://<service-url>/apidocs/`
-   - Test endpoints interactively directly from the browser.
+   - Test endpoints interactively directly from the browser (protected against Mixed Content via `ProxyFix`).
 3. **System Health Check**: `https://<service-url>/healthz`
-   - Verifies container runtime and demo mode status.
-4. **Instant Forensic PDF Downloads**: `https://<service-url>/api/report/<report_id>.pdf`
-   - Generates multi-page institutional-grade forensic audit reports.
+   - Verifies container runtime, demo mode status, and Firebase Firestore connectivity (`"firebase_connected": true`).
+4. **Persistent Instant Forensic PDF Downloads**: `https://<service-url>/api/report/<report_id>.pdf`
+   - Generates multi-page institutional-grade forensic audit reports retrieved from memory or Firebase Firestore.
 
 ---
+
 
 ## 8. Operational & Cost Management FAQ
 

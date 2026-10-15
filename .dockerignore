@@ -20,9 +20,8 @@ tests/
 # Local reports & temp outputs
 reports_out/
 
-# Markdown Docs & System Files
-InvestPI_Planning_Document.md
-DEPLOYMENT_GUIDE.md
+# Markdown Docs & Architecture Analysis
+*.md
 .DS_Store
 .idea/
 .vscode/

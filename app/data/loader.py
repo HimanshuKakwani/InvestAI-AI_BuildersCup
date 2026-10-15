@@ -17,8 +17,11 @@ class DataLoader:
     def __init__(self):
         self.markets: Dict[str, Dict[str, Any]] = {}
         self.universe: Dict[str, List[Dict[str, Any]]] = {}
+        self._prices_cache: Dict[str, pd.DataFrame] = {}
+        self._fundamentals_cache: Dict[str, Dict[str, Any]] = {}
         self._load_markets()
         self._load_universe()
+
 
     def _load_markets(self):
         for yml_path in MARKETS_DIR.glob("*.yaml"):
@@ -93,8 +96,11 @@ class DataLoader:
     def get_price_history(self, ticker: str, force_refresh: bool = False) -> Optional[pd.DataFrame]:
         """
         Returns 5-year daily OHLCV price history DataFrame.
-        Uses cached CSV if fresh (<24h); otherwise dynamically fetches live from exchange.
+        Uses in-memory cache and cached CSV if fresh (<24h); otherwise dynamically fetches live from exchange.
         """
+        if not force_refresh and ticker in self._prices_cache:
+            return self._prices_cache[ticker]
+
         p_path = DATA_DIR / "prices" / f"{ticker}.csv"
         now = time.time()
 
@@ -105,6 +111,7 @@ class DataLoader:
                 try:
                     df = pd.read_csv(p_path, parse_dates=["Date"], index_col="Date")
                     if not df.empty and "Close" in df.columns:
+                        self._prices_cache[ticker] = df
                         return df
                 except Exception as e:
                     logger.warning(f"Error reading cached prices for {ticker}: {e}")
@@ -119,6 +126,7 @@ class DataLoader:
             if df is not None and not df.empty and "Close" in df.columns:
                 p_path.parent.mkdir(parents=True, exist_ok=True)
                 df.to_csv(p_path)
+                self._prices_cache[ticker] = df
                 return df
         except Exception as e:
             logger.warning(f"Failed to fetch live prices for {ticker}: {e}")
@@ -126,17 +134,24 @@ class DataLoader:
         # Fallback to existing cached file even if older
         if p_path.exists():
             try:
-                return pd.read_csv(p_path, parse_dates=["Date"], index_col="Date")
+                df = pd.read_csv(p_path, parse_dates=["Date"], index_col="Date")
+                if not df.empty:
+                    self._prices_cache[ticker] = df
+                    return df
             except Exception:
                 pass
 
         return None
+
 
     def get_fundamentals(self, ticker: str, force_refresh: bool = False) -> Optional[Dict[str, Any]]:
         """
         Returns fundamental financial metrics, valuation envelope, analyst consensus,
         and shareholding trends. Fetches live on-demand if cache is missing or stale.
         """
+        if not force_refresh and ticker in self._fundamentals_cache:
+            return self._fundamentals_cache[ticker]
+
         f_path = DATA_DIR / "fundamentals" / f"{ticker}.json"
         now = time.time()
 
@@ -149,9 +164,11 @@ class DataLoader:
                         data = json.load(f)
                     # Verify has critical fields
                     if data.get("pe_band_5y") and data.get("analyst") and (data.get("trailing_eps") is not None):
+                        self._fundamentals_cache[ticker] = data
                         return data
                 except Exception as e:
                     logger.warning(f"Error reading cached fundamentals for {ticker}: {e}")
+
 
         # Dynamic live fetch via yfinance
         try:
@@ -285,6 +302,7 @@ class DataLoader:
             with open(f_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
 
+            self._fundamentals_cache[ticker] = data
             return data
 
         except Exception as e:
@@ -294,11 +312,14 @@ class DataLoader:
         if f_path.exists():
             try:
                 with open(f_path, "r", encoding="utf-8") as f:
-                    return json.load(f)
+                    data = json.load(f)
+                    self._fundamentals_cache[ticker] = data
+                    return data
             except Exception:
                 pass
 
         return None
+
 
     def get_registry(self, rel_path: str) -> List[Dict[str, Any]]:
         reg_file = DATA_DIR / rel_path

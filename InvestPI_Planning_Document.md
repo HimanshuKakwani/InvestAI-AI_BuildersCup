@@ -80,6 +80,7 @@ flowchart TD
         PACKS["Regional YAML Packs<br/>(IN.yaml, SG.yaml, AU.yaml)"]
         DATASET["Curated Offline Universe (~50-100 Stocks)<br/>(5-Yr EOD Prices, Filings, Pledges, Surveillance)"]
         REGISTRIES["Regulator Snapshots<br/>(SEBI RA/IA, MAS FID, ASIC Licensees, Alert Lists)"]
+        FIREBASE["Firebase Firestore (Spark Tier: $0)<br/>(Cross-Instance Audits, Report JSON, Session Persistence)"]
     end
 
     INPUTS --> WEB
@@ -96,7 +97,10 @@ flowchart TD
     GEM_NARR --> AUDIT
     AUDIT --> RENDERER
     RENDERER -->|Interactive Card + PDF Stream| WEB
+    RENDERER -->|Persist Audit Record| FIREBASE
+    FIREBASE -.->|Retrieve Report on Cold Start| RENDERER
 ```
+
 
 ---
 
@@ -300,7 +304,26 @@ data/
 - **Singapore (SG):** `D05.SI` (DBS), `Z74.SI` (Singtel) + speculative Catalist counters.
 - **Australia (AU):** `BHP.AX`, `CBA.AX` + high-volatility lithium/uranium speculative stocks.
 
+### 8.2 Cloud Persistence Architecture: Firebase Firestore & Cloud Storage
+While empirical market data (prices, fundamentals, registries) is bundled locally for sub-millisecond evaluation, dynamic audit reports and user sessions require scalable, persistent cloud storage in production:
+
+1. **Two-Tier Hybrid Session Storage (`app/data/storage.py`)**:
+   - **L1 In-Memory LRU Cache (`BoundedReportCache`)**: Bounded to 150 items to eliminate memory leaks and serve instant PDF downloads.
+   - **L2 Firebase Firestore (`investpi_reports`)**: Automatically captures each completed forensic audit (extracted claims, 9-parameter score matrix, verdict flag, and rendered chart) using Google Cloud Application Default Credentials (ADC).
+   - **Cross-Instance Continuity**: Solves serverless Cloud Run cold starts and horizontal scaling; if an instance spins down or a request is routed to a different container, the report is seamlessly retrieved from Firestore and re-cached into L1 RAM.
+
+2. **Firebase Spark Plan ($0.00 / Month Always-Free Tier)**:
+   - 1 GiB document storage.
+   - 50,000 document reads / day.
+   - 20,000 document writes / day.
+   - Zero idle VM or database costs, preserving 100% of the $300 Google Cloud Free Trial credits.
+
+3. **Firebase Cloud Storage (Optional Media Layer)**:
+   - For long-term archival of generated PDF briefs and high-resolution screenshot uploads.
+   - Generates secure signed download URLs without exposing internal container paths.
+
 ---
+
 
 ## 9. Web UI & Report UX Design
 

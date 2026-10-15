@@ -230,42 +230,57 @@ class DataLoader:
 
 ---
 
-## 6. Strategy 5: Memory Leak & Bloat Protection (`reports_cache`)
+## 6. Strategy 5: Multi-Instance Persistence & Memory Leak Protection (Firebase Firestore + Bounded LRU Cache)
 
 ### The Problem:
-In [`app/routes/api.py`](file:///Users/chawadesharvari17gmail.com/Desktop/projects/InvestAI-AI_BuildersCup/app/routes/api.py), `reports_cache = {}` is an unbounded Python dictionary storing full reports and Base64-encoded charts (~100KB each).
-- After 1,000 requests, RAM usage expands by ~100MB+.
-- If RAM exceeds the 1GiB limit, Cloud Run throws `Memory limit exceeded (OOM)` and restarts, or is forced to scale to multiple instances.
+In a serverless environment like Google Cloud Run:
+1. **Unbounded RAM Growth**: An unbounded Python dictionary (`reports_cache = {}`) storing full reports and Base64-encoded charts expands memory continuously. If RAM exceeds the container limit, Cloud Run restarts with an OOM crash.
+2. **Cold-Start Data Loss**: Cloud Run scales down to zero (0) instances when idle. When the container terminates, purely in-memory reports are erased.
+3. **Multi-Instance Isolation**: When multiple container instances run concurrently to handle user spikes, an audit performed on Container A cannot have its PDF downloaded by Container B, causing `404 Report Not Found` errors.
 
-### The Solution:
-Replace the unbounded dictionary with a bounded LRU cache that automatically evicts older reports:
+### Why Traditional Databases Are Inefficient:
+- **Cloud SQL (PostgreSQL/MySQL)**: Costs $15 to $40/month even when completely idle, draining free trial credits.
+- **Memorystore (Redis)**: Costs ~$35/month minimum and requires VPC connectors.
+- **Firebase Firestore (The Ideal Solution)**: Serverless NoSQL document database built directly into Google Cloud, with zero idle billing and a generous permanent **Spark Free Tier**.
 
-```python
-# In app/routes/api.py
-from collections import OrderedDict
+### The Hybrid L1/L2 Architecture (`app/data/storage.py`):
+InvestPI uses a two-tier storage engine:
+- **L1 (In-Memory `BoundedReportCache`)**: Ultra-fast (0.01ms latency), bounded to 150 reports with LRU eviction to prevent memory leaks.
+- **L2 (Firebase Firestore Document Collection `investpi_reports`)**: Durable cross-instance persistence across container restarts and horizontal auto-scaling, using Application Default Credentials (ADC) without requiring separate API key files.
 
-class BoundedReportCache:
-    def __init__(self, max_items: int = 100):
-        self.max_items = max_items
-        self._store = OrderedDict()
-
-    def __setitem__(self, key, value):
-        if len(self._store) >= self.max_items:
-            self._store.popitem(last=False)  # Remove oldest
-        self._store[key] = value
-
-    def __getitem__(self, key):
-        self._store.move_to_end(key)
-        return self._store[key]
-
-    def get(self, key, default=None):
-        if key in self._store:
-            self._store.move_to_end(key)
-            return self._store[key]
-        return default
-
-reports_cache = BoundedReportCache(max_items=100)
 ```
++-----------------------------------------------------------------------------------------+
+|                               INVESTPI HYBRID STORAGE LAYER                             |
++-----------------------------------------------------------------------------------------+
+|  [Incoming HTTP Request]                                                                |
+|          |                                                                              |
+|          v                                                                              |
+|  [L1: Bounded LRU Cache in RAM] -----(Cache Hit: 0.01ms)-----> [Instant Return]         |
+|          |                                                                              |
+|     (Cache Miss)                                                                        |
+|          v                                                                              |
+|  [L2: Firebase Firestore Collection] -(Fetch & Populate L1)-> [Return & Cache]         |
+|          |                                                                              |
+|    (If Firestore Offline)                                                               |
+|          v                                                                              |
+|  [Graceful Fallback to L1 Only]                                                         |
++-----------------------------------------------------------------------------------------+
+```
+
+### Firebase Spark Free Tier Economics:
+```
++------------------------+------------------------------------+---------------------------+
+| Operation / Resource   | Monthly Free Tier Allowance        | InvestPI Hackathon Usage  |
++------------------------+------------------------------------+---------------------------+
+| Stored Data            | 1 GiB total storage                | ~5 MB (1,000 audits)      |
+| Document Reads         | 50,000 reads / day                 | ~500 - 1,500 reads / day  |
+| Document Writes        | 20,000 writes / day                | ~100 - 300 writes / day   |
+| Document Deletes       | 20,000 deletes / day               | < 50 deletes / day        |
+| Network Egress         | 10 GiB / month                     | < 100 MB / month          |
+| TOTAL MONTHLY COST     |                                    | $0.00 (100% Free)         |
++------------------------+------------------------------------+---------------------------+
+```
+
 
 ---
 

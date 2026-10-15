@@ -4,7 +4,9 @@ import logging
 import json
 from flask import Flask, request, jsonify, render_template, send_file, g
 from flasgger import Swagger
+from werkzeug.middleware.proxy_fix import ProxyFix
 from app.config import Config, ROOT_DIR
+from app.data.storage import ReportStorage
 from app.engine.orchestrator import AnalysisService
 from app.reporting.chart_generator import generate_price_target_chart
 from app.reporting.pdf_generator import build_pdf_report
@@ -21,14 +23,24 @@ if not logger.handlers:
     logger.propagate = True
 
 analysis_service = AnalysisService()
-# In-memory storage for reports during session
-reports_cache = {}
+# Hybrid in-memory bounded LRU cache with Firebase Firestore multi-instance persistence
+reports_cache = ReportStorage()
 
 def create_app():
     templates_path = str(ROOT_DIR / "templates")
     static_path = str(ROOT_DIR / "static")
     app = Flask(__name__, template_folder=templates_path, static_folder=static_path)
     app.config.from_object(Config)
+
+    # Enable Cloud Run reverse-proxy HTTPS header forwarding
+    app.wsgi_app = ProxyFix(
+        app.wsgi_app,
+        x_for=1,
+        x_proto=1,
+        x_host=1,
+        x_prefix=1
+    )
+
 
     # Swagger / OpenAPI Configuration
     swagger_config = {
@@ -112,7 +124,19 @@ def create_app():
         else:
             logger.info(f"<< OUTGOING [{request.method}] {request.path} | Status: {status} | Duration: {duration_ms}ms | Type: {response.content_type}")
 
+        # Add standard CORS headers for cross-origin frontend/demo access
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+
         return response
+
+    @app.errorhandler(413)
+    def request_entity_too_large(error):
+        return jsonify({
+            "error": "Uploaded image exceeds the 10 MB file size limit.",
+            "status": 413
+        }), 413
 
     @app.route("/")
     def index():
@@ -139,8 +163,17 @@ def create_app():
                 demo_mode:
                   type: boolean
                   example: false
+                firebase_connected:
+                  type: boolean
+                  example: false
         """
-        return jsonify({"status": "healthy", "service": "InvestPI Engine", "demo_mode": Config.DEMO_MODE})
+        return jsonify({
+            "status": "healthy",
+            "service": "InvestPI Engine",
+            "demo_mode": Config.DEMO_MODE,
+            "firebase_connected": reports_cache.is_firestore_connected()
+        })
+
 
     @app.route("/api/markets")
     def get_markets():

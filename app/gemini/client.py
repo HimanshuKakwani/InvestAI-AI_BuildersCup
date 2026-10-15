@@ -165,8 +165,15 @@ class GeminiAuditor:
         }}
         """
 
-        fallback_models = ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3-flash-preview", self.model_name]
+        fallback_models = [
+            self.model_name,
+            "gemini-2.5-flash",
+            "gemini-2.0-flash",
+            "gemini-1.5-flash",
+            "gemini-1.5-pro",
+        ]
         last_error = None
+
 
         for model in list(dict.fromkeys(fallback_models)):
             try:
@@ -428,8 +435,15 @@ class GeminiAuditor:
         }}
         If multiple stocks are recommended, return an array of these JSON objects.
         """
-        fallback_models = ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3-flash-preview", self.model_name]
+        fallback_models = [
+            self.model_name,
+            "gemini-2.5-flash",
+            "gemini-2.0-flash",
+            "gemini-1.5-flash",
+            "gemini-1.5-pro",
+        ]
         last_error = None
+
 
         for model in list(dict.fromkeys(fallback_models)):
             try:
@@ -539,8 +553,15 @@ class GeminiAuditor:
           Return JSON with "is_financial_advice": true, and keys: ticker, company_name, direction, target_price, claimed_percentage_move, time_horizon_days, exact_quote, creator_claimed_name, guaranteed_return_language_detected, manipulative_phrases.
         """
 
-        fallback_models = ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3-flash-preview", self.model_name]
+        fallback_models = [
+            self.model_name,
+            "gemini-2.5-flash",
+            "gemini-2.0-flash",
+            "gemini-1.5-flash",
+            "gemini-1.5-pro",
+        ]
         last_error = None
+
 
         for model in list(dict.fromkeys(fallback_models)):
             try:

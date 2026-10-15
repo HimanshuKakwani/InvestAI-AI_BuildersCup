@@ -22,8 +22,9 @@ def generate_price_target_chart(
     if prices_df is None or prices_df.empty or "Close" not in prices_df.columns:
         return None
 
+    fig = None
     try:
-        fig, ax = plt.subplots(figsize=(7.5, 3.2), dpi=150)
+        fig, ax = plt.subplots(figsize=(7.5, 3.2), dpi=120)
         fig.patch.set_facecolor("#0f172a") # Slate-900 background
         ax.set_facecolor("#0f172a")
 
@@ -52,9 +53,12 @@ def generate_price_target_chart(
 
         buf = io.BytesIO()
         plt.savefig(buf, format="png", facecolor=fig.get_facecolor(), edgecolor="none")
-        plt.close(fig)
         buf.seek(0)
         return base64.b64encode(buf.read()).decode("utf-8")
     except Exception as e:
         print(f"Chart generation error: {e}")
         return None
+    finally:
+        if fig is not None:
+            plt.close(fig)
+
