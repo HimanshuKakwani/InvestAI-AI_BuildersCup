@@ -834,11 +834,13 @@ def create_app():
             "resolved_stock": resolved,
             "claim": {"target_price": claimed_target}
         }
+        logger.info(f"[API] GET /api/agent/subagents/{ticker} requested (norm={norm_ticker}, query='{query}')...")
         bundle = forensic_agent.coordinator.execute_all(
             ticker=norm_ticker,
             report_context=report_ctx,
             message=query
         )
+        logger.info(f"[API] GET /api/agent/subagents/{ticker} completed in {bundle.get('total_latency_ms')}ms.")
         return jsonify(bundle), 200
 
     @app.route("/api/agent/subagents/async", methods=["POST"])
@@ -882,6 +884,7 @@ def create_app():
         norm_ticker = resolved.get("ticker", raw_ticker.upper())
 
         task_id = f"subagent-{uuid.uuid4().hex[:12]}"
+        logger.info(f"[API] POST /api/agent/subagents/async received for {norm_ticker} (task_id={task_id}). Publishing to Pub/Sub...")
         case_store.create_case(task_id, modality="subagent_task", region=market, meta={"ticker": norm_ticker})
 
         event = SubAgentTaskEvent(
@@ -892,6 +895,7 @@ def create_app():
             claimed_target=body.get("claimed_target")
         )
         msg_id = publisher.publish_subagent_task(event)
+        logger.info(f"[API] SubAgentTaskEvent published successfully: msg_id={msg_id}, task_id={task_id}")
 
         return jsonify({
             "task_id": task_id,
@@ -928,9 +932,14 @@ def create_app():
             description: Simple bullet pointers and 4-quadrant SWOT analysis table from past-quarter financial filing.
         """
         live_gemini = request.args.get("live_gemini", "").lower() in ("1", "true", "yes")
+        logger.info(f"[API] GET /api/agent/quarterly-report/{ticker} received (live_gemini={live_gemini})...")
         res = forensic_agent.coordinator.quarterly_agent.run(
             ticker=ticker,
             analyze_with_gemini=live_gemini
+        )
+        logger.info(
+            f"[API] GET /api/agent/quarterly-report/{ticker} completed in {res.get('latency_ms')}ms "
+            f"(Engine: {res.get('analysis_engine')}, Status: {res.get('status')})."
         )
         return jsonify(res), 200
 

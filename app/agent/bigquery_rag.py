@@ -145,10 +145,17 @@ class BigQueryFinancialRAG:
             norm_ticker = f"{norm_ticker}.NS"
 
         if self.is_cloud_enabled:
+            logger.info(f"[BigQuery Vector RAG] (is_cloud_enabled=True) Querying BigQuery VECTOR_SEARCH for {norm_ticker}...")
             try:
-                return self._search_bigquery(norm_ticker, query_text, top_k)
+                t0 = time.time()
+                chunks = self._search_bigquery(norm_ticker, query_text, top_k)
+                elapsed = round((time.time() - t0) * 1000, 2)
+                logger.info(f"[BigQuery Vector RAG] VECTOR_SEARCH returned {len(chunks)} chunks in {elapsed}ms for {norm_ticker}.")
+                return chunks
             except Exception as e:
-                logger.error(f"BigQuery vector search failed ({e}). Reverting to Local RAG Fallback.")
+                logger.error(f"[BigQuery Vector RAG] BigQuery vector search failed for {norm_ticker}: {e}. Reverting to Local RAG Fallback.")
+        else:
+            logger.info(f"[Local RAG] (is_cloud_enabled=False) Searching local filing chunks for {norm_ticker}...")
 
         return self._search_local(norm_ticker, query_text, top_k)
 
@@ -162,6 +169,7 @@ class BigQueryFinancialRAG:
                 bigquery.ScalarQueryParameter("top_k", "INT64", top_k),
             ]
         )
+        logger.info(f"[BigQuery Vector RAG] Dispatching query to BigQuery in project: {self.project_id}...")
         query_job = self._bq_client.query(query, job_config=job_config)
         results = []
         for row in query_job:
@@ -246,7 +254,9 @@ class BigQueryFinancialRAG:
             norm_ticker = f"{norm_ticker}.NS"
 
         if self.is_cloud_enabled:
+            logger.info(f"[BigQuery RAG] (is_cloud_enabled=True) Querying `{self.project_id}.{self.dataset_id}.quarterly_reports` for {norm_ticker}...")
             try:
+                t0 = time.time()
                 from google.cloud import bigquery
                 query = f"""
                 SELECT report_data 
@@ -270,10 +280,14 @@ class BigQueryFinancialRAG:
                     else:
                         continue
                     data["source_engine"] = "Google BigQuery (financial_intelligence.quarterly_reports)"
-                    logger.info(f"Retrieved quarterly report for {norm_ticker} from BigQuery.")
+                    elapsed = round((time.time() - t0) * 1000, 2)
+                    logger.info(f"[BigQuery RAG] Successfully fetched quarterly report for {norm_ticker} from BigQuery in {elapsed}ms (Company: {data.get('company_name')}).")
                     return data
+                logger.warning(f"[BigQuery RAG] No rows returned from BigQuery quarterly_reports for {norm_ticker}. Falling back to local data/ folder.")
             except Exception as e:
-                logger.warning(f"BigQuery fetch of quarterly_reports for {norm_ticker} failed: {e}. Falling back to local file.")
+                logger.error(f"[BigQuery RAG] BigQuery fetch of quarterly_reports for {norm_ticker} failed: {e}. Falling back to local file.")
+        else:
+            logger.info(f"[Local RAG] (is_cloud_enabled=False) Loading quarterly report for {norm_ticker} from local data/ folder.")
 
         return self._get_quarterly_report_local(norm_ticker)
 
@@ -289,9 +303,12 @@ class BigQueryFinancialRAG:
                 with open(matches[0], "r", encoding="utf-8") as f:
                     data = json.load(f)
                     data["source_engine"] = "Local Filing Document Parser"
+                    logger.info(f"[Local RAG] Successfully loaded local quarterly report for {ticker} from {matches[0].name}.")
                     return data
-            except Exception:
-                pass
+            except Exception as e:
+                logger.warning(f"[Local RAG] Error reading local quarterly file {matches[0]}: {e}")
+        else:
+            logger.warning(f"[Local RAG] No matching quarterly report file found in {q_dir} for {ticker}.")
         return None
 
     @classmethod

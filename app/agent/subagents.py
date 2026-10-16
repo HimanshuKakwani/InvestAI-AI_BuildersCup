@@ -85,10 +85,12 @@ class HistoricalPriceSubAgent:
     def run(self, ticker: str, trigger_pubsub_sync_if_stale: bool = True) -> Dict[str, Any]:
         """Fetch historical prices and compute multi-horizon returns and technical baselines."""
         start_ts = time.time()
+        logger.info(f"[HistoricalPriceSubAgent] Starting analysis for ticker='{ticker}'...")
         sym = _currency_symbol(ticker)
         df = self.loader.get_price_history(ticker)
 
         if df is None or df.empty or "Close" not in df.columns:
+            logger.warning(f"[HistoricalPriceSubAgent] No price data found for '{ticker}'.")
             # Trigger async Pub/Sub sync so background worker populates Firestore/local cache
             if trigger_pubsub_sync_if_stale and ticker and ticker != "AUDITED_EQUITY":
                 self._dispatch_pubsub_sync(ticker)
@@ -253,6 +255,8 @@ class HistoricalPriceSubAgent:
             ],
             "latency_ms": round((time.time() - start_ts) * 1000, 2)
         }
+        logger.info(f"[HistoricalPriceSubAgent] Completed for '{ticker}' in {res['latency_ms']}ms (Latest Close: {sym}{latest_close:.2f}).")
+        return res
 
     @staticmethod
     def _dispatch_pubsub_sync(ticker: str):
@@ -285,6 +289,7 @@ class PriceTargetSubAgent:
     def run(self, ticker: str, claimed_target: Optional[float] = None) -> Dict[str, Any]:
         """Compute predicted future price target via Analyst Consensus or EMA-200 1-Month Fallback."""
         start_ts = time.time()
+        logger.info(f"[PriceTargetSubAgent] Starting prediction for ticker='{ticker}' (claimed_target={claimed_target})...")
         sym = _currency_symbol(ticker)
 
         df = self.loader.get_price_history(ticker)
@@ -419,6 +424,8 @@ class PriceTargetSubAgent:
             ],
             "latency_ms": round((time.time() - start_ts) * 1000, 2)
         }
+        logger.info(f"[PriceTargetSubAgent] Completed for '{ticker}' in {res['latency_ms']}ms (Method: {res['method']}, Target: {sym}{pred_target:.2f}).")
+        return res
 
 
 class FundamentalsSubAgent:
@@ -433,6 +440,7 @@ class FundamentalsSubAgent:
     def run(self, ticker: str) -> Dict[str, Any]:
         """Retrieve and analyze fundamental metrics for the given stock ticker."""
         start_ts = time.time()
+        logger.info(f"[FundamentalsSubAgent] Starting fundamentals check for ticker='{ticker}'...")
         fund = self.loader.get_fundamentals(ticker)
         sym = _currency_symbol(ticker, (fund or {}).get("currency", "INR"))
 
@@ -573,6 +581,8 @@ class FundamentalsSubAgent:
             ],
             "latency_ms": round((time.time() - start_ts) * 1000, 2)
         }
+        logger.info(f"[FundamentalsSubAgent] Completed for '{ticker}' in {res['latency_ms']}ms (P/E: {res['valuation']['pe_current']}, Trailing EPS: {sym}{res['earnings']['trailing_eps']}).")
+        return res
 
 
 class SimpleExplainerSubAgent:
@@ -762,10 +772,12 @@ class QuarterlyReportSummarizerSubAgent:
         from app.agent.bigquery_rag import BigQueryFinancialRAG
 
         start_ts = time.time()
+        logger.info(f"[QuarterlyReportSubAgent] Starting report summarization for ticker='{ticker}' (analyze_with_gemini={analyze_with_gemini})...")
         norm_ticker = self.normalize_demo_ticker(ticker)
         sym = _currency_symbol(norm_ticker or ticker)
 
         if not norm_ticker or norm_ticker not in self.SUPPORTED_DEMO_TICKERS:
+            logger.info(f"[QuarterlyReportSubAgent] '{ticker}' is not in 10 supported marquee demo stocks. Returning guardrail status.")
             return {
                 "agent_id": self.AGENT_ID,
                 "role": self.ROLE,
@@ -904,6 +916,11 @@ class QuarterlyReportSummarizerSubAgent:
             ],
             "latency_ms": round((time.time() - start_ts) * 1000, 2)
         }
+        logger.info(
+            f"[QuarterlyReportSubAgent] Completed for '{norm_ticker}' in {res['latency_ms']}ms "
+            f"(Engine: {analysis_engine_used}, Pointers: {len(pointers)}, Segments: {len(segments)}, RAG Chunks: {len(rag_chunks)})."
+        )
+        return res
 
 
 class SubAgentCoordinator:
@@ -1001,6 +1018,7 @@ class SubAgentCoordinator:
         claimed_target = claim.get("target_price")
 
         invoked_ids = self.detect_relevant_agents(message)
+        logger.info(f"[SubAgentCoordinator] Dispatching sub-agents for '{ticker}' (invoked_ids={invoked_ids})...")
 
         # Allow explicit mention of Reliance or SBIN in message to override ticker for quarterly agent if queried
         lower_msg = (message or "").lower()
@@ -1061,4 +1079,13 @@ class SubAgentCoordinator:
             "prompt_context_block": prompt_context_block,
             "total_latency_ms": round((time.time() - start_ts) * 1000, 2)
         }
+        logger.info(
+            f"[SubAgentCoordinator] All sub-agents completed for '{ticker}' in {bundle['total_latency_ms']}ms "
+            f"[Price: {price_res.get('status')} ({price_res.get('latency_ms')}ms), "
+            f"Target: {target_res.get('status')} ({target_res.get('latency_ms')}ms), "
+            f"Fund: {fund_res.get('status')} ({fund_res.get('latency_ms')}ms), "
+            f"Quarterly: {quart_res.get('status')} ({quart_res.get('latency_ms')}ms), "
+            f"Explainer: {explainer_res.get('status', 'OK')} ({explainer_res.get('latency_ms')}ms)]."
+        )
+        return bundle
 
