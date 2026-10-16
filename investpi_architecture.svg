@@ -1,0 +1,384 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1860 1180" width="100%" height="100%" style="--bg:#18181B;--surface:#1F1F23;--border:#52525B;--fg:#F4F4F5;--muted:#A1A1AA;background:var(--bg)">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap');
+    text { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; }
+  </style>
+
+  <defs>
+    <!-- Drop Shadow for Subgraphs and Nodes -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+
+    <!-- Color-Coded Arrowheads -->
+    <marker id="arrow-indigo" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#818cf8"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#60a5fa"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#fb923c"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#c084fc"/>
+    </marker>
+    <marker id="arrow-yellow" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#facc15"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#f87171"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#34d399"/>
+    </marker>
+
+    <!-- Subtle Dot Grid -->
+    <pattern id="dotGrid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#3F3F46" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1860" height="1180" fill="#18181B"/>
+  <rect width="1860" height="1180" fill="url(#dotGrid)"/>
+
+  <!-- ==================== TOP TITLE & FLOW LEGEND BAR ==================== -->
+  <g transform="translate(40, 22)" filter="url(#shadow)">
+    <rect width="1780" height="62" rx="8" fill="#202024" stroke="#3F3F46" stroke-width="1.5"/>
+    <text x="24" y="28" font-size="18" font-weight="800" fill="#FFFFFF">InvestPI — Cloud-Native Serverless Architecture (Mermaid Subgraph View)</text>
+    <text x="24" y="48" font-size="12" fill="#A1A1AA" class="mono">Follow numbered steps ① → ④ left-to-right · Zero crossing lines · Color-coded by Google Cloud service</text>
+
+    <!-- Service Color Legend Pills -->
+    <g transform="translate(1035, 16)" font-size="11" font-weight="600">
+      <rect x="0" y="0" width="110" height="30" rx="5" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5"/>
+      <text x="55" y="19" fill="#e0e7ff" text-anchor="middle">Client Browser</text>
+
+      <rect x="122" y="0" width="115" height="30" rx="5" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="179" y="19" fill="#dbeafe" text-anchor="middle">Cloud Run</text>
+
+      <rect x="249" y="0" width="115" height="30" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="1.5"/>
+      <text x="306" y="19" fill="#ccfbf1" text-anchor="middle">Cloud Pub/Sub</text>
+
+      <rect x="376" y="0" width="115" height="30" rx="5" fill="#7c2d12" stroke="#f97316" stroke-width="1.5"/>
+      <text x="433" y="19" fill="#ffedd5" text-anchor="middle">Firestore (L2)</text>
+
+      <rect x="503" y="0" width="110" height="30" rx="5" fill="#3b0764" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="558" y="19" fill="#f3e8ff" text-anchor="middle">Gemini AI</text>
+
+      <rect x="625" y="0" width="115" height="30" rx="5" fill="#713f12" stroke="#eab308" stroke-width="1.5"/>
+      <text x="682" y="19" fill="#fef08a" text-anchor="middle">Cloud Cron</text>
+    </g>
+  </g>
+
+
+  <!-- ========================================================================= -->
+  <!-- TIER 1 (TOP): CLIENT BROWSER (LEFT)  &  GOOGLE CLOUD SCHEDULER (RIGHT)    -->
+  <!-- ========================================================================= -->
+
+  <!-- SUBGRAPH: Client Browser -->
+  <g class="subgraph" data-id="CLIENT_BROWSER" transform="translate(80, 110)" filter="url(#shadow)">
+    <rect width="1060" height="125" rx="6" fill="#1F1F23" stroke="#6366f1" stroke-width="1.5"/>
+    <rect width="1060" height="30" rx="6" fill="#27272A" stroke="#6366f1" stroke-width="1"/>
+    <text x="16" y="20" font-size="12.5" font-weight="700" fill="#a5b4fc">Client Browser (Desktop &amp; Mobile)</text>
+
+    <!-- Node: BROWSER -->
+    <rect x="310" y="48" width="440" height="56" rx="6" fill="#1e1b4b" stroke="#6366f1" stroke-width="2"/>
+    <text x="530" y="73" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Retail Investor (Desktop &amp; Mobile)</text>
+    <text x="530" y="92" text-anchor="middle" font-size="11.5" fill="#a5b4fc" class="mono">Submits YouTube / Screenshot / PDF · Streams Live SSE</text>
+  </g>
+
+  <!-- SUBGRAPH: Google Cloud Scheduler -->
+  <g class="subgraph" data-id="GCP_SCHEDULER" transform="translate(1390, 110)" filter="url(#shadow)">
+    <rect width="430" height="125" rx="6" fill="#1F1F23" stroke="#eab308" stroke-width="1.5"/>
+    <rect width="430" height="30" rx="6" fill="#27272A" stroke="#eab308" stroke-width="1"/>
+    <text x="16" y="20" font-size="12.5" font-weight="700" fill="#fde047">Google Cloud Scheduler</text>
+
+    <!-- Node: CRON -->
+    <rect x="25" y="48" width="380" height="56" rx="6" fill="#713f12" stroke="#eab308" stroke-width="2"/>
+    <text x="215" y="72" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">Multi-Jurisdiction Market-Close Crons</text>
+    <text x="215" y="91" text-anchor="middle" font-size="11.5" fill="#fef08a" class="mono">• IN: 11:30 UTC · SG: 09:30 UTC · AU: 06:30 UTC</text>
+  </g>
+
+
+  <!-- ========================================================================= -->
+  <!-- TIER 2 (MIDDLE): GOOGLE CLOUD RUN (STATELESS CONTAINER)                   -->
+  <!-- ========================================================================= -->
+  <g class="subgraph" data-id="CLOUD_RUN" transform="translate(40, 325)" filter="url(#shadow)">
+    <rect width="1780" height="365" rx="6" fill="#1F1F23" stroke="#3b82f6" stroke-width="1.8"/>
+    <rect width="1780" height="32" rx="6" fill="#27272A" stroke="#3b82f6" stroke-width="1.2"/>
+    <text x="18" y="21" font-size="13" font-weight="700" fill="#93c5fd">Google Cloud Run (Stateless Container · Auto-Scales 0 to 1,000 Instances)</text>
+
+    <!-- Top Infrastructure Bar inside Cloud Run: Flask + ProxyFix + L1 LRU Cache -->
+    <g transform="translate(30, 48)">
+      <!-- Node: FLASK -->
+      <rect x="0" y="0" width="330" height="44" rx="5" fill="#172554" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="165" y="27" text-anchor="middle" font-size="13" font-weight="600" fill="#dbeafe">Flask Application Server (Gunicorn WSGI)</text>
+
+      <!-- Node: PROXY -->
+      <rect x="350" y="0" width="410" height="44" rx="5" fill="#172554" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="555" y="27" text-anchor="middle" font-size="13" font-weight="600" fill="#dbeafe">Werkzeug ProxyFix (HTTPS Header Forwarding)</text>
+
+      <!-- Node: L1_CACHE -->
+      <rect x="780" y="0" width="440" height="44" rx="5" fill="#172554" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="1000" y="27" text-anchor="middle" font-size="13" font-weight="600" fill="#dbeafe">L1: In-Memory Bounded LRU Cache (150 Items in RAM, Leak-Safe)</text>
+
+      <!-- Security Badge -->
+      <rect x="1240" y="0" width="480" height="44" rx="5" fill="#172554" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="1480" y="27" text-anchor="middle" font-size="12" font-weight="600" fill="#93c5fd" class="mono">🔑 Secrets Injected via Cloud Secret Manager &amp; IAM OIDC</text>
+    </g>
+
+    <!-- Row 2 inside Cloud Run: The 5 Route Handlers Aligned Left-to-Right by Flow -->
+    <!-- 1. UI_ROUTE (x=30) -->
+    <g class="node" data-id="UI_ROUTE" transform="translate(30, 120)">
+      <rect width="280" height="64" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+      <text x="140" y="27" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">GET /</text>
+      <text x="140" y="47" text-anchor="middle" font-size="12" font-weight="500" fill="#bfdbfe">(Renders templates/index.html natively)</text>
+    </g>
+
+    <!-- 2. ASYNC_API (x=355) -->
+    <g class="node" data-id="ASYNC_API" transform="translate(355, 120)">
+      <rect width="300" height="64" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+      <text x="150" y="27" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">POST /api/analyze/async</text>
+      <text x="150" y="47" text-anchor="middle" font-size="12" font-weight="500" fill="#bfdbfe">(Returns 202 + case_id in &lt;50ms)</text>
+    </g>
+
+    <!-- 3. CASE_STREAM (x=700) -->
+    <g class="node" data-id="CASE_STREAM" transform="translate(700, 120)">
+      <rect width="280" height="64" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+      <text x="140" y="27" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">GET /api/cases/:id/stream</text>
+      <text x="140" y="47" text-anchor="middle" font-size="12" font-weight="500" fill="#bfdbfe">(SSE Live Status + AI Chat API)</text>
+    </g>
+
+    <!-- 4. PUSH_HOOK (x=1030) -->
+    <g class="node" data-id="PUSH_HOOK" transform="translate(1030, 120)">
+      <rect width="300" height="64" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+      <text x="150" y="27" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">POST /api/pubsub/push</text>
+      <text x="150" y="47" text-anchor="middle" font-size="12" font-weight="500" fill="#bfdbfe">(Pub/Sub Webhook Worker)</text>
+    </g>
+
+    <!-- 5. SYNC_JOB (x=1425) -->
+    <g class="node" data-id="SYNC_JOB" transform="translate(1425, 120)">
+      <rect width="320" height="64" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+      <text x="160" y="27" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">POST /api/jobs/sync-market</text>
+      <text x="160" y="47" text-anchor="middle" font-size="12" font-weight="500" fill="#bfdbfe">(Timezone EOD Sync)</text>
+    </g>
+
+    <!-- Row 3 inside Cloud Run: FORENSIC_ENGINE (Directly below PUSH_HOOK) -->
+    <g class="node" data-id="FORENSIC_ENGINE" transform="translate(990, 265)">
+      <rect width="380" height="72" rx="6" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2.5"/>
+      <text x="190" y="29" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">9-Parameter Forensic Math Engine</text>
+      <text x="190" y="50" text-anchor="middle" font-size="12" font-weight="500" fill="#93c5fd" class="mono">(P1–P9 Python Core · Hard Gates · Chart &amp; PDF Gen)</text>
+    </g>
+
+    <!-- Internal Edge: PUSH_HOOK -> FORENSIC_ENGINE -->
+    <line x1="1180" y1="184" x2="1180" y2="265" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <rect x="1125" y="210" width="110" height="24" rx="4" fill="#18181B" stroke="#3b82f6" stroke-width="1"/>
+    <text x="1180" y="226" text-anchor="middle" font-size="11" font-weight="600" fill="#93c5fd">Execute Audit</text>
+  </g>
+
+
+  <!-- ========================================================================= -->
+  <!-- TIER 3 (BOTTOM): PUB/SUB (LEFT) · FIRESTORE (CENTER) · GEMINI AI (RIGHT)  -->
+  <!-- ========================================================================= -->
+
+  <!-- SUBGRAPH 1: Google Cloud Pub/Sub (Left: x=40) -->
+  <g class="subgraph" data-id="GCP_PUBSUB" transform="translate(40, 785)" filter="url(#shadow)">
+    <rect width="580" height="355" rx="6" fill="#1F1F23" stroke="#14b8a6" stroke-width="1.8"/>
+    <rect width="580" height="32" rx="6" fill="#27272A" stroke="#14b8a6" stroke-width="1.2"/>
+    <text x="18" y="21" font-size="13" font-weight="700" fill="#5eead4">Google Cloud Pub/Sub (Asynchronous Event Bus)</text>
+
+    <!-- Node: TOPIC_IN -->
+    <g class="node" data-id="TOPIC_IN" transform="translate(25, 55)">
+      <rect width="265" height="46" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
+      <text x="132" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#ffffff" class="mono">Topic: investpi-leads-inbound</text>
+    </g>
+
+    <!-- Node: TOPIC_OUT -->
+    <g class="node" data-id="TOPIC_OUT" transform="translate(305, 55)">
+      <rect width="250" height="46" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
+      <text x="125" y="28" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" class="mono">Topic: investpi-audits-completed</text>
+    </g>
+
+    <!-- Node: SUB_WORKER -->
+    <g class="node" data-id="SUB_WORKER" transform="translate(25, 165)">
+      <rect width="310" height="60" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
+      <text x="155" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Push Subscription: investpi-worker-sub</text>
+      <text x="155" y="45" text-anchor="middle" font-size="11.5" fill="#99f6e4" class="mono">(IAM OIDC Bearer Token · 300s Deadline)</text>
+    </g>
+
+    <!-- Node: TOPIC_DLQ -->
+    <g class="node" data-id="TOPIC_DLQ" transform="translate(25, 285)">
+      <rect width="310" height="46" rx="5" fill="#450a0a" stroke="#f87171" stroke-width="2"/>
+      <text x="155" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#fecaca" class="mono">Dead-Letter Topic: investpi-leads-dlq</text>
+    </g>
+
+    <!-- Internal Edge: TOPIC_IN -> SUB_WORKER -->
+    <line x1="157" y1="101" x2="157" y2="165" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow-teal)"/>
+    <rect x="65" y="120" width="184" height="24" rx="4" fill="#18181B" stroke="#14b8a6" stroke-width="1"/>
+    <text x="157" y="136" text-anchor="middle" font-size="11" font-weight="500" fill="#5eead4">HTTPS Push with OIDC Token</text>
+
+    <!-- Internal Edge: SUB_WORKER -> TOPIC_DLQ -->
+    <line x1="157" y1="225" x2="157" y2="285" stroke="#f87171" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-red)"/>
+    <rect x="75" y="243" width="164" height="24" rx="4" fill="#18181B" stroke="#f87171" stroke-width="1"/>
+    <text x="157" y="259" text-anchor="middle" font-size="11" font-weight="500" fill="#fca5a5">On 5 consecutive errors</text>
+  </g>
+
+
+  <!-- SUBGRAPH 2: Google Firebase Firestore (Center: x=660) -->
+  <g class="subgraph" data-id="GCP_FIRESTORE" transform="translate(660, 785)" filter="url(#shadow)">
+    <rect width="740" height="355" rx="6" fill="#1F1F23" stroke="#f97316" stroke-width="1.8"/>
+    <rect width="740" height="32" rx="6" fill="#27272A" stroke="#f97316" stroke-width="1.2"/>
+    <text x="18" y="21" font-size="13" font-weight="700" fill="#fdba74">Google Firebase Firestore (L2 Multi-Instance State &amp; Data Store)</text>
+
+    <!-- Cylinder 1: FS_CASES -->
+    <g class="node" data-id="FS_CASES" transform="translate(25, 145)">
+      <path d="M 0,14 L 0,86 A 105,12 0 0,0 210,86 L 210,14 Z" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+      <ellipse cx="105" cy="14" rx="105" ry="12" fill="#9a3412" stroke="#f97316" stroke-width="2"/>
+      <text x="105" y="48" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">investpi_cases</text>
+      <text x="105" y="68" text-anchor="middle" font-size="11.5" fill="#fed7aa">(Async case state tracking)</text>
+    </g>
+
+    <!-- Cylinder 2: FS_REPORTS -->
+    <g class="node" data-id="FS_REPORTS" transform="translate(260, 145)">
+      <path d="M 0,14 L 0,86 A 110,12 0 0,0 220,86 L 220,14 Z" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+      <ellipse cx="110" cy="14" rx="110" ry="12" fill="#9a3412" stroke="#f97316" stroke-width="2"/>
+      <text x="110" y="48" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">investpi_reports</text>
+      <text x="110" y="68" text-anchor="middle" font-size="11.5" fill="#fed7aa">(Scorecards, charts, PDFs)</text>
+    </g>
+
+    <!-- Cylinder 3: FS_PRICES -->
+    <g class="node" data-id="FS_PRICES" transform="translate(505, 145)">
+      <path d="M 0,14 L 0,86 A 105,12 0 0,0 210,86 L 210,14 Z" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
+      <ellipse cx="105" cy="14" rx="105" ry="12" fill="#9a3412" stroke="#f97316" stroke-width="2"/>
+      <text x="105" y="48" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">investpi_prices</text>
+      <text x="105" y="68" text-anchor="middle" font-size="11.5" fill="#fed7aa">(5-year OHLCV daily candles)</text>
+    </g>
+
+    <!-- Bottom Caption inside Firestore -->
+    <rect x="25" y="275" width="690" height="54" rx="5" fill="#27272A" stroke="#52525B" stroke-width="1"/>
+    <text x="370" y="298" text-anchor="middle" font-size="12" font-weight="600" fill="#e4e4e7">Multi-Instance Serverless Persistence</text>
+    <text x="370" y="317" text-anchor="middle" font-size="11" fill="#a1a1aa" class="mono">Allows Worker A to execute audit and Worker B to stream SSE or serve PDF exports seamlessly</text>
+  </g>
+
+
+  <!-- SUBGRAPH 3: Google DeepMind Gemini & Regulatory Data (Right: x=1440) -->
+  <g class="subgraph" data-id="GCP_GEMINI" transform="translate(1440, 785)" filter="url(#shadow)">
+    <rect width="380" height="355" rx="6" fill="#1F1F23" stroke="#a855f7" stroke-width="1.8"/>
+    <rect width="380" height="32" rx="6" fill="#27272A" stroke="#a855f7" stroke-width="1.2"/>
+    <text x="18" y="21" font-size="13" font-weight="700" fill="#d8b4fe">Google DeepMind Gemini &amp; Registries</text>
+
+    <!-- Node: GEMINI -->
+    <g class="node" data-id="GEMINI" transform="translate(25, 65)">
+      <rect width="330" height="82" rx="6" fill="#3b0764" stroke="#a855f7" stroke-width="2"/>
+      <text x="165" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Gemini 2.5 / 3.1 Flash</text>
+      <text x="165" y="50" text-anchor="middle" font-size="12" fill="#e9d5ff">(Multimodal Video/OCR Claims Extraction</text>
+      <text x="165" y="68" text-anchor="middle" font-size="12" fill="#e9d5ff">&amp; Guardrailed Forensic Assistant Chat)</text>
+    </g>
+
+    <!-- Node: REGISTRIES & YFINANCE -->
+    <g class="node" data-id="REGISTRIES" transform="translate(25, 185)">
+      <rect width="330" height="140" rx="6" fill="#27272A" stroke="#71717A" stroke-width="1.5"/>
+      <text x="165" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Empirical Market &amp; Regulatory Sources</text>
+      <line x1="20" y1="38" x2="310" y2="38" stroke="#3F3F46" stroke-width="1"/>
+      <text x="24" y="60" font-size="11.5" fill="#d4d4d8" class="mono">• SEBI (India) RA/IA &amp; Debarred List</text>
+      <text x="24" y="82" font-size="11.5" fill="#d4d4d8" class="mono">• MAS (Singapore) Investor Alert List</text>
+      <text x="24" y="104" font-size="11.5" fill="#d4d4d8" class="mono">• ASIC (Australia) AFS Licensees</text>
+      <text x="24" y="126" font-size="11.5" fill="#d4d4d8" class="mono">• Yahoo Finance &amp; YouTube oEmbed API</text>
+    </g>
+  </g>
+
+
+  <!-- ========================================================================= -->
+  <!-- CLEAN ORTHOGONAL CONNECTORS & EDGE LABELS (ZERO CROSSINGS)                -->
+  <!-- ========================================================================= -->
+
+  <!-- 1. BROWSER -> UI_ROUTE (1. GET /) -->
+  <polyline points="420,214 420,260 150,260 150,445" fill="none" stroke="#818cf8" stroke-width="2" marker-end="url(#arrow-indigo)"/>
+  <rect x="108" y="275" width="84" height="24" rx="4" fill="#18181B" stroke="#6366f1" stroke-width="1"/>
+  <text x="150" y="291" text-anchor="middle" font-size="11" font-weight="700" fill="#a5b4fc">① GET /</text>
+
+  <!-- 1b. UI_ROUTE -> BROWSER (Renders HTML5 Single-Page App) -->
+  <polyline points="230,445 230,285 460,285 460,214" fill="none" stroke="#34d399" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-green)"/>
+  <rect x="245" y="273" width="188" height="24" rx="4" fill="#18181B" stroke="#34d399" stroke-width="1"/>
+  <text x="339" y="289" text-anchor="middle" font-size="11" font-weight="500" fill="#6ee7b7">Renders HTML5 Single-Page App</text>
+
+
+  <!-- 2. BROWSER -> ASYNC_API (2. POST /api/analyze/async) -->
+  <line x1="515" y1="214" x2="515" y2="445" stroke="#818cf8" stroke-width="2" marker-end="url(#arrow-indigo)"/>
+  <rect x="430" y="250" width="170" height="24" rx="4" fill="#18181B" stroke="#6366f1" stroke-width="1"/>
+  <text x="515" y="266" text-anchor="middle" font-size="11" font-weight="700" fill="#a5b4fc">② POST /api/analyze/async</text>
+
+  <!-- 2b. ASYNC_API -> BROWSER (Immediate 202 Accepted) -->
+  <line x1="635" y1="445" x2="635" y2="214" stroke="#34d399" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-green)"/>
+  <rect x="562" y="285" width="146" height="24" rx="4" fill="#18181B" stroke="#34d399" stroke-width="1"/>
+  <text x="635" y="301" text-anchor="middle" font-size="11" font-weight="600" fill="#6ee7b7">Immediate 202 Accepted</text>
+
+
+  <!-- 2c. ASYNC_API -> TOPIC_IN (Publish LeadSubmittedEvent) -->
+  <polyline points="460,509 460,725 197,725 197,840" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <rect x="235" y="713" width="172" height="24" rx="4" fill="#18181B" stroke="#14b8a6" stroke-width="1"/>
+  <text x="321" y="729" text-anchor="middle" font-size="11" font-weight="600" fill="#5eead4">Publish LeadSubmittedEvent</text>
+
+  <!-- 2d. ASYNC_API -> FS_CASES (Save QUEUED state) -->
+  <polyline points="560,509 560,745 735,745 735,930" fill="none" stroke="#fb923c" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <rect x="588" y="733" width="120" height="24" rx="4" fill="#18181B" stroke="#f97316" stroke-width="1"/>
+  <text x="648" y="749" text-anchor="middle" font-size="11" font-weight="600" fill="#fdba74">Save QUEUED state</text>
+
+
+  <!-- 3. SUB_WORKER -> PUSH_HOOK (3. POST /api/pubsub/push) -->
+  <polyline points="375,980 638,980 638,545 1070,545 1070,509" fill="none" stroke="#2dd4bf" stroke-width="2.2" marker-end="url(#arrow-teal)"/>
+  <rect x="442" y="968" width="165" height="24" rx="4" fill="#18181B" stroke="#14b8a6" stroke-width="1.2"/>
+  <text x="524" y="984" text-anchor="middle" font-size="11" font-weight="700" fill="#5eead4">③ POST /api/pubsub/push</text>
+
+
+  <!-- 3b. PUSH_HOOK -> TOPIC_OUT (Publish AuditCompletedEvent) -->
+  <polyline points="1115,509 1115,715 470,715 470,840" fill="none" stroke="#2dd4bf" stroke-width="1.8" marker-end="url(#arrow-teal)"/>
+  <rect x="485" y="703" width="176" height="24" rx="4" fill="#18181B" stroke="#14b8a6" stroke-width="1"/>
+  <text x="573" y="719" text-anchor="middle" font-size="11" font-weight="500" fill="#5eead4">Publish AuditCompletedEvent</text>
+
+
+  <!-- 3c. PUSH_HOOK -> FS_CASES (Set PROCESSING / Set COMPLETED) -->
+  <polyline points="1155,509 1155,755 835,755 835,930" fill="none" stroke="#fb923c" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <rect x="855" y="743" width="196" height="24" rx="4" fill="#18181B" stroke="#f97316" stroke-width="1"/>
+  <text x="953" y="759" text-anchor="middle" font-size="11" font-weight="600" fill="#fdba74">Set PROCESSING → COMPLETED</text>
+
+
+  <!-- 3d. FORENSIC_ENGINE -> FS_REPORTS (Write Audit Record) -->
+  <polyline points="1140,662 1140,860 1030,860 1030,930" fill="none" stroke="#fb923c" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <rect x="1032" y="848" width="120" height="24" rx="4" fill="#18181B" stroke="#f97316" stroke-width="1"/>
+  <text x="1092" y="864" text-anchor="middle" font-size="11" font-weight="600" fill="#fdba74">Write Audit Record</text>
+
+
+  <!-- 3e. FORENSIC_ENGINE -> GEMINI (Extract Claims) -->
+  <polyline points="1330,662 1330,740 1630,740 1630,850" fill="none" stroke="#c084fc" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
+  <rect x="1430" y="728" width="110" height="24" rx="4" fill="#18181B" stroke="#a855f7" stroke-width="1"/>
+  <text x="1485" y="744" text-anchor="middle" font-size="11" font-weight="600" fill="#d8b4fe">Extract Claims</text>
+
+
+  <!-- 4. BROWSER -> CASE_STREAM (4. Poll / Stream SSE) -->
+  <polyline points="750,185 880,185 880,445" fill="none" stroke="#818cf8" stroke-width="2" marker-end="url(#arrow-indigo)"/>
+  <rect x="815" y="250" width="130" height="24" rx="4" fill="#18181B" stroke="#6366f1" stroke-width="1"/>
+  <text x="880" y="266" text-anchor="middle" font-size="11" font-weight="700" fill="#a5b4fc">④ Poll / Stream SSE</text>
+
+  <!-- 4b. CASE_STREAM -> FS_CASES (Read live status) -->
+  <polyline points="880,509 880,730 785,730 785,930" fill="none" stroke="#fb923c" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrow-orange)"/>
+  <rect x="735" y="848" width="104" height="24" rx="4" fill="#18181B" stroke="#f97316" stroke-width="1"/>
+  <text x="787" y="864" text-anchor="middle" font-size="11" font-weight="500" fill="#fdba74">Read live status</text>
+
+
+  <!-- 5. CRON -> SYNC_JOB (POST /api/jobs/sync-market) -->
+  <line x1="1625" y1="214" x2="1625" y2="445" stroke="#facc15" stroke-width="2" marker-end="url(#arrow-yellow)"/>
+  <rect x="1540" y="260" width="170" height="24" rx="4" fill="#18181B" stroke="#eab308" stroke-width="1"/>
+  <text x="1625" y="276" text-anchor="middle" font-size="11" font-weight="600" fill="#fde047">POST /api/jobs/sync-market</text>
+
+  <!-- 5b. SYNC_JOB -> FS_PRICES (Append EOD candles) -->
+  <polyline points="1625,509 1625,715 1270,715 1270,930" fill="none" stroke="#fb923c" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <rect x="1205" y="848" width="130" height="24" rx="4" fill="#18181B" stroke="#f97316" stroke-width="1"/>
+  <text x="1270" y="864" text-anchor="middle" font-size="11" font-weight="600" fill="#fdba74">Append EOD candles</text>
+
+</svg>
