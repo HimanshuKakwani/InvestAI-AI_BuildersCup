@@ -70,38 +70,38 @@
     .button-danger { background: var(--red); color: white; }
     .button-danger:hover { background: #8e2b20; }
 
-    /* STAGE 1: Executive Table Surface & Ivory Business Card */
+    /* STAGE 1: Olive Greenish Desk Surface & Ivory Business Card */
     .stage-input {
-      background: radial-gradient(ellipse at 50% 38%, #271d17 0%, #17110c 60%, #0c0806 100%);
-      color: #1a1a18;
+      background: var(--forest);
+      color: white;
       overflow-x: hidden;
       position: relative;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
-    /* Natural dark walnut wood grain texture */
     .stage-input:before {
       content: '';
-      position: absolute;
+      position: fixed;
       inset: 0;
-      opacity: 0.25;
+      opacity: .12;
       pointer-events: none;
       background-image: 
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 2px, transparent 2px, transparent 10px),
-        repeating-linear-gradient(0deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 1px, transparent 1px, transparent 4px),
-        linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 40%, rgba(0,0,0,0.65) 100%);
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(90deg, black, transparent 65%);
     }
-    /* Overhead warm desk spotlight falling directly onto the card */
     .stage-input:after {
       content: '';
-      position: absolute;
-      top: 14%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 980px;
-      height: 760px;
-      background: radial-gradient(ellipse at center, rgba(246, 232, 206, 0.09) 0%, rgba(215, 185, 140, 0.035) 45%, transparent 72%);
+      position: fixed;
+      width: 720px;
+      height: 720px;
+      border: 1px solid rgba(213,255,95,.09);
+      border-radius: 50%;
+      left: -260px;
+      top: 170px;
+      box-shadow: 0 0 0 120px rgba(213,255,95,.02), 0 0 0 240px rgba(213,255,95,.015);
       pointer-events: none;
     }
 
@@ -416,54 +416,27 @@
     .card-action-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .card-samples {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .card-sample-label {
-      font: 600 8.5px 'DM Mono', monospace;
-      color: #8c816f;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .card-sample-pill {
-      font: 500 9px 'DM Mono', monospace;
-      padding: 3px 8px;
-      background: #ebe5d5;
-      border: 1px solid #cfc7b4;
-      border-radius: 3px;
-      color: #453f34;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .card-sample-pill:hover {
-      background: #142820;
-      color: #FAF7EE;
-      border-color: #142820;
+      justify-content: flex-end;
+      margin-top: 6px;
     }
 
     .card-submit-btn {
-      height: 44px;
+      width: 100%;
+      height: 48px;
       padding: 0 24px;
       background: #13271f;
       color: #FAF7EE;
       border: 0;
-      border-radius: 3px;
-      font: 700 11px 'DM Mono', monospace;
-      letter-spacing: 1px;
+      border-radius: 4px;
+      font: 700 11.5px 'DM Mono', monospace;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       transition: all 0.2s ease;
-      margin-left: auto;
     }
     .card-submit-btn:hover {
       background: #9c2a2a;
@@ -885,7 +858,7 @@
                 <div id="panel-video" class="spec-panel">
                   <div class="card-url-box">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="m10 9 5 3-5 3V9Z"/></svg>
-                    <input id="input-video" type="url" placeholder="Paste YouTube video or short URL here…" value="https://www.youtube.com/shorts/DivTA2Lz08s" />
+                    <input id="input-video" type="url" placeholder="Paste YouTube video or short URL here…" />
                   </div>
                 </div>
 
@@ -914,15 +887,8 @@
                   </div>
                 </div>
 
-                <!-- Action Controls: Sample Leads & Submit -->
+                <!-- Action Controls: Submit Investigation -->
                 <div class="card-action-row">
-                  <div class="card-samples">
-                    <span class="card-sample-label">Sample Leads:</span>
-                    <button type="button" class="card-sample-pill" onclick="loadSample('adani_yt')">Adani Breakout Short</button>
-                    <button type="button" class="card-sample-pill" onclick="loadSample('suzlon_scam')">Suzlon WhatsApp Tip</button>
-                    <button type="button" class="card-sample-pill" onclick="loadSample('clean_tcs')">TCS Research Analysis</button>
-                  </div>
-
                   <button id="btn-submit" type="button" class="card-submit-btn" onclick="submitInvestigation()">
                     <span>Open Investigation</span>
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
