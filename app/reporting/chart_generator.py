@@ -32,12 +32,20 @@ def generate_price_target_chart(
         ax.plot(prices_df.index, prices_df["Close"], color="#38bdf8", linewidth=1.8, label=f"{ticker} 5-Yr Price")
 
         # Current Price Line
-        if current_price:
-            ax.axhline(current_price, color="#94a3b8", linestyle="--", linewidth=1.0, label=f"Current: {current_price:.1f}")
+        if current_price is not None:
+            try:
+                cp = float(current_price)
+                ax.axhline(cp, color="#94a3b8", linestyle="--", linewidth=1.0, label=f"Current: {cp:.1f}")
+            except Exception:
+                pass
 
         # Claimed Target Line
-        if target_price:
-            ax.axhline(target_price, color="#f43f5e", linestyle="-.", linewidth=1.5, label=f"Claimed Target: {target_price:.1f}")
+        if target_price is not None:
+            try:
+                tp = float(str(target_price).replace(",", "").strip())
+                ax.axhline(tp, color="#f43f5e", linestyle="-.", linewidth=1.5, label=f"Claimed Target: {tp:.1f}")
+            except Exception:
+                pass
 
         # Format axes
         ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))

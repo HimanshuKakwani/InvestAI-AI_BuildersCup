@@ -166,17 +166,35 @@ def build_pdf_report(data: Dict[str, Any], chart_b64: str = None) -> io.BytesIO:
     creator = claim.get("creator_claimed_name") or "Unspecified Handle"
     quote = claim.get("exact_quote", "N/A")
 
+    # Format claimed_move safely whether float, int, or string
+    formatted_move = "Directional Breakout"
+    if claimed_move is not None:
+        try:
+            val = float(str(claimed_move).replace("%", "").strip())
+            formatted_move = f"+{val:.1f}% ({horizon} days horizon)"
+        except Exception:
+            formatted_move = f"{claimed_move} ({horizon} days horizon)"
+
+    # Format target_price safely whether float, int, or string
+    formatted_target = "Not explicit"
+    if target_price is not None:
+        try:
+            t_val = float(str(target_price).replace(",", "").strip())
+            formatted_target = f"{t_val:.2f}"
+        except Exception:
+            formatted_target = str(target_price)
+
     story.append(Paragraph("1. Audited Claim Overview", heading_style))
     summary_data = [
         [
             Paragraph("<b>Company / Security:</b>", table_body_style),
             Paragraph(f"{resolved.get('name', 'N/A')} ({resolved.get('ticker', 'N/A')})", table_body_style),
             Paragraph("<b>Claimed Move:</b>", table_body_style),
-            Paragraph(f"+{claimed_move:.1f}% ({horizon} days horizon)" if claimed_move else "Directional Breakout", table_body_style)
+            Paragraph(formatted_move, table_body_style)
         ],
         [
             Paragraph("<b>Target Price:</b>", table_body_style),
-            Paragraph(f"{target_price:.2f}" if target_price else "Not explicit", table_body_style),
+            Paragraph(formatted_target, table_body_style),
             Paragraph("<b>Source / Handle:</b>", table_body_style),
             Paragraph(f"{creator}", table_body_style)
         ],
