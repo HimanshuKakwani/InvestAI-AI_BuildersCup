@@ -23,6 +23,7 @@ IN:
   - {ticker: CDSL.NS, name: Central Depository Services (India), aliases: [cdsl]}
   - {ticker: KIRLOSENG.NS, name: Kirloskar Oil Engines, aliases: [kirloskar oil, kirloskar oil engines, kirloseng]}
   - {ticker: DEEPAKNTR.NS, name: Deepak Nitrite, aliases: [deepak nitrite, deepakntr]}
+  - {ticker: PASHUPATI.NS, name: Pashupati Cotspin, aliases: [pashupati cotspin, pashupati, pashupati cotspin ltd]}
 
 SG:
   - {ticker: D05.SI, name: DBS Group Holdings, aliases: [dbs]}

@@ -36,9 +36,12 @@ REPORTS_DIR = ROOT_DIR / "reports_out"
 
 class Config:
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-    GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.1-flash-lite")
     # Demo mode is on automatically when no API key is configured.
-    DEMO_MODE = os.getenv("DEMO_MODE", "1") == "1" or not os.getenv("GEMINI_API_KEY")
+    DEMO_MODE = (
+        os.getenv("DEMO_MODE", "0" if os.getenv("GEMINI_API_KEY") else "1").lower() in ("1", "true", "yes")
+        or not os.getenv("GEMINI_API_KEY")
+    )
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10 MB uploads
     TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 

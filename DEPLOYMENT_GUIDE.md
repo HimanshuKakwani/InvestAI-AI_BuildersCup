@@ -225,15 +225,20 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 Run this single command from your project root (`InvestAI-AI_BuildersCup`):
 
 ```bash
-gcloud run deploy investpi-service \
+export PROJECT_ID="investpi-builderscup-0000"
+export REGION="us-central1"
+export SERVICE_NAME="investpi-service"
+
+gcloud run deploy $SERVICE_NAME \
   --source . \
-  --region us-central1 \
+  --region=$REGION \
   --platform managed \
   --allow-unauthenticated \
   --memory 1Gi \
   --cpu 1 \
-  --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest" \
-  --set-env-vars="DEMO_MODE=0,FLASK_DEBUG=0,USE_FIREBASE=1,FIREBASE_COLLECTION=investpi_reports"
+  --timeout 300 \
+  --set-env-vars="GCP_PROJECT_ID=${PROJECT_ID},GEMINI_MODEL=gemini-3.1-flash-lite,DEMO_MODE=0,PUBSUB_TOPIC_LEADS=investpi-leads-inbound,PUBSUB_TOPIC_AUDITS=investpi-audits-completed,PUBSUB_TOPIC_SYNC=investpi-market-sync,USE_FIREBASE=1,FIREBASE_PROJECT_ID=${PROJECT_ID},FIREBASE_COLLECTION=investpi_reports" \
+  --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest"
 ```
 
 ### How Secret Manager & Firebase Work with the Code:
