@@ -1,0 +1,87 @@
+{
+  "ticker": "TVSMOTOR.NS",
+  "name": "TVS Motor Company Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Consumer Cyclical",
+  "trailing_eps": 72.15,
+  "forward_eps": 115.69199,
+  "market_cap": 1910409527296,
+  "current_price": 4020.0,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 274336800000.0,
+      "net_income": 13286700000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 326684600000.0,
+      "net_income": 16863700000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 368874400000.0,
+      "net_income": 22355600000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 476516300000.0,
+      "net_income": 30183300000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 115420000000.0,
+      "net_income": 6481600000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 122100500000.0,
+      "net_income": 6100400000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 147555200000.0,
+      "net_income": 8412900000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 150527300000.0,
+      "net_income": 7715200000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 162955200000.0,
+      "net_income": 10194300000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 8.62,
+    "median": 29.21,
+    "max": 53.6,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 4251.054,
+    "target_high": 5425.0,
+    "target_low": 2470.0,
+    "num_analysts": 37,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 52.27,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-15"
+}

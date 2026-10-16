@@ -6,8 +6,8 @@
   "sector": "Financial Services",
   "trailing_eps": 1.19,
   "forward_eps": 1.82086,
-  "market_cap": 665463029760,
-  "current_price": 21.2,
+  "market_cap": 568782553088,
+  "current_price": 18.12,
   "annual": [
     {
       "period_end": "2022-03-31",
@@ -83,5 +83,5 @@
     }
   ],
   "source": "Yahoo Finance (yfinance live)",
-  "as_of": "2026-10-14"
+  "as_of": "2026-10-15"
 }

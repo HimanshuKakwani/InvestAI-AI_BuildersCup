@@ -6,8 +6,8 @@
   "sector": "Communication Services",
   "trailing_eps": 0.34,
   "forward_eps": 0.21433,
-  "market_cap": 67465109504,
-  "current_price": 4.14,
+  "market_cap": 67722772480,
+  "current_price": 4.16,
   "annual": [
     {
       "period_end": "2022-03-31",
@@ -57,5 +57,5 @@
     }
   ],
   "source": "Yahoo Finance (yfinance live)",
-  "as_of": "2026-10-14"
+  "as_of": "2026-10-16"
 }

@@ -1,0 +1,82 @@
+{
+  "ticker": "OBEROIRLTY.NS",
+  "name": "Oberoi Realty Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Real Estate",
+  "trailing_eps": 72.31,
+  "forward_eps": 106.32598,
+  "market_cap": 621032636416,
+  "current_price": 1708.0,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 41737851000.0,
+      "net_income": 19045471000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 44794837000.0,
+      "net_income": 19266037000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 52862745000.0,
+      "net_income": 22255137000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 60090613000.0,
+      "net_income": 25074273000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 11501400000.0,
+      "net_income": 4325000000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 9875500000.0,
+      "net_income": 4212500000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 14926400000.0,
+      "net_income": 6226400000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 17498300000.0,
+      "net_income": 7032800000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 13008900000.0,
+      "net_income": 5435100000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 11.26,
+    "median": 20.27,
+    "max": 26.72,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 2083.077,
+    "target_high": 2490.0,
+    "target_low": 1240.0,
+    "num_analysts": 26,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 67.7,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-15"
+}

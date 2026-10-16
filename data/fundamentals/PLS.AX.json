@@ -4,10 +4,10 @@
   "market": "AU",
   "currency": "AUD",
   "sector": "Basic Materials",
-  "trailing_eps": 0.17,
+  "trailing_eps": 0.15,
   "forward_eps": 0.22736,
-  "market_cap": 10226251776,
-  "current_price": 3.17,
+  "market_cap": 9968175104,
+  "current_price": 3.09,
   "annual": [
     {
       "period_end": "2023-06-30",
@@ -32,13 +32,13 @@
   ],
   "quarterly": [],
   "pe_band_5y": {
-    "min": 9.01,
-    "median": 20.71,
-    "max": 30.6,
+    "min": 10.21,
+    "median": 23.47,
+    "max": 34.68,
     "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
   "analyst": {
-    "target_mean": 4.85,
+    "target_mean": 4.81111,
     "target_high": 6.7,
     "target_low": 3.1,
     "num_analysts": 18,
@@ -52,5 +52,5 @@
     }
   ],
   "source": "Yahoo Finance (yfinance live)",
-  "as_of": "2026-10-14"
+  "as_of": "2026-10-16"
 }

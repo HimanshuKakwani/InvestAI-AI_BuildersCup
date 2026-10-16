@@ -17,6 +17,12 @@ IN:
   - {ticker: PAYTM.NS, name: One97 Communications (Paytm), aliases: [paytm]}
   - {ticker: ADANIENT.NS, name: Adani Enterprises, aliases: [adani enterprises, adanient]}
   - {ticker: TRENT.NS, name: Trent Limited, aliases: [trent, trent limited]}
+  - {ticker: DMART.NS, name: Avenue Supermarts, aliases: [dmart, avenue supermarts, d-mart]}
+  - {ticker: DALBHARAT.NS, name: Dalmia Bharat, aliases: [dalmia bharat, dalbharat, dalmia]}
+  - {ticker: TVSMOTOR.NS, name: TVS Motor Company, aliases: [tvs motor, tvsmotor, tvs]}
+  - {ticker: CDSL.NS, name: Central Depository Services (India), aliases: [cdsl]}
+  - {ticker: KIRLOSENG.NS, name: Kirloskar Oil Engines, aliases: [kirloskar oil, kirloskar oil engines, kirloseng]}
+  - {ticker: DEEPAKNTR.NS, name: Deepak Nitrite, aliases: [deepak nitrite, deepakntr]}
 
 SG:
   - {ticker: D05.SI, name: DBS Group Holdings, aliases: [dbs]}

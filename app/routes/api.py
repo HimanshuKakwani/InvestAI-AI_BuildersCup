@@ -244,9 +244,10 @@ def create_app():
             description: Analysis engine execution error
         """
         try:
-            # Check if multipart form upload with a file
-            if "screenshot" in request.files:
-                file = request.files["screenshot"]
+            # Check if multipart form upload with a file (screenshot, video, or PDF financial report)
+            upload_key = next((k for k in ["screenshot", "file", "pdf"] if k in request.files), None)
+            if upload_key:
+                file = request.files[upload_key]
                 if file.filename == "":
                     return jsonify({"error": "No file selected"}), 400
                 
@@ -261,6 +262,8 @@ def create_app():
                     mime_type = "image/jpeg"
                 elif fn.endswith(".webp"):
                     mime_type = "image/webp"
+                elif fn.endswith(".pdf"):
+                    mime_type = "application/pdf"
 
                 region = request.form.get("region", "IN")
                 result = analysis_service.run_investigation("screenshot", image_bytes, region_override=region, image_mime=mime_type)

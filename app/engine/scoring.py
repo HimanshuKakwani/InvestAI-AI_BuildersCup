@@ -28,6 +28,7 @@ def calculate_verdict(
         avg_score = round(sum(valid_scores) / len(valid_scores), 1) if valid_scores else 1.0
         return {
             "flag": "HIGH_RISK",
+            "flag_color": "RED",
             "flag_label": "High Risk",
             "flag_badge": "🔴",
             "score": min(avg_score, 3.0),
@@ -43,6 +44,7 @@ def calculate_verdict(
         avg_score = round(sum(valid_scores) / len(valid_scores), 1) if valid_scores else 0.0
         return {
             "flag": "NOT_ENOUGH_DATA",
+            "flag_color": "GRAY",
             "flag_label": "Not Enough Data",
             "flag_badge": "⚪",
             "score": avg_score,
@@ -59,26 +61,31 @@ def calculate_verdict(
 
     if pos_ratio < 0.40:
         flag = "HIGH_RISK"
+        flag_color = "RED"
         flag_label = "High Risk"
         flag_badge = "🔴"
     elif pos_ratio <= 0.70:
         flag = "CAUTION"
+        flag_color = "ORANGE"
         flag_label = "Caution"
         flag_badge = "🟠"
     else:
         # > 70% positive ratio: Source Cap rule applies!
         if is_source_registered:
             flag = "CONSISTENT"
+            flag_color = "GREEN"
             flag_label = "Consistent with Public Data"
             flag_badge = "🟢"
         else:
             # Capped at Caution if source is unregistered!
             flag = "CAUTION"
+            flag_color = "ORANGE"
             flag_label = "Caution (Unregistered Source)"
             flag_badge = "🟠"
 
     return {
         "flag": flag,
+        "flag_color": flag_color,
         "flag_label": flag_label,
         "flag_badge": flag_badge,
         "score": avg_score,

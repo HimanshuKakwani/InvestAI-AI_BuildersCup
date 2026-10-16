@@ -4,10 +4,10 @@
   "market": "SG",
   "currency": "SGD",
   "sector": "Financial Services",
-  "trailing_eps": 5.98,
-  "forward_eps": 4.4396,
-  "market_cap": 211422986240,
-  "current_price": 74.34,
+  "trailing_eps": 5.93,
+  "forward_eps": 4.4376,
+  "market_cap": 209745035264,
+  "current_price": 73.75,
   "annual": [
     {
       "period_end": "2022-12-31",
@@ -58,9 +58,9 @@
     }
   ],
   "pe_band_5y": {
-    "min": 3.69,
-    "median": 4.76,
-    "max": 11.91,
+    "min": 3.72,
+    "median": 4.83,
+    "max": 12.04,
     "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
   "analyst": {
@@ -78,5 +78,5 @@
     }
   ],
   "source": "Yahoo Finance (yfinance live)",
-  "as_of": "2026-10-14"
+  "as_of": "2026-10-16"
 }
