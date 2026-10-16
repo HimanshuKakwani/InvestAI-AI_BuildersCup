@@ -2,12 +2,20 @@
 import time
 import logging
 import json
-from flask import Flask, request, jsonify, render_template, send_file, g
+import uuid
+import base64
+import threading
+from flask import Flask, request, jsonify, render_template, send_file, g, Response
 from flasgger import Swagger
 from app.config import Config, ROOT_DIR
 from app.engine.orchestrator import AnalysisService
 from app.reporting.chart_generator import generate_price_target_chart
 from app.reporting.pdf_generator import build_pdf_report
+from app.pubsub.events import LeadSubmittedEvent
+from app.pubsub.store import case_store, CaseStatus
+from app.pubsub.publisher import publisher
+from app.pubsub.consumer import handle_push_message
+from app.agent import forensic_agent
 
 import sys
 # Configure detailed API logger
@@ -325,6 +333,324 @@ def create_app():
         except Exception as e:
             logger.error(f"Analysis failure: {e}", exc_info=True)
             return jsonify({"error": f"Investigation failed: {str(e)}"}), 500
+
+    @app.route("/api/analyze/async", methods=["POST"])
+    def analyze_async():
+        """
+        Asynchronous Forensic Audit (Pub/Sub Event Ingestion)
+        ---
+        tags:
+          - Forensic Engine
+        consumes:
+          - application/json
+          - multipart/form-data
+        parameters:
+          - in: body
+            name: body
+            description: JSON request for YouTube URL or text tips
+            required: false
+            schema:
+              type: object
+              properties:
+                modality:
+                  type: string
+                  enum: [youtube_url, text]
+                  default: youtube_url
+                payload:
+                  type: string
+                  description: YouTube link or social media chat text
+                region:
+                  type: string
+                  enum: [IN, SG, AU]
+                  default: IN
+          - in: formData
+            name: screenshot
+            type: file
+            required: false
+            description: Uploaded chat screenshot or document
+          - in: formData
+            name: region
+            type: string
+            required: false
+            default: IN
+        responses:
+          202:
+            description: Investigation queued. Returns case_id and tracking URLs.
+            schema:
+              properties:
+                case_id:
+                  type: string
+                status:
+                  type: string
+                  example: QUEUED
+                status_url:
+                  type: string
+                stream_url:
+                  type: string
+          400:
+            description: Missing or invalid payload
+        """
+        try:
+            case_id = str(uuid.uuid4())
+            upload_key = next((k for k in ["screenshot", "file", "pdf"] if k in request.files), None)
+
+            if upload_key:
+                file = request.files[upload_key]
+                if file.filename == "":
+                    return jsonify({"error": "No file selected"}), 400
+
+                raw_bytes = file.read()
+                mime_type = file.mimetype or "image/png"
+                fn = (file.filename or "").lower()
+                if fn.endswith(".mp4"):
+                    mime_type = "video/mp4"
+                elif fn.endswith(".mov"):
+                    mime_type = "video/quicktime"
+                elif fn.endswith((".jpg", ".jpeg")):
+                    mime_type = "image/jpeg"
+                elif fn.endswith(".webp"):
+                    mime_type = "image/webp"
+                elif fn.endswith(".pdf"):
+                    mime_type = "application/pdf"
+
+                region = request.form.get("region", "IN")
+                payload_b64 = base64.b64encode(raw_bytes).decode("utf-8")
+
+                case_store.create_case(case_id, modality="screenshot", region=region)
+                event = LeadSubmittedEvent(
+                    case_id=case_id,
+                    modality="screenshot",
+                    payload=payload_b64,
+                    region=region,
+                    mime_type=mime_type
+                )
+                publisher.publish_lead(event)
+
+                return jsonify({
+                    "case_id": case_id,
+                    "status": CaseStatus.QUEUED,
+                    "message": "File lead ingested successfully. Forensic audit queued.",
+                    "status_url": f"/api/cases/{case_id}",
+                    "stream_url": f"/api/cases/{case_id}/stream"
+                }), 202
+
+            # JSON payload
+            data = request.get_json(silent=True) or {}
+            modality = data.get("modality", "text")
+            payload = data.get("payload", "").strip()
+            region = data.get("region", "IN")
+
+            if not payload:
+                return jsonify({"error": "Payload content (URL or text) is required"}), 400
+
+            case_store.create_case(case_id, modality=modality, region=region)
+            event = LeadSubmittedEvent(
+                case_id=case_id,
+                modality=modality,
+                payload=payload,
+                region=region
+            )
+            publisher.publish_lead(event)
+
+            return jsonify({
+                "case_id": case_id,
+                "status": CaseStatus.QUEUED,
+                "message": "Lead ingested successfully. Forensic audit queued.",
+                "status_url": f"/api/cases/{case_id}",
+                "stream_url": f"/api/cases/{case_id}/stream"
+            }), 202
+
+        except Exception as e:
+            logger.error(f"Async ingestion failed: {e}", exc_info=True)
+            return jsonify({"error": f"Failed to ingest lead: {str(e)}"}), 500
+
+    @app.route("/api/cases/<case_id>", methods=["GET"])
+    def get_case(case_id):
+        """
+        Poll Case Status and Results
+        ---
+        tags:
+          - Forensic Engine
+        parameters:
+          - name: case_id
+            in: path
+            type: string
+            required: true
+            description: Investigation case ID
+        responses:
+          200:
+            description: Case metadata, progress status, and audit verdict
+          404:
+            description: Case ID not found
+        """
+        case = case_store.get_case(case_id)
+        if not case:
+            return jsonify({"error": "Case not found", "case_id": case_id}), 404
+        return jsonify(case), 200
+
+    @app.route("/api/cases/<case_id>/stream", methods=["GET"])
+    def stream_case(case_id):
+        """
+        Real-time Server-Sent Events (SSE) Stream for Investigation Case
+        ---
+        tags:
+          - Forensic Engine
+        parameters:
+          - name: case_id
+            in: path
+            type: string
+            required: true
+            description: Investigation case ID
+        responses:
+          200:
+            description: Server-Sent Events stream delivering live status updates
+        """
+        def generate():
+            event = threading.Event()
+            case_store.register_listener(case_id, event)
+            try:
+                # Initial snapshot
+                c = case_store.get_case(case_id)
+                if not c:
+                    yield f"data: {json.dumps({'error': 'Case not found', 'case_id': case_id})}\n\n"
+                    return
+                yield f"data: {json.dumps(c)}\n\n"
+                if c.get("status") in [CaseStatus.COMPLETED, CaseStatus.REJECTED, CaseStatus.FAILED]:
+                    return
+
+                start_time = time.time()
+                while time.time() - start_time < 120:  # 2 minute max stream window
+                    signaled = event.wait(timeout=2.0)
+                    if signaled:
+                        event.clear()
+                        c = case_store.get_case(case_id)
+                        if c:
+                            yield f"data: {json.dumps(c)}\n\n"
+                            if c.get("status") in [CaseStatus.COMPLETED, CaseStatus.REJECTED, CaseStatus.FAILED]:
+                                break
+                    else:
+                        # SSE keepalive comment
+                        yield ": keepalive\n\n"
+            finally:
+                case_store.unregister_listener(case_id, event)
+
+        return Response(
+            generate(),
+            mimetype="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "X-Accel-Buffering": "no",
+                "Connection": "keep-alive"
+            }
+        )
+
+    @app.route("/api/pubsub/push", methods=["POST"])
+    def pubsub_push_webhook():
+        """
+        Google Cloud Pub/Sub Push Subscription Webhook
+        ---
+        tags:
+          - System & Data
+        responses:
+          200:
+            description: Message acknowledged and processed
+          400:
+            description: Malformed Pub/Sub envelope
+          401:
+            description: Unauthorized webhook invocation
+        """
+        if Config.PUBSUB_PUSH_TOKEN:
+            token = request.args.get("token") or request.headers.get("X-InvestPI-Token")
+            auth_header = request.headers.get("Authorization", "")
+            if token != Config.PUBSUB_PUSH_TOKEN and f"Bearer {Config.PUBSUB_PUSH_TOKEN}" != auth_header:
+                logger.warning("Unauthorized Pub/Sub push notification attempt")
+                return jsonify({"error": "Unauthorized"}), 401
+
+        envelope = request.get_json(silent=True)
+        if not envelope:
+            return jsonify({"error": "Missing JSON push envelope"}), 400
+
+        try:
+            handle_push_message(envelope)
+            return jsonify({"status": "acknowledged", "processed": True}), 200
+        except Exception as e:
+            logger.error(f"Pub/Sub push webhook error: {e}", exc_info=True)
+            return jsonify({"error": str(e)}), 400
+
+    @app.route("/api/chat", methods=["POST"])
+    def chat():
+        """
+        Forensic Intelligence Assistant Chatbot
+        ---
+        tags:
+          - Forensic Engine
+        consumes:
+          - application/json
+        parameters:
+          - in: body
+            name: body
+            required: true
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Explain the confidence score and why Parameter 1 triggered a warning.
+                report_id:
+                  type: string
+                  example: rep_12345
+                context:
+                  type: object
+                  description: Optional full report object
+                history:
+                  type: array
+                  items:
+                    type: object
+        responses:
+          200:
+            description: Agent response with guardrail status
+            schema:
+              properties:
+                reply:
+                  type: string
+                in_scope:
+                  type: boolean
+                ticker:
+                  type: string
+          400:
+            description: Missing message parameter
+        """
+        data = request.get_json(silent=True) or {}
+        message = data.get("message", "").strip()
+        if not message:
+            return jsonify({"error": "Message parameter is required"}), 400
+
+        report_id = data.get("report_id")
+        report_context = data.get("context")
+
+        if not report_context and report_id and report_id in reports_cache:
+            report_context = reports_cache[report_id].get("data")
+
+        # Fallback if no context provided: look up most recently cached report
+        if not report_context and reports_cache:
+            latest_key = list(reports_cache.keys())[-1]
+            report_context = reports_cache[latest_key].get("data")
+
+        history = data.get("history", [])
+
+        reply, in_scope = forensic_agent.respond(
+            message=message,
+            report_context=report_context,
+            history=history
+        )
+
+        ticker = report_context.get("resolved_stock", {}).get("ticker") if report_context else None
+
+        return jsonify({
+            "reply": reply,
+            "in_scope": in_scope,
+            "ticker": ticker
+        })
 
     return app
 

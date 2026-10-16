@@ -1,0 +1,82 @@
+{
+  "ticker": "PERSISTENT.NS",
+  "name": "Persistent Systems Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Technology",
+  "trailing_eps": 120.95,
+  "forward_eps": 176.62222,
+  "market_cap": 916162478080,
+  "current_price": 5840.0,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 83505920000.0,
+      "net_income": 9210930000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 98215870000.0,
+      "net_income": 10934910000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 119387170000.0,
+      "net_income": 14001610000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 147484490000.0,
+      "net_income": 18651200000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 32421120000.0,
+      "net_income": 3957600000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 33335870000.0,
+      "net_income": 4249360000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 37782050000.0,
+      "net_income": 4394540000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 40559370000.0,
+      "net_income": 5292600000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 43032270000.0,
+      "net_income": 4830430000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 14.14,
+    "median": 32.47,
+    "max": 51.34,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 5635.7427,
+    "target_high": 7210.0,
+    "target_low": 3510.0,
+    "num_analysts": 35,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 33.13,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-16"
+}

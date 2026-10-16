@@ -6,8 +6,8 @@
   "sector": "Consumer Cyclical",
   "trailing_eps": 0.47,
   "forward_eps": 3.73854,
-  "market_cap": 2908904226816,
-  "current_price": 316.0,
+  "market_cap": 2975726043136,
+  "current_price": 323.0,
   "annual": [
     {
       "period_end": "2022-03-31",
@@ -64,7 +64,7 @@
   ],
   "pe_band_5y": {
     "min": 114.65,
-    "median": 390.43,
+    "median": 390.74,
     "max": 687.39,
     "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
@@ -83,5 +83,5 @@
     }
   ],
   "source": "Yahoo Finance (yfinance live)",
-  "as_of": "2026-10-14"
+  "as_of": "2026-10-16"
 }

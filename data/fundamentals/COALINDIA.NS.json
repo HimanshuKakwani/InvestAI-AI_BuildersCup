@@ -1,0 +1,82 @@
+{
+  "ticker": "COALINDIA.NS",
+  "name": "Coal India Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Energy",
+  "trailing_eps": 50.63,
+  "forward_eps": 56.77448,
+  "market_cap": 2576020406272,
+  "current_price": 418.0,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 1274290300000.0,
+      "net_income": 317632300000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 1270744100000.0,
+      "net_income": 374022900000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 1662956200000.0,
+      "net_income": 355057800000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 1664173000000.0,
+      "net_income": 310942900000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 439615600000.0,
+      "net_income": 97516400000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 429192000000.0,
+      "net_income": 87970500000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 308181700000.0,
+      "net_income": 71574500000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 464900300000.0,
+      "net_income": 108391800000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 462548000000.0,
+      "net_income": 88521100000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 2.22,
+    "median": 6.82,
+    "max": 8.75,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 472.125,
+    "target_high": 550.0,
+    "target_low": 370.0,
+    "num_analysts": 24,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 61.14,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-16"
+}
