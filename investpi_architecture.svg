@@ -264,25 +264,40 @@
     <text x="18" y="21" font-size="13" font-weight="700" fill="#5eead4">Google Cloud Pub/Sub (Event Bus)</text>
 
     <g transform="translate(20, 50)">
-      <rect x="0" y="0" width="410" height="60" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
-      <text x="205" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">Topic: investpi-leads-inbound</text>
-      <text x="205" y="46" text-anchor="middle" font-size="11" fill="#99f6e4">Ingests user leads with HTTP 202 in &lt;50ms</text>
+      <!-- Topic: Leads Inbound -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="410" height="55" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
+        <text x="205" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">Topic: investpi-leads-inbound</text>
+        <text x="205" y="44" text-anchor="middle" font-size="11" fill="#99f6e4">Ingests user leads with HTTP 202 in &lt;50ms</text>
+      </g>
 
-      <rect x="0" y="80" width="410" height="60" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
-      <text x="205" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">Topic: investpi-subagent-tasks</text>
-      <text x="205" y="46" text-anchor="middle" font-size="11" fill="#99f6e4">Dispatches parallel sub-agent microtasks</text>
+      <!-- Topic: SubAgent Tasks -->
+      <g transform="translate(0, 70)">
+        <rect x="0" y="0" width="410" height="55" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
+        <text x="205" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">Topic: investpi-subagent-tasks</text>
+        <text x="205" y="44" text-anchor="middle" font-size="11" fill="#99f6e4">Dispatches parallel sub-agent microtasks</text>
+      </g>
 
-      <rect x="0" y="160" width="410" height="75" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
-      <text x="205" y="26" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Push Subscription: investpi-subagent-sub</text>
-      <text x="205" y="46" text-anchor="middle" font-size="11" fill="#99f6e4" class="mono">Endpoint: /api/pubsub/push (OIDC Auth)</text>
-      <text x="205" y="64" text-anchor="middle" font-size="10.5" fill="#99f6e4" class="mono">Ack Deadline: 60s · Parallel Cloud Run Dispatch</text>
+      <!-- Push Subscription -->
+      <g transform="translate(0, 140)">
+        <rect x="0" y="0" width="410" height="74" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
+        <text x="205" y="24" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Push Subscription: investpi-subagent-sub</text>
+        <text x="205" y="44" text-anchor="middle" font-size="11" fill="#99f6e4" class="mono">Endpoint: /api/pubsub/push (OIDC Auth)</text>
+        <text x="205" y="62" text-anchor="middle" font-size="10.5" fill="#99f6e4" class="mono">Ack Deadline: 60s · Parallel Cloud Run Dispatch</text>
+      </g>
 
-      <rect x="0" y="255" width="410" height="55" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
-      <text x="205" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">Topic: investpi-audits-completed</text>
-      <text x="205" y="45" text-anchor="middle" font-size="11" fill="#99f6e4">Fires notification and audit archive</text>
+      <!-- Topic: Audits Completed -->
+      <g transform="translate(0, 228)">
+        <rect x="0" y="0" width="410" height="52" rx="5" fill="#134e4a" stroke="#14b8a6" stroke-width="2"/>
+        <text x="205" y="23" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">Topic: investpi-audits-completed</text>
+        <text x="205" y="42" text-anchor="middle" font-size="11" fill="#99f6e4">Fires notification and audit archive</text>
+      </g>
 
-      <rect x="0" y="325" width="410" height="40" rx="5" fill="#450a0a" stroke="#f87171" stroke-width="1.5"/>
-      <text x="205" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#fecaca" class="mono">Dead-Letter Queue (DLQ): investpi-leads-dlq</text>
+      <!-- DLQ -->
+      <g transform="translate(0, 294)">
+        <rect x="0" y="0" width="410" height="42" rx="5" fill="#450a0a" stroke="#f87171" stroke-width="1.5"/>
+        <text x="205" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#fecaca" class="mono">Dead-Letter Queue (DLQ): investpi-leads-dlq</text>
+      </g>
     </g>
   </g>
 
@@ -295,27 +310,35 @@
 
     <g transform="translate(20, 50)">
       <!-- BigQuery Table Card -->
-      <rect x="0" y="0" width="480" height="110" rx="5" fill="#042f2e" stroke="#2dd4bf" stroke-width="2"/>
-      <text x="240" y="26" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">Table: financial_intelligence.quarterly_report_chunks</text>
-      <text x="20" y="50" font-size="11" fill="#a7f3d0" class="mono">• Ticker (Partition/Cluster) · Quarter (Q1 FY27) · Segment</text>
-      <text x="20" y="70" font-size="11" fill="#a7f3d0" class="mono">• content: Markdown statement notes, balance sheet rows</text>
-      <text x="20" y="90" font-size="11" fill="#a7f3d0" class="mono">• embedding: ARRAY&lt;FLOAT64&gt; (768-dim text-embedding-004)</text>
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="480" height="100" rx="5" fill="#042f2e" stroke="#2dd4bf" stroke-width="2"/>
+        <text x="240" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">Tables: quarterly_reports &amp; chunks</text>
+        <text x="20" y="46" font-size="11" fill="#a7f3d0" class="mono">• quarterly_reports: Full 10-Stock Statements &amp; SWOT</text>
+        <text x="20" y="66" font-size="11" fill="#a7f3d0" class="mono">• quarterly_report_chunks: Text + 768-dim Vectors</text>
+        <text x="20" y="86" font-size="11" fill="#a7f3d0" class="mono">• Partitioned by Date · Clustered by Ticker &amp; Quarter</text>
+      </g>
 
       <!-- Remote Model Card -->
-      <rect x="0" y="125" width="480" height="90" rx="5" fill="#042f2e" stroke="#2dd4bf" stroke-width="1.5"/>
-      <text x="240" y="25" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">Remote Model: embedding_model</text>
-      <text x="20" y="50" font-size="11" fill="#a7f3d0" class="mono">• Remote Connection: us.vertex-connection</text>
-      <text x="20" y="70" font-size="11" fill="#a7f3d0" class="mono">• ML.GENERATE_EMBEDDING over Vertex AI text-embedding-004</text>
+      <g transform="translate(0, 114)">
+        <rect x="0" y="0" width="480" height="74" rx="5" fill="#042f2e" stroke="#2dd4bf" stroke-width="1.5"/>
+        <text x="240" y="23" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">Remote Model: embedding_model</text>
+        <text x="20" y="45" font-size="11" fill="#a7f3d0" class="mono">• Remote Connection: us.vertex-connection</text>
+        <text x="20" y="65" font-size="11" fill="#a7f3d0" class="mono">• ML.GENERATE_EMBEDDING over text-embedding-004</text>
+      </g>
 
       <!-- Vector Search Index Card -->
-      <rect x="0" y="230" width="480" height="85" rx="5" fill="#042f2e" stroke="#2dd4bf" stroke-width="1.5"/>
-      <text x="240" y="25" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">VECTOR_SEARCH() Execution Query</text>
-      <text x="20" y="48" font-size="11" fill="#a7f3d0" class="mono">• IVF Vector Index (COSINE Distance Type)</text>
-      <text x="20" y="68" font-size="11" fill="#a7f3d0" class="mono">• Sub-millisecond Top-K retrieval filtered by target ticker</text>
+      <g transform="translate(0, 202)">
+        <rect x="0" y="0" width="480" height="74" rx="5" fill="#042f2e" stroke="#2dd4bf" stroke-width="1.5"/>
+        <text x="240" y="23" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">VECTOR_SEARCH() Execution Query</text>
+        <text x="20" y="45" font-size="11" fill="#a7f3d0" class="mono">• IVF Vector Index (COSINE Distance Type)</text>
+        <text x="20" y="65" font-size="11" fill="#a7f3d0" class="mono">• Sub-millisecond Top-K retrieval filtered by target ticker</text>
+      </g>
 
       <!-- 10 Stocks Badge -->
-      <rect x="0" y="330" width="480" height="40" rx="5" fill="#0f766e" stroke="#5eead4" stroke-width="1.5"/>
-      <text x="240" y="25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff">10 Marquee Stocks Ingested · Instant "No report available" Guardrail</text>
+      <g transform="translate(0, 290)">
+        <rect x="0" y="0" width="480" height="38" rx="5" fill="#0f766e" stroke="#5eead4" stroke-width="1.5"/>
+        <text x="240" y="24" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff">10 Marquee Stocks Ingested · Instant "No report available" Guardrail</text>
+      </g>
     </g>
   </g>
 
@@ -362,27 +385,32 @@
 
     <g transform="translate(20, 50)">
       <!-- Gemini 2.5 Flash -->
-      <rect x="0" y="0" width="360" height="95" rx="6" fill="#3b0764" stroke="#a855f7" stroke-width="2"/>
-      <text x="180" y="28" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">Gemini 2.5 Flash (Multimodal)</text>
-      <text x="15" y="52" font-size="11" fill="#e9d5ff">• Native YouTube, MP4 video, OCR perception</text>
-      <text x="15" y="70" font-size="11" fill="#e9d5ff">• Structured claim extraction in &lt;1.2s</text>
-      <text x="15" y="88" font-size="11" fill="#e9d5ff">• Google Search Grounding with web citations</text>
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="360" height="85" rx="6" fill="#3b0764" stroke="#a855f7" stroke-width="2"/>
+        <text x="180" y="25" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Gemini 2.5 Flash (Multimodal)</text>
+        <text x="15" y="46" font-size="11" fill="#e9d5ff">• Native YouTube, MP4 video, OCR perception</text>
+        <text x="15" y="65" font-size="11" fill="#e9d5ff">• Structured claim extraction in &lt;1.2s</text>
+      </g>
 
       <!-- Gemini 2.5 Pro -->
-      <rect x="0" y="110" width="360" height="75" rx="6" fill="#3b0764" stroke="#c084fc" stroke-width="1.5"/>
-      <text x="180" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Gemini 2.5 Pro (Deep Reasoning)</text>
-      <text x="15" y="48" font-size="11" fill="#e9d5ff">• Synthesis of complex financial SWOT tables</text>
-      <text x="15" y="66" font-size="11" fill="#e9d5ff">• High-context corporate disclosure audits</text>
+      <g transform="translate(0, 98)">
+        <rect x="0" y="0" width="360" height="70" rx="6" fill="#3b0764" stroke="#c084fc" stroke-width="1.5"/>
+        <text x="180" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Gemini 2.5 Pro (Deep Reasoning)</text>
+        <text x="15" y="44" font-size="11" fill="#e9d5ff">• Synthesis of complex financial SWOT tables</text>
+        <text x="15" y="60" font-size="11" fill="#e9d5ff">• High-context corporate disclosure audits</text>
+      </g>
 
       <!-- Registries -->
-      <rect x="0" y="200" width="360" height="165" rx="6" fill="#27272A" stroke="#71717A" stroke-width="1.5"/>
-      <text x="180" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Official Deterministic Registries</text>
-      <line x1="15" y1="36" x2="345" y2="36" stroke="#3F3F46" stroke-width="1"/>
-      <text x="18" y="58" font-size="11" fill="#d4d4d8" class="mono">🇮🇳 SEBI: 1,420+ Reg Analyst / Debarred List</text>
-      <text x="18" y="80" font-size="11" fill="#d4d4d8" class="mono">🇸🇬 MAS: Financial Institutions Directory</text>
-      <text x="18" y="102" font-size="11" fill="#d4d4d8" class="mono">🇦🇺 ASIC: Australian Financial Services (AFS)</text>
-      <text x="18" y="124" font-size="11" fill="#d4d4d8" class="mono">📊 NSE / BSE Official Regulation 33 Disclosures</text>
-      <text x="18" y="146" font-size="11" fill="#d4d4d8" class="mono">📈 Yahoo Finance &amp; EOD Historical Feeds</text>
+      <g transform="translate(0, 180)">
+        <rect x="0" y="0" width="360" height="152" rx="6" fill="#27272A" stroke="#71717A" stroke-width="1.5"/>
+        <text x="180" y="23" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Official Deterministic Registries</text>
+        <line x1="15" y1="32" x2="345" y2="32" stroke="#3F3F46" stroke-width="1"/>
+        <text x="18" y="52" font-size="10.5" fill="#d4d4d8" class="mono">🇮🇳 SEBI: 1,420+ Reg Analyst / Debarred List</text>
+        <text x="18" y="72" font-size="10.5" fill="#d4d4d8" class="mono">🇸🇬 MAS: Financial Institutions Directory</text>
+        <text x="18" y="92" font-size="10.5" fill="#d4d4d8" class="mono">🇦🇺 ASIC: Australian Financial Services (AFS)</text>
+        <text x="18" y="112" font-size="10.5" fill="#d4d4d8" class="mono">📊 NSE / BSE Official Regulation 33 Disclosures</text>
+        <text x="18" y="132" font-size="10.5" fill="#d4d4d8" class="mono">📈 Yahoo Finance &amp; EOD Historical Feeds</text>
+      </g>
     </g>
   </g>
 
@@ -392,33 +420,33 @@
   <!-- ========================================================================= -->
 
   <!-- Flow 1: Client -> Cloud Run UI -->
-  <line x1="280" y1="240" x2="280" y2="420" stroke="#818cf8" stroke-width="2.2" marker-end="url(#arrow-indigo)"/>
-  <rect x="220" y="315" width="120" height="24" rx="4" fill="#18181B" stroke="#6366f1" stroke-width="1"/>
-  <text x="280" y="331" text-anchor="middle" font-size="11" font-weight="700" fill="#a5b4fc">① Submit Lead / Dropdown</text>
+  <line x1="280" y1="240" x2="280" y2="310" stroke="#818cf8" stroke-width="2.2" marker-end="url(#arrow-indigo)"/>
+  <rect x="195" y="263" width="170" height="24" rx="4" fill="#18181B" stroke="#6366f1" stroke-width="1.2"/>
+  <text x="280" y="279" text-anchor="middle" font-size="11" font-weight="700" fill="#a5b4fc">① Submit Lead / Dropdown</text>
 
   <!-- Flow 2: Cloud Run -> Pub/Sub Topic -->
-  <polyline points="430,480 430,770 245,770 245,860" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow-teal)"/>
-  <rect x="260" y="758" width="155" height="24" rx="4" fill="#18181B" stroke="#14b8a6" stroke-width="1"/>
-  <text x="337" y="774" text-anchor="middle" font-size="11" font-weight="600" fill="#5eead4">Publish SubAgent Tasks</text>
+  <polyline points="265,750 265,860" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow-teal)"/>
+  <rect x="180" y="768" width="170" height="24" rx="4" fill="#18181B" stroke="#14b8a6" stroke-width="1"/>
+  <text x="265" y="784" text-anchor="middle" font-size="11" font-weight="600" fill="#5eead4">Publish SubAgent Tasks</text>
 
   <!-- Flow 3: Pub/Sub Push Subscription -> Cloud Run Webhook -->
-  <polyline points="430,995 490,995 490,750 1150,750 1150,480" fill="none" stroke="#2dd4bf" stroke-width="2.2" marker-end="url(#arrow-teal)"/>
-  <rect x="760" y="738" width="180" height="24" rx="4" fill="#18181B" stroke="#14b8a6" stroke-width="1.2"/>
-  <text x="850" y="754" text-anchor="middle" font-size="11" font-weight="700" fill="#5eead4">Push Webhook (/api/pubsub/push)</text>
+  <polyline points="470,1037 500,1037 500,750" fill="none" stroke="#2dd4bf" stroke-width="2.2" marker-end="url(#arrow-teal)"/>
+  <rect x="410" y="768" width="180" height="24" rx="4" fill="#18181B" stroke="#14b8a6" stroke-width="1.2"/>
+  <text x="500" y="784" text-anchor="middle" font-size="10.5" font-weight="700" fill="#5eead4">Push Webhook (/api/pubsub/push)</text>
 
   <!-- Flow 4: Cloud Run -> BigQuery Vector Search -->
-  <polyline points="740,480 740,860" fill="none" stroke="#2dd4bf" stroke-width="2.5" marker-end="url(#arrow-teal)"/>
-  <rect x="660" y="640" width="160" height="24" rx="4" fill="#18181B" stroke="#2dd4bf" stroke-width="1.2"/>
-  <text x="740" y="656" text-anchor="middle" font-size="11" font-weight="700" fill="#2dd4bf">VECTOR_SEARCH() Query</text>
+  <polyline points="770,750 770,860" fill="none" stroke="#2dd4bf" stroke-width="2.5" marker-end="url(#arrow-teal)"/>
+  <rect x="675" y="768" width="190" height="24" rx="4" fill="#18181B" stroke="#2dd4bf" stroke-width="1.2"/>
+  <text x="770" y="784" text-anchor="middle" font-size="11" font-weight="700" fill="#2dd4bf">VECTOR_SEARCH() Query</text>
 
   <!-- Flow 5: Cloud Run -> Gemini AI -->
-  <polyline points="1440,480 1440,780 1700,780 1700,860" fill="none" stroke="#c084fc" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
-  <rect x="1510" y="768" width="165" height="24" rx="4" fill="#18181B" stroke="#a855f7" stroke-width="1"/>
-  <text x="1592" y="784" text-anchor="middle" font-size="11" font-weight="600" fill="#d8b4fe">Multimodal Claim Extract</text>
+  <polyline points="1720,750 1720,860" fill="none" stroke="#c084fc" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
+  <rect x="1635" y="768" width="170" height="24" rx="4" fill="#18181B" stroke="#a855f7" stroke-width="1"/>
+  <text x="1720" y="784" text-anchor="middle" font-size="11" font-weight="600" fill="#d8b4fe">Multimodal Claim Extract</text>
 
   <!-- Flow 6: Cloud Run -> Firestore L2 -->
-  <polyline points="1275,720 1275,860" fill="none" stroke="#fb923c" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <rect x="1215" y="775" width="120" height="24" rx="4" fill="#18181B" stroke="#f97316" stroke-width="1"/>
+  <polyline points="1275,750 1275,860" fill="none" stroke="#fb923c" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <rect x="1195" y="768" width="160" height="24" rx="4" fill="#18181B" stroke="#f97316" stroke-width="1"/>
   <text x="1275" y="791" text-anchor="middle" font-size="11" font-weight="600" fill="#fdba74">Persist Case &amp; Dossier</text>
 
 </svg>
