@@ -1,0 +1,90 @@
+{
+  "ticker": "SBIN.NS",
+  "company_name": "State Bank of India",
+  "exchange": "NSE / BSE",
+  "filing_type": "Regulation 33 Reviewed Standalone & Consolidated Financial Results",
+  "quarter_label": "Q1 FY2026-27 (Quarter Ended June 30, 2026)",
+  "period_end": "2026-06-30",
+  "currency": "INR",
+  "FilingSource": "BSE / NSE Corporate Filings & SBI Central Board Analyst Presentation (Q1 FY27)",
+  "headline_metrics": {
+    "gross_revenue_cr": 97814.29,
+    "gross_revenue_formatted": "₹97,814.29 Cr",
+    "revenue_qoq_growth_pct": -3.27,
+    "revenue_yoy_growth_pct": 10.24,
+    "prev_quarter_revenue_cr": 101125.59,
+    "year_ago_quarter_revenue_cr": 88725.36,
+    "net_interest_income_cr": 41125.0,
+    "nii_formatted": "₹41,125 Cr",
+    "domestic_nim_pct": 3.35,
+    "net_profit_pat_cr": 24113.0,
+    "net_profit_formatted": "₹24,113.00 Cr",
+    "pat_qoq_growth_pct": 22.76,
+    "pat_yoy_growth_pct": 13.73,
+    "pat_yoy_note": "Highest-ever quarterly Net Profit driven by benign credit costs (0.38%) and strong treasury/fee income",
+    "eps_quarterly_inr": 27.02,
+    "gnpa_pct": 2.21,
+    "nnpa_pct": 0.57,
+    "pcr_pct": 91.8,
+    "car_pct": 14.28
+  },
+  "segment_performance": [
+    {
+      "segment": "Retail Personal Banking (Home, Auto & Xpress Credit)",
+      "revenue_cr": 44210.0,
+      "ebitda_cr": 11850.0,
+      "ebitda_margin_pct": 26.8,
+      "highlight": "Home loan book grew +14.2% YoY with industry-lowest Gross NPA of 0.68% in retail mortgages."
+    },
+    {
+      "segment": "Corporate & Wholesale Banking",
+      "revenue_cr": 36840.0,
+      "ebitda_cr": 10920.0,
+      "ebitda_margin_pct": 29.6,
+      "highlight": "Strong working capital and infrastructure loan demand (+16.1% YoY); corporate recoveries exceeded fresh slippages."
+    },
+    {
+      "segment": "Treasury & Financial Markets",
+      "revenue_cr": 14120.0,
+      "ebitda_cr": 4380.0,
+      "ebitda_margin_pct": 31.0,
+      "highlight": "Lower sovereign bond yields generated strong mark-to-market (MTM) treasury gains during Q1 FY27."
+    },
+    {
+      "segment": "SME & Agri Advances",
+      "revenue_cr": 2644.29,
+      "ebitda_cr": 963.0,
+      "ebitda_margin_pct": 36.4,
+      "highlight": "Digital SME underwriting via YONO Business propelled SME advances past ₹4.6 Lakh Cr (+18.4% YoY)."
+    }
+  ],
+  "simple_pointers": [
+    "**Record Quarterly Net Profit (PAT):** SBI delivered its highest-ever quarterly Net Profit of **₹24,113 Cr** in Q1 FY27, surging **+22.76% QoQ** (vs ₹19,643 Cr in Q4 FY26) and **+13.73% YoY** (vs ₹21,201 Cr in Q1 FY26).",
+    "**Resilient Net Interest Income (NII) & Margins:** Net Interest Income stood at **₹41,125 Cr** with Domestic Net Interest Margin (NIM) holding steady at **3.35%**, while total interest revenue reached **₹97,814 Cr** (+10.24% YoY).",
+    "**Decade-Best Asset Quality (Low Bad Loans):** Gross Non-Performing Assets (GNPA) improved by 55 bps YoY to **2.21%**, and Net NPA dropped to just **0.57%** with a **91.8% Provision Coverage Ratio (PCR)**.",
+    "**Healthy Loan Book & Deposit Franchise:** Total advances expanded **+15.4% YoY** (led by Retail Home Loans and SME credit), backed by India's largest low-cost deposit franchise (**40.7% CASA ratio**).",
+    "**Attractive Valuation vs Historical Peers:** Trading at **~10.2x trailing P/E** with Return on Equity (ROE) exceeding **19.4%** and Capital Adequacy Ratio (CAR) at **14.28%** (57.23% Government of India sovereign ownership)."
+  ],
+  "swot": {
+    "strengths": [
+      "Record quarterly Net Profit of ₹24,113 Cr (+22.76% QoQ, +13.73% YoY) with Return on Equity (ROE) above 19%.",
+      "Pristine asset quality: Gross NPA down to 2.21%, Net NPA at 0.57%, and 91.8% Provision Coverage Ratio (with AUCA).",
+      "Unmatched deposit franchise (40.7% CASA ratio) and 57.23% sovereign backing by the Government of India (0% pledge)."
+    ],
+    "weaknesses": [
+      "Sequential top-line interest revenue dipped -3.27% QoQ (₹97,814 Cr vs ₹1,01,126 Cr in Q4 FY26) due to seasonal Q1 fee moderation.",
+      "Deposit growth (+8.2% YoY) trails credit growth (+15.4% YoY), elevating the Credit-to-Deposit (CD) ratio toward 76.5%.",
+      "High operating expenses from wage revision provisions and pension liabilities compared to private-sector banking peers."
+    ],
+    "opportunities": [
+      "Monetization of 80M+ registered users on the YONO digital banking platform for cross-selling insurance, mutual funds, and pre-approved loans.",
+      "Strong corporate capex pipeline in infrastructure, renewable energy, and manufacturing driving high-rated wholesale credit demand.",
+      "Potential stake unlocking and dividend upstreaming from high-growth subsidiaries (SBI Life, SBI Cards, SBI Mutual Fund)."
+    ],
+    "threats": [
+      "Expected RBI repo rate cuts in upcoming quarters could compress floating-rate loan yields before term deposits reprice downward.",
+      "System-wide competition for retail term deposits forcing higher cost of funds across Indian public and private banks.",
+      "Macroeconomic or monsoon shocks potentially impacting agricultural and unsecured retail Xpress Credit delinquencies."
+    ]
+  }
+}

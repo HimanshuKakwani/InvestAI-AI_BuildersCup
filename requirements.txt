@@ -18,3 +18,4 @@ google-cloud-firestore>=2.14.0
 pytest>=8.0.0
 youtube-transcript-api>=1.2.0
 google-cloud-pubsub>=2.20.0
+google-cloud-bigquery>=3.20.0

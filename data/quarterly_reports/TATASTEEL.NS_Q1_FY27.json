@@ -1,0 +1,82 @@
+{
+  "ticker": "TATASTEEL.NS",
+  "company_name": "Tata Steel Limited",
+  "exchange": "NSE / BSE",
+  "filing_type": "Regulation 33 Unaudited Consolidated Financial Results",
+  "quarter_label": "Q1 FY2026-27 (Quarter Ended June 30, 2026)",
+  "period_end": "2026-06-30",
+  "currency": "INR",
+  "FilingSource": "BSE / NSE Corporate Filings & Tata Steel Financial Results Presentation (Q1 FY27)",
+  "headline_metrics": {
+    "gross_revenue_cr": 54770.0,
+    "gross_revenue_formatted": "₹54,770 Cr",
+    "revenue_qoq_growth_pct": -6.65,
+    "revenue_yoy_growth_pct": -7.95,
+    "ebitda_cr": 6690.0,
+    "ebitda_formatted": "₹6,690 Cr",
+    "ebitda_margin_pct": 12.21,
+    "net_profit_pat_cr": 918.0,
+    "net_profit_formatted": "₹918 Cr",
+    "pat_qoq_growth_pct": 79.65,
+    "pat_yoy_growth_pct": 44.8,
+    "eps_quarterly_inr": 0.74,
+    "india_crude_steel_prod_mt": 5.27,
+    "net_debt_to_ebitda": 2.24
+  },
+  "segment_performance": [
+    {
+      "segment": "Tata Steel India (Standalone & Domestic)",
+      "revenue_cr": 34850.0,
+      "ebitda_cr": 6820.0,
+      "ebitda_margin_pct": 19.57,
+      "highlight": "Domestic deliveries grew +4% YoY led by automotive and infrastructure steel demand; EBITDA per ton touched ₹14,200."
+    },
+    {
+      "segment": "Tata Steel Netherlands (IJmuiden)",
+      "revenue_cr": 12940.0,
+      "ebitda_cr": 580.0,
+      "ebitda_margin_pct": 4.48,
+      "highlight": "Blast furnace relining completed; returned to positive operational EBITDA."
+    },
+    {
+      "segment": "Tata Steel UK (Port Talbot)",
+      "revenue_cr": 5840.0,
+      "ebitda_cr": -740.0,
+      "ebitda_margin_pct": -12.67,
+      "highlight": "Transition to Electric Arc Furnace (EAF) underway; closure of legacy blast furnaces curtailing operating cash burn."
+    },
+    {
+      "segment": "Other Industrial Subsidiaries & Services",
+      "revenue_cr": 1140.0,
+      "ebitda_cr": 30.0,
+      "ebitda_margin_pct": 2.63,
+      "highlight": "Tubes, wires, and downstream engineering fabrication products."
+    }
+  ],
+  "simple_pointers": [
+    "**Indian Operations Drive Profitability:** Tata Steel India delivered robust operational EBITDA of **₹6,820 Cr** (19.57% margin), offsetting European restructuring costs.",
+    "**Consolidated Net Profit Turns Positive:** PAT rebounded to **₹918 Cr** (+79.65% QoQ; +44.8% YoY), aided by lower coking coal input costs.",
+    "**Kalinganagar Phase 2 Commissioning:** Blast furnace expansion at Kalinganagar adds 5 MTPA high-margin capacity, lowering domestic production costs per ton.",
+    "**UK Transition Milestones Achieved:** Shut down of loss-making Port Talbot blast furnaces will reduce recurring European cash drain starting late FY27.",
+    "**Deleveraging Focus Maintained:** Net debt stood at ₹82,160 Cr; management reaffirmed commitment to annual deleveraging targets."
+  ],
+  "swot": {
+    "strengths": [
+      "100% captive iron ore security in India shielding domestic operations from international raw material spikes.",
+      "Leading market position in automotive flat steel and pre-engineered infrastructure structural sections.",
+      "High-efficiency coastal assets with low cost of conversion at Jamshedpur and Kalinganagar."
+    ],
+    "weaknesses": [
+      "Ongoing restructuring losses and transition capex in UK operations dragging overall return on equity.",
+      "Higher debt-to-equity ratio (net debt ~₹82k Cr) compared to pure domestic peers."
+    ],
+    "opportunities": [
+      "Commissioning of 5 MTPA Kalinganagar expansion driving volume growth and economies of scale.",
+      "Decarbonization grant support from UK government (£500M) for the green Electric Arc Furnace transition."
+    ],
+    "threats": [
+      "Global steel oversupply and surge in cheap Chinese hot-rolled coil exports pressuring domestic steel realization prices.",
+      "European carbon border adjustment tax (CBAM) compliance costs on export shipments."
+    ]
+  }
+}

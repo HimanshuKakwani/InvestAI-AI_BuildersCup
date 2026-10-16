@@ -1,0 +1,82 @@
+{
+  "ticker": "TRENT.NS",
+  "company_name": "Trent Limited",
+  "exchange": "NSE / BSE",
+  "filing_type": "Regulation 33 Unaudited Consolidated Financial Results",
+  "quarter_label": "Q1 FY2026-27 (Quarter Ended June 30, 2026)",
+  "period_end": "2026-06-30",
+  "currency": "INR",
+  "FilingSource": "BSE / NSE Corporate Filings & Trent Media Statement (Q1 FY27)",
+  "headline_metrics": {
+    "gross_revenue_cr": 4104.0,
+    "gross_revenue_formatted": "₹4,104 Cr",
+    "revenue_qoq_growth_pct": 24.58,
+    "revenue_yoy_growth_pct": 56.17,
+    "ebitda_cr": 613.0,
+    "ebitda_formatted": "₹613 Cr",
+    "ebitda_margin_pct": 14.94,
+    "net_profit_pat_cr": 392.0,
+    "net_profit_formatted": "₹392 Cr",
+    "pat_qoq_growth_pct": 5.95,
+    "pat_yoy_growth_pct": 134.73,
+    "eps_quarterly_inr": 11.03,
+    "zudio_store_count": 560,
+    "westside_store_count": 235
+  },
+  "segment_performance": [
+    {
+      "segment": "Zudio (Value Fast Fashion)",
+      "revenue_cr": 2480.0,
+      "ebitda_cr": 380.0,
+      "ebitda_margin_pct": 15.32,
+      "highlight": "Explosive growth propelled by rapid store additions in Tier-2/3 cities and 15-day inventory replenishment turnaround."
+    },
+    {
+      "segment": "Westside (Premium Lifestyle & Apparel)",
+      "revenue_cr": 1210.0,
+      "ebitda_cr": 190.0,
+      "ebitda_margin_pct": 15.7,
+      "highlight": "Like-for-like (LFL) sales growth of 11%; WestStyleClub membership crossed 10 million active shoppers."
+    },
+    {
+      "segment": "Star Bazaar & Food Retail",
+      "revenue_cr": 310.0,
+      "ebitda_cr": 28.0,
+      "ebitda_margin_pct": 9.03,
+      "highlight": "Omnichannel grocery growth through compact store formats and increased share of private label food brands."
+    },
+    {
+      "segment": "Joint Ventures (Inditex — Zara & Massimo Dutti)",
+      "revenue_cr": 104.0,
+      "ebitda_cr": 15.0,
+      "ebitda_margin_pct": 14.42,
+      "highlight": "Stable dividend yields and equity-accounted earnings contribution."
+    }
+  ],
+  "simple_pointers": [
+    "**Explosive Top-Line Hyper-Growth:** Consolidated revenue surged **+56.17% YoY** to **₹4,104 Cr**, outperforming every listed apparel retailer in India.",
+    "**Phenomenal Net Profit Surge:** Profit After Tax (PAT) skyrocketed **+134.73% YoY** to **₹392 Cr**, powered by superior inventory turns and store-level operating leverage.",
+    "**Zudio Phenomenon Continues:** Zudio network reached 560 stores with industry-leading store payback periods (<18 months).",
+    "**Industry-Leading Operating Margins:** Consolidated EBITDA reached **₹613 Cr** (14.94% margin) despite hyper-expansion capex.",
+    "**Zero Long-Term Debt:** Rapid expansion fully financed through internal operating cash flows with healthy net cash surplus."
+  ],
+  "swot": {
+    "strengths": [
+      "100% own-branded merchandise portfolio yielding gross margins exceeding 48%.",
+      "Mastery of agile fast-fashion supply chains with rapid design-to-shelf turnaround.",
+      "Backed by the trusted Tata Group brand, providing real estate bargaining power in premium malls."
+    ],
+    "weaknesses": [
+      "Premium valuation multiples (P/E > 100x) leaving narrow margin for operational missteps.",
+      "High geographical concentration in urban clusters, although Tier-2/3 expansion is scaling quickly."
+    ],
+    "opportunities": [
+      "Expansion into beauty, footwear, and innerwear micro-categories across existing Zudio footprints.",
+      "International store expansion in Middle East and Southeast Asian diaspora markets."
+    ],
+    "threats": [
+      "Aggressive competitive launches in value fashion from Reliance (Yousta) and Aditya Birla (Style Up).",
+      "Retail rent inflation and mall vacancy constraints in high-footfall metropolitan catchments."
+    ]
+  }
+}

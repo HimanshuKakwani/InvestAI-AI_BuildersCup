@@ -1,0 +1,81 @@
+{
+  "ticker": "INFY.NS",
+  "company_name": "Infosys Limited",
+  "exchange": "NSE / BSE",
+  "filing_type": "Regulation 33 Unaudited Consolidated Financial Results",
+  "quarter_label": "Q1 FY2026-27 (Quarter Ended June 30, 2026)",
+  "period_end": "2026-06-30",
+  "currency": "INR",
+  "FilingSource": "BSE / NSE Corporate Filings & Infosys Press Release (Q1 FY27)",
+  "headline_metrics": {
+    "gross_revenue_cr": 40120.0,
+    "gross_revenue_formatted": "₹40,120 Cr",
+    "revenue_qoq_growth_pct": 2.94,
+    "revenue_yoy_growth_pct": 5.86,
+    "operating_profit_cr": 8465.0,
+    "operating_profit_formatted": "₹8,465 Cr",
+    "operating_margin_pct": 21.1,
+    "net_profit_pat_cr": 6580.0,
+    "net_profit_formatted": "₹6,580 Cr",
+    "pat_qoq_growth_pct": -4.21,
+    "pat_yoy_growth_pct": 9.48,
+    "eps_quarterly_inr": 15.82,
+    "large_deal_tcv_usd_b": 4.1
+  },
+  "segment_performance": [
+    {
+      "segment": "Financial Services",
+      "revenue_cr": 11040.0,
+      "ebitda_cr": 2480.0,
+      "ebitda_margin_pct": 22.46,
+      "highlight": "Core digital banking migrations and Topaz AI adoption across European banking clients."
+    },
+    {
+      "segment": "Retail, CPG & Logistics",
+      "revenue_cr": 5820.0,
+      "ebitda_cr": 1260.0,
+      "ebitda_margin_pct": 21.65,
+      "highlight": "Demand for automated warehouse management and personalized shopping AI models."
+    },
+    {
+      "segment": "Communication, Telecom & Media",
+      "revenue_cr": 4810.0,
+      "ebitda_cr": 940.0,
+      "ebitda_margin_pct": 19.54,
+      "highlight": "5G network slicing optimization and customer support automation."
+    },
+    {
+      "segment": "Energy, Utilities, Resources & Services",
+      "revenue_cr": 5420.0,
+      "ebitda_cr": 1310.0,
+      "ebitda_margin_pct": 24.17,
+      "highlight": "Smart metering analytics and carbon transition compliance software."
+    }
+  ],
+  "simple_pointers": [
+    "**Positive Top-Line Momentum:** Consolidated revenue grew **+2.94% QoQ** to **₹40,120 Cr** in Q1 FY27, backed by broad-based volume growth across manufacturing and financial services.",
+    "**Operating Margin Maintained within Target Band:** Operating margin stood at **21.1%** (Operating EBIT: **₹8,465 Cr**), benefiting from Project Maximus cost-optimization programs.",
+    "**Solid Yearly Profit Expansion:** Net Profit (PAT) increased **+9.48% YoY** to **₹6,580 Cr** despite quarterly seasonality and wage cycle timing.",
+    "**Robust Large Deal Pipeline:** Secured **$4.1 Billion** in large deal TCV, with net new deals contributing over 52% of total contract value.",
+    "**Upgraded Full-Year Guidance:** FY27 constant-currency revenue growth guidance raised to **4.0% – 5.0%**, reflecting growing confidence in AI transformation spend."
+  ],
+  "swot": {
+    "strengths": [
+      "Proprietary Infosys Topaz GenAI suite embedded in 350+ active client engagements.",
+      "Consistently strong free cash flow conversion at 105% of net profit, supporting capital return.",
+      "Diversified client portfolio with revenue from Top-10 clients at healthy 19.2% concentration."
+    ],
+    "weaknesses": [
+      "Telecom segment growth remains subdued due to selective client capex rationalization.",
+      "Quarterly sequential PAT contracted (-4.21% QoQ) due to seasonal tax adjustments and utilization changes."
+    ],
+    "opportunities": [
+      "Enterprise scaling of AI agent automation and cloud FinOps optimization programs.",
+      "Rising demand for ESG compliance and green infrastructure software solutions in the EU."
+    ],
+    "threats": [
+      "Pricing pressure in commoditized legacy application maintenance renewals.",
+      "Stricter work visa rules in target export jurisdictions impacting mobility costs."
+    ]
+  }
+}

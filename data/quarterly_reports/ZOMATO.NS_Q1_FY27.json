@@ -1,0 +1,81 @@
+{
+  "ticker": "ZOMATO.NS",
+  "company_name": "Zomato Limited (Eternal)",
+  "exchange": "NSE / BSE",
+  "filing_type": "Regulation 33 Unaudited Consolidated Financial Results",
+  "quarter_label": "Q1 FY2026-27 (Quarter Ended June 30, 2026)",
+  "period_end": "2026-06-30",
+  "currency": "INR",
+  "FilingSource": "BSE / NSE Corporate Filings & Zomato Shareholder Letter (Q1 FY27)",
+  "headline_metrics": {
+    "gross_revenue_cr": 4206.0,
+    "gross_revenue_formatted": "₹4,206 Cr",
+    "revenue_qoq_growth_pct": 18.15,
+    "revenue_yoy_growth_pct": 74.02,
+    "adjusted_ebitda_cr": 299.0,
+    "adjusted_ebitda_formatted": "₹299 Cr",
+    "net_profit_pat_cr": 253.0,
+    "net_profit_formatted": "₹253 Cr",
+    "pat_qoq_growth_pct": 44.57,
+    "pat_yoy_growth_pct": 1165.0,
+    "eps_quarterly_inr": 0.29,
+    "blinkit_dark_stores": 639,
+    "food_delivery_gov_cr": 9264.0
+  },
+  "segment_performance": [
+    {
+      "segment": "Quick Commerce (Blinkit)",
+      "revenue_cr": 1420.0,
+      "ebitda_cr": 32.0,
+      "ebitda_margin_pct": 2.25,
+      "highlight": "Gross Order Value (GOV) reached ₹4,923 Cr (+130% YoY); store-level contribution margins expanded as dark stores reached 639."
+    },
+    {
+      "segment": "Food Delivery (Core Zomato App)",
+      "revenue_cr": 1940.0,
+      "ebitda_cr": 310.0,
+      "ebitda_margin_pct": 15.98,
+      "highlight": "GOV grew 27% YoY to ₹9,264 Cr; adjusted EBITDA margin as % of GOV improved to 3.3% led by platform fee optimization."
+    },
+    {
+      "segment": "Hyperpure (B2B Restaurant Supply)",
+      "revenue_cr": 690.0,
+      "ebitda_cr": -18.0,
+      "ebitda_margin_pct": -2.61,
+      "highlight": "Value-added farm-to-kitchen sourcing for 45,000+ restaurant partners with narrowing EBITDA losses."
+    },
+    {
+      "segment": "Going-Out & Live Entertainment (District App)",
+      "revenue_cr": 156.0,
+      "ebitda_cr": -25.0,
+      "ebitda_margin_pct": -16.03,
+      "highlight": "Ticketing and dining-out experiences being consolidated into the dedicated District lifestyle application."
+    }
+  ],
+  "simple_pointers": [
+    "**Hyper-Growth in Consolidated Revenue:** Revenue jumped **+74.02% YoY** to **₹4,206 Cr**, driven by explosive 130% YoY expansion in Blinkit quick-commerce GOV.",
+    "**Sustained Profitability Trajectory:** Net Profit (PAT) leaped to **₹253 Cr** (compared to ₹20 Cr in the year-ago quarter), demonstrating robust platform network effects.",
+    "**Blinkit Crosses Adjusted EBITDA Breakeven:** Quick-commerce achieved milestone positive adjusted EBITDA (+₹32 Cr), dispelling doubts over unit economics.",
+    "**Aggressive Dark Store Expansion:** Dark store network expanded to 639 locations with management raising the target to 1,000 dark stores by end-FY27.",
+    "**Substantial Net Cash Balance:** Cash balance stands at ₹12,250 Cr, fully funding expansion without debt or dilutive equity issuances."
+  ],
+  "swot": {
+    "strengths": [
+      "Duopoly market leadership in food delivery and #1 market share in Indian quick-commerce (Blinkit).",
+      "Immense network effects with 20M+ monthly transacting customers and gold loyalty memberships.",
+      "Cash-rich balance sheet (>₹12,000 Cr liquid cash) enabling aggressive 10-minute delivery infrastructure buildout."
+    ],
+    "weaknesses": [
+      "Hyperpure and Going-Out segments still generating operational EBITDA losses.",
+      "High gig-worker delivery partner attrition requiring recurring driver incentive spends."
+    ],
+    "opportunities": [
+      "Expansion into non-grocery quick-commerce categories (electronics, apparel, beauty, festival merchandise).",
+      "Higher high-margin in-app advertising revenues from FMCG and consumer tech brands."
+    ],
+    "threats": [
+      "Intensified quick-commerce competition from Swiggy Instamart, Zepto, and Tata BigBasket.",
+      "Potential gig-economy labor regulations, minimum wage mandates, and rider social security legislation."
+    ]
+  }
+}

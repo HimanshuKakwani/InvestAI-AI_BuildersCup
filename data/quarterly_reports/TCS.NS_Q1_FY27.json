@@ -1,0 +1,90 @@
+{
+  "ticker": "TCS.NS",
+  "company_name": "Tata Consultancy Services Limited",
+  "exchange": "NSE / BSE",
+  "filing_type": "Regulation 33 Unaudited Consolidated Financial Results",
+  "quarter_label": "Q1 FY2026-27 (Quarter Ended June 30, 2026)",
+  "period_end": "2026-06-30",
+  "currency": "INR",
+  "FilingSource": "BSE / NSE Corporate Disclosures & TCS Investor Factsheet (Q1 FY27)",
+  "headline_metrics": {
+    "gross_revenue_cr": 63575.0,
+    "gross_revenue_formatted": "₹63,575 Cr",
+    "revenue_qoq_growth_pct": 2.25,
+    "revenue_yoy_growth_pct": 7.42,
+    "prev_quarter_revenue_cr": 62176.0,
+    "year_ago_quarter_revenue_cr": 59187.0,
+    "ebitda_cr": 16530.0,
+    "ebitda_formatted": "₹16,530 Cr",
+    "operating_profit_cr": 15320.0,
+    "operating_profit_formatted": "₹15,320 Cr",
+    "operating_margin_pct": 24.1,
+    "net_profit_pat_cr": 12410.0,
+    "net_profit_formatted": "₹12,410 Cr",
+    "pat_qoq_growth_pct": -0.18,
+    "pat_yoy_growth_pct": 8.71,
+    "eps_quarterly_inr": 34.28,
+    "attrition_ttm_pct": 12.1,
+    "order_book_tcv_usd_b": 8.3
+  },
+  "segment_performance": [
+    {
+      "segment": "Banking, Financial Services & Insurance (BFSI)",
+      "revenue_cr": 20470.0,
+      "ebitda_cr": 5420.0,
+      "ebitda_margin_pct": 26.5,
+      "highlight": "Core digital banking and AI wealth-platform modernization contracts drove resilient 2.1% QoQ growth."
+    },
+    {
+      "segment": "Consumer Business & Retail",
+      "revenue_cr": 9980.0,
+      "ebitda_cr": 2480.0,
+      "ebitda_margin_pct": 24.8,
+      "highlight": "Omnichannel transformations and cloud ERP rollouts in North American and European retail chains."
+    },
+    {
+      "segment": "Life Sciences & Healthcare",
+      "revenue_cr": 6860.0,
+      "ebitda_cr": 1820.0,
+      "ebitda_margin_pct": 26.5,
+      "highlight": "Strong demand for AI-assisted clinical trial analytics and regulatory submission automation."
+    },
+    {
+      "segment": "Manufacturing & Utilities",
+      "revenue_cr": 11340.0,
+      "ebitda_cr": 2810.0,
+      "ebitda_margin_pct": 24.78,
+      "highlight": "Industrial IoT implementations and supply chain resilience software migration projects."
+    }
+  ],
+  "simple_pointers": [
+    "**Resilient Revenue Expansion:** Consolidated revenue reached **₹63,575 Cr** in Q1 FY27, up **+2.25% QoQ** and **+7.42% YoY**, maintaining industry leadership in Indian IT services.",
+    "**Robust Operating Margins:** Operating EBIT margin stood firm at **24.1%** (Operating profit: **₹15,320 Cr**), absorbing annual salary increments and employee compensation adjustments.",
+    "**Solid Bottom-Line Profitability:** Net Profit (PAT) grew **+8.71% YoY** to **₹12,410 Cr**, supported by high offshore delivery ratios and disciplined operational pyramid management.",
+    "**Strong Deal Inflows & AI Bookings:** Quarterly Total Contract Value (TCV) was recorded at **$8.3 Billion**, including significant multi-year GenAI and enterprise transformation mandates.",
+    "**Rock-Solid Balance Sheet & Shareholder Return:** Zero long-term debt with cash reserves exceeding ₹42,000 Cr; interim dividend of ₹10.0 per equity share approved by the board."
+  ],
+  "swot": {
+    "strengths": [
+      "Industry-leading operating EBIT margin at 24.1%, showcasing superior pricing power and operational efficiency.",
+      "Vast global client base across 55 countries with exceptional 98%+ client retention and $8.3B quarterly deal TCV.",
+      "Strong free cash flow conversion exceeding 90% of net profits with zero long-term funded debt.",
+      "Industry-lowest employee attrition rate at 12.1%, minimizing project handoff frictions and recruitment costs."
+    ],
+    "weaknesses": [
+      "Sequential net profit remained flat (-0.18% QoQ) due to wage hike impacts in Q1.",
+      "High geographic concentration with North America and UK accounting for over 70% of total export billings.",
+      "Subdued discretionary tech spending among regional mid-sized European financial institutions."
+    ],
+    "opportunities": [
+      "Enterprise migration to generative AI agent platforms and cyber-defense co-innovation projects.",
+      "Large-scale vendor consolidation deals in BFSI favor Tier-1 integrators with end-to-end execution capacity.",
+      "Expansion of sovereign cloud partnerships and digital public infrastructure solutions in Asia-Pacific."
+    ],
+    "threats": [
+      "Prolonged macroeconomic uncertainty in US corporate tech capex delaying transformation project starts.",
+      "Foreign exchange volatility across EUR, GBP, and USD affecting margin realization in rupee terms.",
+      "Rapid advances in automated code generation potentially impacting billable linear headcount metrics."
+    ]
+  }
+}

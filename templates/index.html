@@ -745,6 +745,210 @@
     .marker.status-WARN em { color: var(--orange); }
     .marker.status-INFO em, .marker.status-NA em { color: #64748b; }
 
+    /* Section 04: Quarterly Financial Report Summarizer & SWOT Matrix */
+    .quarterly-section { border-top: 1px solid #bdb7aa; padding-top: 28px; margin-top: 24px; }
+    .quarterly-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+    .quarterly-switch-group { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+    .quarterly-switch-btn { background: #e9e2d2; color: var(--ink); border: 1px solid #bfb6a2; padding: 5px 10px; font: 600 9px 'DM Mono', monospace; cursor: pointer; border-radius: 3px; transition: all .15s; }
+    .quarterly-switch-btn:hover, .quarterly-switch-btn.active { background: var(--forest); color: var(--acid); border-color: var(--forest); }
+    .quarterly-meta-banner { background: #e9e2d2; border-left: 3px solid var(--forest); padding: 10px 14px; font: 500 10px 'DM Mono', monospace; color: var(--ink); margin-bottom: 16px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .quarterly-pointers-box { background: rgba(255,255,255,.55); border: 1px solid #d5cfc2; padding: 16px 20px; margin-bottom: 20px; }
+    .quarterly-pointers-box h3 { font: 700 10px 'DM Mono', monospace; letter-spacing: 1px; color: var(--forest); text-transform: uppercase; margin: 0 0 10px; }
+    .quarterly-pointers-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font: 400 12.5px/1.6 'Manrope', sans-serif; color: #2b312a; }
+    .swot-table-wrap { overflow-x: auto; margin-top: 10px; }
+    .swot-grid-table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,.7); border: 1px solid #bdb7aa; font: 400 12px/1.55 'Manrope', sans-serif; }
+    .swot-grid-table th { background: var(--forest); color: #f6f0e2; font: 700 9.5px 'DM Mono', monospace; letter-spacing: .8px; text-transform: uppercase; padding: 10px 14px; text-align: left; border: 1px solid #2b4438; }
+    .swot-grid-table td { padding: 12px 14px; vertical-align: top; border: 1px solid #cfc8b8; color: #252b24; width: 50%; }
+    .swot-quad-label { display: inline-block; font: 700 9px 'DM Mono', monospace; letter-spacing: .8px; padding: 2px 7px; border-radius: 3px; margin-bottom: 8px; text-transform: uppercase; }
+    .swot-s { background: rgba(22, 101, 52, 0.14); color: #166534; border: 1px solid rgba(22, 101, 52, 0.35); }
+    .swot-w { background: rgba(194, 65, 12, 0.14); color: #9a3412; border: 1px solid rgba(194, 65, 12, 0.35); }
+    .swot-o { background: rgba(3, 105, 161, 0.14); color: #0369a1; border: 1px solid rgba(3, 105, 161, 0.35); }
+    .swot-t { background: rgba(153, 27, 27, 0.14); color: #991b1b; border: 1px solid rgba(153, 27, 27, 0.35); }
+    .swot-list { margin: 0; padding-left: 16px; display: flex; flex-direction: column; gap: 6px; }
+    .chat-md-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 11px; background: #fff; border: 1px solid #cfc8b8; }
+    .chat-md-table th { background: #142820; color: #d5ff5f; font: 600 9.5px 'DM Mono', monospace; padding: 6px 8px; text-align: left; border: 1px solid #2b4438; }
+    .chat-md-table td { padding: 6px 8px; border: 1px solid #d5cfc2; vertical-align: top; line-height: 1.45; }
+
+    /* Financial Report Analysis Section Search Bar */
+    .financial-search-card {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid #c8bfaa;
+      border-radius: 4px;
+      padding: 14px 14px 12px;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .financial-search-label {
+      display: block;
+      font: 700 9px 'DM Mono', monospace;
+      letter-spacing: 1px;
+      color: #7d7261;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .financial-search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1.5px solid #13271f;
+      border-radius: 3px;
+      padding: 2px 4px 2px 10px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,.06);
+    }
+    .financial-search-bar svg {
+      color: #13271f;
+      flex-shrink: 0;
+    }
+    .financial-search-bar input,
+    .financial-search-bar select {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      font: 600 12.5px 'Manrope', sans-serif;
+      color: #13271f;
+      padding: 8px 4px;
+      cursor: pointer;
+    }
+    .financial-search-bar select option {
+      background: #FAF7EE;
+      color: #13271f;
+      font: 500 12px 'Manrope', sans-serif;
+      padding: 6px 10px;
+    }
+    .financial-search-bar input::placeholder {
+      color: #9c9281;
+      font-weight: 400;
+      font-size: 12px;
+    }
+    .btn-fin-search-go {
+      background: #13271f;
+      color: #FAF7EE;
+      border: 0;
+      padding: 7px 14px;
+      font: 700 10.5px 'DM Mono', monospace;
+      letter-spacing: .8px;
+      border-radius: 2px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all .2s;
+    }
+    .btn-fin-search-go:hover {
+      background: #9c2a2a;
+    }
+    .fin-search-msg {
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: 3px;
+      font: 600 11px/1.4 'DM Mono', monospace;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: sheet-in .2s ease;
+    }
+    .fin-search-msg.error {
+      background: rgba(185, 28, 28, 0.1);
+      border: 1px solid rgba(185, 28, 28, 0.4);
+      color: #991b1b;
+    }
+    .fin-search-msg.success {
+      background: rgba(22, 101, 52, 0.1);
+      border: 1px solid rgba(22, 101, 52, 0.4);
+      color: #166534;
+    }
+    .fin-msg-badge {
+      font-size: 8.5px;
+      background: #991b1b;
+      color: #fff;
+      padding: 1px 5px;
+      border-radius: 2px;
+      letter-spacing: .5px;
+    }
+    .financial-quick-tags {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .financial-quick-tags > span {
+      font: 500 9px 'DM Mono', monospace;
+      color: #7d7261;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .fin-tag-btn {
+      background: #e7dfcc;
+      border: 1px solid #c2b79e;
+      color: #13271f;
+      padding: 3px 8px;
+      font: 600 9.5px 'DM Mono', monospace;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .fin-tag-btn:hover {
+      background: #13271f;
+      color: #FAF7EE;
+      border-color: #13271f;
+    }
+    .fin-or-divider {
+      text-align: center;
+      position: relative;
+      margin: 10px 0 12px;
+    }
+    .fin-or-divider:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: rgba(180, 162, 133, 0.4);
+    }
+    .fin-or-divider span {
+      position: relative;
+      background: #ede6d4;
+      padding: 0 10px;
+      font: 600 8.5px 'DM Mono', monospace;
+      color: #8c816f;
+      letter-spacing: 1px;
+    }
+
+    /* Segmental cards on separate financial page */
+    .segment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 700px) {
+      .segment-grid { grid-template-columns: 1fr; }
+    }
+    .segment-card {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid #d5cfc2;
+      padding: 12px 14px;
+      border-radius: 4px;
+    }
+    .segment-card-title {
+      font: 700 12px 'Manrope', sans-serif;
+      color: #13271f;
+      margin-bottom: 4px;
+    }
+    .segment-card-metrics {
+      font: 600 10px 'DM Mono', monospace;
+      color: var(--forest);
+      margin-bottom: 6px;
+    }
+    .segment-card-desc {
+      font: 400 11px/1.5 'Manrope', sans-serif;
+      color: #555b54;
+    }
+
     .analyst-signoff { border-top: 3px double #565a53; padding-top: 22px; margin-top: 36px; display: flex; align-items: center; justify-content: space-between; }
     .analyst-signoff > div { display: flex; flex-direction: column; gap: 3px; }
     .analyst-signoff span, .analyst-signoff small { font: 400 8px 'DM Mono', monospace; color: #85877f; }
@@ -1122,6 +1326,49 @@
 
                 <!-- 4. Financial Report Analysis Panel (PDF) -->
                 <div id="panel-pdf" class="spec-panel" style="display: none;">
+                  <div class="financial-search-card">
+                    <label for="select-financial-stock" class="financial-search-label">
+                      Select Equity · Regulation 33 Quarterly Filing Analysis
+                    </label>
+                    <div class="financial-search-bar">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                      <select id="select-financial-stock" onchange="handleFinancialDropdownChange(this.value)">
+                        <option value="" selected disabled>-- Select a Stock from Financial Report Universe --</option>
+                        <option value="RELIANCE.NS">Reliance Industries (RELIANCE.NS) · Energy &amp; Retail</option>
+                        <option value="SBIN.NS">State Bank of India (SBIN.NS) · Banking</option>
+                        <option value="TCS.NS">Tata Consultancy Services (TCS.NS) · IT &amp; GenAI</option>
+                        <option value="INFY.NS">Infosys Limited (INFY.NS) · IT &amp; Cloud</option>
+                        <option value="HDFCBANK.NS">HDFC Bank Limited (HDFCBANK.NS) · Banking</option>
+                        <option value="ITC.NS">ITC Limited (ITC.NS) · FMCG &amp; Cigarettes</option>
+                        <option value="TATASTEEL.NS">Tata Steel Limited (TATASTEEL.NS) · Metals &amp; Mining</option>
+                        <option value="TRENT.NS">Trent Limited - Zudio / Westside (TRENT.NS) · Fast Fashion</option>
+                        <option value="TVSMOTOR.NS">TVS Motor Company (TVSMOTOR.NS) · 2W &amp; EV</option>
+                        <option value="ZOMATO.NS">Zomato / Blinkit (ZOMATO.NS) · Quick Commerce</option>
+                        <option value="UNSUPPORTED">Other Stock (e.g. Suzlon, Paytm) · [Test 'No report available']</option>
+                      </select>
+                      <button type="button" class="btn-fin-search-go" onclick="executeFinancialSearch()">
+                        <span>Open Report</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+                      </button>
+                    </div>
+                    <div id="fin-search-msg" class="fin-search-msg" style="display: none;"></div>
+                    <div class="financial-quick-tags">
+                      <span>10 Demo Stocks (BigQuery RAG):</span>
+                      <button type="button" class="fin-tag-btn" onclick="selectAndSearchFinancial('reliance')">Reliance</button>
+                      <button type="button" class="fin-tag-btn" onclick="selectAndSearchFinancial('sbin')">SBI</button>
+                      <button type="button" class="fin-tag-btn" onclick="selectAndSearchFinancial('tcs')">TCS</button>
+                      <button type="button" class="fin-tag-btn" onclick="selectAndSearchFinancial('infy')">Infosys</button>
+                      <button type="button" class="fin-tag-btn" onclick="selectAndSearchFinancial('hdfcbank')">HDFC Bank</button>
+                      <button type="button" class="fin-tag-btn" onclick="selectAndSearchFinancial('itc')">ITC</button>
+                      <button type="button" class="fin-tag-btn" onclick="selectAndSearchFinancial('tatasteel')">Tata Steel</button>
+                      <button type="button" class="fin-tag-btn" onclick="selectAndSearchFinancial('trent')">Trent</button>
+                      <button type="button" class="fin-tag-btn" onclick="selectAndSearchFinancial('tvsmotor')">TVS Motor</button>
+                      <button type="button" class="fin-tag-btn" onclick="selectAndSearchFinancial('zomato')">Zomato</button>
+                    </div>
+                  </div>
+
+                  <div class="fin-or-divider"><span>OR UPLOAD CUSTOM STATEMENT (PDF)</span></div>
+
                   <div id="dropzone-pdf" class="card-dropzone" onclick="document.getElementById('file-pdf').click()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
                     <div id="dropzone-pdf-text" class="card-dropzone-title">Click to upload or drag &amp; drop Financial Report (PDF)</div>
@@ -1418,6 +1665,67 @@
             </div>
           </div>
 
+          <!-- Section 04: Quarterly Financial Report Summarizer & SWOT Analysis (Demo: RELIANCE.NS & SBIN.NS) -->
+          <div id="quarterly-report-section" class="report-section quarterly-section">
+            <span class="section-no">04</span>
+            <div style="min-width: 0;">
+              <div class="quarterly-header-row">
+                <div>
+                  <p class="report-label">QUARTERLY REPORT SUMMARIZER AGENT · PAST QUARTER FILING &amp; SWOT</p>
+                  <h2 id="quarterly-section-title" style="margin-bottom: 4px;">Past-Quarter Financial Summary &amp; SWOT Matrix</h2>
+                </div>
+                <div class="quarterly-switch-group">
+                  <button id="btn-q-reliance" class="quarterly-switch-btn" onclick="loadQuarterlyReportSection('RELIANCE.NS')">Reliance (RELIANCE.NS)</button>
+                  <button id="btn-q-sbin" class="quarterly-switch-btn" onclick="loadQuarterlyReportSection('SBIN.NS')">State Bank of India (SBIN.NS)</button>
+                </div>
+              </div>
+
+              <div id="quarterly-meta-banner" class="quarterly-meta-banner">
+                <span id="quarterly-filing-label">Filing: Regulation 33 Unaudited Consolidated Results · Q1 FY2026-27</span>
+                <span id="quarterly-agent-badge">Agent: quarterly_report_agent</span>
+              </div>
+
+              <div class="quarterly-pointers-box">
+                <h3>Key Financial Takeaways (In Simple Pointers)</h3>
+                <ul id="quarterly-pointers-list" class="quarterly-pointers-list">
+                  <!-- Populated by QuarterlyReportSummarizerSubAgent -->
+                </ul>
+              </div>
+
+              <div class="swot-table-wrap">
+                <table class="swot-grid-table">
+                  <thead>
+                    <tr>
+                      <th colspan="2" id="swot-table-header">FINANCIAL STATEMENT SWOT ANALYSIS MATRIX · PAST QUARTER</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span class="swot-quad-label swot-s">Strengths (Internal Financial Positives)</span>
+                        <ul id="swot-strengths-list" class="swot-list"></ul>
+                      </td>
+                      <td>
+                        <span class="swot-quad-label swot-w">Weaknesses (Internal Financial Challenges)</span>
+                        <ul id="swot-weaknesses-list" class="swot-list"></ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="swot-quad-label swot-o">Opportunities (External Growth Tailwinds)</span>
+                        <ul id="swot-opportunities-list" class="swot-list"></ul>
+                      </td>
+                      <td>
+                        <span class="swot-quad-label swot-t">Threats (External &amp; Regulatory Headwinds)</span>
+                        <ul id="swot-threats-list" class="swot-list"></ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
           <!-- Analyst Signoff -->
           <div class="analyst-signoff">
             <div>
@@ -1462,6 +1770,7 @@
         </div>
 
         <div class="chat-chips-tray">
+          <button class="chat-chip" onclick="sendSuggestedQuestion('Summarize the past quarter financial report in simple pointers and show the SWOT analysis table')">Quarterly Report &amp; SWOT</button>
           <button class="chat-chip" onclick="sendSuggestedQuestion('How was this stock\'s historic price performance in the last 1 month and 1 year?')">Historic Price Agent</button>
           <button class="chat-chip" onclick="sendSuggestedQuestion('What is the predicted future price target based on analysts or EMA200?')">Price Target / EMA200 Agent</button>
           <button class="chat-chip" onclick="sendSuggestedQuestion('What are the company fundamentals, P/E valuation, and earnings?')">Fundamentals Agent</button>
@@ -1482,13 +1791,260 @@
         </div>
       </div>
     </div>
+    <!-- ==================== STAGE 4: SEPARATE FINANCIAL REPORT PAGE ==================== -->
+    <div id="stage-financial-report" class="stage-report" style="display: none;">
+      <!-- Header -->
+      <header class="report-header">
+        <div class="brand" onclick="switchStage('input')">
+          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <span>Invest<span>PI</span></span>
+        </div>
 
-  </div>
+        <div class="case-id">
+          <span>QUARTERLY REPORT SUMMARIZER · REGULATION 33</span>
+          <strong id="fin-header-stock-id">RELIANCE.NS · Q1 FY27</strong>
+        </div>
+
+        <div class="report-actions">
+          <button class="button button-ghost" onclick="switchStage('input')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            Back to Desk
+          </button>
+          <button class="button button-secondary" onclick="window.print()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 20h14"/></svg>
+            Print Dossier
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Workspace -->
+      <main class="case-workspace">
+        <!-- Sidebar -->
+        <aside class="case-sidebar">
+          <div class="sidebar-heading">
+            <span>AUDITED FILINGS</span>
+            <small>PAST QUARTER RESULTS</small>
+          </div>
+
+          <div class="source-evidence">
+            <span class="evidence-tag">DEMO FILING</span>
+            <div class="source-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+            </div>
+            <div>
+              <strong id="fin-sidebar-title">Reliance Industries</strong>
+              <small id="fin-sidebar-reg">SEBI Regulation 33</small>
+            </div>
+          </div>
+
+          <div class="folder-label">10 MARQUEE STOCKS (BIGQUERY RAG)</div>
+          <div class="folder-stack" style="max-height: 360px; overflow-y: auto;">
+            <div id="fin-folder-reliance" class="folder-item active" onclick="openFinancialReportPage('RELIANCE.NS')">
+              <strong>RELIANCE.NS</strong>
+              <span>Reliance Industries Ltd</span>
+            </div>
+            <div id="fin-folder-sbin" class="folder-item" onclick="openFinancialReportPage('SBIN.NS')">
+              <strong>SBIN.NS</strong>
+              <span>State Bank of India</span>
+            </div>
+            <div id="fin-folder-tcs" class="folder-item" onclick="openFinancialReportPage('TCS.NS')">
+              <strong>TCS.NS</strong>
+              <span>Tata Consultancy Services</span>
+            </div>
+            <div id="fin-folder-infy" class="folder-item" onclick="openFinancialReportPage('INFY.NS')">
+              <strong>INFY.NS</strong>
+              <span>Infosys Limited</span>
+            </div>
+            <div id="fin-folder-hdfcbank" class="folder-item" onclick="openFinancialReportPage('HDFCBANK.NS')">
+              <strong>HDFCBANK.NS</strong>
+              <span>HDFC Bank Limited</span>
+            </div>
+            <div id="fin-folder-itc" class="folder-item" onclick="openFinancialReportPage('ITC.NS')">
+              <strong>ITC.NS</strong>
+              <span>ITC Limited</span>
+            </div>
+            <div id="fin-folder-tatasteel" class="folder-item" onclick="openFinancialReportPage('TATASTEEL.NS')">
+              <strong>TATASTEEL.NS</strong>
+              <span>Tata Steel Limited</span>
+            </div>
+            <div id="fin-folder-trent" class="folder-item" onclick="openFinancialReportPage('TRENT.NS')">
+              <strong>TRENT.NS</strong>
+              <span>Trent Ltd (Zudio/Westside)</span>
+            </div>
+            <div id="fin-folder-tvsmotor" class="folder-item" onclick="openFinancialReportPage('TVSMOTOR.NS')">
+              <strong>TVSMOTOR.NS</strong>
+              <span>TVS Motor Company</span>
+            </div>
+            <div id="fin-folder-zomato" class="folder-item" onclick="openFinancialReportPage('ZOMATO.NS')">
+              <strong>ZOMATO.NS</strong>
+              <span>Zomato Limited (Blinkit)</span>
+            </div>
+          </div>
+
+          <div class="chain-note">
+            <span>FILING SPECIFICATION</span>
+            <p id="fin-sidebar-meta">
+              Document: Regulation 33 Unaudited Results<br />
+              Period: Q1 FY2026-27<br />
+              Audit: Limited Review by Statutory Auditors<br />
+              Agent: quarterly_report_agent
+            </p>
+          </div>
+
+          <button class="button button-primary" style="width: 100%; margin-top: 16px; justify-content: center;" onclick="switchStage('input')">
+            ← Search Another Stock
+          </button>
+        </aside>
+
+        <!-- Report Sheet -->
+        <section class="report-sheet">
+          <div class="paper-punches"><span></span><span></span><span></span></div>
+
+          <!-- Official Stamp -->
+          <div class="report-stamp stamp-green" style="border-color: #166534; color: #166534;">
+            REGULATION 33<br />
+            <strong>AUDITED</strong>
+            <span id="fin-stamp-quarter">Q1 FY2026-27</span>
+          </div>
+
+          <!-- Masthead -->
+          <div class="report-masthead">
+            <span>OFFICIAL FINANCIAL &amp; QUARTERLY REPORT DOSSIER</span>
+            <span id="fin-filing-code">SEBI (LODR) REGULATION 33</span>
+          </div>
+
+          <!-- Subject Head -->
+          <div class="subject-head">
+            <div>
+              <p>CORPORATE ENTITY / SECURITY</p>
+              <h1 id="fin-company-name">Reliance Industries Limited</h1>
+              <span id="fin-ticker-market">RELIANCE.NS · NSE / BSE · INDIA (SEBI)</span>
+            </div>
+
+            <div class="verdict">
+              <small>REPORT STATUS</small>
+              <strong id="fin-status-text" style="color: #166534; font-size: 20px;">VERIFIED</strong>
+              <span id="fin-quarter-badge" class="badge-green" style="background: rgba(22,101,52,0.12); color: #166534;">Q1 FY27</span>
+            </div>
+          </div>
+
+          <!-- Price & Metrics Strip -->
+          <div class="price-strip">
+            <div>
+              <small>GROSS REVENUE</small>
+              <strong id="fin-metric-revenue">₹3,09,468 Cr</strong>
+            </div>
+            <div>
+              <small>NET PROFIT (PAT)</small>
+              <strong id="fin-metric-pat">₹20,946 Cr</strong>
+            </div>
+            <div>
+              <small>EBITDA / OPERATING PROFIT</small>
+              <strong id="fin-metric-op">₹43,765 Cr</strong>
+            </div>
+            <div>
+              <small>PROFIT MARGIN / ROE</small>
+              <strong id="fin-metric-margin">6.77% PAT Margin</strong>
+            </div>
+          </div>
+
+          <!-- Section 01: Key Financial Takeaways in Simple Pointers -->
+          <div class="report-section">
+            <span class="section-no">01</span>
+            <div style="min-width: 0;">
+              <p class="report-label">AGENT HIGHLIGHTS · NATURAL LANGUAGE SUMMARY</p>
+              <h2>Key Financial Takeaways (In Simple Pointers)</h2>
+              <div class="quarterly-pointers-box" style="margin-top: 14px;">
+                <ul id="fin-pointers-list" class="quarterly-pointers-list">
+                  <!-- Rendered dynamically -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 02: Segmental Performance -->
+          <div class="report-section">
+            <span class="section-no">02</span>
+            <div style="min-width: 0;">
+              <p class="report-label">SEGMENT-LEVEL REVENUE &amp; PROFIT CONTRIBUTION</p>
+              <h2>Quarterly Segment Performance</h2>
+              <div id="fin-segment-grid" class="segment-grid">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 03: SWOT Analysis Matrix -->
+          <div class="report-section">
+            <span class="section-no">03</span>
+            <div style="min-width: 0;">
+              <p class="report-label">STRATEGIC FINANCIAL POSITIONING</p>
+              <h2>Financial Statement SWOT Analysis Matrix</h2>
+              <div class="swot-table-wrap" style="margin-top: 14px;">
+                <table class="swot-grid-table">
+                  <thead>
+                    <tr>
+                      <th colspan="2" id="fin-swot-table-header">FINANCIAL STATEMENT SWOT ANALYSIS · PAST QUARTER</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span class="swot-quad-label swot-s">Strengths (Internal Financial Positives)</span>
+                        <ul id="fin-swot-strengths" class="swot-list"></ul>
+                      </td>
+                      <td>
+                        <span class="swot-quad-label swot-w">Weaknesses (Internal Financial Challenges)</span>
+                        <ul id="fin-swot-weaknesses" class="swot-list"></ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="swot-quad-label swot-o">Opportunities (External Growth Tailwinds)</span>
+                        <ul id="fin-swot-opportunities" class="swot-list"></ul>
+                      </td>
+                      <td>
+                        <span class="swot-quad-label swot-t">Threats (External &amp; Regulatory Headwinds)</span>
+                        <ul id="fin-swot-threats" class="swot-list"></ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 04: Agent Execution & Regulatory Notes -->
+          <div class="report-section">
+            <span class="section-no">04</span>
+            <div style="min-width: 0;">
+              <p class="report-label">DETERMINISTIC VERIFICATION &amp; PROVENANCE</p>
+              <h2>Agent Execution &amp; Provenance Details</h2>
+              <p class="report-text" id="fin-provenance-text">
+                This summary was compiled by the <code>quarterly_report_agent</code> from Regulation 33 unaudited quarterly financial statements submitted to the National Stock Exchange (NSE) and Bombay Stock Exchange (BSE). Figures reflect limited-review compliance standards.
+              </p>
+            </div>
+          </div>
+
+          <!-- Signoff -->
+          <div class="analyst-signoff">
+            <div>
+              <span>QUARTERLY REPORT DOSSIER SEALED BY</span>
+              <strong>InvestPI Machine Audit Engine</strong>
+              <small>SEBI LODR Regulation 33 Disclosure Ingestion Desk</small>
+            </div>
+            <button class="button button-ghost" onclick="switchStage('input')">
+              ← Return to Investigation Desk
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
 
   <script>
     // Global Application State
     const state = {
-      stage: 'input', // 'input' | 'loading' | 'report'
+      stage: 'input', // 'input' | 'loading' | 'report' | 'financial-report'
       modality: 'video', // 'video' | 'image' | 'text' | 'pdf'
       selectedFile: null,
       selectedPdf: null,
@@ -1501,10 +2057,241 @@
       document.getElementById('stage-input').style.display = stageName === 'input' ? 'block' : 'none';
       document.getElementById('stage-loading').style.display = stageName === 'loading' ? 'flex' : 'none';
       document.getElementById('stage-report').style.display = stageName === 'report' ? 'block' : 'none';
+      const stageFin = document.getElementById('stage-financial-report');
+      if (stageFin) {
+        stageFin.style.display = stageName === 'financial-report' ? 'block' : 'none';
+      }
       if (stageName !== 'report') {
         toggleForensicChat(false);
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function clearFinancialSearchMsg() {
+      const msgEl = document.getElementById('fin-search-msg');
+      if (msgEl) {
+        msgEl.style.display = 'none';
+        msgEl.className = 'fin-search-msg';
+        msgEl.innerHTML = '';
+      }
+    }
+
+    function handleFinancialDropdownChange(val) {
+      const msgEl = document.getElementById('fin-search-msg');
+      if (val === 'UNSUPPORTED') {
+        if (msgEl) {
+          msgEl.className = 'fin-search-msg error';
+          msgEl.style.display = 'flex';
+          msgEl.innerHTML = '<span class="fin-msg-badge">STATUS</span> No report available';
+        }
+        return;
+      }
+      clearFinancialSearchMsg();
+      if (val) {
+        openFinancialReportPage(val);
+      }
+    }
+
+    function selectAndSearchFinancial(tickerOrName) {
+      const sel = document.getElementById('select-financial-stock');
+      const norm = tickerOrName.toUpperCase().trim();
+      let matched = null;
+      if (sel) {
+        for (let i = 0; i < sel.options.length; i++) {
+          const optVal = sel.options[i].value;
+          if (optVal.includes(norm) || (norm === 'RELIANCE' && optVal === 'RELIANCE.NS') || (norm === 'SBI' && optVal === 'SBIN.NS') || (norm === 'TCS' && optVal === 'TCS.NS') || (norm === 'INFY' && optVal === 'INFY.NS') || (norm === 'HDFCBANK' && optVal === 'HDFCBANK.NS') || (norm === 'ITC' && optVal === 'ITC.NS') || (norm === 'TATASTEEL' && optVal === 'TATASTEEL.NS') || (norm === 'TRENT' && optVal === 'TRENT.NS') || (norm === 'TVSMOTOR' && optVal === 'TVSMOTOR.NS') || (norm === 'ZOMATO' && optVal === 'ZOMATO.NS')) {
+            matched = optVal;
+            sel.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      if (matched) {
+        clearFinancialSearchMsg();
+        openFinancialReportPage(matched);
+      } else {
+        executeFinancialSearch();
+      }
+    }
+
+    async function executeFinancialSearch() {
+      const selectEl = document.getElementById('select-financial-stock');
+      const msgEl = document.getElementById('fin-search-msg');
+      const selectedVal = (selectEl ? selectEl.value : '').trim();
+
+      if (!selectedVal) {
+        if (msgEl) {
+          msgEl.className = 'fin-search-msg error';
+          msgEl.style.display = 'flex';
+          msgEl.innerHTML = '<span class="fin-msg-badge">REQUIRED</span> Please select an equity from the dropdown list.';
+        }
+        return;
+      }
+
+      if (selectedVal === 'UNSUPPORTED') {
+        if (msgEl) {
+          msgEl.className = 'fin-search-msg error';
+          msgEl.style.display = 'flex';
+          msgEl.innerHTML = '<span class="fin-msg-badge">STATUS</span> No report available';
+        }
+        return;
+      }
+
+      clearFinancialSearchMsg();
+      openFinancialReportPage(selectedVal);
+    }
+
+    async function openFinancialReportPage(targetTicker) {
+      let normalized = targetTicker.toUpperCase().trim();
+      if (!normalized.includes('.')) {
+        if (normalized.includes('RELIANCE') || normalized === 'RIL') normalized = 'RELIANCE.NS';
+        else if (normalized.includes('SBIN') || normalized.includes('SBI')) normalized = 'SBIN.NS';
+        else if (normalized.includes('TCS')) normalized = 'TCS.NS';
+        else if (normalized.includes('INFY')) normalized = 'INFY.NS';
+        else if (normalized.includes('HDFC')) normalized = 'HDFCBANK.NS';
+        else if (normalized === 'ITC') normalized = 'ITC.NS';
+        else if (normalized.includes('TATASTEEL') || normalized.includes('TATA STEEL')) normalized = 'TATASTEEL.NS';
+        else if (normalized.includes('TRENT') || normalized.includes('ZUDIO')) normalized = 'TRENT.NS';
+        else if (normalized.includes('TVS')) normalized = 'TVSMOTOR.NS';
+        else if (normalized.includes('ZOMATO') || normalized.includes('BLINKIT')) normalized = 'ZOMATO.NS';
+      }
+
+      // Update sidebar active folder highlight across 10 demo stocks
+      const allFolders = ['reliance', 'sbin', 'tcs', 'infy', 'hdfcbank', 'itc', 'tatasteel', 'trent', 'tvsmotor', 'zomato'];
+      const baseKey = normalized.replace('.NS', '').toLowerCase();
+      allFolders.forEach(key => {
+        const el = document.getElementById('fin-folder-' + key);
+        if (el) el.classList.toggle('active', key === baseKey || normalized.toLowerCase().includes(key));
+      });
+
+      // Keep intake desk select dropdown in sync
+      const selEl = document.getElementById('select-financial-stock');
+      if (selEl && normalized) {
+        selEl.value = normalized;
+      }
+
+      try {
+        const res = await fetch(`/api/agent/quarterly-report/${encodeURIComponent(normalized)}`);
+        if (!res.ok) {
+          alert("Error retrieving quarterly report from agent.");
+          return;
+        }
+        const qData = await res.json();
+        if (!qData || !qData.is_supported_demo_stock) {
+          const msgEl = document.getElementById('fin-search-msg');
+          if (msgEl) {
+            msgEl.className = 'fin-search-msg error';
+            msgEl.style.display = 'flex';
+            msgEl.innerHTML = '<span class="fin-msg-badge">STATUS</span> No report available';
+          }
+          return;
+        }
+
+        // Header info
+        const headStockEl = document.getElementById('fin-header-stock-id');
+        if (headStockEl) headStockEl.innerText = `${qData.ticker} · ${qData.quarter_label.split('(')[0].trim()}`;
+
+        // Sidebar
+        const sideTitle = document.getElementById('fin-sidebar-title');
+        if (sideTitle) sideTitle.innerText = qData.company_name;
+
+        // Subject head
+        const compNameEl = document.getElementById('fin-company-name');
+        if (compNameEl) compNameEl.innerText = qData.company_name;
+
+        const tickMktEl = document.getElementById('fin-ticker-market');
+        if (tickMktEl) tickMktEl.innerText = `${qData.ticker} · ${qData.exchange || 'NSE / BSE'} · INDIA (SEBI)`;
+
+        const quarterBadgeEl = document.getElementById('fin-quarter-badge');
+        if (quarterBadgeEl) quarterBadgeEl.innerText = qData.quarter_label.split('(')[0].trim();
+
+        const stampQuarterEl = document.getElementById('fin-stamp-quarter');
+        if (stampQuarterEl) stampQuarterEl.innerText = qData.quarter_label.split('(')[0].trim();
+
+        // Headline Metrics
+        const hm = qData.headline_metrics || {};
+        const revEl = document.getElementById('fin-metric-revenue');
+        if (revEl) revEl.innerText = hm.gross_revenue_formatted || 'N/A';
+
+        const patEl = document.getElementById('fin-metric-pat');
+        if (patEl) patEl.innerText = hm.net_profit_formatted || 'N/A';
+
+        const opEl = document.getElementById('fin-metric-op');
+        if (opEl) {
+          opEl.innerText = hm.ebitda_formatted || hm.operating_profit_formatted || (hm.operating_profit_cr ? `₹${Number(hm.operating_profit_cr).toLocaleString('en-IN')} Cr` : 'N/A');
+        }
+
+        const marginEl = document.getElementById('fin-metric-margin');
+        if (marginEl) {
+          if (hm.pat_qoq_growth_pct !== undefined) {
+            marginEl.innerText = `${hm.pat_qoq_growth_pct > 0 ? '+' : ''}${hm.pat_qoq_growth_pct}% QoQ PAT`;
+          } else if (hm.net_profit_margin_pct) {
+            marginEl.innerText = `${hm.net_profit_margin_pct}% PAT Margin`;
+          } else {
+            marginEl.innerText = 'Regulation 33';
+          }
+        }
+
+        const formatBold = (str) => String(str || '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Simple pointers list
+        const pList = document.getElementById('fin-pointers-list');
+        if (pList) {
+          pList.innerHTML = (qData.simple_pointers || []).map(p => `<li>${formatBold(p)}</li>`).join('');
+        }
+
+        // Segment cards grid
+        const segGrid = document.getElementById('fin-segment-grid');
+        if (segGrid) {
+          const segs = qData.segment_performance || [];
+          if (segs.length > 0) {
+            segGrid.innerHTML = segs.map(s => {
+              const segName = s.segment || s.segment_name || 'Segment';
+              const revVal = s.revenue_cr ? `₹${Number(s.revenue_cr).toLocaleString('en-IN')} Cr` : (s.revenue || 'N/A');
+              const opVal = s.ebitda_cr ? `₹${Number(s.ebitda_cr).toLocaleString('en-IN')} Cr` : (s.operating_profit || 'N/A');
+              const marginVal = s.ebitda_margin_pct ? ` (${s.ebitda_margin_pct}% Margin)` : '';
+              const desc = s.highlight || s.notes || s.description || '';
+              return `
+                <div class="segment-card">
+                  <div class="segment-card-title">${segName}</div>
+                  <div class="segment-card-metrics">Revenue: ${revVal} | Operating Profit: ${opVal}${marginVal}</div>
+                  <div class="segment-card-desc">${formatBold(desc)}</div>
+                </div>
+              `;
+            }).join('');
+          } else {
+            segGrid.innerHTML = '<p style="color:#7d7261; font-size:12px;">Segment performance consolidated in core financials.</p>';
+          }
+        }
+
+        // SWOT Table
+        const swotHead = document.getElementById('fin-swot-table-header');
+        if (swotHead) {
+          swotHead.innerText = `FINANCIAL STATEMENT SWOT ANALYSIS · ${qData.company_name.toUpperCase()} (${qData.quarter_label.toUpperCase()})`;
+        }
+
+        const swot = qData.swot || {};
+        const renderList = (id, arr) => {
+          const el = document.getElementById(id);
+          if (el) el.innerHTML = (arr || []).map(item => `<li>${formatBold(item)}</li>`).join('');
+        };
+        renderList('fin-swot-strengths', swot.strengths);
+        renderList('fin-swot-weaknesses', swot.weaknesses);
+        renderList('fin-swot-opportunities', swot.opportunities);
+        renderList('fin-swot-threats', swot.threats);
+
+        const provEl = document.getElementById('fin-provenance-text');
+        if (provEl) {
+          const ragTag = qData.rag_source || 'BigQuery Vector RAG (text-embedding-004)';
+          provEl.innerHTML = `This quarterly summary and SWOT matrix were synthesized by the <code>quarterly_report_agent</code> consuming semantic chunks from <strong>${ragTag}</strong> across official Regulation 33 quarterly statements submitted to BSE & NSE.`;
+        }
+
+        // Switch to the separate financial report stage
+        switchStage('financial-report');
+      } catch (err) {
+        console.error("Failed to load quarterly report page:", err);
+        alert("Failed to load quarterly report page. Please try again.");
+      }
     }
 
     function flipCard(shouldFlip) {
@@ -1576,6 +2363,15 @@
     }
 
     async function submitInvestigation() {
+      if (state.modality === 'pdf') {
+        const stockSelect = document.getElementById('select-financial-stock');
+        const q = (stockSelect ? stockSelect.value : '').trim();
+        if (q.length > 0) {
+          executeFinancialSearch();
+          return;
+        }
+      }
+
       const region = document.getElementById('jurisdictionSelect').value;
       const loadingText = document.getElementById('loading-status-text');
       switchStage('loading');
@@ -1886,8 +2682,104 @@
         gridEl.appendChild(card);
       });
 
+      // Load Quarterly Financial Report Summarizer & SWOT Section (Demo: RELIANCE.NS & SBIN.NS)
+      const activeTicker = (stock.ticker || '').toUpperCase();
+      if (activeTicker.includes('SBIN') || activeTicker === 'SBI') {
+        loadQuarterlyReportSection('SBIN.NS');
+      } else {
+        loadQuarterlyReportSection('RELIANCE.NS');
+      }
+
       // Initialize Forensic AI Assistant for active audited report
       initForensicChat(rep);
+    }
+
+    async function loadQuarterlyReportSection(targetTicker) {
+      const btnRel = document.getElementById('btn-q-reliance');
+      const btnSbi = document.getElementById('btn-q-sbin');
+      if (btnRel) btnRel.classList.toggle('active', targetTicker === 'RELIANCE.NS');
+      if (btnSbi) btnSbi.classList.toggle('active', targetTicker === 'SBIN.NS');
+
+      try {
+        const res = await fetch(`/api/agent/quarterly-report/${encodeURIComponent(targetTicker)}`);
+        if (!res.ok) return;
+        const qData = await res.json();
+        if (!qData || !qData.is_supported_demo_stock) return;
+
+        const titleEl = document.getElementById('quarterly-section-title');
+        if (titleEl) {
+          titleEl.innerText = `${qData.company_name} (${qData.ticker}) — Past Quarter Summary & SWOT`;
+        }
+        const filingLabelEl = document.getElementById('quarterly-filing-label');
+        if (filingLabelEl) {
+          filingLabelEl.innerText = `Filing: ${qData.filing_type} · ${qData.quarter_label}`;
+        }
+        const badgeEl = document.getElementById('quarterly-agent-badge');
+        if (badgeEl) {
+          const hm = qData.headline_metrics || {};
+          badgeEl.innerText = `Revenue: ${hm.gross_revenue_formatted || 'N/A'} | Net Profit (PAT): ${hm.net_profit_formatted || 'N/A'}`;
+        }
+        const swotHead = document.getElementById('swot-table-header');
+        if (swotHead) {
+          swotHead.innerText = `FINANCIAL STATEMENT SWOT ANALYSIS MATRIX · ${qData.company_name.toUpperCase()} (${qData.quarter_label.toUpperCase()})`;
+        }
+
+        const formatBold = (str) => String(str || '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        const pList = document.getElementById('quarterly-pointers-list');
+        if (pList) {
+          pList.innerHTML = (qData.simple_pointers || []).map(p => `<li>${formatBold(p)}</li>`).join('');
+        }
+
+        const swot = qData.swot || {};
+        const renderList = (id, arr) => {
+          const el = document.getElementById(id);
+          if (el) el.innerHTML = (arr || []).map(item => `<li>${formatBold(item)}</li>`).join('');
+        };
+        renderList('swot-strengths-list', swot.strengths);
+        renderList('swot-weaknesses-list', swot.weaknesses);
+        renderList('swot-opportunities-list', swot.opportunities);
+        renderList('swot-threats-list', swot.threats);
+      } catch (e) {
+        console.warn("Failed to load quarterly report summary:", e);
+      }
+    }
+
+    function renderMarkdownTables(text) {
+      const lines = text.split('\n');
+      const out = [];
+      let inTable = false;
+      let tableRows = [];
+
+      const flushTable = () => {
+        if (tableRows.length === 0) return;
+        let html = '<table class="chat-md-table">';
+        tableRows.forEach((row, rIdx) => {
+          const cells = row.split('|').slice(1, -1).map(c => c.trim());
+          if (rIdx === 1 && cells.every(c => /^[:\-]+$/.test(c))) return;
+          const tag = rIdx === 0 ? 'th' : 'td';
+          html += '<tr>' + cells.map(c => `<${tag}>${c}</${tag}>`).join('') + '</tr>';
+        });
+        html += '</table>';
+        out.push(html);
+        tableRows = [];
+      };
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+          inTable = true;
+          tableRows.push(trimmed);
+        } else {
+          if (inTable) {
+            flushTable();
+            inTable = false;
+          }
+          out.push(line);
+        }
+      }
+      if (inTable) flushTable();
+      return out.join('\n');
     }
 
     /* ==================== FORENSIC CHATBOT CONTROLLER ==================== */
@@ -1937,7 +2829,7 @@
         <div class="chat-bubble chat-bubble-assistant">
           <p><strong>InvestPI Forensic Assistant Online</strong></p>
           <p>I am grounded in the 9-parameter compliance findings for <strong>${company} (${ticker})</strong> with an InvestPI Score of <strong>${score}/10</strong> (${flag}).</p>
-          <p>You can interrogate the empirical findings, price move plausibility, valuation envelopes, or regulatory checks. <em>Guardrails are active to preserve focus on this case file.</em></p>
+          <p>You can interrogate the empirical findings, price move plausibility, valuation envelopes, quarterly report SWOT analysis, or regulatory checks. <em>Guardrails are active to preserve focus on this case file.</em></p>
         </div>
       `;
     }
@@ -2017,13 +2909,16 @@
               historic_price_agent: '📈 Historic Price Agent',
               price_target_agent: '🎯 Price Target / EMA200 Agent',
               fundamentals_agent: '📊 Fundamentals Agent',
+              quarterly_report_agent: '📑 Quarterly Report & SWOT Agent',
               explainer_agent: '💡 Simple Explainer'
             };
             const pills = invoked.map(a => `<span style="display:inline-block;background:#e8e2d2;color:#11221b;font:600 9.5px 'DM Mono',monospace;padding:2px 6px;border-radius:4px;margin:0 4px 4px 0;">${labelMap[a] || a}</span>`).join('');
             agentBadgeHtml = `<div style="margin-bottom:6px;border-bottom:1px solid rgba(0,0,0,.08);padding-bottom:4px;">${pills}</div>`;
           }
-          // Convert markdown formatting to clean HTML
-          const formatted = replyText
+          // Convert markdown tables and formatting to clean HTML
+          const withTables = renderMarkdownTables(replyText);
+          const formatted = withTables
+            .replace(/^####\s+(.*)$/gm, '<strong>$1</strong>')
             .replace(/^###\s+(.*)$/gm, '<strong>$1</strong>')
             .replace(/^##\s+(.*)$/gm, '<strong>$1</strong>')
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')

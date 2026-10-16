@@ -903,6 +903,37 @@ def create_app():
             "stream_url": f"/api/cases/{task_id}/stream"
         }), 202
 
+    @app.route("/api/agent/quarterly-report/<ticker>", methods=["GET"])
+    def get_quarterly_report_summary(ticker):
+        """
+        Financial & Quarterly Report Summarizer & SWOT Analysis (Demo: RELIANCE.NS & SBIN.NS)
+        ---
+        tags:
+          - Forensic Engine
+        parameters:
+          - name: ticker
+            in: path
+            type: string
+            required: true
+            description: Stock ticker symbol (Demo supported for RELIANCE.NS and SBIN.NS)
+            example: RELIANCE.NS
+          - name: live_gemini
+            in: query
+            type: boolean
+            required: false
+            default: false
+            description: Whether to run live Gemini document extraction over the raw filing document
+        responses:
+          200:
+            description: Simple bullet pointers and 4-quadrant SWOT analysis table from past-quarter financial filing.
+        """
+        live_gemini = request.args.get("live_gemini", "").lower() in ("1", "true", "yes")
+        res = forensic_agent.coordinator.quarterly_agent.run(
+            ticker=ticker,
+            analyze_with_gemini=live_gemini
+        )
+        return jsonify(res), 200
+
     return app
 
 

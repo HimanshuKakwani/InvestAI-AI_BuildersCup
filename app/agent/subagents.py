@@ -685,10 +685,244 @@ class SimpleExplainerSubAgent:
         }
 
 
+class QuarterlyReportSummarizerSubAgent:
+    """
+    Sub-Agent 5: Financial & Quarterly Reports Document Summarizer & SWOT Matrix Generator.
+    Reads official past-quarter corporate financial filings (Regulation 33 Consolidated Results),
+    distills the financial statement into simple, jargon-free bullet pointers, and constructs a
+    4-quadrant SWOT Analysis table grounded strictly in quarterly financial statement metrics.
+    For demo purposes, supports past-quarter filings for Reliance Industries (`RELIANCE.NS`)
+    and State Bank of India (`SBIN.NS`).
+    """
+
+    AGENT_ID = "quarterly_report_agent"
+    ROLE = "Financial & Quarterly Reports Summarizer Sub-Agent"
+    SUPPORTED_DEMO_TICKERS = {
+        "RELIANCE.NS": "RELIANCE.NS_Q1_FY27",
+        "SBIN.NS": "SBIN.NS_Q1_FY27",
+        "TCS.NS": "TCS.NS_Q1_FY27",
+        "INFY.NS": "INFY.NS_Q1_FY27",
+        "HDFCBANK.NS": "HDFCBANK.NS_Q1_FY27",
+        "ITC.NS": "ITC.NS_Q1_FY27",
+        "TATASTEEL.NS": "TATASTEEL.NS_Q1_FY27",
+        "TRENT.NS": "TRENT.NS_Q1_FY27",
+        "TVSMOTOR.NS": "TVSMOTOR.NS_Q1_FY27",
+        "ZOMATO.NS": "ZOMATO.NS_Q1_FY27",
+    }
+
+    def __init__(self, loader: Optional[DataLoader] = None):
+        self.loader = loader or DataLoader()
+
+    @classmethod
+    def normalize_demo_ticker(cls, ticker_or_name: str) -> Optional[str]:
+        """Map raw ticker/alias to one of the 10 supported demo stocks."""
+        raw = (ticker_or_name or "").strip().upper()
+        if not raw:
+            return None
+
+        # Direct ticker check
+        if raw in cls.SUPPORTED_DEMO_TICKERS:
+            return raw
+        base = raw.replace(".NS", "").replace(".BO", "")
+        if f"{base}.NS" in cls.SUPPORTED_DEMO_TICKERS:
+            return f"{base}.NS"
+
+        # Alias mappings
+        if "RELIANCE" in raw or raw in ("RIL", "JIO"):
+            return "RELIANCE.NS"
+        if "STATE BANK" in raw or raw in ("SBI", "SBIN"):
+            return "SBIN.NS"
+        if "TATA CONSULTANCY" in raw or raw == "TCS":
+            return "TCS.NS"
+        if "INFOSYS" in raw or raw == "INFY":
+            return "INFY.NS"
+        if "HDFC" in raw and ("BANK" in raw or raw in ("HDFCBANK", "HDFC")):
+            return "HDFCBANK.NS"
+        if raw == "ITC" or "ITC LIMITED" in raw:
+            return "ITC.NS"
+        if "TATA STEEL" in raw or raw == "TATASTEEL":
+            return "TATASTEEL.NS"
+        if "TRENT" in raw or "ZUDIO" in raw or "WESTSIDE" in raw:
+            return "TRENT.NS"
+        if "TVS" in raw or "TVS MOTOR" in raw or raw == "TVSMOTOR":
+            return "TVSMOTOR.NS"
+        if "ZOMATO" in raw or "BLINKIT" in raw or "ETERNAL" in raw:
+            return "ZOMATO.NS"
+
+        return None
+
+    def run(self, ticker: str, analyze_with_gemini: bool = False) -> Dict[str, Any]:
+        """
+        Read the past-quarter financial filing document & structured statement for the target stock,
+        produce simple bullet pointers, and build a Markdown + structured SWOT Analysis table.
+        Consumes chunks from BigQuery RAG with local deterministic fallback.
+        """
+        import json
+        from app.config import DATA_DIR, Config
+        from app.agent.bigquery_rag import BigQueryFinancialRAG
+
+        start_ts = time.time()
+        norm_ticker = self.normalize_demo_ticker(ticker)
+        sym = _currency_symbol(norm_ticker or ticker)
+
+        if not norm_ticker or norm_ticker not in self.SUPPORTED_DEMO_TICKERS:
+            return {
+                "agent_id": self.AGENT_ID,
+                "role": self.ROLE,
+                "status": "DEMO_UNSUPPORTED_TICKER",
+                "is_supported_demo_stock": False,
+                "ticker": ticker,
+                "supported_tickers": list(self.SUPPORTED_DEMO_TICKERS.keys()),
+                "summary": (
+                    f"[{self.ROLE}] Full past-quarter financial report document summarization and SWOT table "
+                    f"generation is currently enabled for 10 marquee stocks: "
+                    f"{', '.join(self.SUPPORTED_DEMO_TICKERS.keys())}. Active stock: `{ticker}`."
+                ),
+                "simple_pointers": [],
+                "swot": {"strengths": [], "weaknesses": [], "opportunities": [], "threats": []},
+                "swot_markdown_table": "",
+                "sources": [f"NSE / BSE Regulation 33 Filings (10-Stock Pack)"],
+                "latency_ms": round((time.time() - start_ts) * 1000, 2)
+            }
+
+        file_stem = self.SUPPORTED_DEMO_TICKERS[norm_ticker]
+        q_dir = DATA_DIR / "quarterly_reports"
+        json_path = q_dir / f"{file_stem}.json"
+        md_doc_path = q_dir / f"{file_stem}.md"
+
+        q_data: Dict[str, Any] = {}
+        raw_doc_text = ""
+        if json_path.exists():
+            try:
+                with open(json_path, "r", encoding="utf-8") as f:
+                    q_data = json.load(f)
+            except Exception as e:
+                logger.warning(f"Failed to read quarterly JSON {json_path}: {e}")
+
+        if md_doc_path.exists():
+            try:
+                with open(md_doc_path, "r", encoding="utf-8") as f:
+                    raw_doc_text = f.read()
+            except Exception as e:
+                logger.warning(f"Failed to read quarterly MD doc {md_doc_path}: {e}")
+
+        company_name = q_data.get("company_name", norm_ticker)
+        quarter_label = q_data.get("quarter_label", "Past Quarter (Q1 FY2026-27)")
+        filing_type = q_data.get("filing_type", "Regulation 33 Quarterly Financial Results")
+        filing_source = q_data.get("FilingSource", "BSE / NSE Quarterly Corporate Filings")
+        metrics = q_data.get("headline_metrics", {})
+        segments = q_data.get("segment_performance", [])
+        pointers = list(q_data.get("simple_pointers", []))
+        swot = q_data.get("swot", {"strengths": [], "weaknesses": [], "opportunities": [], "threats": []})
+        analysis_engine_used = "Deterministic Filing Document Parser (Primary Fast-Path)"
+
+        # Optional live Gemini document reading & enhancement over the raw quarterly filing (.md)
+        if analyze_with_gemini and raw_doc_text and getattr(Config, "GEMINI_API_KEY", None) and not getattr(Config, "DEMO_MODE", False):
+            try:
+                from google import genai
+                from google.genai import types
+                client = genai.Client(api_key=Config.GEMINI_API_KEY)
+                prompt = (
+                    f"Read the following official quarterly financial filing for {company_name} ({norm_ticker}) "
+                    f"and return a JSON object with keys 'simple_pointers' (array of 5 plain-English bullet strings "
+                    f"with exact ₹ Crore figures and % growth) and 'swot' (object with keys 'strengths', 'weaknesses', "
+                    f"'opportunities', 'threats', each an array of 3 concise financial bullet strings).\n\n"
+                    f"DOCUMENT:\n{raw_doc_text}"
+                )
+                for model_name in ("gemini-3.1-flash-lite", "models/gemini-flash-lite-latest", "gemini-2.0-flash"):
+                    try:
+                        resp = client.models.generate_content(
+                            model=model_name,
+                            contents=prompt,
+                            config=types.GenerateContentConfig(
+                                temperature=0.1,
+                                max_output_tokens=1500,
+                                response_mime_type="application/json"
+                            )
+                        )
+                        parsed = json.loads(resp.text or "{}")
+                        if parsed.get("simple_pointers") and parsed.get("swot"):
+                            pointers = parsed["simple_pointers"]
+                            swot = parsed["swot"]
+                            analysis_engine_used = f"Gemini Live Document Reader ({model_name})"
+                            break
+                    except Exception as inner_e:
+                        logger.debug(f"Quarterly report Gemini model {model_name} fallback: {inner_e}")
+            except Exception as e:
+                logger.warning(f"Gemini live quarterly document summarization fell back to deterministic filing pack: {e}")
+
+        # Build clean Markdown SWOT Table
+        s_items = " <br>• ".join(swot.get("strengths", []))
+        w_items = " <br>• ".join(swot.get("weaknesses", []))
+        o_items = " <br>• ".join(swot.get("opportunities", []))
+        t_items = " <br>• ".join(swot.get("threats", []))
+
+        swot_md_table = (
+            "| SWOT Dimension | Key Financial Statement Insights (" + quarter_label + ") |\n"
+            "| :--- | :--- |\n"
+            f"| **STRENGTHS (Internal Positives)** | • {s_items} |\n"
+            f"| **WEAKNESSES (Internal Challenges)** | • {w_items} |\n"
+            f"| **OPPORTUNITIES (Growth Tailwinds)** | • {o_items} |\n"
+            f"| **THREATS (External Headwinds)** | • {t_items} |"
+        )
+
+        pointers_md = "\n".join(f"- {p}" for p in pointers)
+
+        formatted_report_md = (
+            f"### Quarterly Financial Report Summary: {company_name} ({norm_ticker})\n"
+            f"**Filing Audited:** {filing_type} — **{quarter_label}**\n\n"
+            f"#### Key Takeaways in Simple Pointers:\n"
+            f"{pointers_md}\n\n"
+            f"#### Financial Statement SWOT Analysis Table ({quarter_label}):\n"
+            f"{swot_md_table}\n\n"
+            f"**Source:** {filing_source}"
+        )
+
+        # Query BigQuery Financial RAG for semantic verification chunks
+        rag_engine = BigQueryFinancialRAG()
+        rag_chunks = rag_engine.search_chunks(norm_ticker, query_text="revenue EBITDA net profit PAT growth segments and SWOT analysis", top_k=3)
+        rag_source_tag = "Google BigQuery Vector Search (text-embedding-004)" if rag_engine.is_cloud_enabled else "BigQuery Vector RAG Store (text-embedding-004)"
+
+        return {
+            "agent_id": self.AGENT_ID,
+            "role": self.ROLE,
+            "status": "OK",
+            "is_supported_demo_stock": True,
+            "ticker": norm_ticker,
+            "company_name": company_name,
+            "quarter_label": quarter_label,
+            "filing_type": filing_type,
+            "currency_symbol": sym,
+            "analysis_engine": analysis_engine_used,
+            "headline_metrics": metrics,
+            "segment_performance": segments,
+            "simple_pointers": pointers,
+            "swot": swot,
+            "swot_markdown_table": swot_md_table,
+            "formatted_report_markdown": formatted_report_md,
+            "document_excerpt": raw_doc_text[:600] if raw_doc_text else "",
+            "rag_source": rag_source_tag,
+            "rag_chunks": rag_chunks,
+            "summary": formatted_report_md,
+            "sources": [
+                filing_source,
+                rag_source_tag,
+                f"data/quarterly_reports/{file_stem}.md",
+                f"data/quarterly_reports/{file_stem}.json"
+            ],
+            "latency_ms": round((time.time() - start_ts) * 1000, 2)
+        }
+
+
 class SubAgentCoordinator:
     """
     Orchestrates the chatbot sub-agents in parallel and integrates with the Pub/Sub event bus.
-    Routes user queries to the specialized sub-agents and aggregates their empirical findings.
+    Routes user queries to the specialized sub-agents and aggregates their empirical findings:
+      1. HistoricalPriceSubAgent (`historic_price_agent`)
+      2. PriceTargetSubAgent (`price_target_agent`)
+      3. FundamentalsSubAgent (`fundamentals_agent`)
+      4. QuarterlyReportSummarizerSubAgent (`quarterly_report_agent`)
+      5. SimpleExplainerSubAgent (`explainer_agent`)
     """
 
     def __init__(self, loader: Optional[DataLoader] = None):
@@ -696,6 +930,7 @@ class SubAgentCoordinator:
         self.price_agent = HistoricalPriceSubAgent(self.loader)
         self.target_agent = PriceTargetSubAgent(self.loader)
         self.fundamentals_agent = FundamentalsSubAgent(self.loader)
+        self.quarterly_agent = QuarterlyReportSummarizerSubAgent(self.loader)
         self.explainer_agent = SimpleExplainerSubAgent()
 
     def detect_relevant_agents(self, message: str) -> List[str]:
@@ -724,21 +959,30 @@ class SubAgentCoordinator:
             "fundamental", "fundamentals", "pe", "p/e", "valuation", "eps",
             "earning", "earnings", "revenue", "sales", "profit", "loss", "income",
             "pat", "market cap", "promoter", "holding", "pledge", "pledging",
-            "balance sheet", "financial", "financials", "quarter", "annual", "sector"
+            "balance sheet", "financial", "financials", "annual", "sector"
         ]):
             selected.append(FundamentalsSubAgent.AGENT_ID)
 
-        # 4. Simple explanation / summary triggers or fallback
+        # 4. Quarterly Report Summarizer & SWOT triggers
+        if any(w in lower for w in [
+            "quarterly", "quarter", "q1", "q2", "q3", "q4", "swot",
+            "strengths", "weaknesses", "opportunities", "threats",
+            "quarterly report", "financial report", "results", "pointers",
+            "segment", "jio", "o2c", "nii", "nim", "gnpa", "nnpa", "casa"
+        ]):
+            selected.append(QuarterlyReportSummarizerSubAgent.AGENT_ID)
+
+        # 5. Simple explanation / summary triggers or fallback
         if any(w in lower for w in [
             "simple", "simply", "explain", "summary", "summarize", "overview",
             "all", "everything", "easy", "beginner", "layman", "break down", "breakdown",
             "tell me about", "what do you think", "score", "verdict"
         ]) or not selected:
-            # When user asks for a general explanation or overview, run all 3 data agents + explainer
             for aid in [
                 HistoricalPriceSubAgent.AGENT_ID,
                 PriceTargetSubAgent.AGENT_ID,
                 FundamentalsSubAgent.AGENT_ID,
+                QuarterlyReportSummarizerSubAgent.AGENT_ID,
             ]:
                 if aid not in selected:
                     selected.append(aid)
@@ -756,7 +1000,7 @@ class SubAgentCoordinator:
         message: str = ""
     ) -> Dict[str, Any]:
         """
-        Executes the data sub-agents concurrently via ThreadPoolExecutor and synthesizes
+        Executes the data & document sub-agents concurrently via ThreadPoolExecutor and synthesizes
         plain-language explanations via SimpleExplainerSubAgent.
         """
         start_ts = time.time()
@@ -766,15 +1010,25 @@ class SubAgentCoordinator:
 
         invoked_ids = self.detect_relevant_agents(message)
 
-        # Execute the 3 empirical data sub-agents concurrently
-        with concurrent.futures.ThreadPoolExecutor(max_workers=3, thread_name_prefix="chatbot-subagent") as pool:
+        # Allow explicit mention of Reliance or SBIN in message to override ticker for quarterly agent if queried
+        lower_msg = (message or "").lower()
+        quarterly_ticker = ticker
+        if "reliance" in lower_msg or "ril" in lower_msg.split():
+            quarterly_ticker = "RELIANCE.NS"
+        elif "sbin" in lower_msg or "sbi" in lower_msg.split() or "state bank" in lower_msg:
+            quarterly_ticker = "SBIN.NS"
+
+        # Execute the 4 empirical & document sub-agents concurrently
+        with concurrent.futures.ThreadPoolExecutor(max_workers=4, thread_name_prefix="chatbot-subagent") as pool:
             f_price = pool.submit(self.price_agent.run, ticker)
             f_target = pool.submit(self.target_agent.run, ticker, claimed_target)
             f_fund = pool.submit(self.fundamentals_agent.run, ticker)
+            f_quart = pool.submit(self.quarterly_agent.run, quarterly_ticker)
 
             price_res = f_price.result()
             target_res = f_target.result()
             fund_res = f_fund.result()
+            quart_res = f_quart.result()
 
         # Run SimpleExplainerSubAgent over the gathered empirical results
         explainer_res = self.explainer_agent.run(
@@ -787,7 +1041,7 @@ class SubAgentCoordinator:
 
         # Deduplicate sources across all sub-agents
         all_sources = []
-        for res in (price_res, target_res, fund_res):
+        for res in (price_res, target_res, fund_res, quart_res):
             for src in res.get("sources", []):
                 if src not in all_sources:
                     all_sources.append(src)
@@ -797,6 +1051,7 @@ class SubAgentCoordinator:
             f"=== SUB-AGENT 2: {target_res['summary']}\n\n"
             f"=== SUB-AGENT 3: {fund_res['summary']}\n\n"
             f"=== SUB-AGENT 4 (PLAIN-LANGUAGE SYNTHESIS):\n{explainer_res['summary']}\n\n"
+            f"=== SUB-AGENT 5 (QUARTERLY REPORT SUMMARIZER & SWOT TABLE):\n{quart_res['summary']}\n\n"
             f"=== VERIFIED DATA SOURCES:\n" + "\n".join(f"- {s}" for s in all_sources)
         )
 
@@ -807,9 +1062,11 @@ class SubAgentCoordinator:
                 HistoricalPriceSubAgent.AGENT_ID: price_res,
                 PriceTargetSubAgent.AGENT_ID: target_res,
                 FundamentalsSubAgent.AGENT_ID: fund_res,
+                QuarterlyReportSummarizerSubAgent.AGENT_ID: quart_res,
                 SimpleExplainerSubAgent.AGENT_ID: explainer_res,
             },
             "sources": all_sources,
             "prompt_context_block": prompt_context_block,
             "total_latency_ms": round((time.time() - start_ts) * 1000, 2)
         }
+

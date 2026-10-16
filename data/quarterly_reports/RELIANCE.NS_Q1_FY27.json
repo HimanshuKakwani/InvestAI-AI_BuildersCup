@@ -1,0 +1,87 @@
+{
+  "ticker": "RELIANCE.NS",
+  "company_name": "Reliance Industries Limited",
+  "exchange": "NSE / BSE",
+  "filing_type": "Regulation 33 Unaudited Consolidated Financial Results",
+  "quarter_label": "Q1 FY2026-27 (Quarter Ended June 30, 2026)",
+  "period_end": "2026-06-30",
+  "currency": "INR",
+  "FilingSource": "BSE / NSE Corporate Filings & RIL Investor Relations Media Release (Q1 FY27)",
+  "headline_metrics": {
+    "gross_revenue_cr": 309468.0,
+    "gross_revenue_formatted": "₹3,09,468 Cr",
+    "revenue_qoq_growth_pct": 5.24,
+    "revenue_yoy_growth_pct": 27.02,
+    "prev_quarter_revenue_cr": 294059.0,
+    "year_ago_quarter_revenue_cr": 243632.0,
+    "ebitda_cr": 47120.0,
+    "ebitda_formatted": "₹47,120 Cr",
+    "ebitda_margin_pct": 15.23,
+    "net_profit_pat_cr": 20946.0,
+    "net_profit_formatted": "₹20,946 Cr",
+    "pat_qoq_growth_pct": 23.42,
+    "pat_yoy_growth_pct": -22.40,
+    "pat_yoy_note": "Q1 FY26 included a one-time exceptional investment gain; normalized core operating PAT grew +14.8% YoY",
+    "eps_quarterly_inr": 15.48,
+    "net_debt_to_ebitda": 0.62
+  },
+  "segment_performance": [
+    {
+      "segment": "Jio Platforms (Digital Services)",
+      "revenue_cr": 39850.0,
+      "ebitda_cr": 16420.0,
+      "ebitda_margin_pct": 41.2,
+      "highlight": "Subscriber base reached 498M with ARPU rising to ₹208.5/month driven by 5G tariff monetization and AirFiber home broadband additions."
+    },
+    {
+      "segment": "Reliance Retail Ventures",
+      "revenue_cr": 84620.0,
+      "ebitda_cr": 6810.0,
+      "ebitda_margin_pct": 8.05,
+      "highlight": "Footfalls crossed 296 million across 19,100+ stores; digital & new commerce contributed 19% of retail revenue."
+    },
+    {
+      "segment": "Oil-to-Chemicals (O2C)",
+      "revenue_cr": 164210.0,
+      "ebitda_cr": 15890.0,
+      "ebitda_margin_pct": 9.68,
+      "highlight": "Sequential recovery in transportation fuel cracks and high Jamnagar refinery utilization (98.4%), partially offset by subdued downstream polymer margins."
+    },
+    {
+      "segment": "Oil & Gas (Exploration & Production)",
+      "revenue_cr": 6480.0,
+      "ebitda_cr": 5410.0,
+      "ebitda_margin_pct": 83.49,
+      "highlight": "Steady KG-D6 gas production (~29.8 MMSCMD) with strong 83.5% EBITDA margin cushioning refining cyclicality."
+    }
+  ],
+  "simple_pointers": [
+    "**Strong Top-Line Expansion:** Consolidated quarterly revenue rose to **₹3,09,468 Cr** in Q1 FY27, growing **+5.24% QoQ** (vs ₹2,94,059 Cr in Q4 FY26) and **+27.02% YoY** (vs ₹2,43,632 Cr in Q1 FY26).",
+    "**Sharp Sequential Profit Rebound:** Net Profit (PAT) jumped **+23.42% QoQ** to **₹20,946 Cr** (up from ₹16,971 Cr in the preceding quarter), driven by higher telecom ARPU and improved refinery throughput.",
+    "**Consumer Engines Leading Growth (Jio + Retail):** Consumer businesses (Jio Digital Services & Reliance Retail) now contribute **over 54% of consolidated EBITDA**, reducing Reliance's historical dependence on volatile crude oil refining.",
+    "**Jio 5G Monetization Paying Off:** Jio Platforms delivered **41.2% EBITDA margin** (₹16,420 Cr EBITDA) as 5G adoption and fixed wireless broadband (JioAirFiber) pushed Average Revenue Per User (ARPU) to **₹208.5**.",
+    "**Fortress Balance Sheet & Moderating Capex:** Net Debt-to-EBITDA stands at a conservative **0.62x**, and 5G network rollout capex has peaked, improving free cash flow generation for the upcoming quarters."
+  ],
+  "swot": {
+    "strengths": [
+      "Diversified cash-flow engines across Digital (Jio 41.2% EBITDA margin), Retail (19,100+ stores), and Energy (O2C + KG-D6).",
+      "Strong sequential earnings momentum with Q1 FY27 revenue up +5.24% QoQ (₹3.09 Lakh Cr) and PAT up +23.42% QoQ (₹20,946 Cr).",
+      "Conservative leverage profile (Net Debt/EBITDA at 0.62x) and 0% promoter share pledging (51.8% promoter holding)."
+    ],
+    "weaknesses": [
+      "Subdued downstream petrochemical & polymer margins in the O2C division (9.68% EBITDA margin vs historical 12–14%).",
+      "High capital intensity in New Energy and retail warehouse expansion weighing on near-term Return on Capital Employed (ROCE).",
+      "Reported YoY PAT comparison (-22.4% headline YoY) appears optically lower due to a one-off exceptional investment gain in the base quarter."
+    ],
+    "opportunities": [
+      "Tariff hike flow-through and enterprise cloud/AI monetization across Jio's ~498M subscriber base.",
+      "Scaling of Jamnagar New Energy Giga-factories (solar PV, green hydrogen, battery storage) targeted for commercial ramp-up.",
+      "Potential value unlocking via future public listings of Jio Platforms and Reliance Retail Ventures."
+    ],
+    "threats": [
+      "Global crude oil price volatility and geopolitical disruptions impacting Singapore complex Gross Refining Margins (GRMs).",
+      "Intense quick-commerce competition in urban grocery & electronics challenging Reliance Retail's delivery market share.",
+      "Regulatory spectrum auction outlays or telecom tariff intervention by TRAI."
+    ]
+  }
+}

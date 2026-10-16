@@ -5,6 +5,7 @@ from app.agent.subagents import (
     HistoricalPriceSubAgent,
     PriceTargetSubAgent,
     FundamentalsSubAgent,
+    QuarterlyReportSummarizerSubAgent,
     SimpleExplainerSubAgent
 )
 
@@ -16,5 +17,6 @@ __all__ = [
     "HistoricalPriceSubAgent",
     "PriceTargetSubAgent",
     "FundamentalsSubAgent",
+    "QuarterlyReportSummarizerSubAgent",
     "SimpleExplainerSubAgent"
 ]

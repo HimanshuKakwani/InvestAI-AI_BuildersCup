@@ -1,0 +1,84 @@
+{
+  "ticker": "HDFCBANK.NS",
+  "company_name": "HDFC Bank Limited",
+  "exchange": "NSE / BSE",
+  "filing_type": "Regulation 33 Unaudited Consolidated Financial Results",
+  "quarter_label": "Q1 FY2026-27 (Quarter Ended June 30, 2026)",
+  "period_end": "2026-06-30",
+  "currency": "INR",
+  "FilingSource": "BSE / NSE Banking Financial Disclosures & HDFC Bank Investor Presentation (Q1 FY27)",
+  "headline_metrics": {
+    "gross_revenue_cr": 83700.0,
+    "gross_revenue_formatted": "₹83,700 Cr",
+    "net_interest_income_cr": 29840.0,
+    "net_interest_income_formatted": "₹29,840 Cr",
+    "revenue_yoy_growth_pct": 14.8,
+    "operating_profit_cr": 23410.0,
+    "operating_profit_formatted": "₹23,410 Cr",
+    "net_profit_pat_cr": 16820.0,
+    "net_profit_formatted": "₹16,820 Cr",
+    "pat_qoq_growth_pct": 1.94,
+    "pat_yoy_growth_pct": 35.32,
+    "eps_quarterly_inr": 22.14,
+    "gnpa_pct": 1.33,
+    "nnpa_pct": 0.39,
+    "nim_pct": 3.47,
+    "car_pct": 19.3
+  },
+  "segment_performance": [
+    {
+      "segment": "Retail Banking (Mortgages, Cards & Auto)",
+      "revenue_cr": 48920.0,
+      "ebitda_cr": 12840.0,
+      "ebitda_margin_pct": 26.25,
+      "highlight": "Post-merger mortgage disbursements reached record monthly run-rates; retail credit quality remains pristine."
+    },
+    {
+      "segment": "Wholesale & Corporate Banking",
+      "revenue_cr": 24110.0,
+      "ebitda_cr": 7920.0,
+      "ebitda_margin_pct": 32.85,
+      "highlight": "Commercial and institutional loan book grew +17.2% YoY with zero fresh large corporate defaults."
+    },
+    {
+      "segment": "Treasury & Investment Operations",
+      "revenue_cr": 8210.0,
+      "ebitda_cr": 2180.0,
+      "ebitda_margin_pct": 26.55,
+      "highlight": "G-Sec yield stability provided mark-to-market trading cushions and liquidity buffer optimization."
+    },
+    {
+      "segment": "Digital & Other Banking Products",
+      "revenue_cr": 2460.0,
+      "ebitda_cr": 470.0,
+      "ebitda_margin_pct": 19.11,
+      "highlight": "PayZapp and SmartGateway merchant transactions crossed 1.2 billion volume during the quarter."
+    }
+  ],
+  "simple_pointers": [
+    "**Sustained Profit Leadership:** Consolidated Net Profit (PAT) jumped **+35.32% YoY** to **₹16,820 Cr**, reflecting complete post-merger integration synergies.",
+    "**Core Net Interest Income Expansion:** Net Interest Income (NII) expanded to **₹29,840 Cr**, maintaining a healthy Net Interest Margin (NIM) of **3.47%**.",
+    "**Best-in-Class Asset Quality:** Gross NPA was kept low at **1.33%** and Net NPA at **0.39%**, significantly outperforming banking sector benchmarks.",
+    "**Strong Deposit Mobilization:** Total deposits advanced to ₹23.8 Lakh Cr (+16.5% YoY), driven by aggressive branch network expansion in Tier-2/3 cities.",
+    "**Exceptional Capital Adequacy:** Capital Adequacy Ratio (CAR) stood at **19.3%** (Tier-1: 17.1%), offering a massive buffer against credit shocks."
+  ],
+  "swot": {
+    "strengths": [
+      "Unrivaled brand reputation and India's largest private banking branch network (8,800+ branches).",
+      "Pristine asset quality with Net NPA under 0.40% and Provision Coverage Ratio (PCR) at ~74%.",
+      "High Tier-1 Capital Adequacy (17.1%) providing balance sheet headroom for accelerated retail loan growth."
+    ],
+    "weaknesses": [
+      "Credit-to-Deposit (CD) ratio remains higher than pre-merger levels, requiring elevated deposit acquisition costs.",
+      "Net Interest Margin (3.47%) remains compressed compared to historical 4.0%+ averages."
+    ],
+    "opportunities": [
+      "Cross-selling home loans to existing 85M+ liability customer accounts.",
+      "Expanding high-yield co-branded credit cards and rural agriculture lending via digital apps."
+    ],
+    "threats": [
+      "Intensified deposit competition from PSU banks and neo-banking wealth apps pushing up cost of funds.",
+      "Macroeconomic consumer credit slowdown or unsecured personal loan regulatory tightening by RBI."
+    ]
+  }
+}

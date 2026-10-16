@@ -12,6 +12,7 @@ from app.agent.subagents import (
     HistoricalPriceSubAgent,
     PriceTargetSubAgent,
     FundamentalsSubAgent,
+    QuarterlyReportSummarizerSubAgent,
     SimpleExplainerSubAgent
 )
 
@@ -48,12 +49,14 @@ IN_SCOPE_CORE_KEYWORDS = {
     "performance", "performing", "return", "returns", "trend", "trends", "movement",
     "history", "historical", "historic", "track", "record", "past", "recent", "chart", "charts",
     "timeline", "month", "months", "year", "years", "week", "weeks", "day", "days",
-    "quarter", "quarters", "annual", "growth", "fall", "dip", "correction", "gain", "gains",
+    "quarter", "quarters", "quarterly", "q1", "q2", "q3", "q4", "annual", "growth", "fall", "dip", "correction", "gain", "gains",
     "rally", "volatility", "momentum", "high", "low", "52-week", "52w", "candle", "candles",
-    # Sub-agent specific concepts: future prediction, EMA-200, fundamentals, simple explanation
+    # Sub-agent specific concepts: future prediction, EMA-200, fundamentals, quarterly SWOT, simple explanation
     "predict", "predicted", "prediction", "future", "projection", "projected", "expected",
     "ema", "ema200", "ema-200", "200", "sma", "moving average", "technical", "technicals",
     "fundamental", "fundamentals", "financial", "financials", "sector",
+    "swot", "strengths", "weaknesses", "opportunities", "threats", "pointers", "results", "filing", "statement", "statements",
+    "reliance", "ril", "sbin", "sbi",
     "simple", "simply", "easy", "beginner", "layman", "plain", "terms", "overview", "everything",
     "agent", "subagent", "subagents", "source", "sources"
 }
@@ -68,18 +71,20 @@ CONTEXTUAL_STOCK_REFERENCES = [
     "last month", "last 1 month", "last 3 months", "last 6 months", "last year", "past year",
     "next 1 month", "next month", "1 month", "3 months", "6 months", "1 year",
     "in simple terms", "explain in simple", "explain all", "explain everything",
-    "future price", "predicted price", "price target", "historic price", "historical price"
+    "future price", "predicted price", "price target", "historic price", "historical price",
+    "quarterly report", "financial report", "past quarter", "swot analysis", "swot table"
 ]
 
 
 class ForensicAssistantAgent:
     """
     Master Conversational Agent & Sub-Agent Orchestrator grounded in the active audit dossier.
-    Coordinates 4 specialized sub-agents:
+    Coordinates 5 specialized sub-agents:
       1. HistoricalPriceSubAgent (`historic_price_agent`)
       2. PriceTargetSubAgent (`price_target_agent`) — Analyst Consensus Average or EMA-200 1M Fallback
       3. FundamentalsSubAgent (`fundamentals_agent`)
-      4. SimpleExplainerSubAgent (`explainer_agent`)
+      4. QuarterlyReportSummarizerSubAgent (`quarterly_report_agent`) — Past-Quarter Pointers & SWOT Table (RELIANCE.NS & SBIN.NS)
+      5. SimpleExplainerSubAgent (`explainer_agent`)
     """
 
     def __init__(self):
@@ -172,11 +177,12 @@ class ForensicAssistantAgent:
         subagent_context = subagent_bundle.get("prompt_context_block", "")
         invoked_list = ", ".join(subagent_bundle.get("subagents_invoked", []))
 
-        return f"""You are the InvestPI Forensic Intelligence Assistant, an empirical financial audit chatbot powered by 4 specialized sub-agents:
+        return f"""You are the InvestPI Forensic Intelligence Assistant, an empirical financial audit chatbot powered by 5 specialized sub-agents:
 1. HistoricalPriceSubAgent (historic_price_agent): 5-year daily OHLCV candles, multi-horizon returns (1W, 1M, 3M, 6M, 1Y, 5Y), 52W High/Low, volatility, and moving averages.
 2. PriceTargetSubAgent (price_target_agent): Predicted future price target using Institutional Analyst Consensus Average (`target_mean`). When analyst targets are absent, it provides the 1-month (21-trading-day) projected price based on the 200-Day Exponential Moving Average (`EMA-200`).
 3. FundamentalsSubAgent (fundamentals_agent): Company EPS, P/E, 5-year P/E valuation band, Market Cap, annual & quarterly Revenue & Net Profit (PAT), and Promoter shareholding/pledging.
-4. SimpleExplainerSubAgent (explainer_agent): Translates all technical metrics into plain, simple everyday language.
+4. QuarterlyReportSummarizerSubAgent (quarterly_report_agent): Reads official past-quarter corporate financial filings (Q1 FY2026-27 Regulation 33 Consolidated Results for `RELIANCE.NS` and `SBIN.NS`), summarizes the financial statement in simple bullet pointers, and presents a 4-quadrant SWOT Analysis table (`Strengths`, `Weaknesses`, `Opportunities`, `Threats`).
+5. SimpleExplainerSubAgent (explainer_agent): Translates all technical metrics into plain, simple everyday language.
 
 ACTIVE CASE FILE:
 SECURITY: {company_name} ({ticker})
@@ -196,16 +202,19 @@ LIVE SUB-AGENT INTELLIGENCE & EMPIRICAL DATA:
 
 CRITICAL HEAVY GUARDRAIL & RESPONSE POLICY:
 1. You may ONLY answer questions directly pertaining to:
-   - The audited security ({ticker} / {company_name}).
+   - The audited security ({ticker} / {company_name}) or demo quarterly filings (`RELIANCE.NS` and `SBIN.NS`).
    - The InvestPI confidence score, risk verdict, and 9 compliance parameters (P1–P9).
    - Historic price performance, technical moving averages (SMA/EMA-200), and volatility from HistoricalPriceSubAgent.
    - Predicted future price targets from PriceTargetSubAgent (Analyst Consensus Average if available, or EMA-200 1-Month Projection fallback if analyst targets are unavailable).
    - Company fundamentals (EPS, P/E, 5Y P/E band, Revenue, Net Income, Market Cap, Promoter holding/pledging) from FundamentalsSubAgent.
+   - Past-quarter financial report summaries in simple bullet pointers and the Markdown SWOT Analysis Table from QuarterlyReportSummarizerSubAgent.
    - Explaining any or all of these findings in simple, beginner-friendly terms and citing the data sources.
 2. IF the user asks ANY question outside this audit dossier (e.g. general knowledge, coding, weather, recipes, sports, politics, movies, jokes, cryptocurrency, or other unrelated stocks):
    You MUST respond with EXACTLY this sentence and NOTHING ELSE:
    "{GUARDRAIL_REJECTION_MESSAGE}"
-3. Always explain technical concepts in clear, simple terms alongside the exact empirical numbers and mention whether a price target comes from Institutional Analyst Consensus or the EMA-200 1-Month Projection.
+3. Whenever the user asks about the quarterly report, past quarter results, or SWOT analysis, you MUST output:
+   (a) The key takeaways in simple, easy-to-read bullet pointers, AND
+   (b) The complete Markdown SWOT Analysis Table (`| SWOT Dimension | Key Financial Statement Insights |`).
 """
 
     def generate_demo_response(
@@ -233,14 +242,32 @@ CRITICAL HEAVY GUARDRAIL & RESPONSE POLICY:
         price_res = agents.get(HistoricalPriceSubAgent.AGENT_ID, {})
         target_res = agents.get(PriceTargetSubAgent.AGENT_ID, {})
         fund_res = agents.get(FundamentalsSubAgent.AGENT_ID, {})
+        quart_res = agents.get(QuarterlyReportSummarizerSubAgent.AGENT_ID, {})
         explainer_res = agents.get(SimpleExplainerSubAgent.AGENT_ID, {})
         sym = price_res.get("currency_symbol", "₹")
 
+        # 0. Quarterly Financial Report Summarizer & SWOT Analysis query
+        if any(w in lower for w in [
+            "quarterly", "quarter", "swot", "q1", "quarterly report", "financial report",
+            "strengths", "weaknesses", "opportunities", "threats", "pointers"
+        ]):
+            if quart_res.get("is_supported_demo_stock"):
+                return quart_res.get("formatted_report_markdown", quart_res.get("summary", ""))
+            return (
+                f"{quart_res.get('summary', '')}\n\n"
+                f"Tip: You can ask me **\"Summarize the quarterly report and SWOT for Reliance\"** or "
+                f"**\"Show quarterly report and SWOT table for SBIN\"** to inspect the full demo quarterly filings!"
+            )
+
         # 1. Plain-language / "explain everything in simple terms" query
         if any(w in lower for w in ["simple", "simply", "layman", "beginner", "everything", "explain all", "overview", "summary"]):
+            extra_quart = ""
+            if quart_res.get("is_supported_demo_stock"):
+                extra_quart = f"\n\n{quart_res.get('formatted_report_markdown', '')}"
             return (
                 f"**Plain-Language Summary for {company} ({ticker})** *(InvestPI Score: {score}/10 — {flag})*:\n\n"
-                f"{explainer_res.get('summary', '')}\n\n"
+                f"{explainer_res.get('summary', '')}"
+                f"{extra_quart}\n\n"
                 f"**Data Sources:** {', '.join(subagent_bundle.get('sources', []))}"
             )
 
@@ -422,6 +449,15 @@ CRITICAL HEAVY GUARDRAIL & RESPONSE POLICY:
 
                 # Ensure response wasn't truncated prematurely
                 if len(text) >= 40:
+                    quart_res = (subagent_bundle or {}).get("agents", {}).get(QuarterlyReportSummarizerSubAgent.AGENT_ID, {})
+                    if (
+                        QuarterlyReportSummarizerSubAgent.AGENT_ID in (subagent_bundle or {}).get("subagents_invoked", [])
+                        and quart_res.get("is_supported_demo_stock")
+                        and any(k in message.lower() for k in ("swot", "quarterly", "quarter", "q1", "financial report"))
+                        and "| SWOT Dimension |" not in text
+                        and "| :--- |" not in text
+                    ):
+                        text = f"{text}\n\n#### Financial Statement SWOT Analysis Table ({quart_res.get('quarter_label', 'Q1 FY27')}):\n{quart_res.get('swot_markdown_table', '')}"
                     return text, True
                 logger.warning(f"Model {model} returned truncated text ({len(text)} chars), trying next...")
             except Exception as e:

@@ -1,0 +1,81 @@
+{
+  "ticker": "ITC.NS",
+  "company_name": "ITC Limited",
+  "exchange": "NSE / BSE",
+  "filing_type": "Regulation 33 Unaudited Consolidated Financial Results",
+  "quarter_label": "Q1 FY2026-27 (Quarter Ended June 30, 2026)",
+  "period_end": "2026-06-30",
+  "currency": "INR",
+  "FilingSource": "BSE / NSE Corporate Filings & ITC Quarterly Media Release (Q1 FY27)",
+  "headline_metrics": {
+    "gross_revenue_cr": 19850.0,
+    "gross_revenue_formatted": "₹19,850 Cr",
+    "revenue_qoq_growth_pct": 3.82,
+    "revenue_yoy_growth_pct": 7.35,
+    "operating_profit_cr": 7180.0,
+    "operating_profit_formatted": "₹7,180 Cr",
+    "operating_margin_pct": 36.17,
+    "net_profit_pat_cr": 5180.0,
+    "net_profit_formatted": "₹5,180 Cr",
+    "pat_qoq_growth_pct": 2.17,
+    "pat_yoy_growth_pct": 5.71,
+    "eps_quarterly_inr": 4.16,
+    "fmcg_ebitda_margin_pct": 11.4
+  },
+  "segment_performance": [
+    {
+      "segment": "Cigarettes & Tobacco Business",
+      "revenue_cr": 8420.0,
+      "ebitda_cr": 5140.0,
+      "ebitda_margin_pct": 61.05,
+      "highlight": "Volume stability driven by differentiated capsule variants and supply chain reach; EBIT margins held at 61%."
+    },
+    {
+      "segment": "FMCG Others (Branded Packaged Foods, Personal Care)",
+      "revenue_cr": 5640.0,
+      "ebitda_cr": 640.0,
+      "ebitda_margin_pct": 11.35,
+      "highlight": "Aashirvaad, Sunfeast, and Bingo brands gained market share; EBITDA margin expanded 110 bps YoY."
+    },
+    {
+      "segment": "Agri-Business (Wheat, Spices & Coffee)",
+      "revenue_cr": 3980.0,
+      "ebitda_cr": 420.0,
+      "ebitda_margin_pct": 10.55,
+      "highlight": "Value-added spice and coffee exports cushioned domestic government wheat procurement restrictions."
+    },
+    {
+      "segment": "Paperboards, Paper & Packaging",
+      "revenue_cr": 1810.0,
+      "ebitda_cr": 280.0,
+      "ebitda_margin_pct": 15.47,
+      "highlight": "Subdued due to cheap Chinese carton board imports, partially offset by sustainable plastic-substitution packaging."
+    }
+  ],
+  "simple_pointers": [
+    "**Predictable Cash Generation:** Quarterly revenue grew to **₹19,850 Cr** (+7.35% YoY), highlighting resilient performance across cigarettes and packaged foods.",
+    "**High Operating Margins:** Consolidated operating profit touched **₹7,180 Cr** with an enviable **36.17%** operating margin.",
+    "**Steady Net Profit Growth:** Profit After Tax (PAT) climbed to **₹5,180 Cr** (+5.71% YoY), reaffirming reliable shareholder dividend support.",
+    "**FMCG Margin Expansion:** FMCG-Others EBITDA margin reached **11.4%**, demonstrating operational leverage in staple foods and personal care brands.",
+    "**Fortress Balance Sheet:** Net cash reserves exceed ₹18,000 Cr with zero debt; hotel business demerger successfully finalized."
+  ],
+  "swot": {
+    "strengths": [
+      "Exceptional monopolistic cash generation in legal cigarettes with 75%+ national market share.",
+      "High ROCE (>38%) and dividend payout ratio (>80%) with negligible debt.",
+      "Extensive direct distribution network covering 7 million+ retail touchpoints across India."
+    ],
+    "weaknesses": [
+      "Paperboards division experiencing margin drag from low-cost Chinese paper imports.",
+      "High dependence on tobacco for ~70% of total operating EBIT."
+    ],
+    "opportunities": [
+      "Scale-up of premium personal care and luxury chocolates via quick-commerce channels.",
+      "Value unlocking post completed hotel business demerger."
+    ],
+    "threats": [
+      "Potential adverse GST or excise tax changes in national budget cycles.",
+      "Illicit cigarette smuggling and duty-evaded local contraband products."
+    ]
+  }
+}

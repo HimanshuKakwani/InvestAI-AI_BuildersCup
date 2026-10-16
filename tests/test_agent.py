@@ -228,3 +228,53 @@ def test_api_chat_and_subagent_endpoints(client, sample_report_context):
     )
     assert push_resp.status_code == 200
     assert push_resp.get_json()["status"] == "acknowledged"
+
+
+def test_quarterly_report_summarizer_and_swot(client, sample_report_context):
+    """Verify QuarterlyReportSummarizerSubAgent across 10 demo stocks and BigQuery RAG."""
+    from app.agent.bigquery_rag import BigQueryFinancialRAG
+
+    coordinator = SubAgentCoordinator()
+
+    # 1. Verify all 10 marquee stocks resolve and have reports
+    ten_stocks = [
+        "RELIANCE.NS", "SBIN.NS", "TCS.NS", "INFY.NS", "HDFCBANK.NS",
+        "ITC.NS", "TATASTEEL.NS", "TRENT.NS", "TVSMOTOR.NS", "ZOMATO.NS"
+    ]
+    for ticker in ten_stocks:
+        res = coordinator.quarterly_agent.run(ticker)
+        assert res["agent_id"] == "quarterly_report_agent"
+        assert res["status"] == "OK"
+        assert res["is_supported_demo_stock"] is True
+        assert len(res["simple_pointers"]) >= 4
+        assert len(res["swot"]["strengths"]) >= 2
+        assert len(res["swot"]["weaknesses"]) >= 2
+        assert len(res["swot"]["opportunities"]) >= 2
+        assert len(res["swot"]["threats"]) >= 2
+        assert "| SWOT Dimension |" in res["swot_markdown_table"]
+
+    # 2. BigQuery Financial RAG module test
+    rag = BigQueryFinancialRAG()
+    tcs_chunks = rag.search_chunks("TCS.NS", query_text="operating margin BFSI", top_k=2)
+    assert len(tcs_chunks) > 0
+    assert "TCS" in tcs_chunks[0]["ticker"]
+
+    # 3. Direct REST endpoint /api/agent/quarterly-report/<ticker> for demo stocks
+    api_rel = client.get("/api/agent/quarterly-report/RELIANCE.NS")
+    assert api_rel.status_code == 200
+    assert api_rel.get_json()["is_supported_demo_stock"] is True
+
+    api_tcs = client.get("/api/agent/quarterly-report/tcs")
+    assert api_tcs.status_code == 200
+    assert api_tcs.get_json()["ticker"] == "TCS.NS"
+
+    api_zomato = client.get("/api/agent/quarterly-report/zomato")
+    assert api_zomato.status_code == 200
+    assert api_zomato.get_json()["ticker"] == "ZOMATO.NS"
+
+    # 4. Non-supported stock returns is_supported_demo_stock: False
+    api_unsupported = client.get("/api/agent/quarterly-report/SUZLON.NS")
+    assert api_unsupported.status_code == 200
+    assert api_unsupported.get_json()["is_supported_demo_stock"] is False
+    assert api_unsupported.get_json()["status"] == "DEMO_UNSUPPORTED_TICKER"
+

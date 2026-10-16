@@ -1,0 +1,82 @@
+{
+  "ticker": "TVSMOTOR.NS",
+  "company_name": "TVS Motor Company Limited",
+  "exchange": "NSE / BSE",
+  "filing_type": "Regulation 33 Unaudited Consolidated Financial Results",
+  "quarter_label": "Q1 FY2026-27 (Quarter Ended June 30, 2026)",
+  "period_end": "2026-06-30",
+  "currency": "INR",
+  "FilingSource": "BSE / NSE Corporate Filings & TVS Motor Press Release (Q1 FY27)",
+  "headline_metrics": {
+    "gross_revenue_cr": 9820.0,
+    "gross_revenue_formatted": "₹9,820 Cr",
+    "revenue_qoq_growth_pct": 2.82,
+    "revenue_yoy_growth_pct": 14.85,
+    "ebitda_cr": 1120.0,
+    "ebitda_formatted": "₹1,120 Cr",
+    "ebitda_margin_pct": 11.41,
+    "net_profit_pat_cr": 608.0,
+    "net_profit_formatted": "₹608 Cr",
+    "pat_qoq_growth_pct": 4.11,
+    "pat_yoy_growth_pct": 29.36,
+    "eps_quarterly_inr": 12.8,
+    "ev_sales_units_k": 58.4,
+    "total_two_wheeler_sales_lakh": 10.87
+  },
+  "segment_performance": [
+    {
+      "segment": "Motorcycles (Apache, Raider, Ronin)",
+      "revenue_cr": 4410.0,
+      "ebitda_cr": 540.0,
+      "ebitda_margin_pct": 12.24,
+      "highlight": "TVS Raider 125cc achieved leadership in executive commuter segment; premium Apache series volumes up 16% YoY."
+    },
+    {
+      "segment": "Scooters & Electric Vehicles (Jupiter, iQube, TVS X)",
+      "revenue_cr": 3280.0,
+      "ebitda_cr": 350.0,
+      "ebitda_margin_pct": 10.67,
+      "highlight": "iQube EV monthly dispatches sustained 18k+ units; Jupiter 110/125 captured record domestic market share."
+    },
+    {
+      "segment": "International Exports (Africa, LatAm, ASEAN)",
+      "revenue_cr": 1740.0,
+      "ebitda_cr": 190.0,
+      "ebitda_margin_pct": 10.92,
+      "highlight": "Gradual recovery in African foreign-exchange liquidity driving two-wheeler shipment rebounds."
+    },
+    {
+      "segment": "Three-Wheelers & Parts / Accessories",
+      "revenue_cr": 390.0,
+      "ebitda_cr": 40.0,
+      "ebitda_margin_pct": 10.26,
+      "highlight": "Commercial cargo and passenger auto sales across suburban transit corridors."
+    }
+  ],
+  "simple_pointers": [
+    "**Record Quarterly Revenue:** Revenue rose **+14.85% YoY** to **₹9,820 Cr**, backed by 10.87 lakh total vehicle sales.",
+    "**Substantial Profit Expansion:** Profit After Tax (PAT) grew **+29.36% YoY** to **₹608 Cr**, driven by premium product mix and localized component sourcing.",
+    "**Operating Margin Strength:** Operating EBITDA margin reached **11.41%** (EBITDA: **₹1,120 Cr**), maintaining double-digit margins despite EV battery transition costs.",
+    "**EV Market Share Acceleration:** TVS iQube electric scooter crossed 58,000 units during the quarter, holding the #2 spot in Indian electric two-wheelers.",
+    "**Premium Motorcycle Leadership:** Strong traction for Apache and Raider models in urban and semi-urban markets expanded domestic market share by 140 bps."
+  ],
+  "swot": {
+    "strengths": [
+      "Top-tier brand loyalty and design engineering prowess recognized globally through the BMW Motorrad manufacturing partnership.",
+      "Balanced portfolio across high-margin premium motorcycles and market-leading commuter scooters.",
+      "Rapidly scaling EV supply chain and dealer charging network."
+    ],
+    "weaknesses": [
+      "EV business EBITDA margins remain lower than ICE scooters due to battery import costs.",
+      "Exposure to volatile currency availability in primary African export destinations (Nigeria, Kenya)."
+    ],
+    "opportunities": [
+      "Rollout of new electric three-wheeler cargo platforms and export of BMW-engineered mid-capacity bikes.",
+      "PLI (Production-Linked Incentive) scheme subsidy disbursements enhancing EV profitability."
+    ],
+    "threats": [
+      "Price wars in domestic EV two-wheelers initiated by aggressive VC-funded competitors.",
+      "Fluctuations in key input commodities including aluminum, rubber, and precious metals."
+    ]
+  }
+}
