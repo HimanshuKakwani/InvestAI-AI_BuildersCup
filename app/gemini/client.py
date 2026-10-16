@@ -2,7 +2,7 @@
 import json
 import logging
 import re
-from typing import Dict, Any, Optional, List, Union
+from typing import Dict, Any, Optional, List, Union, Tuple
 from google import genai
 from google.genai import types
 from app.config import Config
@@ -17,7 +17,9 @@ FINANCIAL_KEYWORDS = {
     "nse", "asx", "sgx", "dividend", "breakout", "multibagger", "portfolio", "trading", "crypto", "invest",
     "investment", "investor", "broker", "sebi", "asic", "mas", "pe ratio", "market cap", "earning", "earnings",
     "quarterly", "upper circuit", "lower circuit", "jackpot", "operator", "bull", "bear", "rally", "dump",
-    "pump", "circuit", "target price", "tp", "sl", "stoploss", "stop loss"
+    "pump", "circuit", "target price", "tp", "sl", "stoploss", "stop loss",
+    # Hindi / Devanagari financial terminology
+    "खरीदारी", "बिकवाली", "मुनाफा", "स्टॉप", "टारगेट", "शेयर", "स्टॉक", "तेजी", "मंदी"
 }
 
 
@@ -34,8 +36,53 @@ def is_likely_financial_text(text: str, universe_stocks: Optional[List[Dict[str,
             for term in [t, nm] + aliases:
                 if len(term) >= 3 and term in lower:
                     return True
-    words = set(re.findall(r'[a-zA-Z]+', lower))
+    words = set(re.findall(r'[a-zA-Z\u0900-\u097F]+', lower))
     return bool(words.intersection(FINANCIAL_KEYWORDS))
+
+
+def extract_youtube_video_id(url: str) -> Optional[str]:
+    """Extracts 11-character video ID from any format of YouTube URL or Short."""
+    if not url:
+        return None
+    m = re.search(r'(?:v=|\/shorts\/|\/embed\/|youtu\.be\/|\/v\/)([a-zA-Z0-9_-]{11})', url)
+    return m.group(1) if m else None
+
+
+def fetch_youtube_transcript(video_id: str) -> Tuple[str, List[Dict[str, Any]]]:
+    """
+    Fetches full spoken video transcript with timestamps via youtube_transcript_api.
+    Returns:
+        (formatted_transcript_text, raw_snippets_list)
+    """
+    if not video_id:
+        return "", []
+    try:
+        from youtube_transcript_api import YouTubeTranscriptApi
+        api = YouTubeTranscriptApi()
+        t_list = api.list(video_id)
+        tr = None
+        try:
+            tr = t_list.find_transcript(['hi', 'en', 'en-IN', 'en-GB', 'en-US'])
+        except Exception:
+            tr = next(iter(t_list), None)
+
+        if tr:
+            snippets = tr.fetch()
+            lines = []
+            raw_snippets = []
+            for s in snippets:
+                start_sec = int(getattr(s, 'start', 0) if not isinstance(s, dict) else s.get('start', 0))
+                mm = start_sec // 60
+                ss = start_sec % 60
+                txt = (getattr(s, 'text', '') if not isinstance(s, dict) else s.get('text', '')).strip()
+                if txt:
+                    timestamp_str = f"{mm:02d}:{ss:02d}"
+                    lines.append(f"[{timestamp_str}] {txt}")
+                    raw_snippets.append({"timestamp": timestamp_str, "text": txt})
+            return "\n".join(lines), raw_snippets
+    except Exception as e:
+        logger.debug(f"YouTube transcript retrieval note for {video_id}: {e}")
+    return "", []
 
 
 class GeminiAuditor:
@@ -47,17 +94,23 @@ class GeminiAuditor:
     def analyze_youtube_claim(self, youtube_url: str, market_hint: str = "IN") -> Union[Dict[str, Any], List[Dict[str, Any]]]:
         """
         Multimodal extraction for YouTube URLs:
-        1. Queries oEmbed API to fetch video title, creator/author name, and thumbnail URL.
-        2. Evaluates whether the video actually contains financial advice or is irrelevant content.
-        3. Extracts explicit claims, targets, and manipulative phrases if it IS financial advice.
+        1. Extracts full spoken video audio transcript with timestamps via youtube_transcript_api.
+        2. Queries oEmbed API to fetch video title, creator/author name, and thumbnail URL.
+        3. Evaluates whether the video actually contains financial advice or is irrelevant content.
+        4. Extracts complete and accurate securities claims, targets, and manipulative phrases from the transcript using gemini-3.1-flash-lite.
         """
         import urllib.request
 
+        video_id = extract_youtube_video_id(youtube_url)
         video_title = ""
         channel_name = ""
         thumbnail_url = ""
         thumbnail_bytes = None
 
+        # 1. Fetch full spoken audio transcript
+        transcript_text, raw_snippets = fetch_youtube_transcript(video_id) if video_id else ("", [])
+
+        # 2. Fetch video metadata & thumbnail
         try:
             oembed_endpoint = f"https://www.youtube.com/oembed?url={youtube_url}&format=json"
             req = urllib.request.Request(oembed_endpoint, headers={"User-Agent": "Mozilla/5.0"})
@@ -88,7 +141,7 @@ class GeminiAuditor:
         from app.data.loader import DataLoader
         loader = DataLoader()
         universe_stocks = loader.universe.get(market_hint, []) or loader.universe.get("IN", [])
-        text_corpus = (video_title + " " + channel_name + " " + youtube_url).lower()
+        text_corpus = (video_title + " " + channel_name + " " + transcript_text + " " + youtube_url).lower()
 
         # Instant relevance filter: reject obvious non-financial content (sports, cooking, music, etc.)
         # immediately without waiting for slow LLM calls or wasting API quota
@@ -100,7 +153,6 @@ class GeminiAuditor:
 
         # Offline / Demo Mode Check
         if Config.DEMO_MODE or not self.client:
-
             # Check if any known stock matches
             for s in universe_stocks:
                 t_clean = s["ticker"].lower().replace(".ns", "").replace(".si", "").replace(".ax", "")
@@ -110,14 +162,15 @@ class GeminiAuditor:
                         "ticker": s["ticker"],
                         "company_name": s["name"],
                         "direction": "BUY",
-                        "target_price": 3320.0 if "adani" in text_corpus else 4500.0,
+                        "target_price": 3380.0 if "adani" in text_corpus else 4500.0,
                         "claimed_percentage_move": 15.0,
                         "time_horizon_days": 14,
                         "exact_quote": f"Top pick {s['name']} showing strong momentum! Video: {video_title}",
                         "quote_timestamp": "00:15",
                         "creator_claimed_name": channel_name or "@MarketExpert",
                         "guaranteed_return_language_detected": False,
-                        "manipulative_phrases": []
+                        "manipulative_phrases": [],
+                        "transcript": transcript_text
                     }
 
             return {
@@ -125,47 +178,58 @@ class GeminiAuditor:
                 "message": NOT_FINANCIAL_ADVICE_MSG
             }
 
-        # Prompt with strict Financial Advice Classification
+        # Prompt with strict Transcript-Driven Financial Advice Classification
+        transcript_block = (
+            f"=== VERBATIM SPOKEN AUDIO TRANSCRIPT (WITH TIMESTAMPS) ===\n{transcript_text}\n==========================================================="
+            if transcript_text
+            else "(Spoken video transcript unavailable; analyze based on video metadata and visual thumbnail)"
+        )
+
         prompt = f"""
         Act as an institutional securities compliance auditor.
-        You are analyzing this YouTube video or short:
+        You are forensically analyzing this YouTube video based on its VERBATIM SPOKEN AUDIO TRANSCRIPT and metadata:
         Video Title: {video_title}
         Creator/Channel: {channel_name}
         URL: {youtube_url}
         Jurisdiction focus: {market_hint}.
 
-        CRITICAL DECISION:
-        1. Evaluate whether this video contains financial advice, stock recommendations, trading tips, or securities claims.
-        - If the video is irrelevant or does NOT contain financial advice / stock tips (e.g. music, comedy, gaming, vlogs, cooking, entertainment, sports, general non-financial news):
+        {transcript_block}
+
+        CRITICAL AUDITING INSTRUCTIONS:
+        1. Base your answers directly on the complete and accurate information spoken in the video transcript above, not merely the metadata or title.
+        2. Evaluate whether this video contains financial advice, stock recommendations, trading tips, or securities claims.
+        - If the video is irrelevant or does NOT contain financial advice / stock recommendations / trading calls (e.g. formula 1, racing, gaming, music, cooking, comedy, entertainment, general news):
           Return JSON with:
           {{
             "is_financial_advice": false,
-            "relevance_explanation": "Not a financial advice, kindly provide relevant input",
-            "ticker": null,
-            "company_name": null
+            "message": "Not a financial advice, kindly provide relevant input"
           }}
-        - If the video DOES contain financial advice, stock tips, or price targets:
-          Return JSON with "is_financial_advice": true, and extract the explicit investment claims, mentioned tickers, company names, target prices, time horizons, and verbatim quotes.
-
-        Return ONLY a valid JSON object (or array of objects if multiple stocks are recommended) matching this schema:
-        {{
-          "is_financial_advice": boolean,
-          "relevance_explanation": string,
-          "ticker": string or null,
-          "company_name": string or null,
-          "direction": "BUY" | "SELL" | null,
-          "target_price": float or null,
-          "claimed_percentage_move": float or null,
-          "time_horizon_days": int or null,
-          "exact_quote": string,
-          "quote_timestamp": string,
-          "creator_claimed_name": string or null,
-          "guaranteed_return_language_detected": boolean,
-          "manipulative_phrases": [{{"phrase": string, "category": string, "timestamp": string}}]
-        }}
+        - If the video DOES contain financial advice, stock recommendations, or trading calls:
+          Extract every stock recommended or analyzed. If MULTIPLE stocks are recommended in the video, return a JSON array with one object for each stock.
+          For each stock, provide:
+          - "is_financial_advice": true
+          - "ticker": official exchange ticker (e.g. ADANIENT.NS, TRENT.NS for India; D05.SI for Singapore; BHP.AX for Australia)
+          - "company_name": company name
+          - "direction": "BUY" or "SELL"
+          - "target_price": float price target spoken in transcript, or null
+          - "claimed_percentage_move": float percentage return spoken in transcript, or null
+          - "time_horizon_days": integer trading horizon in days, or null
+          - "exact_quote": exact verbatim quote spoken by the creator in the transcript recommending the stock or stating the price target / stop loss
+          - "quote_timestamp": the MM:SS timestamp from the transcript where this quote was spoken (e.g. "00:15")
+          - "creator_claimed_name": string channel/creator name
+          - "guaranteed_return_language_detected": boolean
+          - "manipulative_phrases": list of objects [{{"phrase": string, "category": string, "timestamp": string}}]
         """
 
-        fallback_models = ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3-flash-preview", self.model_name]
+        # Primary model is gemini-3.1-flash-lite as requested for speed and cost efficiency
+        primary_model = "gemini-3.1-flash-lite"
+        fallback_models = [
+            primary_model,
+            "gemini-3.1-flash-lite-preview",
+            "gemini-3.5-flash-lite",
+            "gemini-2.5-flash-lite",
+            self.model_name
+        ]
         last_error = None
 
         for model in list(dict.fromkeys(fallback_models)):
@@ -197,6 +261,7 @@ class GeminiAuditor:
                     valid = [c for c in parsed if isinstance(c, dict) and (c.get("ticker") or c.get("company_name")) and c.get("is_financial_advice") is not False]
                     if valid:
                         for c in valid:
+                            c["transcript"] = transcript_text
                             if not c.get("creator_claimed_name") and channel_name:
                                 c["creator_claimed_name"] = channel_name
                         return valid if len(valid) > 1 else valid[0]
@@ -206,6 +271,7 @@ class GeminiAuditor:
                     }
 
                 if isinstance(parsed, dict) and (parsed.get("ticker") or parsed.get("company_name")):
+                    parsed["transcript"] = transcript_text
                     if not parsed.get("creator_claimed_name") and channel_name:
                         parsed["creator_claimed_name"] = channel_name
                     return parsed
@@ -235,7 +301,7 @@ class GeminiAuditor:
                     break
 
             if matched:
-                nums = re.findall(r'\b\d{2,5}\b', video_title)
+                nums = re.findall(r'\b\d{2,5}\b', text_corpus)
                 t_price = float(nums[0]) if nums else None
                 detected_claims.append({
                     "is_financial_advice": True,
@@ -251,13 +317,13 @@ class GeminiAuditor:
                     "guaranteed_return_language_detected": is_guaranteed,
                     "manipulative_phrases": [
                         {"phrase": "breakout jackpot", "category": "SPECULATION", "timestamp": "00:00"}
-                    ] if is_guaranteed else []
+                    ] if is_guaranteed else [],
+                    "transcript": transcript_text
                 })
 
         if detected_claims:
             return detected_claims if len(detected_claims) > 1 else detected_claims[0]
 
-        # No financial claims detected -> return not financial advice
         return {
             "is_financial_advice": False,
             "message": NOT_FINANCIAL_ADVICE_MSG

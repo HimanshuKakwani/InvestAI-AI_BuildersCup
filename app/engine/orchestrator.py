@@ -145,7 +145,8 @@ class AnalysisService:
         raw_text_for_p9 = ""
         if modality == "youtube_url":
             claims_raw = self.gemini.analyze_youtube_claim(str(payload), market_hint=region)
-            raw_text_for_p9 = str(payload)
+            first_c = claims_raw[0] if isinstance(claims_raw, list) and claims_raw else (claims_raw if isinstance(claims_raw, dict) else {})
+            raw_text_for_p9 = first_c.get("transcript") or str(payload)
         elif modality == "screenshot":
             claims_raw = self.gemini.analyze_screenshot(payload, mime_type=image_mime, market_hint=region)
             raw_text_for_p9 = claims_raw[0].get("exact_quote", "") if isinstance(claims_raw, list) and claims_raw else getattr(claims_raw, "get", lambda k, d="": "")("exact_quote", "")
