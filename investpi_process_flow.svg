@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1050" width="100%" height="100%" font-family="'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1120" width="100%" height="100%" font-family="'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif">
   <defs>
     <!-- Background Gradient -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0d1f19"/>
-      <stop offset="50%" stop-color="#132c24"/>
-      <stop offset="100%" stop-color="#0b1a15"/>
+      <stop offset="0%" stop-color="#0b1914"/>
+      <stop offset="50%" stop-color="#112720"/>
+      <stop offset="100%" stop-color="#081410"/>
     </linearGradient>
 
     <!-- Card Surface Gradient -->
@@ -15,16 +15,22 @@
 
     <!-- Dark Panel Gradient -->
     <linearGradient id="panelDark" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#18382d"/>
-      <stop offset="100%" stop-color="#112820"/>
+      <stop offset="0%" stop-color="#16342a"/>
+      <stop offset="100%" stop-color="#0f241d"/>
     </linearGradient>
 
-    <!-- Drop Shadow -->
+    <!-- Highlight Panel Gradient -->
+    <linearGradient id="panelHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e4437"/>
+      <stop offset="100%" stop-color="#132e25"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
     <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="125%">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.5"/>
     </filter>
     <filter id="softShadow" x="-5%" y="-5%" width="110%" height="115%">
-      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.3"/>
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
     </filter>
 
     <!-- Arrow Markers -->
@@ -37,8 +43,8 @@
     <marker id="arrowRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#ff6b5b"/>
     </marker>
-    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#f59e0b"/>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#2dd4bf"/>
     </marker>
     <marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#34d399"/>
@@ -46,383 +52,471 @@
 
     <!-- Subtle Grid Pattern -->
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.6" stroke-opacity="0.05"/>
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.6" stroke-opacity="0.04"/>
     </pattern>
   </defs>
 
   <!-- Canvas Background -->
-  <rect width="1600" height="1050" fill="url(#bgGrad)"/>
-  <rect width="1600" height="1050" fill="url(#grid)"/>
+  <rect width="1600" height="1120" fill="url(#bgGrad)"/>
+  <rect width="1600" height="1120" fill="url(#grid)"/>
 
   <!-- ==================== TOP TITLE BANNER ==================== -->
-  <g transform="translate(40, 26)">
-    <rect width="1520" height="68" rx="10" fill="#0d1f19" stroke="#2d5446" stroke-width="1.5" filter="url(#softShadow)"/>
+  <g transform="translate(40, 24)">
+    <rect width="1520" height="72" rx="10" fill="#0d1f19" stroke="#2d5446" stroke-width="1.5" filter="url(#softShadow)"/>
     <!-- Brand Mark -->
-    <g transform="translate(22, 16)">
-      <rect width="34" height="34" rx="4" fill="none" stroke="#d5ff5f" stroke-width="2"/>
-      <rect x="7" y="19" width="4" height="9" fill="#ffffff" opacity="0.5"/>
-      <rect x="15" y="13" width="4" height="15" fill="#ffffff" opacity="0.8"/>
-      <rect x="23" y="7" width="4" height="21" fill="#d5ff5f"/>
+    <g transform="translate(22, 18)">
+      <rect width="36" height="36" rx="4" fill="none" stroke="#d5ff5f" stroke-width="2"/>
+      <rect x="7" y="20" width="5" height="10" fill="#ffffff" opacity="0.5"/>
+      <rect x="15" y="14" width="5" height="16" fill="#ffffff" opacity="0.8"/>
+      <rect x="23" y="8" width="5" height="22" fill="#d5ff5f"/>
     </g>
-    <text x="70" y="36" fill="#ffffff" font-size="22" font-weight="800" letter-spacing="-0.5">Invest<tspan fill="#d5ff5f">PI</tspan> — End-to-End Forensic Audit Process Flow</text>
-    <text x="70" y="55" fill="#9cb3a8" font-size="12" font-family="monospace">CORE DOCTRINE: "RATE THE CLAIM, NOT THE STOCK" · MULTIMODAL AI EXTRACTION + 9-PARAMETER DETERMINISTIC ENGINE</text>
+    <text x="74" y="38" fill="#ffffff" font-size="22" font-weight="800" letter-spacing="-0.5">Invest<tspan fill="#d5ff5f">PI</tspan> — End-to-End Forensic Audit &amp; BigQuery Vector RAG Process Flow</text>
+    <text x="74" y="58" fill="#9cb3a8" font-size="12" font-family="monospace">CORE DOCTRINE: "RATE THE CLAIM, NOT THE STOCK" · MULTIMODAL AI + 9-PARAMETER ENGINE + 5 SUB-AGENTS OVER PUB/SUB</text>
 
     <!-- Right Badges -->
-    <rect x="1220" y="18" width="135" height="32" rx="6" fill="#18382d" stroke="#d5ff5f" stroke-width="1"/>
-    <text x="1287" y="38" fill="#d5ff5f" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">&lt; 50ms INGEST</text>
+    <rect x="1090" y="20" width="135" height="32" rx="6" fill="#18382d" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="1157" y="40" fill="#2dd4bf" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">BIGQUERY RAG</text>
 
-    <rect x="1368" y="18" width="132" height="32" rx="6" fill="#18382d" stroke="#34d399" stroke-width="1"/>
-    <text x="1434" y="38" fill="#34d399" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">0% HALLUCINATION</text>
+    <rect x="1235" y="20" width="135" height="32" rx="6" fill="#18382d" stroke="#d5ff5f" stroke-width="1"/>
+    <text x="1302" y="40" fill="#d5ff5f" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">&lt; 50ms INGEST</text>
+
+    <rect x="1380" y="20" width="120" height="32" rx="6" fill="#18382d" stroke="#34d399" stroke-width="1"/>
+    <text x="1440" y="40" fill="#34d399" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">0% HALLUCINATION</text>
   </g>
 
 
-  <!-- ==================== STAGE 1: USER & MULTI-MODAL INGESTION ==================== -->
-  <g transform="translate(40, 118)">
-    <rect width="290" height="535" rx="12" fill="url(#panelDark)" stroke="#356352" stroke-width="1.5" filter="url(#dropShadow)"/>
-    <rect width="290" height="38" rx="12" fill="#1f4739"/>
+  <!-- ==================== STAGE 1: DUAL-TRACK CLIENT INTAKE ==================== -->
+  <g transform="translate(40, 116)">
+    <rect width="295" height="560" rx="12" fill="url(#panelDark)" stroke="#356352" stroke-width="1.5" filter="url(#dropShadow)"/>
+    <rect width="295" height="38" rx="12" fill="#1f4739"/>
     <text x="18" y="24" fill="#d5ff5f" font-size="12" font-weight="800" font-family="monospace" letter-spacing="1">STAGE 1 · CLIENT INTAKE</text>
 
-    <!-- User Actor -->
-    <g transform="translate(20, 54)">
-      <rect width="250" height="58" rx="8" fill="url(#cardIvory)" stroke="#c9c2b3" stroke-width="1.5"/>
-      <circle cx="32" cy="29" r="16" fill="#132c24"/>
-      <text x="32" y="34" fill="#d5ff5f" font-size="14" font-weight="700" text-anchor="middle">👤</text>
-      <text x="58" y="25" fill="#17201b" font-size="13" font-weight="800">Retail Investor / Analyst</text>
-      <text x="58" y="42" fill="#5c5548" font-size="11" font-family="monospace">Submits Suspicious Market Lead</text>
+    <!-- User Actor Card -->
+    <g transform="translate(18, 50)">
+      <rect width="259" height="52" rx="8" fill="url(#cardIvory)" stroke="#c9c2b3" stroke-width="1.5"/>
+      <circle cx="28" cy="26" r="14" fill="#132c24"/>
+      <text x="28" y="31" fill="#d5ff5f" font-size="13" font-weight="700" text-anchor="middle">👤</text>
+      <text x="52" y="23" fill="#17201b" font-size="12" font-weight="800">Retail Investor / Analyst</text>
+      <text x="52" y="39" fill="#5c5548" font-size="10.5" font-family="monospace">Submits Lead or Selects Stock</text>
     </g>
 
-    <!-- Arrow Down -->
-    <line x1="145" y1="112" x2="145" y2="136" stroke="#d5ff5f" stroke-width="2" marker-end="url(#arrowLime)"/>
+    <line x1="147" y1="104" x2="147" y2="118" stroke="#d5ff5f" stroke-width="2" marker-end="url(#arrowLime)"/>
 
-    <!-- Jurisdiction Selector -->
-    <g transform="translate(20, 140)">
-      <rect width="250" height="54" rx="8" fill="#0d1f19" stroke="#3b6e5c" stroke-width="1.2"/>
-      <text x="125" y="21" fill="#9cb3a8" font-size="10" font-family="monospace" font-weight="700" text-anchor="middle">SELECT REGULATORY JURISDICTION</text>
-      <text x="125" y="40" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">🇮🇳 SEBI  |  🇸🇬 MAS  |  🇦🇺 ASIC</text>
+    <!-- Track A: Multimodal Scam Claim Ingestion -->
+    <g transform="translate(18, 120)">
+      <rect width="259" height="185" rx="8" fill="#10251e" stroke="#457d68" stroke-width="1.2"/>
+      <rect x="0" y="0" width="259" height="24" rx="8" fill="#18382d"/>
+      <text x="10" y="16" fill="#d5ff5f" font-size="10" font-family="monospace" font-weight="700">TRACK A · MULTIMODAL AUDIT (4 CHANNELS)</text>
+
+      <!-- 4 mini channels -->
+      <g transform="translate(8, 30)">
+        <rect x="0" y="0" width="243" height="32" rx="4" fill="#142e25" stroke="#356352" stroke-width="1"/>
+        <text x="10" y="20" fill="#f87171" font-size="11" font-weight="700">▶ Video</text>
+        <text x="70" y="20" fill="#9cb3a8" font-size="9.5" font-family="monospace">YouTube Video / Shorts URL</text>
+
+        <rect x="0" y="36" width="243" height="32" rx="4" fill="#142e25" stroke="#356352" stroke-width="1"/>
+        <text x="10" y="56" fill="#34d399" font-size="11" font-weight="700">🖼 Image</text>
+        <text x="70" y="56" fill="#9cb3a8" font-size="9.5" font-family="monospace">WhatsApp / Telegram Tip OCR</text>
+
+        <rect x="0" y="72" width="243" height="32" rx="4" fill="#142e25" stroke="#356352" stroke-width="1"/>
+        <text x="10" y="92" fill="#fbbf24" font-size="11" font-weight="700">¶ Text</text>
+        <text x="70" y="92" fill="#9cb3a8" font-size="9.5" font-family="monospace">Social Post / Forwarded Advisory</text>
+
+        <rect x="0" y="108" width="243" height="32" rx="4" fill="#142e25" stroke="#356352" stroke-width="1"/>
+        <text x="10" y="128" fill="#38bdf8" font-size="11" font-weight="700">📄 PDF</text>
+        <text x="70" y="128" fill="#9cb3a8" font-size="9.5" font-family="monospace">Research Brief / Brokerage Note</text>
+      </g>
+
+      <text x="10" y="174" fill="#e9e5da" font-size="9" font-family="monospace">Jurisdictions: 🇮🇳 SEBI | 🇸🇬 MAS | 🇦🇺 ASIC</text>
     </g>
 
-    <!-- Arrow Down -->
-    <line x1="145" y1="194" x2="145" y2="218" stroke="#d5ff5f" stroke-width="2" marker-end="url(#arrowLime)"/>
+    <!-- Track B: 10-Stock Regulation 33 Dropdown Selector -->
+    <g transform="translate(18, 316)">
+      <rect width="259" height="150" rx="8" fill="#0d1f19" stroke="#2dd4bf" stroke-width="1.5"/>
+      <rect x="0" y="0" width="259" height="24" rx="8" fill="#133d34"/>
+      <text x="10" y="16" fill="#2dd4bf" font-size="10" font-family="monospace" font-weight="800">TRACK B · 10-STOCK REGULATION 33 RAG</text>
 
-    <!-- 4 Modalities Stack -->
-    <g transform="translate(20, 222)">
-      <text x="0" y="12" fill="#d5ff5f" font-size="10" font-family="monospace" font-weight="700">CHOOSE CLAIM MODALITY (4 CHANNELS):</text>
+      <text x="10" y="42" fill="#9cb3a8" font-size="9.5" font-family="monospace">Structured &lt;select&gt; Dropdown Intake:</text>
 
-      <!-- Mod 1: Video -->
-      <rect x="0" y="22" width="250" height="44" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1"/>
-      <rect x="10" y="31" width="26" height="26" rx="4" fill="#a93a2d"/>
-      <text x="23" y="49" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">▶</text>
-      <text x="46" y="41" fill="#ffffff" font-size="12" font-weight="700">1. Video Analysis</text>
-      <text x="46" y="56" fill="#9cb3a8" font-size="10" font-family="monospace">YouTube Video / Shorts URL</text>
+      <!-- Dropdown wireframe element -->
+      <rect x="10" y="50" width="239" height="30" rx="4" fill="#162e26" stroke="#2dd4bf" stroke-width="1"/>
+      <text x="18" y="70" fill="#ffffff" font-size="10" font-family="monospace">RELIANCE.NS (Reliance Industries) ▾</text>
 
-      <!-- Mod 2: Image -->
-      <rect x="0" y="74" width="250" height="44" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1"/>
-      <rect x="10" y="83" width="26" height="26" rx="4" fill="#257849"/>
-      <text x="23" y="101" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">🖼</text>
-      <text x="46" y="93" fill="#ffffff" font-size="12" font-weight="700">2. Image / Clip Analysis</text>
-      <text x="46" y="108" fill="#9cb3a8" font-size="10" font-family="monospace">WhatsApp/Telegram Screenshot, MP4</text>
-
-      <!-- Mod 3: Text -->
-      <rect x="0" y="126" width="250" height="44" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1"/>
-      <rect x="10" y="135" width="26" height="26" rx="4" fill="#c86828"/>
-      <text x="23" y="153" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">¶</text>
-      <text x="46" y="145" fill="#ffffff" font-size="12" font-weight="700">3. Text Tip Analysis</text>
-      <text x="46" y="160" fill="#9cb3a8" font-size="10" font-family="monospace">Social Post / Forwarded Advisory</text>
-
-      <!-- Mod 4: PDF -->
-      <rect x="0" y="178" width="250" height="44" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1"/>
-      <rect x="10" y="187" width="26" height="26" rx="4" fill="#bc955d"/>
-      <text x="23" y="205" fill="#17201b" font-size="11" font-weight="800" font-family="monospace" text-anchor="middle">PDF</text>
-      <text x="46" y="197" fill="#ffffff" font-size="12" font-weight="700">4. Financial Report (PDF)</text>
-      <text x="46" y="212" fill="#9cb3a8" font-size="10" font-family="monospace">Research Brief / Filing (≤15MB)</text>
+      <!-- 10 stocks pills -->
+      <g transform="translate(10, 88)" font-family="monospace" font-size="8.5">
+        <text x="0" y="10" fill="#2dd4bf">🇮🇳 RELIANCE</text>
+        <text x="66" y="10" fill="#2dd4bf">· TCS</text>
+        <text x="100" y="10" fill="#2dd4bf">· HDFCBANK</text>
+        <text x="168" y="10" fill="#2dd4bf">· INFY</text>
+        <text x="206" y="10" fill="#2dd4bf">· ICICI</text>
+        <text x="0" y="24" fill="#38bdf8">🇸🇬 DBS (D05.SI)</text>
+        <text x="96" y="24" fill="#38bdf8">· SINGTEL (Z74.SI)</text>
+        <text x="0" y="38" fill="#fbbf24">🇦🇺 BHP (BHP.AX)</text>
+        <text x="96" y="38" fill="#fbbf24">· CBA (CBA.AX) · CSL (CSL.AX)</text>
+      </g>
     </g>
 
-    <!-- Arrow Down -->
-    <line x1="145" y1="450" x2="145" y2="472" stroke="#d5ff5f" stroke-width="2" marker-end="url(#arrowLime)"/>
-
-    <!-- Submit Button Call -->
-    <g transform="translate(20, 476)">
-      <rect width="250" height="42" rx="6" fill="#d5ff5f"/>
-      <text x="125" y="21" fill="#132c24" font-size="12" font-weight="800" font-family="monospace" text-anchor="middle">POST /api/analyze/async</text>
-      <text x="125" y="35" fill="#1e4034" font-size="10" font-family="monospace" font-weight="700" text-anchor="middle">JSON or Multipart Form Payload</text>
+    <!-- Submit Dispatch -->
+    <g transform="translate(18, 480)">
+      <rect width="259" height="60" rx="6" fill="#d5ff5f"/>
+      <text x="130" y="24" fill="#132c24" font-size="11.5" font-weight="800" font-family="monospace" text-anchor="middle">POST /api/analyze/async</text>
+      <text x="130" y="40" fill="#1e4034" font-size="9.5" font-family="monospace" font-weight="700" text-anchor="middle">or /api/quarterly-reports/rag</text>
+      <text x="130" y="53" fill="#132c24" font-size="9" font-family="monospace" text-anchor="middle">&lt; 50ms Async Handshake</text>
     </g>
   </g>
 
   <!-- Connector Stage 1 -> Stage 2 -->
-  <path d="M 330 615 L 368 615 L 368 205 L 398 205" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowLime)"/>
+  <path d="M 335 400 L 358 400" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowLime)"/>
 
 
-  <!-- ==================== STAGE 2: ASYNC QUEUEING & MULTIMODAL AI ==================== -->
-  <g transform="translate(405, 118)">
-    <rect width="340" height="535" rx="12" fill="url(#panelDark)" stroke="#356352" stroke-width="1.5" filter="url(#dropShadow)"/>
-    <rect width="340" height="38" rx="12" fill="#1f4739"/>
-    <text x="18" y="24" fill="#d5ff5f" font-size="12" font-weight="800" font-family="monospace" letter-spacing="1">STAGE 2 · ASYNC QUEUE &amp; AI PARSE</text>
+  <!-- ==================== STAGE 2: PUB/SUB, 5 SUB-AGENTS & BIGQUERY VECTOR RAG ==================== -->
+  <g transform="translate(362, 116)">
+    <rect width="395" height="560" rx="12" fill="url(#panelDark)" stroke="#356352" stroke-width="1.5" filter="url(#dropShadow)"/>
+    <rect width="395" height="38" rx="12" fill="#1f4739"/>
+    <text x="18" y="24" fill="#d5ff5f" font-size="12" font-weight="800" font-family="monospace" letter-spacing="1">STAGE 2 · EVENT BUS, SUB-AGENTS &amp; BIGQUERY</text>
 
-    <!-- Step 2.1: Case Init -->
-    <g transform="translate(20, 54)">
-      <rect width="300" height="68" rx="8" fill="#0d1f19" stroke="#457d68" stroke-width="1.2"/>
-      <text x="14" y="20" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="700">2.1 INSTANT CASE REGISTRATION (&lt;50ms)</text>
-      <text x="14" y="38" fill="#ffffff" font-size="12" font-weight="600">• Generate UUIDv4 case_id</text>
-      <text x="14" y="55" fill="#9cb3a8" font-size="11" font-family="monospace">• Save QUEUED in Firestore · Return HTTP 202</text>
+    <!-- Cloud Pub/Sub Box -->
+    <g transform="translate(16, 48)">
+      <rect width="363" height="68" rx="8" fill="#112b23" stroke="#14b8a6" stroke-width="1.5"/>
+      <text x="12" y="18" fill="#2dd4bf" font-size="10.5" font-family="monospace" font-weight="800">GOOGLE CLOUD PUB/SUB EVENT BUS</text>
+      <text x="12" y="34" fill="#ffffff" font-size="11" font-weight="600">Topic: investpi-leads-inbound  |  investpi-subagent-tasks</text>
+      <text x="12" y="49" fill="#9cb3a8" font-size="10" font-family="monospace">Push: investpi-worker-sub (OIDC Token) · 300s Deadline</text>
+      <text x="12" y="62" fill="#fca5a5" font-size="9.5" font-family="monospace">Dead-Letter Queue (DLQ): investpi-leads-dlq (5 retries)</text>
     </g>
 
-    <line x1="170" y1="122" x2="170" y2="146" stroke="#d5ff5f" stroke-width="2" marker-end="url(#arrowLime)"/>
+    <line x1="197" y1="116" x2="197" y2="128" stroke="#d5ff5f" stroke-width="1.8" marker-end="url(#arrowLime)"/>
 
-    <!-- Step 2.2: Cloud Pub/Sub -->
-    <g transform="translate(20, 150)">
-      <rect width="300" height="76" rx="8" fill="#142e25" stroke="#60a5fa" stroke-width="1.5"/>
-      <text x="14" y="20" fill="#60a5fa" font-size="11" font-family="monospace" font-weight="700">2.2 GOOGLE CLOUD PUB/SUB EVENT BUS</text>
-      <text x="14" y="39" fill="#ffffff" font-size="12" font-weight="600">Topic: investpi-leads-inbound</text>
-      <text x="14" y="56" fill="#9cb3a8" font-size="10.5" font-family="monospace">Push Sub: investpi-worker-sub (OIDC Token)</text>
-      <text x="14" y="69" fill="#fca5a5" font-size="10" font-family="monospace">5 Failures → Dead-Letter Queue (leads-dlq)</text>
+    <!-- Gemini 2.5 Flash Multimodal Extraction -->
+    <g transform="translate(16, 130)">
+      <rect width="363" height="66" rx="8" fill="url(#cardIvory)" stroke="#bc955d" stroke-width="1.5"/>
+      <text x="12" y="18" fill="#132c24" font-size="10.5" font-family="monospace" font-weight="800">GEMINI 2.5 FLASH MULTIMODAL EXTRACTION</text>
+      <text x="12" y="34" fill="#17201b" font-size="11" font-weight="700">• YouTube oEmbed &amp; Transcript Audio Analysis</text>
+      <text x="12" y="48" fill="#17201b" font-size="11" font-weight="700">• Vision OCR on Chat Bubbles, Chart Screengrabs &amp; PDFs</text>
+      <text x="12" y="61" fill="#5c5548" font-size="9.5" font-family="monospace">• Outputs Normalized JSON Claims: {ticker, target, horizon, return}</text>
     </g>
 
-    <line x1="170" y1="226" x2="170" y2="250" stroke="#d5ff5f" stroke-width="2" marker-end="url(#arrowLime)"/>
+    <line x1="197" y1="196" x2="197" y2="208" stroke="#d5ff5f" stroke-width="1.8" marker-end="url(#arrowLime)"/>
 
-    <!-- Step 2.3: Gemini 2.5 Flash Extraction -->
-    <g transform="translate(20, 254)">
-      <rect width="300" height="92" rx="8" fill="url(#cardIvory)" stroke="#bc955d" stroke-width="2"/>
-      <text x="14" y="21" fill="#132c24" font-size="11" font-family="monospace" font-weight="800">2.3 GEMINI 2.5 FLASH MULTIMODAL</text>
-      <text x="14" y="40" fill="#17201b" font-size="12" font-weight="700">• YouTube oEmbed + Audio/Transcript Parse</text>
-      <text x="14" y="57" fill="#17201b" font-size="12" font-weight="700">• Vision OCR on Chat Bubbles &amp; Charts</text>
-      <text x="14" y="74" fill="#5c5548" font-size="11" font-family="monospace">• Extracts Ticker, Target, Horizon &amp; Claims</text>
+    <!-- SubAgentCoordinator: 5 Micro-Agents -->
+    <g transform="translate(16, 210)">
+      <rect width="363" height="162" rx="8" fill="#0d1f19" stroke="#818cf8" stroke-width="1.5"/>
+      <rect x="0" y="0" width="363" height="22" rx="8" fill="#1f2347"/>
+      <text x="10" y="15" fill="#a5b4fc" font-size="10" font-family="monospace" font-weight="800">SubAgentCoordinator · 5 PARALLEL MICRO-AGENTS</text>
+
+      <g transform="translate(10, 28)" font-family="monospace" font-size="9.5">
+        <!-- Agent 1 -->
+        <rect x="0" y="0" width="343" height="23" rx="4" fill="#181c3b" stroke="#6366f1" stroke-width="0.8"/>
+        <text x="8" y="16" fill="#c7d2fe" font-weight="700">1. historic_price_agent</text>
+        <text x="195" y="16" fill="#9cb3a8">5-Yr OHLCV, 50/200 EMA, σ</text>
+
+        <!-- Agent 2 -->
+        <rect x="0" y="26" width="343" height="23" rx="4" fill="#181c3b" stroke="#6366f1" stroke-width="0.8"/>
+        <text x="8" y="42" fill="#c7d2fe" font-weight="700">2. price_target_agent</text>
+        <text x="195" y="42" fill="#9cb3a8">Consensus Target, Implied Move</text>
+
+        <!-- Agent 3 -->
+        <rect x="0" y="52" width="343" height="23" rx="4" fill="#181c3b" stroke="#6366f1" stroke-width="0.8"/>
+        <text x="8" y="68" fill="#c7d2fe" font-weight="700">3. fundamentals_agent</text>
+        <text x="195" y="68" fill="#9cb3a8">P/E, EPS, ROE, Promoter Pledge</text>
+
+        <!-- Agent 4 -->
+        <rect x="0" y="78" width="343" height="23" rx="4" fill="#181c3b" stroke="#2dd4bf" stroke-width="1.2"/>
+        <text x="8" y="94" fill="#2dd4bf" font-weight="800">4. quarterly_report_agent</text>
+        <text x="195" y="94" fill="#5eead4">BigQuery Vector Search RAG</text>
+
+        <!-- Agent 5 -->
+        <rect x="0" y="104" width="343" height="23" rx="4" fill="#181c3b" stroke="#6366f1" stroke-width="0.8"/>
+        <text x="8" y="120" fill="#c7d2fe" font-weight="700">5. explainer_agent</text>
+        <text x="195" y="120" fill="#9cb3a8">Layman Synthesis &amp; Disclaimers</text>
+      </g>
     </g>
 
-    <line x1="170" y1="346" x2="170" y2="372" stroke="#d5ff5f" stroke-width="2" marker-end="url(#arrowLime)"/>
+    <line x1="197" y1="372" x2="197" y2="384" stroke="#2dd4bf" stroke-width="1.8" marker-end="url(#arrowTeal)"/>
 
-    <!-- Step 2.4: Relevance Gate Diamond / Decision -->
-    <g transform="translate(20, 376)">
-      <rect width="300" height="66" rx="8" fill="#2b2112" stroke="#f59e0b" stroke-width="1.8"/>
-      <text x="150" y="22" fill="#fbbf24" font-size="11" font-family="monospace" font-weight="800" text-anchor="middle">◆ FINANCIAL RELEVANCE GATE ◆</text>
-      <text x="150" y="40" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">Does content contain securities claims?</text>
-      <text x="150" y="56" fill="#d6d3d1" font-size="10.5" font-family="monospace" text-anchor="middle">(is_financial_advice == True / False)</text>
-    </g>
+    <!-- Google BigQuery Vector Search RAG Detail -->
+    <g transform="translate(16, 386)">
+      <rect width="363" height="154" rx="8" fill="#0b241d" stroke="#2dd4bf" stroke-width="1.8"/>
+      <rect x="0" y="0" width="363" height="24" rx="8" fill="#133d34"/>
+      <text x="10" y="16" fill="#2dd4bf" font-size="10.5" font-family="monospace" font-weight="800">GOOGLE BIGQUERY VECTOR SEARCH PIPELINE</text>
 
-    <!-- Branch Left: Non-Financial Rejected -->
-    <line x1="95" y1="442" x2="95" y2="468" stroke="#ff6b5b" stroke-width="2" marker-end="url(#arrowRed)"/>
-    <g transform="translate(20, 472)">
-      <rect width="145" height="46" rx="6" fill="#3b1614" stroke="#ff6b5b" stroke-width="1.2"/>
-      <text x="72" y="19" fill="#ff9b91" font-size="10.5" font-family="monospace" font-weight="800" text-anchor="middle">FALSE → REJECTED</text>
-      <text x="72" y="35" fill="#fecaca" font-size="9.5" font-family="monospace" text-anchor="middle">"Lead Discarded" Stamp</text>
-    </g>
-
-    <!-- Branch Right: Financial Claim -> Ticker Resolve -->
-    <line x1="245" y1="442" x2="245" y2="468" stroke="#34d399" stroke-width="2" marker-end="url(#arrowGreen)"/>
-    <g transform="translate(175, 472)">
-      <rect width="145" height="46" rx="6" fill="#103324" stroke="#34d399" stroke-width="1.2"/>
-      <text x="72" y="19" fill="#34d399" font-size="10.5" font-family="monospace" font-weight="800" text-anchor="middle">TRUE → RESOLVE</text>
-      <text x="72" y="35" fill="#a7f3d0" font-size="9.5" font-family="monospace" text-anchor="middle">Map NSE / SGX / ASX</text>
+      <g transform="translate(10, 32)">
+        <text x="0" y="12" fill="#ffffff" font-size="10.5" font-weight="600">• Table: <tspan fill="#2dd4bf" font-family="monospace">quarterly_report_chunks</tspan> (10 Marquee Equities)</text>
+        <text x="0" y="28" fill="#ffffff" font-size="10.5" font-weight="600">• Remote Model: <tspan fill="#a78bfa" font-family="monospace">Vertex AI text-embedding-004</tspan></text>
+        <text x="0" y="44" fill="#9cb3a8" font-size="10" font-family="monospace">  Generates 768-dimensional semantic embeddings</text>
+        <text x="0" y="60" fill="#ffffff" font-size="10.5" font-weight="600">• Algorithm: <tspan fill="#d5ff5f" font-family="monospace">VECTOR_SEARCH(COSINE)</tspan> IVF Index</text>
+        <text x="0" y="76" fill="#9cb3a8" font-size="10" font-family="monospace">  Top-5 semantic chunks retrieved in &lt;120ms</text>
+        <text x="0" y="94" fill="#fde68a" font-size="10" font-family="monospace" font-weight="700">Strict Guard: Out-of-universe stock → Instant 404 Guard</text>
+        <text x="0" y="108" fill="#5eead4" font-size="9.5" font-family="monospace">Synthesizes: 5 Key Points + Segment Cards + SWOT Table</text>
+      </g>
     </g>
   </g>
 
   <!-- Connector Stage 2 -> Stage 3 -->
-  <path d="M 725 495 L 775 495 L 775 205 L 803 205" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowLime)"/>
+  <path d="M 757 400 L 780 400" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowLime)"/>
 
 
-  <!-- ==================== STAGE 3: 9-PARAMETER DETERMINISTIC ENGINE ==================== -->
-  <g transform="translate(810, 118)">
-    <rect width="415" height="535" rx="12" fill="url(#panelDark)" stroke="#356352" stroke-width="1.5" filter="url(#dropShadow)"/>
-    <rect width="415" height="38" rx="12" fill="#1f4739"/>
-    <text x="18" y="24" fill="#d5ff5f" font-size="12" font-weight="800" font-family="monospace" letter-spacing="1">STAGE 3 · 9-PARAMETER FORENSIC ENGINE</text>
+  <!-- ==================== STAGE 3: 9-PARAMETER FORENSIC MATH & REG 33 SYNTHESIS ==================== -->
+  <g transform="translate(784, 116)">
+    <rect width="470" height="560" rx="12" fill="url(#panelDark)" stroke="#356352" stroke-width="1.5" filter="url(#dropShadow)"/>
+    <rect width="470" height="38" rx="12" fill="#1f4739"/>
+    <text x="18" y="24" fill="#d5ff5f" font-size="12" font-weight="800" font-family="monospace" letter-spacing="1">STAGE 3 · DETERMINISTIC AUDIT &amp; REG 33 SYNTHESIS</text>
 
-    <!-- Empirical Grounding Data Box -->
-    <g transform="translate(18, 52)">
-      <rect width="379" height="62" rx="8" fill="#0d1f19" stroke="#bc955d" stroke-width="1.5"/>
-      <text x="190" y="20" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800" text-anchor="middle">EMPIRICAL DATA &amp; REGISTRY GROUNDING LOADER</text>
-      <text x="190" y="38" fill="#ffffff" font-size="11.5" font-weight="600" text-anchor="middle">5-Yr OHLCV History · 10-Min Live Price · Company Fundamentals</text>
-      <text x="190" y="53" fill="#9cb3a8" font-size="10.5" font-family="monospace" text-anchor="middle">SEBI / MAS / ASIC Registered Advisors &amp; Sanctions Lists</text>
+    <!-- Empirical Registry Loader Box -->
+    <g transform="translate(16, 46)">
+      <rect width="438" height="56" rx="8" fill="#0d1f19" stroke="#bc955d" stroke-width="1.5"/>
+      <text x="219" y="18" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800" text-anchor="middle">EMPIRICAL DATA &amp; STATUTORY REGISTRY GROUNDING</text>
+      <text x="219" y="34" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">5-Yr Daily OHLCV · 10-Min Live Price · Audited Financial Fundamentals</text>
+      <text x="219" y="48" fill="#9cb3a8" font-size="10" font-family="monospace" text-anchor="middle">SEBI / MAS / ASIC Registries · Surveillance Bands (ASM/GSM) · Debarred Lists</text>
     </g>
 
-    <line x1="207" y1="114" x2="207" y2="134" stroke="#d5ff5f" stroke-width="2" marker-end="url(#arrowLime)"/>
+    <line x1="235" y1="102" x2="235" y2="114" stroke="#d5ff5f" stroke-width="1.8" marker-end="url(#arrowLime)"/>
 
-    <!-- 9 Parameters Grid (3 rows x 3 cols or 9 stacked cards in 2 cols) -->
-    <g transform="translate(18, 138)">
+    <!-- 9 Deterministic Parameters (2 Columns) -->
+    <g transform="translate(16, 116)">
       <!-- P1 -->
-      <rect x="0" y="0" width="184" height="68" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
-      <text x="10" y="18" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800">P1 · Price-Move σ</text>
-      <text x="10" y="35" fill="#ffffff" font-size="11" font-weight="600">5-Yr Rolling Return z-score</text>
-      <text x="10" y="52" fill="#fca5a5" font-size="9.5" font-family="monospace">Gate: Claimed move &gt; 4σ</text>
+      <rect x="0" y="0" width="214" height="66" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
+      <text x="8" y="16" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800">P1 · Price-Move σ</text>
+      <text x="8" y="32" fill="#ffffff" font-size="10.5" font-weight="600">5-Yr Rolling Return z-score</text>
+      <text x="8" y="48" fill="#fca5a5" font-size="9" font-family="monospace">Hard Gate: Move &gt; 4σ</text>
+      <text x="8" y="60" fill="#9cb3a8" font-size="8.5">Rejects impossible trajectory</text>
 
       <!-- P2 -->
-      <rect x="195" y="0" width="184" height="68" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
-      <text x="205" y="18" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800">P2 · Valuation Range</text>
-      <text x="205" y="35" fill="#ffffff" font-size="11" font-weight="600">Implied P/E vs Sector Band</text>
-      <text x="205" y="52" fill="#fca5a5" font-size="9.5" font-family="monospace">Gate: Extreme P/E distortion</text>
+      <rect x="224" y="0" width="214" height="66" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
+      <text x="232" y="16" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800">P2 · Valuation Band</text>
+      <text x="232" y="32" fill="#ffffff" font-size="10.5" font-weight="600">Implied Forward P/E vs Sector</text>
+      <text x="232" y="48" fill="#fca5a5" font-size="9" font-family="monospace">Gate: Extreme P/E distortion</text>
+      <text x="232" y="60" fill="#9cb3a8" font-size="8.5">Audits valuation sanity</text>
 
       <!-- P3 -->
-      <rect x="0" y="78" width="184" height="68" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
-      <text x="10" y="96" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800">P3 · Earnings Trend</text>
-      <text x="10" y="113" fill="#ffffff" font-size="11" font-weight="600">Revenue &amp; EPS Growth</text>
-      <text x="10" y="130" fill="#9cb3a8" font-size="9.5" font-family="monospace">Checks fundamental backing</text>
+      <rect x="0" y="72" width="214" height="66" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
+      <text x="8" y="88" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800">P3 · Earnings Trend</text>
+      <text x="8" y="104" fill="#ffffff" font-size="10.5" font-weight="600">Revenue &amp; EPS Growth</text>
+      <text x="8" y="120" fill="#9cb3a8" font-size="9" font-family="monospace">Trailing 12-month trajectory</text>
+      <text x="8" y="132" fill="#9cb3a8" font-size="8.5">Checks fundamental support</text>
 
       <!-- P4 -->
-      <rect x="195" y="78" width="184" height="68" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
-      <text x="205" y="96" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800">P4 · Analyst Target</text>
-      <text x="205" y="113" fill="#ffffff" font-size="11" font-weight="600">Consensus Target Spread</text>
-      <text x="205" y="130" fill="#9cb3a8" font-size="9.5" font-family="monospace">Institutional band check</text>
+      <rect x="224" y="72" width="214" height="66" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
+      <text x="232" y="88" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800">P4 · Analyst Consensus</text>
+      <text x="232" y="104" fill="#ffffff" font-size="10.5" font-weight="600">Institutional Target Spread</text>
+      <text x="232" y="120" fill="#9cb3a8" font-size="9" font-family="monospace">Bloomberg/Refinitiv delta</text>
+      <text x="232" y="132" fill="#9cb3a8" font-size="8.5">Flags isolated tip divergence</text>
 
       <!-- P5 -->
-      <rect x="0" y="156" width="184" height="68" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
-      <text x="10" y="174" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800">P5 · Promoter Stake</text>
-      <text x="10" y="191" fill="#ffffff" font-size="11" font-weight="600">Pledge % &amp; Dilution</text>
-      <text x="10" y="208" fill="#9cb3a8" font-size="9.5" font-family="monospace">Insider dumping detection</text>
+      <rect x="0" y="144" width="214" height="66" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
+      <text x="8" y="160" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800">P5 · Promoter Stake</text>
+      <text x="8" y="176" fill="#ffffff" font-size="10.5" font-weight="600">Pledge % &amp; Insider Dilution</text>
+      <text x="8" y="192" fill="#fca5a5" font-size="9" font-family="monospace">Gate: Promoter pledge &gt;50%</text>
+      <text x="8" y="204" fill="#9cb3a8" font-size="8.5">Detects insider dumping risk</text>
 
       <!-- P6 -->
-      <rect x="195" y="156" width="184" height="68" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
-      <text x="205" y="174" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800">P6 · Regulatory Alerts</text>
-      <text x="205" y="191" fill="#ffffff" font-size="11" font-weight="600">Debarred &amp; Enforcement</text>
-      <text x="205" y="208" fill="#fca5a5" font-size="9.5" font-family="monospace">Gate: Sanctioned company</text>
+      <rect x="224" y="144" width="214" height="66" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
+      <text x="232" y="160" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800">P6 · Sanctions / Debarred</text>
+      <text x="232" y="176" fill="#ffffff" font-size="10.5" font-weight="600">Regulatory Sanctions Orders</text>
+      <text x="232" y="192" fill="#fca5a5" font-size="9" font-family="monospace">Hard Gate: Debarred Director</text>
+      <text x="232" y="204" fill="#9cb3a8" font-size="8.5">SEBI / MAS / ASIC blacklist</text>
 
       <!-- P7 -->
-      <rect x="0" y="234" width="184" height="68" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
-      <text x="10" y="252" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800">P7 · Surveillance</text>
-      <text x="10" y="269" fill="#ffffff" font-size="11" font-weight="600">ASM/GSM &amp; 20d Vol Spike</text>
-      <text x="10" y="286" fill="#fca5a5" font-size="9.5" font-family="monospace">Gate: Pump volume anomaly</text>
+      <rect x="0" y="216" width="214" height="66" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
+      <text x="8" y="232" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800">P7 · Surveillance ASM/GSM</text>
+      <text x="8" y="248" fill="#ffffff" font-size="10.5" font-weight="600">20-Day Volume Anomaly Spike</text>
+      <text x="8" y="264" fill="#fca5a5" font-size="9" font-family="monospace">Gate: Abnormal pump spike</text>
+      <text x="8" y="276" fill="#9cb3a8" font-size="8.5">Exchange surveillance check</text>
 
       <!-- P8 -->
-      <rect x="195" y="234" width="184" height="68" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
-      <text x="205" y="252" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800">P8 · Advisor License</text>
-      <text x="205" y="269" fill="#ffffff" font-size="11" font-weight="600">SEBI RA/IA · MAS · ASIC</text>
-      <text x="205" y="286" fill="#fbbf24" font-size="9.5" font-family="monospace">Triggers Source-Cap if False</text>
+      <rect x="224" y="216" width="214" height="66" rx="6" fill="#142e25" stroke="#457d68" stroke-width="1.2"/>
+      <text x="232" y="232" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800">P8 · Advisor Licensing</text>
+      <text x="232" y="248" fill="#ffffff" font-size="10.5" font-weight="600">SEBI RA/IA · MAS · ASIC</text>
+      <text x="232" y="264" fill="#fbbf24" font-size="9" font-family="monospace">Hard Gate: Unregistered Tipster</text>
+      <text x="232" y="276" fill="#9cb3a8" font-size="8.5">Caps maximum score ≤ Caution</text>
 
-      <!-- P9 (Full Width Bottom) -->
-      <rect x="0" y="312" width="379" height="68" rx="6" fill="#2b1917" stroke="#ff6b5b" stroke-width="1.4"/>
-      <text x="14" y="332" fill="#ff9b91" font-size="11" font-family="monospace" font-weight="800">P9 · Hype, Urgency &amp; Manipulation Lexicon Audit</text>
-      <text x="14" y="350" fill="#ffffff" font-size="11.5" font-weight="600">Detects "100% Guaranteed", "Sure-Shot Multibagger", Fake Urgency</text>
-      <text x="14" y="367" fill="#fca5a5" font-size="10" font-family="monospace">Hard Gate: Guaranteed return claim → Instant High Risk</text>
+      <!-- P9 Full Width -->
+      <rect x="0" y="288" width="438" height="66" rx="6" fill="#2b1917" stroke="#ff6b5b" stroke-width="1.4"/>
+      <text x="12" y="306" fill="#ff9b91" font-size="10.5" font-family="monospace" font-weight="800">P9 · Hype, Urgency &amp; Manipulation Lexicon Audit</text>
+      <text x="12" y="322" fill="#ffffff" font-size="11" font-weight="600">Detects "100% Guaranteed", "Sure-Shot Multibagger", "Secret Insider Blast"</text>
+      <text x="12" y="338" fill="#fca5a5" font-size="9.5" font-family="monospace">Hard Gate: Guaranteed Return Claim → Instant High Risk &amp; Score Capped ≤ 3.0</text>
+      <text x="12" y="350" fill="#fecaca" font-size="8.5">SEBI Prohibition of Fraudulent and Unfair Trade Practices (PFUTP) Enforcement</text>
+    </g>
+
+    <!-- Regulation 33 Synthesis Card at Bottom of Stage 3 -->
+    <g transform="translate(16, 476)">
+      <rect width="438" height="68" rx="6" fill="#0f2620" stroke="#2dd4bf" stroke-width="1.2"/>
+      <text x="12" y="18" fill="#2dd4bf" font-size="10" font-family="monospace" font-weight="800">REGULATION 33 CORPORATE FILING SYNTHESIS (GEMINI 2.5 PRO)</text>
+      <text x="12" y="34" fill="#ffffff" font-size="10.5" font-weight="600">• Headline Financials: Gross Revenue, Operating EBITDA, Net Profit PAT</text>
+      <text x="12" y="48" fill="#9cb3a8" font-size="9.5" font-family="monospace">• 5 Key Plain-English Takeaways + Segment Operations + Red-Flag Disclosures</text>
+      <text x="12" y="61" fill="#5eead4" font-size="9.5" font-family="monospace">• 4-Quadrant Institutional SWOT Matrix (Strengths, Weaknesses, Opps, Threats)</text>
     </g>
   </g>
 
   <!-- Connector Stage 3 -> Stage 4 -->
-  <path d="M 1225 385 L 1258 385" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowLime)"/>
+  <path d="M 1254 400 L 1277 400" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowLime)"/>
 
 
-  <!-- ==================== STAGE 4: VERDICT MATRIX (RIGHT COLUMN) ==================== -->
-  <g transform="translate(1265, 118)">
-    <rect width="295" height="535" rx="12" fill="url(#panelDark)" stroke="#356352" stroke-width="1.5" filter="url(#dropShadow)"/>
-    <rect width="295" height="38" rx="12" fill="#1f4739"/>
-    <text x="18" y="24" fill="#d5ff5f" font-size="12" font-weight="800" font-family="monospace" letter-spacing="1">STAGE 4 · VERDICT ENGINE</text>
+  <!-- ==================== STAGE 4: VERDICT ENGINE & FIRESTORE L2 SEAL ==================== -->
+  <g transform="translate(1280, 116)">
+    <rect width="280" height="560" rx="12" fill="url(#panelDark)" stroke="#356352" stroke-width="1.5" filter="url(#dropShadow)"/>
+    <rect width="280" height="38" rx="12" fill="#1f4739"/>
+    <text x="16" y="24" fill="#d5ff5f" font-size="12" font-weight="800" font-family="monospace" letter-spacing="1">STAGE 4 · VERDICT &amp; SEAL</text>
 
-    <!-- Gate 1: Hard Gate Check -->
-    <g transform="translate(18, 54)">
-      <rect width="259" height="82" rx="8" fill="#3b1614" stroke="#ff6b5b" stroke-width="1.8"/>
-      <text x="14" y="20" fill="#ff9b91" font-size="11" font-family="monospace" font-weight="800">1. HARD GATE CHECK</text>
-      <text x="14" y="38" fill="#ffffff" font-size="11.5" font-weight="600">Any Hard Gate Triggered?</text>
-      <text x="14" y="55" fill="#fecaca" font-size="10.5" font-family="monospace">→ Instant 🔴 HIGH RISK</text>
-      <text x="14" y="71" fill="#fca5a5" font-size="10" font-family="monospace">→ Final Score Capped ≤ 3.0 / 10</text>
+    <!-- 1. Hard Gate Check -->
+    <g transform="translate(14, 50)">
+      <rect width="252" height="88" rx="8" fill="#3b1614" stroke="#ff6b5b" stroke-width="1.8"/>
+      <text x="12" y="20" fill="#ff9b91" font-size="10.5" font-family="monospace" font-weight="800">1. HARD GATE TRIGGERED?</text>
+      <text x="12" y="38" fill="#ffffff" font-size="11" font-weight="600">P9 Guaranteed Return OR</text>
+      <text x="12" y="52" fill="#ffffff" font-size="11" font-weight="600">P8 Unregistered Tipster OR</text>
+      <text x="12" y="66" fill="#ffffff" font-size="11" font-weight="600">P6 Debarred Entity</text>
+      <text x="12" y="80" fill="#fca5a5" font-size="9.5" font-family="monospace">→ Instant 🔴 HIGH RISK (Score ≤ 3.0)</text>
     </g>
 
-    <line x1="147" y1="136" x2="147" y2="158" stroke="#e9e5da" stroke-width="1.8" marker-end="url(#arrowIvory)"/>
+    <line x1="140" y1="142" x2="140" y2="156" stroke="#e9e5da" stroke-width="1.8" marker-end="url(#arrowIvory)"/>
 
-    <!-- Gate 2: Data Sufficiency -->
-    <g transform="translate(18, 162)">
-      <rect width="259" height="68" rx="8" fill="#1f2937" stroke="#9ca3af" stroke-width="1.4"/>
-      <text x="14" y="20" fill="#e5e7eb" font-size="11" font-family="monospace" font-weight="800">2. DATA SUFFICIENCY CHECK</text>
-      <text x="14" y="38" fill="#ffffff" font-size="11.5" font-weight="600">Evaluated Params &lt; 4?</text>
-      <text x="14" y="55" fill="#d1d5db" font-size="10.5" font-family="monospace">→ ⚪ NOT ENOUGH DATA (Neutral)</text>
+    <!-- 2. Data Sufficiency -->
+    <g transform="translate(14, 160)">
+      <rect width="252" height="66" rx="8" fill="#1f2937" stroke="#9ca3af" stroke-width="1.4"/>
+      <text x="12" y="18" fill="#e5e7eb" font-size="10.5" font-family="monospace" font-weight="800">2. DATA SUFFICIENCY CHECK</text>
+      <text x="12" y="36" fill="#ffffff" font-size="11" font-weight="600">Evaluated Parameters &lt; 4?</text>
+      <text x="12" y="54" fill="#d1d5db" font-size="9.5" font-family="monospace">→ ⚪ NOT ENOUGH DATA (Neutral)</text>
     </g>
 
-    <line x1="147" y1="230" x2="147" y2="252" stroke="#e9e5da" stroke-width="1.8" marker-end="url(#arrowIvory)"/>
+    <line x1="140" y1="230" x2="140" y2="244" stroke="#e9e5da" stroke-width="1.8" marker-end="url(#arrowIvory)"/>
 
-    <!-- Gate 3: Positive Ratio & Source Cap -->
-    <g transform="translate(18, 256)">
-      <rect width="259" height="170" rx="8" fill="#0d1f19" stroke="#d5ff5f" stroke-width="1.5"/>
-      <text x="14" y="20" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800">3. POSITIVE RATIO (Score ≥ 7.0)</text>
+    <!-- 3. Positive Ratio & Verdict -->
+    <g transform="translate(14, 248)">
+      <rect width="252" height="174" rx="8" fill="#0d1f19" stroke="#d5ff5f" stroke-width="1.5"/>
+      <text x="12" y="18" fill="#d5ff5f" font-size="10" font-family="monospace" font-weight="800">3. POSITIVE RATIO (Score ≥ 7.0)</text>
 
-      <!-- <40% -->
-      <rect x="12" y="30" width="235" height="34" rx="5" fill="#3b1614" stroke="#ff6b5b" stroke-width="1"/>
-      <text x="22" y="51" fill="#ff9b91" font-size="11" font-family="monospace" font-weight="700">Ratio &lt; 40%  →  🔴 HIGH RISK</text>
+      <!-- Ratio < 40% -->
+      <rect x="10" y="28" width="232" height="34" rx="4" fill="#3b1614" stroke="#ff6b5b" stroke-width="1"/>
+      <text x="18" y="49" fill="#ff9b91" font-size="10.5" font-family="monospace" font-weight="700">&lt; 40%  →  🔴 HIGH RISK</text>
 
       <!-- 40-70% -->
-      <rect x="12" y="72" width="235" height="34" rx="5" fill="#3b2510" stroke="#f59e0b" stroke-width="1"/>
-      <text x="22" y="93" fill="#fbbf24" font-size="11" font-family="monospace" font-weight="700">40% – 70%    →  🟠 CAUTION</text>
+      <rect x="10" y="68" width="232" height="34" rx="4" fill="#3b2510" stroke="#f59e0b" stroke-width="1"/>
+      <text x="18" y="89" fill="#fbbf24" font-size="10.5" font-family="monospace" font-weight="700">40% – 70%  →  🟠 CAUTION</text>
 
-      <!-- >70% + Source Cap -->
-      <rect x="12" y="114" width="235" height="46" rx="5" fill="#103324" stroke="#34d399" stroke-width="1"/>
-      <text x="22" y="133" fill="#34d399" font-size="11" font-family="monospace" font-weight="700">&gt; 70% + Licensed → 🟢 CONSISTENT</text>
-      <text x="22" y="150" fill="#fbbf24" font-size="10" font-family="monospace">Unregistered Source Capped at 🟠 CAUTION</text>
+      <!-- >70% + Licensed -->
+      <rect x="10" y="108" width="232" height="56" rx="4" fill="#103324" stroke="#34d399" stroke-width="1"/>
+      <text x="18" y="128" fill="#34d399" font-size="10.5" font-family="monospace" font-weight="700">&gt; 70% + Reg → 🟢 CONSISTENT</text>
+      <text x="18" y="144" fill="#fbbf24" font-size="9" font-family="monospace">Unlicensed creator capped</text>
+      <text x="18" y="156" fill="#fbbf24" font-size="9" font-family="monospace">at 🟠 CAUTION regardless</text>
     </g>
 
-    <line x1="147" y1="426" x2="147" y2="450" stroke="#d5ff5f" stroke-width="2" marker-end="url(#arrowLime)"/>
+    <line x1="140" y1="426" x2="140" y2="442" stroke="#d5ff5f" stroke-width="1.8" marker-end="url(#arrowLime)"/>
 
-    <!-- Persist & Publish -->
-    <g transform="translate(18, 454)">
-      <rect width="259" height="64" rx="8" fill="url(#cardIvory)" stroke="#c9c2b3" stroke-width="1.5"/>
-      <text x="130" y="22" fill="#132c24" font-size="11" font-family="monospace" font-weight="800" text-anchor="middle">4. SEAL &amp; PERSIST DOSSIER</text>
-      <text x="130" y="40" fill="#17201b" font-size="11.5" font-weight="700" text-anchor="middle">Save to Firestore (investpi_reports)</text>
-      <text x="130" y="55" fill="#5c5548" font-size="10" font-family="monospace" text-anchor="middle">Emit AuditCompletedEvent via SSE</text>
+    <!-- 4. Firestore L2 Seal -->
+    <g transform="translate(14, 446)">
+      <rect width="252" height="98" rx="8" fill="url(#cardIvory)" stroke="#c9c2b3" stroke-width="1.5"/>
+      <text x="126" y="20" fill="#132c24" font-size="10.5" font-family="monospace" font-weight="800" text-anchor="middle">4. SEAL &amp; PERSIST IN FIRESTORE</text>
+      <text x="126" y="38" fill="#17201b" font-size="11" font-weight="700" text-anchor="middle">Google Cloud Firestore L2</text>
+      <text x="126" y="54" fill="#5c5548" font-size="9.5" font-family="monospace" text-anchor="middle">Collections: investpi_cases,</text>
+      <text x="126" y="68" fill="#5c5548" font-size="9.5" font-family="monospace" text-anchor="middle">investpi_reports, investpi_prices</text>
+      <text x="126" y="85" fill="#257849" font-size="9.5" font-family="monospace" font-weight="700" text-anchor="middle">Emit SSE AuditCompletedEvent</text>
     </g>
   </g>
 
 
-  <!-- ==================== STAGE 5: BOTTOM DELIVERABLES & POST-AUDIT AGENT BAR ==================== -->
+  <!-- ==================== STAGE 5: FIVE CLIENT DELIVERABLES & FORENSIC AGENT DRAWER ==================== -->
   <!-- Connector from Stage 4 down to Stage 5 -->
-  <path d="M 1412 653 L 1412 695" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowLime)"/>
+  <path d="M 1420 676 L 1420 706" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowLime)"/>
 
-  <g transform="translate(40, 702)">
-    <rect width="1520" height="310" rx="14" fill="url(#panelDark)" stroke="#bc955d" stroke-width="1.8" filter="url(#dropShadow)"/>
-    <rect width="1520" height="40" rx="14" fill="#1f4739"/>
-    <text x="24" y="25" fill="#d5ff5f" font-size="13" font-weight="800" font-family="monospace" letter-spacing="1">STAGE 5 · CLIENT DOSSIER DELIVERY, EMPIRICAL ARTIFACTS &amp; GUARDRAILED AI CROSS-EXAMINATION</text>
+  <g transform="translate(40, 712)">
+    <rect width="1520" height="380" rx="14" fill="url(#panelDark)" stroke="#bc955d" stroke-width="1.8" filter="url(#dropShadow)"/>
+    <rect width="1520" height="42" rx="14" fill="#1f4739"/>
+    <text x="24" y="26" fill="#d5ff5f" font-size="13" font-weight="800" font-family="monospace" letter-spacing="1">STAGE 5 · CLIENT DELIVERABLES, DEDICATED REGULATION 33 PAGE &amp; GUARDRAILED FORENSIC AI AGENT</text>
 
-    <!-- Deliverable 1: SSE Real-Time Stream -->
-    <g transform="translate(24, 58)">
-      <rect width="350" height="228" rx="10" fill="#0d1f19" stroke="#457d68" stroke-width="1.5"/>
-      <rect x="16" y="16" width="140" height="24" rx="4" fill="#18382d"/>
-      <text x="86" y="32" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800" text-anchor="middle">REAL-TIME STREAM</text>
-      <text x="16" y="64" fill="#ffffff" font-size="15" font-weight="800">1. Live SSE Case Stream</text>
-      <text x="16" y="84" fill="#9cb3a8" font-size="11.5" font-family="monospace">GET /api/cases/:case_id/stream</text>
-      <line x1="16" y1="98" x2="334" y2="98" stroke="#264a3c" stroke-width="1"/>
-      <text x="16" y="122" fill="#e5e7eb" font-size="12">• Streams state transitions in real time:</text>
-      <text x="28" y="144" fill="#d5ff5f" font-size="11" font-family="monospace">QUEUED → PROCESSING → COMPLETED</text>
-      <text x="16" y="170" fill="#e5e7eb" font-size="12">• Eliminates client polling overhead</text>
-      <text x="16" y="194" fill="#e5e7eb" font-size="12">• Supports multi-equity portfolio tabs</text>
-      <text x="16" y="214" fill="#9cb3a8" font-size="11" font-family="monospace">• Auto-switches UI Stage 2 → Stage 3</text>
+    <!-- Deliverable 1: Live SSE Stream -->
+    <g transform="translate(24, 60)">
+      <rect width="280" height="300" rx="10" fill="#0d1f19" stroke="#457d68" stroke-width="1.5"/>
+      <rect x="14" y="14" width="130" height="22" rx="4" fill="#18382d"/>
+      <text x="79" y="29" fill="#d5ff5f" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="middle">REAL-TIME SSE</text>
+      <text x="14" y="60" fill="#ffffff" font-size="14" font-weight="800">1. Live Case Stream</text>
+      <text x="14" y="78" fill="#9cb3a8" font-size="10.5" font-family="monospace">GET /api/cases/:id/stream</text>
+      <line x1="14" y1="90" x2="266" y2="90" stroke="#264a3c" stroke-width="1"/>
+      <text x="14" y="112" fill="#e5e7eb" font-size="11.5">• Server-Sent Events push states:</text>
+      <text x="24" y="132" fill="#d5ff5f" font-size="10" font-family="monospace">QUEUED → PROCESSING → DONE</text>
+      <text x="14" y="156" fill="#e5e7eb" font-size="11.5">• Eliminates polling &amp; reduces load</text>
+      <text x="14" y="178" fill="#e5e7eb" font-size="11.5">• Multi-equity portfolio tabs update</text>
+      <text x="14" y="200" fill="#e5e7eb" font-size="11.5">• Stage 2 → Stage 3 seamless switch</text>
+      <text x="14" y="222" fill="#9cb3a8" font-size="10" font-family="monospace">• Sub-50ms push notification</text>
+      <rect x="14" y="240" width="252" height="44" rx="6" fill="#142e25" stroke="#356352" stroke-width="1"/>
+      <text x="24" y="258" fill="#34d399" font-size="10" font-family="monospace" font-weight="700">✓ Resilient to Cloud Run sleep</text>
+      <text x="24" y="272" fill="#9cb3a8" font-size="9" font-family="monospace">Automatic exponential reconnect</text>
     </g>
 
-    <!-- Deliverable 2: Interactive Dossier & 5-Yr Chart -->
-    <g transform="translate(398, 58)">
-      <rect width="350" height="228" rx="10" fill="url(#cardIvory)" stroke="#c9c2b3" stroke-width="1.5"/>
-      <rect x="16" y="16" width="165" height="24" rx="4" fill="#132c24"/>
-      <text x="98" y="32" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800" text-anchor="middle">VISUAL EVIDENCE</text>
-      <text x="16" y="64" fill="#17201b" font-size="15" font-weight="800">2. Interactive Forensic Dossier</text>
-      <text x="16" y="84" fill="#5c5548" font-size="11.5" font-family="monospace">app/reporting/chart_generator.py</text>
-      <line x1="16" y1="98" x2="334" y2="98" stroke="#dcd5c5" stroke-width="1"/>
-      <text x="16" y="122" fill="#17201b" font-size="12" font-weight="600">• 5-Year Historical Price Trajectory Chart</text>
-      <text x="16" y="144" fill="#17201b" font-size="12" font-weight="600">• Overlays Claimed Target &amp; Horizon Line</text>
-      <text x="16" y="166" fill="#17201b" font-size="12" font-weight="600">• Displays Official Verdict Rubber Stamp</text>
-      <text x="16" y="188" fill="#17201b" font-size="12" font-weight="600">• Full 9-Parameter Breakdown Cards</text>
-      <text x="16" y="212" fill="#a93a2d" font-size="11" font-family="monospace" font-weight="700">• Highlights Triggered Hard-Gate Banners</text>
+    <!-- Deliverable 2: Interactive Claim Dossier -->
+    <g transform="translate(324, 60)">
+      <rect width="285" height="300" rx="10" fill="url(#cardIvory)" stroke="#c9c2b3" stroke-width="1.5"/>
+      <rect x="14" y="14" width="145" height="22" rx="4" fill="#132c24"/>
+      <text x="86" y="29" fill="#d5ff5f" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="middle">EMPIRICAL EVIDENCE</text>
+      <text x="14" y="60" fill="#17201b" font-size="14" font-weight="800">2. Interactive Dossier</text>
+      <text x="14" y="78" fill="#5c5548" font-size="10.5" font-family="monospace">templates/index.html (#stage-report)</text>
+      <line x1="14" y1="90" x2="271" y2="90" stroke="#dcd5c5" stroke-width="1"/>
+      <text x="14" y="112" fill="#17201b" font-size="11.5" font-weight="600">• 5-Yr Realized Price Trajectory</text>
+      <text x="14" y="132" fill="#17201b" font-size="11.5" font-weight="600">• Overlays Claimed Target &amp; Horizon</text>
+      <text x="14" y="152" fill="#17201b" font-size="11.5" font-weight="600">• Official Forensic Stamp (High Risk)</text>
+      <text x="14" y="172" fill="#17201b" font-size="11.5" font-weight="600">• Full 9-Parameter Audit Matrix</text>
+      <text x="14" y="194" fill="#a93a2d" font-size="10.5" font-family="monospace" font-weight="700">• Highlights Triggered Hard Gates</text>
+      <rect x="14" y="214" width="257" height="70" rx="6" fill="#f5f0e4" stroke="#dcd5c5" stroke-width="1"/>
+      <text x="24" y="234" fill="#17201b" font-size="10" font-family="monospace" font-weight="700">MULTI-TICKER SWITCHER:</text>
+      <text x="24" y="250" fill="#5c5548" font-size="9.5" font-family="monospace">Audits composite video with 2+ stocks</text>
+      <text x="24" y="266" fill="#257849" font-size="9.5" font-family="monospace" font-weight="700">Instant tabbed comparative dossier</text>
     </g>
 
-    <!-- Deliverable 3: Sealed PDF Brief -->
-    <g transform="translate(772, 58)">
-      <rect width="350" height="228" rx="10" fill="#0d1f19" stroke="#457d68" stroke-width="1.5"/>
-      <rect x="16" y="16" width="150" height="24" rx="4" fill="#bc955d"/>
-      <text x="91" y="32" fill="#17201b" font-size="10.5" font-family="monospace" font-weight="800" text-anchor="middle">COMPLIANCE EXPORT</text>
-      <text x="16" y="64" fill="#ffffff" font-size="15" font-weight="800">3. Sealed PDF Audit Brief</text>
-      <text x="16" y="84" fill="#9cb3a8" font-size="11.5" font-family="monospace">GET /api/report/:report_id.pdf</text>
-      <line x1="16" y1="98" x2="334" y2="98" stroke="#264a3c" stroke-width="1"/>
-      <text x="16" y="122" fill="#e5e7eb" font-size="12">• Generated via ReportLab PDF Engine</text>
-      <text x="16" y="144" fill="#e5e7eb" font-size="12">• Contains Executive Summary &amp; Stamp</text>
-      <text x="16" y="166" fill="#e5e7eb" font-size="12">• High-res embedded 5-Yr Price Chart</text>
-      <text x="16" y="188" fill="#e5e7eb" font-size="12">• Complete 9-Parameter Audit Table</text>
-      <text x="16" y="212" fill="#d5ff5f" font-size="11" font-family="monospace">• Cached in Firestore for Multi-Worker Access</text>
+    <!-- Deliverable 3: Dedicated Regulation 33 Page & SWOT -->
+    <g transform="translate(629, 60)">
+      <rect width="295" height="300" rx="10" fill="#0b241d" stroke="#2dd4bf" stroke-width="1.8"/>
+      <rect x="14" y="14" width="165" height="22" rx="4" fill="#133d34"/>
+      <text x="96" y="29" fill="#2dd4bf" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="middle">BIGQUERY VECTOR RAG</text>
+      <text x="14" y="60" fill="#ffffff" font-size="14" font-weight="800">3. Regulation 33 Page</text>
+      <text x="14" y="78" fill="#5eead4" font-size="10.5" font-family="monospace">#stage-financial (Separate Screen)</text>
+      <line x1="14" y1="90" x2="281" y2="90" stroke="#235c4f" stroke-width="1"/>
+      <text x="14" y="112" fill="#ffffff" font-size="11.5" font-weight="600">• 10-Stock Sidebar Quick Switcher</text>
+      <text x="14" y="132" fill="#ffffff" font-size="11.5" font-weight="600">• Headline Revenue, EBITDA &amp; PAT</text>
+      <text x="14" y="152" fill="#ffffff" font-size="11.5" font-weight="600">• 5 Key Plain-English Bullets</text>
+      <text x="14" y="172" fill="#ffffff" font-size="11.5" font-weight="600">• Segment Operational Breakdown Cards</text>
+      <text x="14" y="194" fill="#2dd4bf" font-size="10.5" font-family="monospace" font-weight="800">• 4-Quadrant SWOT Matrix Table:</text>
+      <rect x="14" y="206" width="267" height="78" rx="6" fill="#102f26" stroke="#2dd4bf" stroke-width="1"/>
+      <text x="24" y="224" fill="#34d399" font-size="9.5" font-family="monospace">Strengths: Market leader, cashflow</text>
+      <text x="24" y="239" fill="#f87171" font-size="9.5" font-family="monospace">Weaknesses: Margin pressure, debt</text>
+      <text x="24" y="254" fill="#38bdf8" font-size="9.5" font-family="monospace">Opportunities: Quick commerce, AI</text>
+      <text x="24" y="269" fill="#fbbf24" font-size="9.5" font-family="monospace">Threats: Regulatory changes, tariff</text>
     </g>
 
-    <!-- Deliverable 4: Guardrailed Forensic AI Agent -->
-    <g transform="translate(1146, 58)">
-      <rect width="350" height="228" rx="10" fill="#10261e" stroke="#d5ff5f" stroke-width="1.8"/>
-      <rect x="16" y="16" width="175" height="24" rx="4" fill="#d5ff5f"/>
-      <text x="103" y="32" fill="#132c24" font-size="10.5" font-family="monospace" font-weight="800" text-anchor="middle">GUARDRAILED AI AGENT</text>
-      <text x="16" y="64" fill="#ffffff" font-size="15" font-weight="800">4. Forensic Assistant Chat</text>
-      <text x="16" y="84" fill="#9cb3a8" font-size="11.5" font-family="monospace">POST /api/agent/chat (forensic_agent.py)</text>
-      <line x1="16" y1="98" x2="334" y2="98" stroke="#264a3c" stroke-width="1"/>
-      <text x="16" y="122" fill="#e5e7eb" font-size="12">• Grounded strictly on active Case Dossier</text>
-      <text x="16" y="144" fill="#e5e7eb" font-size="12">• Explains any of the 9 Forensic Parameters</text>
-      <rect x="16" y="158" width="318" height="56" rx="6" fill="#3b1614" stroke="#ff6b5b" stroke-width="1.2"/>
-      <text x="26" y="177" fill="#ff9b91" font-size="11" font-family="monospace" font-weight="800">🛡️ DUAL DOMAIN-BOUNDARY GUARDRAIL:</text>
-      <text x="26" y="194" fill="#fecaca" font-size="10.5">Blocks "Should I buy/sell?" &amp; off-topic queries</text>
-      <text x="26" y="208" fill="#fecaca" font-size="10.5">via Regex Pre-Filter + Gemini System Prompt</text>
+    <!-- Deliverable 4: Sealed PDF Compliance Brief -->
+    <g transform="translate(944, 60)">
+      <rect width="260" height="300" rx="10" fill="#0d1f19" stroke="#457d68" stroke-width="1.5"/>
+      <rect x="14" y="14" width="145" height="22" rx="4" fill="#bc955d"/>
+      <text x="86" y="29" fill="#17201b" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="middle">LEGAL EXPORT</text>
+      <text x="14" y="60" fill="#ffffff" font-size="14" font-weight="800">4. Sealed PDF Brief</text>
+      <text x="14" y="78" fill="#9cb3a8" font-size="10.5" font-family="monospace">GET /api/report/:id.pdf</text>
+      <line x1="14" y1="90" x2="246" y2="90" stroke="#264a3c" stroke-width="1"/>
+      <text x="14" y="112" fill="#e5e7eb" font-size="11.5">• ReportLab Pure-Python Engine</text>
+      <text x="14" y="132" fill="#e5e7eb" font-size="11.5">• Executive Summary &amp; Stamp</text>
+      <text x="14" y="152" fill="#e5e7eb" font-size="11.5">• High-res 5-Yr Price Trajectory</text>
+      <text x="14" y="172" fill="#e5e7eb" font-size="11.5">• Complete 9-Parameter Table</text>
+      <text x="14" y="194" fill="#d5ff5f" font-size="10" font-family="monospace">• SHA-256 Tamper-Evident Seal</text>
+      <rect x="14" y="214" width="232" height="70" rx="6" fill="#18382d" stroke="#2d5446" stroke-width="1"/>
+      <text x="24" y="234" fill="#ffffff" font-size="10" font-family="monospace" font-weight="700">COMPLIANCE READY:</text>
+      <text x="24" y="250" fill="#9cb3a8" font-size="9" font-family="monospace">Can be submitted to SEBI SCORES</text>
+      <text x="24" y="266" fill="#d5ff5f" font-size="9" font-family="monospace">or MAS whistleblowing portal</text>
+    </g>
+
+    <!-- Deliverable 5: Dual-Guarded Forensic AI Agent Drawer -->
+    <g transform="translate(1224, 60)">
+      <rect width="272" height="300" rx="10" fill="#10261e" stroke="#d5ff5f" stroke-width="1.8"/>
+      <rect x="14" y="14" width="165" height="22" rx="4" fill="#d5ff5f"/>
+      <text x="96" y="29" fill="#132c24" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="middle">GUARDRAILED AI AGENT</text>
+      <text x="14" y="60" fill="#ffffff" font-size="14" font-weight="800">5. Forensic Chat Drawer</text>
+      <text x="14" y="78" fill="#9cb3a8" font-size="10.5" font-family="monospace">POST /api/agent/chat</text>
+      <line x1="14" y1="90" x2="258" y2="90" stroke="#264a3c" stroke-width="1"/>
+      <text x="14" y="112" fill="#e5e7eb" font-size="11.5">• Grounded on active Dossier</text>
+      <text x="14" y="132" fill="#e5e7eb" font-size="11.5">• Interrogates 9 Parameters &amp; SWOT</text>
+      <text x="14" y="152" fill="#e5e7eb" font-size="11.5">• Displays Sub-Agent badges</text>
+      <rect x="14" y="168" width="244" height="116" rx="6" fill="#3b1614" stroke="#ff6b5b" stroke-width="1.2"/>
+      <text x="24" y="188" fill="#ff9b91" font-size="10" font-family="monospace" font-weight="800">DUAL DOMAIN GUARDRAILS:</text>
+      <text x="24" y="206" fill="#fecaca" font-size="9.5">• 1. Regex Pre-Filter:</text>
+      <text x="34" y="220" fill="#fca5a5" font-size="9" font-family="monospace">Blocks "Should I buy / sell?"</text>
+      <text x="24" y="238" fill="#fecaca" font-size="9.5">• 2. Gemini System Boundary:</text>
+      <text x="34" y="252" fill="#fca5a5" font-size="9" font-family="monospace">Refuses personal recommendations</text>
+      <text x="24" y="272" fill="#d5ff5f" font-size="9" font-family="monospace" font-weight="700">Strict PFUTP / SEBI RA compliance</text>
     </g>
   </g>
 </svg>

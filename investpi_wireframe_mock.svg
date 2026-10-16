@@ -1,15 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1120" width="100%" height="100%" font-family="'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1150" width="100%" height="100%" font-family="'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif">
   <defs>
+    <!-- Background Canvas Gradient -->
     <linearGradient id="bgCanvas" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0b1914"/>
-      <stop offset="100%" stop-color="#132c24"/>
+      <stop offset="50%" stop-color="#10251e"/>
+      <stop offset="100%" stop-color="#081410"/>
     </linearGradient>
 
+    <!-- Ivory Card Surface Gradient -->
     <linearGradient id="ivoryCard" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#fbf8ef"/>
       <stop offset="100%" stop-color="#f2ecdc"/>
     </linearGradient>
 
+    <!-- Window Box Shadow -->
     <filter id="windowShadow" x="-5%" y="-5%" width="110%" height="115%">
       <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.5"/>
     </filter>
@@ -17,15 +21,18 @@
     <marker id="arrowAccent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#d5ff5f"/>
     </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8.5 5 L 0 8.5 z" fill="#2dd4bf"/>
+    </marker>
 
     <pattern id="deskGrid" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.06"/>
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.05"/>
     </pattern>
   </defs>
 
   <!-- Main Canvas Background -->
-  <rect width="1600" height="1120" fill="url(#bgCanvas)"/>
-  <rect width="1600" height="1120" fill="url(#deskGrid)"/>
+  <rect width="1600" height="1150" fill="url(#bgCanvas)"/>
+  <rect width="1600" height="1150" fill="url(#deskGrid)"/>
 
   <!-- ==================== TOP HEADER BANNER ==================== -->
   <g transform="translate(40, 24)">
@@ -36,411 +43,517 @@
       <rect x="15" y="13" width="4" height="15" fill="#ffffff" opacity="0.8"/>
       <rect x="23" y="7" width="4" height="21" fill="#d5ff5f"/>
     </g>
-    <text x="70" y="35" fill="#ffffff" font-size="22" font-weight="800">Invest<tspan fill="#d5ff5f">PI</tspan> — UI Wireframe &amp; Interactive Screen Mockups</text>
-    <text x="70" y="54" fill="#9cb3a8" font-size="12" font-family="monospace">3-STAGE SINGLE-PAGE APPLICATION (templates/index.html) + GUARDRAILED FORENSIC AI ASSISTANT DRAWER</text>
+    <text x="70" y="35" fill="#ffffff" font-size="22" font-weight="800">Invest<tspan fill="#d5ff5f">PI</tspan> — Interactive UI Wireframe &amp; Screen Architecture Mockups</text>
+    <text x="70" y="54" fill="#9cb3a8" font-size="12" font-family="monospace">EXECUTIVE INTAKE DESK (#stage-input) · REGULATION 33 SWOT PAGE (#stage-financial) · CASE DOSSIER &amp; AI CHAT</text>
 
-    <!-- Color Palette Legend -->
-    <g transform="translate(1150, 18)">
-      <rect x="0" y="4" width="22" height="22" rx="4" fill="#132c24" stroke="#ffffff" stroke-width="1"/>
-      <text x="28" y="19" fill="#e5e7eb" font-size="11" font-family="monospace">Forest #132c24</text>
+    <!-- Palette Legend -->
+    <g transform="translate(1080, 18)">
+      <rect x="0" y="4" width="20" height="20" rx="4" fill="#132c24" stroke="#ffffff" stroke-width="1"/>
+      <text x="26" y="18" fill="#e5e7eb" font-size="10.5" font-family="monospace">Forest #132c24</text>
 
-      <rect x="128" y="4" width="22" height="22" rx="4" fill="#faf7ee" stroke="#c9c2b3" stroke-width="1"/>
-      <text x="156" y="19" fill="#e5e7eb" font-size="11" font-family="monospace">Ivory #faf7ee</text>
+      <rect x="130" y="4" width="20" height="20" rx="4" fill="#faf7ee" stroke="#c9c2b3" stroke-width="1"/>
+      <text x="156" y="18" fill="#e5e7eb" font-size="10.5" font-family="monospace">Ivory #faf7ee</text>
 
-      <rect x="250" y="4" width="22" height="22" rx="4" fill="#d5ff5f"/>
-      <text x="278" y="19" fill="#d5ff5f" font-size="11" font-family="monospace">Acid #d5ff5f</text>
+      <rect x="250" y="4" width="20" height="20" rx="4" fill="#2dd4bf"/>
+      <text x="276" y="18" fill="#2dd4bf" font-size="10.5" font-family="monospace">Teal #2dd4bf</text>
+
+      <rect x="360" y="4" width="20" height="20" rx="4" fill="#d5ff5f"/>
+      <text x="386" y="18" fill="#d5ff5f" font-size="10.5" font-family="monospace">Acid #d5ff5f</text>
     </g>
   </g>
 
 
-  <!-- ==================== SCREEN 1: STAGE 1 INTAKE DESK & 3D FLIP CARD (TOP LEFT) ==================== -->
-  <g transform="translate(40, 114)" filter="url(#windowShadow)">
-    <!-- Browser Frame -->
-    <rect width="730" height="455" rx="12" fill="#132c24" stroke="#3b6e5c" stroke-width="2"/>
+  <!-- ==================== SCREEN 1: STAGE 1 INTAKE DESK WITH 10-STOCK DROPDOWN (TOP LEFT) ==================== -->
+  <g transform="translate(40, 110)" filter="url(#windowShadow)">
+    <rect width="730" height="475" rx="12" fill="#132c24" stroke="#3b6e5c" stroke-width="2"/>
     <!-- Browser Title Bar -->
     <rect width="730" height="34" rx="12" fill="#0d1f19"/>
     <circle cx="20" cy="17" r="5" fill="#ff5f56"/>
     <circle cx="36" cy="17" r="5" fill="#ffbd2e"/>
     <circle cx="52" cy="17" r="5" fill="#27c93f"/>
-    <text x="75" y="21" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="700">VIEW 1 · STAGE 1: EXECUTIVE INTAKE DESK &amp; 3D FLIP IVORY CARD (#stage-input)</text>
+    <text x="75" y="21" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="700">VIEW 1 · STAGE 1: EXECUTIVE INTAKE DESK &amp; 10-STOCK SELECTOR (#stage-input)</text>
 
     <!-- App Topbar inside Mock -->
     <g transform="translate(0, 34)">
-      <rect width="730" height="42" fill="#10251e" stroke="#264a3c" stroke-width="1"/>
-      <text x="24" y="26" fill="#ffffff" font-size="14" font-weight="800">Invest<tspan fill="#d5ff5f">PI</tspan></text>
-      <circle cx="125" cy="22" r="3" fill="#d5ff5f"/>
-      <text x="134" y="25" fill="#ffffff" font-size="10.5" font-weight="600">New Case</text>
-      <text x="200" y="25" fill="#9cb3a8" font-size="10.5">Swagger API</text>
-      <text x="280" y="25" fill="#9cb3a8" font-size="10.5">System Health</text>
+      <rect width="730" height="40" fill="#10251e" stroke="#264a3c" stroke-width="1"/>
+      <text x="24" y="25" fill="#ffffff" font-size="14" font-weight="800">Invest<tspan fill="#d5ff5f">PI</tspan></text>
+      <circle cx="125" cy="21" r="3" fill="#d5ff5f"/>
+      <text x="134" y="24" fill="#ffffff" font-size="10.5" font-weight="600">New Case</text>
+      <text x="200" y="24" fill="#9cb3a8" font-size="10.5">Regulation 33 RAG</text>
+      <text x="315" y="24" fill="#9cb3a8" font-size="10.5">Swagger API</text>
 
-      <!-- Jurisdiction Dropdown -->
-      <rect x="465" y="10" width="125" height="22" rx="4" fill="#0d1f19" stroke="#457d68" stroke-width="1"/>
-      <text x="527" y="25" fill="#ffffff" font-size="10" font-family="monospace" text-anchor="middle">🇮🇳 India (SEBI) ▾</text>
+      <!-- Jurisdiction Selector -->
+      <rect x="470" y="9" width="125" height="22" rx="4" fill="#0d1f19" stroke="#457d68" stroke-width="1"/>
+      <text x="532" y="24" fill="#ffffff" font-size="10" font-family="monospace" text-anchor="middle">🇮🇳 India (SEBI) ▾</text>
 
-      <circle cx="610" cy="21" r="3.5" fill="#d5ff5f"/>
-      <text x="620" y="25" fill="#d5ff5f" font-size="9.5" font-family="monospace">DESK ONLINE</text>
+      <circle cx="612" cy="20" r="3.5" fill="#d5ff5f"/>
+      <text x="622" y="24" fill="#d5ff5f" font-size="9" font-family="monospace">DESK ONLINE</text>
     </g>
 
-    <!-- Center Ivory Business Card (Front Face) -->
-    <g transform="translate(65, 102)">
-      <rect width="560" height="305" rx="8" fill="url(#ivoryCard)" stroke="#b9a88a" stroke-width="1.5"/>
-      <rect x="10" y="10" width="540" height="285" rx="4" fill="none" stroke="#d4c8b0" stroke-width="1"/>
+    <!-- Center Ivory Card -->
+    <g transform="translate(45, 90)">
+      <rect width="640" height="340" rx="8" fill="url(#ivoryCard)" stroke="#b9a88a" stroke-width="1.5"/>
+      <rect x="8" y="8" width="624" height="324" rx="4" fill="none" stroke="#d4c8b0" stroke-width="1"/>
 
       <!-- Card Header -->
-      <circle cx="30" cy="32" r="3.5" fill="#257849"/>
-      <text x="40" y="35" fill="#7c7262" font-size="9" font-family="monospace" font-weight="700">DESK ONLINE</text>
-      <text x="280" y="35" fill="#4b4438" font-size="10" font-family="monospace" font-weight="700" letter-spacing="1.5" text-anchor="middle">SECURITIES FORENSIC INTELLIGENCE</text>
+      <circle cx="28" cy="28" r="3.5" fill="#257849"/>
+      <text x="38" y="31" fill="#7c7262" font-size="9" font-family="monospace" font-weight="700">DESK ONLINE</text>
+      <text x="320" y="31" fill="#4b4438" font-size="10" font-family="monospace" font-weight="700" letter-spacing="1.5" text-anchor="middle">SECURITIES FORENSIC INTELLIGENCE</text>
+      <rect x="500" y="17" width="112" height="22" rx="11" fill="none" stroke="#8c7d65" stroke-width="1"/>
+      <text x="556" y="31" fill="#4b4438" font-size="8.5" font-family="monospace" font-weight="700" text-anchor="middle">Know our mission →</text>
 
-      <!-- 3D Flip Button -->
-      <rect x="430" y="21" width="108" height="22" rx="11" fill="none" stroke="#8c7d65" stroke-width="1"/>
-      <text x="484" y="35" fill="#4b4438" font-size="8.5" font-family="monospace" font-weight="700" text-anchor="middle">Know our mission →</text>
+      <!-- Brand -->
+      <text x="320" y="78" fill="#132c24" font-size="28" font-weight="800" text-anchor="middle">Invest<tspan fill="#257849">PI</tspan></text>
+      <text x="320" y="96" fill="#6c716b" font-size="9" font-family="monospace" letter-spacing="2" text-anchor="middle">AUTONOMOUS DUE DILIGENCE &amp; BIGQUERY VECTOR RAG</text>
 
-      <!-- Card Brand Center -->
-      <text x="280" y="88" fill="#132c24" font-size="32" font-weight="800" text-anchor="middle">Invest<tspan fill="#257849">PI</tspan></text>
-      <text x="280" y="106" fill="#6c716b" font-size="9.5" font-family="monospace" letter-spacing="2" text-anchor="middle">BFSI FRAUD &amp; COMPLIANCE DEFENSE SHIELD</text>
-
-      <!-- Specialisations Tabs -->
-      <g transform="translate(45, 126)">
-        <text x="0" y="12" fill="#8c7d65" font-size="10" font-family="monospace" font-weight="700">Specialisations:</text>
-        <text x="105" y="12" fill="#132c24" font-size="10.5" font-weight="800" text-decoration="underline">Video analysis</text>
-        <text x="190" y="12" fill="#b9a88a" font-size="10.5">/</text>
-        <text x="202" y="12" fill="#6c716b" font-size="10.5" font-weight="600">Image analysis</text>
-        <text x="288" y="12" fill="#b9a88a" font-size="10.5">/</text>
-        <text x="300" y="12" fill="#6c716b" font-size="10.5" font-weight="600">Text Analysis</text>
-        <text x="378" y="12" fill="#b9a88a" font-size="10.5">/</text>
-        <text x="390" y="12" fill="#6c716b" font-size="10.5" font-weight="600">PDF Report</text>
+      <!-- 4 Modality Tabs -->
+      <g transform="translate(30, 114)">
+        <text x="0" y="12" fill="#8c7d65" font-size="9.5" font-family="monospace" font-weight="700">Audit Modality:</text>
+        <text x="100" y="12" fill="#132c24" font-size="10" font-weight="700">▶ Video</text>
+        <text x="160" y="12" fill="#b9a88a">|</text>
+        <text x="175" y="12" fill="#6c716b" font-size="10">🖼 Image</text>
+        <text x="235" y="12" fill="#b9a88a">|</text>
+        <text x="250" y="12" fill="#6c716b" font-size="10">¶ Text Tip</text>
+        <text x="315" y="12" fill="#b9a88a">|</text>
+        <rect x="328" y="-2" width="180" height="20" rx="4" fill="#132c24"/>
+        <text x="418" y="12" fill="#2dd4bf" font-size="10" font-family="monospace" font-weight="800" text-anchor="middle">📄 Financial Report (RAG)</text>
       </g>
 
-      <!-- Input Box -->
-      <g transform="translate(45, 152)">
-        <rect width="470" height="44" rx="6" fill="#ffffff" stroke="#c9c2b3" stroke-width="1.5"/>
-        <rect x="12" y="12" width="22" height="20" rx="4" fill="#f5f0e4" stroke="#b9a88a" stroke-width="1"/>
-        <text x="23" y="26" fill="#a93a2d" font-size="11" font-weight="800" text-anchor="middle">▶</text>
-        <text x="44" y="26" fill="#7c7262" font-size="11" font-family="monospace">Paste YouTube video or short URL here (or Drop Image/PDF)...</text>
+      <!-- Track B: Dropdown Intake UI -->
+      <g transform="translate(30, 142)">
+        <rect width="580" height="96" rx="6" fill="#ffffff" stroke="#2dd4bf" stroke-width="1.5"/>
+        <text x="16" y="22" fill="#132c24" font-size="10.5" font-family="monospace" font-weight="800">SELECT PUBLIC SECURITY FROM 10-STOCK PORTFOLIO UNIVERSE:</text>
+
+        <!-- HTML <select> Dropdown Element Mockup -->
+        <g transform="translate(16, 32)">
+          <rect width="548" height="36" rx="5" fill="#f8fafc" stroke="#2dd4bf" stroke-width="1.2"/>
+          <text x="14" y="23" fill="#17201b" font-size="11" font-family="monospace" font-weight="700">RELIANCE.NS — Reliance Industries Ltd (Energy, Retail, Jio &amp; O2C)</text>
+          <text x="525" y="23" fill="#2dd4bf" font-size="14" font-weight="800">▾</text>
+        </g>
+
+        <!-- Universe Quick Pills -->
+        <g transform="translate(16, 76)" font-family="monospace" font-size="8.5">
+          <text x="0" y="10" fill="#257849" font-weight="700">10-STOCK UNIVERSE:</text>
+          <text x="110" y="10" fill="#475569">Reliance · TCS · HDFCBANK · INFY · ICICIBANK · DBS · Singtel · BHP · CBA · CSL</text>
+        </g>
       </g>
 
-      <!-- Open Investigation CTA -->
-      <g transform="translate(175, 212)">
-        <rect width="210" height="40" rx="6" fill="#132c24"/>
-        <text x="105" y="25" fill="#d5ff5f" font-size="11.5" font-family="monospace" font-weight="800" text-anchor="middle">OPEN INVESTIGATION →</text>
+      <!-- CTA Button -->
+      <g transform="translate(200, 252)">
+        <rect width="240" height="40" rx="6" fill="#132c24"/>
+        <text x="120" y="25" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="800" text-anchor="middle">OPEN FINANCIAL RAG REPORT →</text>
       </g>
 
-      <!-- Bottom Card Strip -->
-      <line x1="25" y1="268" x2="535" y2="268" stroke="#dcd5c5" stroke-width="1"/>
-      <text x="30" y="284" fill="#8c7d65" font-size="8.5" font-family="monospace" font-weight="700">09 EMPIRICAL TESTS · DETERMINISTIC GROUNDING</text>
-      <text x="530" y="284" fill="#8c7d65" font-size="8.5" font-family="monospace" font-weight="700" text-anchor="end">3D FLIP BACK: MISSION DOCTRINE</text>
+      <!-- Bottom Card Ribbon -->
+      <line x1="20" y1="304" x2="620" y2="304" stroke="#dcd5c5" stroke-width="1"/>
+      <text x="25" y="320" fill="#8c7d65" font-size="8.5" font-family="monospace" font-weight="700">GOOGLE BIGQUERY VECTOR SEARCH · text-embedding-004 · 0% HALLUCINATION</text>
+      <text x="615" y="320" fill="#257849" font-size="8.5" font-family="monospace" font-weight="700" text-anchor="end">SUB-SECOND LATENCY</text>
     </g>
 
-    <!-- Footer inside Stage 1 -->
-    <text x="24" y="438" fill="#8fa89c" font-size="9.5" font-family="monospace">INVESTPI FORENSIC ENGINE · BFSI RISK &amp; FRAUD DEFENSE</text>
-    <text x="706" y="438" fill="#8fa89c" font-size="9.5" font-family="monospace" text-anchor="end">SEBI (IN) · MAS (SG) · ASIC (AU)</text>
+    <text x="24" y="456" fill="#8fa89c" font-size="9" font-family="monospace">INVESTPI FORENSIC ENGINE · BFSI RISK DEFENSE</text>
+    <text x="706" y="456" fill="#8fa89c" font-size="9" font-family="monospace" text-anchor="end">SEBI (IN) · MAS (SG) · ASIC (AU)</text>
   </g>
 
   <!-- Transition Arrow View 1 -> View 2 -->
-  <path d="M 770 340 L 822 340" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowAccent)"/>
-  <rect x="773" y="312" width="46" height="20" rx="4" fill="#0d1f19" stroke="#d5ff5f" stroke-width="1"/>
-  <text x="796" y="326" fill="#d5ff5f" font-size="9.5" font-family="monospace" font-weight="700" text-anchor="middle">202</text>
+  <path d="M 770 330 L 826 330" fill="none" stroke="#2dd4bf" stroke-width="2.5" marker-end="url(#arrowTeal)"/>
+  <rect x="774" y="302" width="48" height="22" rx="4" fill="#0d1f19" stroke="#2dd4bf" stroke-width="1"/>
+  <text x="798" y="317" fill="#2dd4bf" font-size="9" font-family="monospace" font-weight="800" text-anchor="middle">RAG</text>
 
 
-  <!-- ==================== SCREEN 2: STAGE 2 LOADING SCENE (TOP RIGHT) ==================== -->
-  <g transform="translate(830, 114)" filter="url(#windowShadow)">
-    <rect width="730" height="455" rx="12" fill="#132c24" stroke="#3b6e5c" stroke-width="2"/>
-    <rect width="730" height="34" rx="12" fill="#0d1f19"/>
+  <!-- ==================== SCREEN 2: DEDICATED REGULATION 33 SWOT PAGE (TOP RIGHT) ==================== -->
+  <g transform="translate(830, 110)" filter="url(#windowShadow)">
+    <rect width="730" height="475" rx="12" fill="#0f2620" stroke="#2dd4bf" stroke-width="2"/>
+    <rect width="730" height="34" rx="12" fill="#091814"/>
     <circle cx="20" cy="17" r="5" fill="#ff5f56"/>
     <circle cx="36" cy="17" r="5" fill="#ffbd2e"/>
     <circle cx="52" cy="17" r="5" fill="#27c93f"/>
-    <text x="75" y="21" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="700">VIEW 2 · STAGE 2: LIVE SSE INVESTIGATION SCENE (#stage-loading)</text>
+    <text x="75" y="21" fill="#2dd4bf" font-size="11" font-family="monospace" font-weight="700">VIEW 2 · STAGE 4: DEDICATED REGULATION 33 PAGE &amp; SWOT MATRIX (#stage-financial)</text>
 
-    <!-- Loading Header -->
-    <text x="40" y="72" fill="#ffffff" font-size="16" font-weight="800">Invest<tspan fill="#d5ff5f">PI</tspan></text>
-    <text x="690" y="72" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="700" text-anchor="end">CASE #IP-76D8 INITIALIZING…</text>
+    <!-- Header inside View 2 -->
+    <g transform="translate(0, 34)">
+      <rect width="730" height="42" fill="#0d201a" stroke="#1d4d3f" stroke-width="1"/>
+      <text x="20" y="26" fill="#ffffff" font-size="14" font-weight="800">Invest<tspan fill="#2dd4bf">PI</tspan> · Corporate Filing Intelligence</text>
 
-    <!-- Animated Investigator Scene Box -->
-    <g transform="translate(145, 92)">
-      <rect width="440" height="205" rx="10" fill="#0f231c" stroke="#2d5446" stroke-width="1.5"/>
+      <rect x="420" y="9" width="130" height="24" rx="4" fill="#133d34"/>
+      <text x="485" y="25" fill="#2dd4bf" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="middle">BigQuery Vector RAG</text>
 
-      <!-- Light Cone -->
-      <polygon points="220,10 110,185 330,185" fill="#d5ff5f" opacity="0.07"/>
+      <rect x="560" y="9" width="70" height="24" rx="4" fill="none" stroke="#3b6e5c" stroke-width="1"/>
+      <text x="595" y="25" fill="#ffffff" font-size="10" font-family="monospace" text-anchor="middle">← Back</text>
 
-      <!-- Floating Evidence Cards -->
-      <g transform="translate(42, 36) rotate(-8)">
-        <rect width="92" height="54" rx="4" fill="#faf7ee" stroke="#c9c2b3" stroke-width="1"/>
-        <text x="10" y="18" fill="#132c24" font-size="8.5" font-family="monospace" font-weight="800">EVIDENCE 01</text>
-        <line x1="10" y1="28" x2="76" y2="28" stroke="#b9a88a" stroke-width="2"/>
-        <line x1="10" y1="36" x2="64" y2="36" stroke="#b9a88a" stroke-width="2"/>
-      </g>
-
-      <g transform="translate(305, 30) rotate(7)">
-        <rect width="96" height="54" rx="4" fill="#faf7ee" stroke="#c9c2b3" stroke-width="1"/>
-        <text x="10" y="18" fill="#257849" font-size="8.5" font-family="monospace" font-weight="800">MARKET DATA</text>
-        <line x1="10" y1="28" x2="80" y2="28" stroke="#b9a88a" stroke-width="2"/>
-        <line x1="10" y1="36" x2="60" y2="36" stroke="#b9a88a" stroke-width="2"/>
-      </g>
-
-      <g transform="translate(315, 112) rotate(-5)">
-        <rect width="92" height="48" rx="4" fill="#faf7ee" stroke="#c9c2b3" stroke-width="1"/>
-        <text x="10" y="18" fill="#a93a2d" font-size="8.5" font-family="monospace" font-weight="800">TRANSCRIPT</text>
-        <line x1="10" y1="28" x2="74" y2="28" stroke="#b9a88a" stroke-width="2"/>
-      </g>
-
-      <!-- Investigator Silhouette -->
-      <ellipse cx="220" cy="72" rx="34" ry="8" fill="#d5ff5f"/>
-      <path d="M 198 72 L 204 52 L 236 52 L 242 72 Z" fill="#d5ff5f"/>
-      <circle cx="220" cy="92" r="16" fill="#e9e5da"/>
-      <path d="M 176 175 C 176 125, 264 125, 264 175 Z" fill="#18382d" stroke="#d5ff5f" stroke-width="1.5"/>
-      <!-- Magnifying Glass -->
-      <circle cx="256" cy="126" r="14" fill="#132c24" stroke="#d5ff5f" stroke-width="2.5"/>
-      <line x1="266" y1="136" x2="278" y2="148" stroke="#d5ff5f" stroke-width="3"/>
-
-      <!-- Desk Surface Line -->
-      <line x1="40" y1="185" x2="400" y2="185" stroke="#d5ff5f" stroke-width="2"/>
+      <rect x="640" y="9" width="70" height="24" rx="4" fill="#d5ff5f"/>
+      <text x="675" y="25" fill="#132c24" font-size="10" font-family="monospace" font-weight="800" text-anchor="middle">Export</text>
     </g>
 
-    <!-- Status Copy & Step Tracker -->
-    <text x="365" y="326" fill="#d5ff5f" font-size="10.5" font-family="monospace" font-weight="800" letter-spacing="2" text-anchor="middle">INVESTIGATION IN PROGRESS (SSE STREAM)</text>
-    <text x="365" y="352" fill="#ffffff" font-size="20" font-weight="800" text-anchor="middle">"Following the money trail…"</text>
+    <!-- Layout: Left 10-Stock Sidebar + Right Financial Content -->
+    <!-- Left Sidebar -->
+    <g transform="translate(14, 86)">
+      <rect width="180" height="370" rx="8" fill="#0a1a15" stroke="#1e4438" stroke-width="1.2"/>
+      <text x="12" y="20" fill="#9cb3a8" font-size="9.5" font-family="monospace" font-weight="800">10-STOCK UNIVERSE</text>
 
-    <!-- Progress Bar -->
-    <rect x="115" y="370" width="500" height="8" rx="4" fill="#0d1f19" stroke="#2d5446" stroke-width="1"/>
-    <rect x="115" y="370" width="340" height="8" rx="4" fill="#d5ff5f"/>
+      <!-- Active Ticker -->
+      <g transform="translate(8, 30)">
+        <rect width="164" height="34" rx="5" fill="#133d34" stroke="#2dd4bf" stroke-width="1.2"/>
+        <text x="10" y="16" fill="#ffffff" font-size="10" font-family="monospace" font-weight="800">● RELIANCE.NS</text>
+        <text x="10" y="28" fill="#2dd4bf" font-size="8.5" font-family="monospace">Reliance Industries · Q3</text>
+      </g>
 
-    <!-- 4 Steps -->
-    <g transform="translate(115, 398)" font-family="monospace" font-size="10" font-weight="700">
-      <text x="0" y="12" fill="#34d399">✓ 1. Reading Source</text>
-      <text x="135" y="12" fill="#34d399">✓ 2. Extracting Claims</text>
-      <text x="280" y="12" fill="#d5ff5f">● 3. Auditing 9 Params</text>
-      <text x="425" y="12" fill="#6c716b">○ 4. Dossier</text>
+      <!-- Inactive Tickers List -->
+      <g transform="translate(8, 70)" font-family="monospace" font-size="9">
+        <rect x="0" y="0" width="164" height="26" rx="4" fill="#0d241d"/>
+        <text x="10" y="17" fill="#cbd5e1">○ TCS.NS (Tata Consultancy)</text>
+
+        <rect x="0" y="30" width="164" height="26" rx="4" fill="#0d241d"/>
+        <text x="10" y="47" fill="#cbd5e1">○ HDFCBANK.NS (HDFC Bank)</text>
+
+        <rect x="0" y="60" width="164" height="26" rx="4" fill="#0d241d"/>
+        <text x="10" y="77" fill="#cbd5e1">○ INFY.NS (Infosys Limited)</text>
+
+        <rect x="0" y="90" width="164" height="26" rx="4" fill="#0d241d"/>
+        <text x="10" y="107" fill="#cbd5e1">○ ICICIBANK.NS (ICICI Bank)</text>
+
+        <rect x="0" y="120" width="164" height="26" rx="4" fill="#0d241d"/>
+        <text x="10" y="137" fill="#38bdf8">○ D05.SI (DBS Group · SGX)</text>
+
+        <rect x="0" y="150" width="164" height="26" rx="4" fill="#0d241d"/>
+        <text x="10" y="167" fill="#38bdf8">○ Z74.SI (Singtel · SGX)</text>
+
+        <rect x="0" y="180" width="164" height="26" rx="4" fill="#0d241d"/>
+        <text x="10" y="197" fill="#fbbf24">○ BHP.AX (BHP Group · ASX)</text>
+
+        <rect x="0" y="210" width="164" height="26" rx="4" fill="#0d241d"/>
+        <text x="10" y="227" fill="#fbbf24">○ CBA.AX (Commonwealth Bank)</text>
+
+        <rect x="0" y="240" width="164" height="26" rx="4" fill="#0d241d"/>
+        <text x="10" y="257" fill="#fbbf24">○ CSL.AX (CSL Limited · ASX)</text>
+      </g>
+
+      <rect x="8" y="340" width="164" height="22" rx="4" fill="#142e25"/>
+      <text x="90" y="355" fill="#5eead4" font-size="8.5" font-family="monospace" text-anchor="middle">✓ BQ COSINE IVF ACTIVE</text>
+    </g>
+
+    <!-- Right Financial Statement Report Area -->
+    <g transform="translate(204, 86)">
+      <rect width="512" height="370" rx="8" fill="#122a22" stroke="#245444" stroke-width="1.2"/>
+
+      <!-- Company Title Strip -->
+      <g transform="translate(14, 14)">
+        <text x="0" y="14" fill="#ffffff" font-size="15" font-weight="800">Reliance Industries Limited (RELIANCE.NS)</text>
+        <text x="0" y="28" fill="#9cb3a8" font-size="9.5" font-family="monospace">Regulation 33 Filing · Q3 FY24-25 Statement Submitted to BSE/NSE</text>
+
+        <!-- KPI Badges -->
+        <g transform="translate(0, 36)">
+          <rect x="0" y="0" width="154" height="34" rx="4" fill="#0b1a15" stroke="#2dd4bf" stroke-width="1"/>
+          <text x="10" y="14" fill="#9cb3a8" font-size="8" font-family="monospace">GROSS REVENUE</text>
+          <text x="10" y="28" fill="#ffffff" font-size="12" font-family="monospace" font-weight="800">₹2,38,797 Cr</text>
+
+          <rect x="162" y="0" width="154" height="34" rx="4" fill="#0b1a15" stroke="#2dd4bf" stroke-width="1"/>
+          <text x="172" y="14" fill="#9cb3a8" font-size="8" font-family="monospace">NET PROFIT (PAT)</text>
+          <text x="172" y="28" fill="#ffffff" font-size="12" font-family="monospace" font-weight="800">₹19,641 Cr</text>
+
+          <rect x="324" y="0" width="158" height="34" rx="4" fill="#0b1a15" stroke="#2dd4bf" stroke-width="1"/>
+          <text x="334" y="14" fill="#9cb3a8" font-size="8" font-family="monospace">OPERATING EBITDA</text>
+          <text x="334" y="28" fill="#ffffff" font-size="12" font-family="monospace" font-weight="800">₹44,678 Cr</text>
+        </g>
+      </g>
+
+      <!-- 5 Key Pointers -->
+      <g transform="translate(14, 94)">
+        <text x="0" y="10" fill="#2dd4bf" font-size="9.5" font-family="monospace" font-weight="800">5 KEY OPERATIONAL TAKEAWAYS (SYNTHESIZED FROM BIGQUERY CHUNKS):</text>
+        <rect x="0" y="16" width="484" height="88" rx="5" fill="#091813" stroke="#1d4538" stroke-width="1"/>
+        <g transform="translate(10, 28)" fill="#e5e7eb" font-size="9">
+          <text x="0" y="0">• <tspan font-weight="700" fill="#ffffff">Jio Infocomm:</tspan> 5G subscriber expansion lifts ARPU to ₹195.1/month (+7.4% YoY).</text>
+          <text x="0" y="15">• <tspan font-weight="700" fill="#ffffff">Retail Operations:</tspan> Footfalls reach 282M across 18,800+ consumer stores.</text>
+          <text x="0" y="30">• <tspan font-weight="700" fill="#ffffff">Oil-to-Chemicals (O2C):</tspan> Exports recover amidst resilient diesel/jet cracks.</text>
+          <text x="0" y="45">• <tspan font-weight="700" fill="#ffffff">Green Energy Capex:</tspan> Jamnagar Gigafactory on track for commercial commissioning.</text>
+          <text x="0" y="60">• <tspan font-weight="700" fill="#ffffff">Balance Sheet Health:</tspan> Net debt to EBITDA sustained at conservative 0.65x.</text>
+        </g>
+      </g>
+
+      <!-- 4-Quadrant SWOT Table -->
+      <g transform="translate(14, 214)">
+        <text x="0" y="10" fill="#d5ff5f" font-size="9.5" font-family="monospace" font-weight="800">FINANCIAL STATEMENT SWOT ANALYSIS MATRIX (4 QUADRANTS):</text>
+        <g transform="translate(0, 16)">
+          <!-- Strengths -->
+          <rect x="0" y="0" width="238" height="60" rx="4" fill="#082017" stroke="#34d399" stroke-width="1"/>
+          <text x="8" y="15" fill="#34d399" font-size="9" font-family="monospace" font-weight="800">STRENGTHS (S)</text>
+          <text x="8" y="30" fill="#e5e7eb" font-size="8.5">• Diversified cash engines (Jio + Retail)</text>
+          <text x="8" y="44" fill="#e5e7eb" font-size="8.5">• Over 490M telecom subscribers base</text>
+
+          <!-- Weaknesses -->
+          <rect x="246" y="0" width="238" height="60" rx="4" fill="#241312" stroke="#f87171" stroke-width="1"/>
+          <text x="254" y="15" fill="#f87171" font-size="9" font-family="monospace" font-weight="800">WEAKNESSES (W)</text>
+          <text x="254" y="30" fill="#e5e7eb" font-size="8.5">• High ongoing capex in 5G &amp; Green Energy</text>
+          <text x="254" y="44" fill="#e5e7eb" font-size="8.5">• O2C margin sensitivity to crude volatility</text>
+
+          <!-- Opportunities -->
+          <rect x="0" y="66" width="238" height="60" rx="4" fill="#0c1f2e" stroke="#38bdf8" stroke-width="1"/>
+          <text x="8" y="81" fill="#38bdf8" font-size="9" font-family="monospace" font-weight="800">OPPORTUNITIES (O)</text>
+          <text x="8" y="96" fill="#e5e7eb" font-size="8.5">• JioAirFiber &amp; Cloud AI enterprise monetization</text>
+          <text x="8" y="110" fill="#e5e7eb" font-size="8.5">• Potential retail &amp; telecom subsidiary IPOs</text>
+
+          <!-- Threats -->
+          <rect x="246" y="66" width="238" height="60" rx="4" fill="#261b0a" stroke="#fbbf24" stroke-width="1"/>
+          <text x="254" y="81" fill="#fbbf24" font-size="9" font-family="monospace" font-weight="800">THREATS (T)</text>
+          <text x="254" y="96" fill="#e5e7eb" font-size="8.5">• Global refining margin compression</text>
+          <text x="254" y="110" fill="#e5e7eb" font-size="8.5">• Heightened quick commerce competition</text>
+        </g>
+      </g>
     </g>
   </g>
 
-  <!-- Transition Arrow View 2 -> View 3 -->
-  <path d="M 1195 569 L 1195 602 L 490 602 L 490 626" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowAccent)"/>
-  <rect x="780" y="590" width="160" height="22" rx="4" fill="#0d1f19" stroke="#d5ff5f" stroke-width="1"/>
-  <text x="860" y="605" fill="#d5ff5f" font-size="10" font-family="monospace" font-weight="700" text-anchor="middle">SSE: STATE = COMPLETED</text>
 
-
-  <!-- ==================== SCREEN 3: STAGE 3 CASE REPORT DOSSIER (BOTTOM LEFT / WIDE) ==================== -->
-  <g transform="translate(40, 632)" filter="url(#windowShadow)">
-    <rect width="980" height="455" rx="12" fill="#e9e5da" stroke="#b9a88a" stroke-width="2"/>
+  <!-- ==================== SCREEN 3: STAGE 3 CASE DOSSIER (BOTTOM LEFT) ==================== -->
+  <g transform="translate(40, 615)" filter="url(#windowShadow)">
+    <rect width="970" height="505" rx="12" fill="#e9e5da" stroke="#b9a88a" stroke-width="2"/>
     <!-- Window Bar -->
-    <rect width="980" height="34" rx="12" fill="#0d1f19"/>
+    <rect width="970" height="34" rx="12" fill="#0d1f19"/>
     <circle cx="20" cy="17" r="5" fill="#ff5f56"/>
     <circle cx="36" cy="17" r="5" fill="#ffbd2e"/>
     <circle cx="52" cy="17" r="5" fill="#27c93f"/>
     <text x="75" y="21" fill="#d5ff5f" font-size="11" font-family="monospace" font-weight="700">VIEW 3 · STAGE 3: FORENSIC CASE REPORT DOSSIER (#stage-report)</text>
 
-    <!-- Dossier Header Bar -->
+    <!-- Dossier Header -->
     <g transform="translate(0, 34)">
-      <rect width="980" height="44" fill="#132c24"/>
+      <rect width="970" height="44" fill="#132c24"/>
       <text x="22" y="27" fill="#ffffff" font-size="15" font-weight="800">Invest<tspan fill="#d5ff5f">PI</tspan></text>
       <text x="130" y="20" fill="#9cb3a8" font-size="8.5" font-family="monospace">PRIVATE &amp; CONFIDENTIAL FORENSIC AUDIT</text>
-      <text x="130" y="33" fill="#ffffff" font-size="11" font-family="monospace" font-weight="700">CASE #IP-76D8</text>
+      <text x="130" y="33" fill="#ffffff" font-size="11" font-family="monospace" font-weight="700">CASE #IP-8842</text>
 
       <!-- Action Buttons -->
       <rect x="615" y="9" width="90" height="26" rx="4" fill="none" stroke="#457d68" stroke-width="1"/>
-      <text x="660" y="26" fill="#ffffff" font-size="10" font-family="monospace" text-anchor="middle">+ New Case</text>
+      <text x="660" y="26" fill="#ffffff" font-size="10" font-family="monospace" text-anchor="middle">+ New Lead</text>
 
       <rect x="715" y="9" width="115" height="26" rx="4" fill="#d5ff5f"/>
       <text x="772" y="26" fill="#132c24" font-size="10" font-family="monospace" font-weight="800" text-anchor="middle">💬 Ask AI Agent</text>
 
-      <rect x="840" y="9" width="120" height="26" rx="4" fill="#1e4034" stroke="#d5ff5f" stroke-width="1"/>
-      <text x="900" y="26" fill="#ffffff" font-size="10" font-family="monospace" text-anchor="middle">⬇ Export PDF</text>
+      <rect x="840" y="9" width="115" height="26" rx="4" fill="#1e4034" stroke="#d5ff5f" stroke-width="1"/>
+      <text x="897" y="26" fill="#ffffff" font-size="10" font-family="monospace" text-anchor="middle">⬇ Export PDF</text>
     </g>
 
-    <!-- Left Sidebar (Case Contents & Multi-Stock Switcher) -->
-    <g transform="translate(18, 92)">
-      <rect width="215" height="345" rx="8" fill="#f5f0e4" stroke="#c9c2b3" stroke-width="1.5"/>
-      <text x="14" y="24" fill="#5c5548" font-size="10" font-family="monospace" font-weight="800">CASE CONTENTS</text>
-      <text x="14" y="38" fill="#8c7d65" font-size="9" font-family="monospace">2 SUBJECTS IDENTIFIED</text>
+    <!-- Left Dossier Sidebar -->
+    <g transform="translate(18, 90)">
+      <rect width="215" height="400" rx="8" fill="#f5f0e4" stroke="#c9c2b3" stroke-width="1.5"/>
+      <text x="14" y="22" fill="#5c5548" font-size="10" font-family="monospace" font-weight="800">CASE CONTENTS</text>
+      <text x="14" y="36" fill="#8c7d65" font-size="8.5" font-family="monospace">2 EQUITIES AUDITED</text>
 
-      <!-- Exhibit A Box -->
-      <rect x="12" y="50" width="191" height="62" rx="6" fill="#fbf8ef" stroke="#dcd5c5" stroke-width="1"/>
-      <rect x="20" y="58" width="64" height="15" rx="3" fill="#132c24"/>
-      <text x="52" y="69" fill="#d5ff5f" font-size="8" font-family="monospace" font-weight="700" text-anchor="middle">EXHIBIT A</text>
-      <text x="20" y="88" fill="#17201b" font-size="11" font-weight="800">YouTube Video Lead</text>
-      <text x="20" y="103" fill="#6c716b" font-size="9.5" font-family="monospace">@ProfitMasterFintech</text>
+      <!-- Exhibit Lead Box -->
+      <rect x="12" y="46" width="191" height="60" rx="6" fill="#fbf8ef" stroke="#dcd5c5" stroke-width="1"/>
+      <rect x="20" y="54" width="64" height="15" rx="3" fill="#132c24"/>
+      <text x="52" y="65" fill="#d5ff5f" font-size="8" font-family="monospace" font-weight="700" text-anchor="middle">EXHIBIT A</text>
+      <text x="20" y="82" fill="#17201b" font-size="10.5" font-weight="800">YouTube Video Tip</text>
+      <text x="20" y="96" fill="#6c716b" font-size="9" font-family="monospace">@WealthGuruOfficial</text>
 
-      <!-- Audited Equities Stack -->
-      <text x="14" y="134" fill="#5c5548" font-size="9.5" font-family="monospace" font-weight="800">AUDITED EQUITIES</text>
-      <rect x="12" y="142" width="191" height="42" rx="6" fill="#132c24"/>
-      <text x="22" y="160" fill="#ffffff" font-size="11" font-family="monospace" font-weight="700">● COFORGE.NS</text>
-      <text x="22" y="175" fill="#d5ff5f" font-size="9.5" font-family="monospace">Score: 2.2/10 · HIGH RISK</text>
+      <!-- Equities List -->
+      <text x="14" y="126" fill="#5c5548" font-size="9.5" font-family="monospace" font-weight="800">AUDITED EQUITIES</text>
+      <rect x="12" y="134" width="191" height="44" rx="6" fill="#132c24"/>
+      <text x="22" y="152" fill="#ffffff" font-size="10.5" font-family="monospace" font-weight="700">● COFORGE.NS</text>
+      <text x="22" y="167" fill="#f87171" font-size="9.5" font-family="monospace">Score: 2.2/10 · HIGH RISK</text>
 
-      <rect x="12" y="190" width="191" height="42" rx="6" fill="#fbf8ef" stroke="#c9c2b3" stroke-width="1"/>
-      <text x="22" y="208" fill="#17201b" font-size="11" font-family="monospace" font-weight="700">○ TCS.NS</text>
-      <text x="22" y="223" fill="#c86828" font-size="9.5" font-family="monospace">Score: 6.8/10 · CAUTION</text>
+      <rect x="12" y="184" width="191" height="44" rx="6" fill="#fbf8ef" stroke="#c9c2b3" stroke-width="1"/>
+      <text x="22" y="202" fill="#17201b" font-size="10.5" font-family="monospace" font-weight="700">○ TCS.NS</text>
+      <text x="22" y="217" fill="#fbbf24" font-size="9.5" font-family="monospace">Score: 6.8/10 · CAUTION</text>
 
-      <!-- Chain of Evidence -->
-      <rect x="12" y="255" width="191" height="76" rx="6" fill="#ede7d8" stroke="#c9c2b3" stroke-width="1"/>
-      <text x="20" y="273" fill="#5c5548" font-size="9" font-family="monospace" font-weight="800">CHAIN OF EVIDENCE</text>
-      <text x="20" y="290" fill="#6c716b" font-size="9" font-family="monospace">Regulator: SEBI (India)</text>
-      <text x="20" y="305" fill="#6c716b" font-size="9" font-family="monospace">Engine: 9-Param Deterministic</text>
-      <text x="20" y="320" fill="#257849" font-size="9" font-family="monospace" font-weight="700">Status: L2 Firestore Sealed</text>
+      <!-- Sub-Agents Invocations -->
+      <rect x="12" y="238" width="191" height="148" rx="6" fill="#ede7d8" stroke="#c9c2b3" stroke-width="1"/>
+      <text x="20" y="254" fill="#5c5548" font-size="9" font-family="monospace" font-weight="800">5 MICRO-AGENTS USED</text>
+      <text x="20" y="272" fill="#257849" font-size="8.5" font-family="monospace">✓ historic_price_agent</text>
+      <text x="20" y="288" fill="#257849" font-size="8.5" font-family="monospace">✓ price_target_agent</text>
+      <text x="20" y="304" fill="#257849" font-size="8.5" font-family="monospace">✓ fundamentals_agent</text>
+      <text x="20" y="320" fill="#257849" font-size="8.5" font-family="monospace">✓ quarterly_report_agent</text>
+      <text x="20" y="336" fill="#257849" font-size="8.5" font-family="monospace">✓ explainer_agent</text>
+      <text x="20" y="360" fill="#132c24" font-size="8.5" font-family="monospace" font-weight="700">State: Firestore L2 Sealed</text>
+      <text x="20" y="374" fill="#6c716b" font-size="8" font-family="monospace">Worker: Google Cloud Run</text>
     </g>
 
-    <!-- Right Main Report Sheet -->
-    <g transform="translate(248, 92)">
-      <rect width="714" height="345" rx="8" fill="#fbf8ef" stroke="#c9c2b3" stroke-width="1.5"/>
+    <!-- Main Dossier Sheet -->
+    <g transform="translate(245, 90)">
+      <rect width="708" height="400" rx="8" fill="#fbf8ef" stroke="#c9c2b3" stroke-width="1.5"/>
 
       <!-- Red Rubber Stamp -->
-      <g transform="translate(450, 14) rotate(-4)">
+      <g transform="translate(455, 14) rotate(-4)">
         <rect width="145" height="44" rx="4" fill="#fff5f5" stroke="#a93a2d" stroke-width="2"/>
         <text x="72" y="18" fill="#a93a2d" font-size="8.5" font-family="monospace" font-weight="800" text-anchor="middle">INVESTPI FORENSIC</text>
         <text x="72" y="34" fill="#a93a2d" font-size="13" font-family="monospace" font-weight="800" text-anchor="middle">HIGH RISK 🔴</text>
       </g>
 
-      <!-- Subject Title & Score -->
+      <!-- Subject Header -->
       <text x="20" y="24" fill="#7c7262" font-size="9" font-family="monospace" font-weight="700">SUBJECT / PUBLIC SECURITY · FILE #NSE-001</text>
       <text x="20" y="46" fill="#17201b" font-size="20" font-weight="800">Coforge Limited</text>
-      <text x="20" y="62" fill="#5c5548" font-size="10.5" font-family="monospace">COFORGE.NS · NSE · INDIA (SEBI)</text>
+      <text x="20" y="62" fill="#5c5548" font-size="10.5" font-family="monospace">COFORGE.NS · NSE · JURISDICTION: INDIA (SEBI)</text>
 
-      <text x="690" y="26" fill="#7c7262" font-size="9" font-family="monospace" text-anchor="end">INVESTPI SCORE</text>
-      <text x="690" y="52" fill="#a93a2d" font-size="26" font-family="monospace" font-weight="800" text-anchor="end">2.2<tspan font-size="13" fill="#7c7262">/10</tspan></text>
+      <text x="685" y="26" fill="#7c7262" font-size="9" font-family="monospace" text-anchor="end">INVESTPI SCORE</text>
+      <text x="685" y="52" fill="#a93a2d" font-size="26" font-family="monospace" font-weight="800" text-anchor="end">2.2<tspan font-size="13" fill="#7c7262">/10</tspan></text>
 
-      <!-- 4 Metric Boxes Strip -->
+      <!-- 4 Metric Cards -->
       <g transform="translate(20, 74)">
-        <rect x="0" y="0" width="160" height="44" rx="5" fill="#f5f0e4" stroke="#dcd5c5" stroke-width="1"/>
-        <text x="10" y="16" fill="#7c7262" font-size="8.5" font-family="monospace">CURRENT MARKET PRICE</text>
-        <text x="10" y="34" fill="#17201b" font-size="13" font-family="monospace" font-weight="800">₹6,840.00</text>
+        <rect x="0" y="0" width="158" height="42" rx="4" fill="#f5f0e4" stroke="#dcd5c5" stroke-width="1"/>
+        <text x="10" y="15" fill="#7c7262" font-size="8" font-family="monospace">CURRENT MARKET PRICE</text>
+        <text x="10" y="32" fill="#17201b" font-size="12" font-family="monospace" font-weight="800">₹6,840.00</text>
 
-        <rect x="171" y="0" width="160" height="44" rx="5" fill="#f5f0e4" stroke="#dcd5c5" stroke-width="1"/>
-        <text x="181" y="16" fill="#7c7262" font-size="8.5" font-family="monospace">CLAIMED TARGET</text>
-        <text x="181" y="34" fill="#a93a2d" font-size="13" font-family="monospace" font-weight="800">₹9,500.00</text>
+        <rect x="168" y="0" width="158" height="42" rx="4" fill="#f5f0e4" stroke="#dcd5c5" stroke-width="1"/>
+        <text x="178" y="15" fill="#7c7262" font-size="8" font-family="monospace">CLAIMED TARGET</text>
+        <text x="178" y="32" fill="#a93a2d" font-size="12" font-family="monospace" font-weight="800">₹9,500.00</text>
 
-        <rect x="342" y="0" width="160" height="44" rx="5" fill="#f5f0e4" stroke="#dcd5c5" stroke-width="1"/>
-        <text x="352" y="16" fill="#7c7262" font-size="8.5" font-family="monospace">IMPLIED MOVE</text>
-        <text x="352" y="34" fill="#a93a2d" font-size="13" font-family="monospace" font-weight="800">+38.8% Upside</text>
+        <rect x="336" y="0" width="158" height="42" rx="4" fill="#f5f0e4" stroke="#dcd5c5" stroke-width="1"/>
+        <text x="346" y="15" fill="#7c7262" font-size="8" font-family="monospace">IMPLIED MOVE</text>
+        <text x="346" y="32" fill="#a93a2d" font-size="12" font-family="monospace" font-weight="800">+38.8% Upside</text>
 
-        <rect x="513" y="0" width="161" height="44" rx="5" fill="#f5f0e4" stroke="#dcd5c5" stroke-width="1"/>
-        <text x="523" y="16" fill="#7c7262" font-size="8.5" font-family="monospace">TIME HORIZON</text>
-        <text x="523" y="34" fill="#17201b" font-size="13" font-family="monospace" font-weight="800">60 Days</text>
+        <rect x="504" y="0" width="164" height="42" rx="4" fill="#f5f0e4" stroke="#dcd5c5" stroke-width="1"/>
+        <text x="514" y="15" fill="#7c7262" font-size="8" font-family="monospace">TIME HORIZON</text>
+        <text x="514" y="32" fill="#17201b" font-size="12" font-family="monospace" font-weight="800">60 Days</text>
       </g>
 
-      <!-- Hard Gate Triggered Alert Strip -->
-      <rect x="20" y="126" width="674" height="26" rx="4" fill="#fde8e8" stroke="#a93a2d" stroke-width="1"/>
-      <text x="30" y="143" fill="#a93a2d" font-size="10" font-family="monospace" font-weight="800">🚨 HARD GATE TRIGGERED: P8 Unregistered Advisor &amp; P9 Guaranteed Return Claim (Score Capped ≤ 3.0)</text>
+      <!-- Alert Banner -->
+      <rect x="20" y="124" width="668" height="26" rx="4" fill="#fde8e8" stroke="#a93a2d" stroke-width="1"/>
+      <text x="30" y="141" fill="#a93a2d" font-size="9.5" font-family="monospace" font-weight="800">🚨 HARD GATE TRIGGERED: P8 Unregistered Advisor &amp; P9 Guaranteed Return Claim (Score Capped ≤ 3.0)</text>
 
-      <!-- 5-Yr Chart + 9-Param Cards Split -->
-      <g transform="translate(20, 160)">
-        <!-- Chart Wireframe -->
-        <rect x="0" y="0" width="325" height="170" rx="6" fill="#ffffff" stroke="#c9c2b3" stroke-width="1"/>
-        <text x="12" y="18" fill="#5c5548" font-size="9" font-family="monospace" font-weight="800">5-YR EMPIRICAL PRICE vs CLAIMED TARGET</text>
-        <!-- Dashed Red Target Line -->
-        <line x1="16" y1="38" x2="308" y2="38" stroke="#a93a2d" stroke-width="1.5" stroke-dasharray="5,4"/>
-        <text x="306" y="33" fill="#a93a2d" font-size="8.5" font-family="monospace" font-weight="700" text-anchor="end">Target: ₹9,500 (+3.4σ)</text>
+      <!-- Split: 5-Yr Chart + Scorecards -->
+      <g transform="translate(20, 158)">
+        <!-- Chart -->
+        <rect x="0" y="0" width="315" height="225" rx="6" fill="#ffffff" stroke="#c9c2b3" stroke-width="1"/>
+        <text x="12" y="18" fill="#5c5548" font-size="8.5" font-family="monospace" font-weight="800">5-YR REALIZED PRICE vs CLAIMED TARGET</text>
+        <!-- Target Line -->
+        <line x1="16" y1="42" x2="300" y2="42" stroke="#a93a2d" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="296" y="37" fill="#a93a2d" font-size="8" font-family="monospace" font-weight="700" text-anchor="end">Target: ₹9,500 (+3.4σ)</text>
         <!-- Historical Curve -->
-        <polyline fill="none" stroke="#132c24" stroke-width="2.2" points="16,145 55,138 95,125 135,130 175,105 215,112 255,88 285,82"/>
-        <!-- Projected Dashed Line -->
-        <line x1="285" y1="82" x2="308" y2="38" stroke="#a93a2d" stroke-width="2" stroke-dasharray="3,3"/>
+        <polyline fill="none" stroke="#132c24" stroke-width="2.2" points="16,190 55,180 95,160 135,168 175,130 215,140 255,108 280,100"/>
+        <line x1="280" y1="100" x2="300" y2="42" stroke="#a93a2d" stroke-width="2" stroke-dasharray="3,3"/>
+        <text x="16" y="212" fill="#6c716b" font-size="8" font-family="monospace">Trajectory: 60-day historical window distribution</text>
 
-        <!-- 9-Param Grid Cards -->
-        <g transform="translate(338, 0)">
-          <text x="0" y="12" fill="#5c5548" font-size="9.5" font-family="monospace" font-weight="800">09-PARAMETER SCORECARD BREAKDOWN</text>
+        <!-- 9-Param Mini Cards -->
+        <g transform="translate(328, 0)">
+          <text x="0" y="12" fill="#5c5548" font-size="9" font-family="monospace" font-weight="800">09-PARAMETER SCORECARD BREAKDOWN</text>
 
-          <rect x="0" y="20" width="162" height="44" rx="4" fill="#ffffff" stroke="#dcd5c5" stroke-width="1"/>
-          <text x="8" y="35" fill="#17201b" font-size="9.5" font-family="monospace" font-weight="700">P1 Price-Move</text>
-          <text x="154" y="35" fill="#a93a2d" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="end">1.5/10 🔴</text>
-          <text x="8" y="52" fill="#6c716b" font-size="8.5">&gt;3.4σ historical outlier</text>
+          <rect x="0" y="20" width="165" height="42" rx="4" fill="#ffffff" stroke="#dcd5c5" stroke-width="1"/>
+          <text x="8" y="34" fill="#17201b" font-size="9" font-family="monospace" font-weight="700">P1 Price-Move σ</text>
+          <text x="156" y="34" fill="#a93a2d" font-size="9" font-family="monospace" font-weight="800" text-anchor="end">1.5 🔴</text>
+          <text x="8" y="50" fill="#6c716b" font-size="8">&gt;3.4σ extreme outlier</text>
 
-          <rect x="172" y="20" width="164" height="44" rx="4" fill="#ffffff" stroke="#dcd5c5" stroke-width="1"/>
-          <text x="180" y="35" fill="#17201b" font-size="9.5" font-family="monospace" font-weight="700">P2 Valuation P/E</text>
-          <text x="328" y="35" fill="#c86828" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="end">3.0/10 🟠</text>
-          <text x="180" y="52" fill="#6c716b" font-size="8.5">68x implied vs 38x avg</text>
+          <rect x="175" y="20" width="165" height="42" rx="4" fill="#ffffff" stroke="#dcd5c5" stroke-width="1"/>
+          <text x="183" y="34" fill="#17201b" font-size="9" font-family="monospace" font-weight="700">P2 Valuation P/E</text>
+          <text x="331" y="34" fill="#c86828" font-size="9" font-family="monospace" font-weight="800" text-anchor="end">3.0 🟠</text>
+          <text x="183" y="50" fill="#6c716b" font-size="8">68x implied vs 38x avg</text>
 
-          <rect x="0" y="72" width="162" height="44" rx="4" fill="#ffffff" stroke="#dcd5c5" stroke-width="1"/>
-          <text x="8" y="87" fill="#17201b" font-size="9.5" font-family="monospace" font-weight="700">P6 Sanctions</text>
-          <text x="154" y="87" fill="#257849" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="end">8.5/10 🟢</text>
-          <text x="8" y="104" fill="#6c716b" font-size="8.5">No SEBI debarment</text>
+          <rect x="0" y="68" width="165" height="42" rx="4" fill="#ffffff" stroke="#dcd5c5" stroke-width="1"/>
+          <text x="8" y="82" fill="#17201b" font-size="9" font-family="monospace" font-weight="700">P3 Earnings Momentum</text>
+          <text x="156" y="82" fill="#257849" font-size="9" font-family="monospace" font-weight="800" text-anchor="end">7.5 🟢</text>
+          <text x="8" y="98" fill="#6c716b" font-size="8">+14% YoY Revenue</text>
 
-          <rect x="172" y="72" width="164" height="44" rx="4" fill="#fde8e8" stroke="#a93a2d" stroke-width="1"/>
-          <text x="180" y="87" fill="#a93a2d" font-size="9.5" font-family="monospace" font-weight="700">P8 Licensing</text>
-          <text x="328" y="87" fill="#a93a2d" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="end">0.0/10 🔴</text>
-          <text x="180" y="104" fill="#a93a2d" font-size="8.5" font-weight="600">Unregistered RA/IA</text>
+          <rect x="175" y="68" width="165" height="42" rx="4" fill="#ffffff" stroke="#dcd5c5" stroke-width="1"/>
+          <text x="183" y="82" fill="#17201b" font-size="9" font-family="monospace" font-weight="700">P6 Sanctions Check</text>
+          <text x="331" y="82" fill="#257849" font-size="9" font-family="monospace" font-weight="800" text-anchor="end">8.5 🟢</text>
+          <text x="183" y="98" fill="#6c716b" font-size="8">No SEBI debarment</text>
 
-          <rect x="0" y="124" width="336" height="44" rx="4" fill="#fde8e8" stroke="#a93a2d" stroke-width="1"/>
-          <text x="8" y="139" fill="#a93a2d" font-size="9.5" font-family="monospace" font-weight="700">P9 Hype &amp; Manipulation Language (HARD GATE)</text>
-          <text x="328" y="139" fill="#a93a2d" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="end">1.0/10 🔴</text>
-          <text x="8" y="156" fill="#7f1d1d" font-size="8.5">"100% Guaranteed Sure-Shot Multibagger" urgency detected</text>
+          <rect x="0" y="116" width="165" height="42" rx="4" fill="#fde8e8" stroke="#a93a2d" stroke-width="1"/>
+          <text x="8" y="130" fill="#a93a2d" font-size="9" font-family="monospace" font-weight="700">P8 Advisor Licensing</text>
+          <text x="156" y="130" fill="#a93a2d" font-size="9" font-family="monospace" font-weight="800" text-anchor="end">0.0 🔴</text>
+          <text x="8" y="146" fill="#a93a2d" font-size="8">Unregistered tipster</text>
+
+          <rect x="175" y="116" width="165" height="42" rx="4" fill="#ffffff" stroke="#dcd5c5" stroke-width="1"/>
+          <text x="183" y="130" fill="#17201b" font-size="9" font-family="monospace" font-weight="700">P7 ASM Surveillance</text>
+          <text x="331" y="130" fill="#257849" font-size="9" font-family="monospace" font-weight="800" text-anchor="end">8.0 🟢</text>
+          <text x="183" y="146" fill="#6c716b" font-size="8">No exchange stage</text>
+
+          <!-- P9 Hard Gate Banner -->
+          <rect x="0" y="164" width="340" height="54" rx="4" fill="#fde8e8" stroke="#a93a2d" stroke-width="1.2"/>
+          <text x="8" y="178" fill="#a93a2d" font-size="9" font-family="monospace" font-weight="800">P9 Hype &amp; Manipulation Lexicon (HARD GATE)</text>
+          <text x="331" y="178" fill="#a93a2d" font-size="9" font-family="monospace" font-weight="800" text-anchor="end">1.0 🔴</text>
+          <text x="8" y="194" fill="#7f1d1d" font-size="8.5">"100% Guaranteed Sure-Shot Multibagger" urgency detected</text>
+          <text x="8" y="208" fill="#7f1d1d" font-size="8">SEBI PFUTP Violation: Hard Gate Caps Overall Score to 2.2/10</text>
         </g>
       </g>
     </g>
   </g>
 
   <!-- Connector from "Ask AI Agent" button to View 4 Chat Drawer -->
-  <path d="M 852 680 L 1052 680" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowAccent)"/>
+  <path d="M 830 660 L 1025 660" fill="none" stroke="#d5ff5f" stroke-width="2.5" marker-end="url(#arrowAccent)"/>
 
 
   <!-- ==================== SCREEN 4: GUARDRAILED FORENSIC AI CHAT DRAWER (BOTTOM RIGHT) ==================== -->
-  <g transform="translate(1060, 632)" filter="url(#windowShadow)">
-    <rect width="500" height="455" rx="12" fill="#11221b" stroke="#d5ff5f" stroke-width="2"/>
+  <g transform="translate(1035, 615)" filter="url(#windowShadow)">
+    <rect width="525" height="505" rx="12" fill="#11221b" stroke="#d5ff5f" stroke-width="2"/>
 
-    <!-- Drawer Header -->
-    <rect width="500" height="54" rx="12" fill="#0d1a15"/>
+    <!-- Drawer Title Bar -->
+    <rect width="525" height="54" rx="12" fill="#0d1a15"/>
     <text x="20" y="24" fill="#ffffff" font-size="12" font-family="monospace" font-weight="800">VIEW 4 · FORENSIC ASSISTANT DRAWER</text>
-    <rect x="275" y="11" width="28" height="16" rx="3" fill="#d5ff5f"/>
-    <text x="289" y="23" fill="#132c24" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="middle">AI</text>
-    <text x="20" y="42" fill="#9cb3a8" font-size="10" font-family="monospace">Case #IP-76D8 · Grounded on 9-Parameter Dossier</text>
+    <rect x="290" y="11" width="28" height="16" rx="3" fill="#d5ff5f"/>
+    <text x="304" y="23" fill="#132c24" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="middle">AI</text>
+    <text x="20" y="42" fill="#9cb3a8" font-size="10" font-family="monospace">Case #IP-8842 · Grounded on 9 Parameters &amp; BigQuery RAG</text>
 
-    <rect x="405" y="15" width="42" height="22" rx="4" fill="none" stroke="#457d68" stroke-width="1"/>
-    <text x="426" y="30" fill="#9cb3a8" font-size="9.5" font-family="monospace" text-anchor="middle">Clear</text>
-    <rect x="454" y="15" width="30" height="22" rx="4" fill="none" stroke="#457d68" stroke-width="1"/>
-    <text x="469" y="30" fill="#ffffff" font-size="10" font-family="monospace" text-anchor="middle">✕</text>
+    <rect x="425" y="15" width="44" height="22" rx="4" fill="none" stroke="#457d68" stroke-width="1"/>
+    <text x="447" y="30" fill="#9cb3a8" font-size="9.5" font-family="monospace" text-anchor="middle">Clear</text>
+    <rect x="475" y="15" width="30" height="22" rx="4" fill="none" stroke="#457d68" stroke-width="1"/>
+    <text x="490" y="30" fill="#ffffff" font-size="10" font-family="monospace" text-anchor="middle">✕</text>
 
-    <!-- Guardrail Banner -->
-    <rect x="0" y="54" width="500" height="28" fill="#183326"/>
-    <text x="20" y="72" fill="#d5ff5f" font-size="10" font-family="monospace" font-weight="700">🛡️ GUARDRAIL: Audits claims only · Rejects Buy/Sell tips</text>
+    <!-- Guardrail Strip -->
+    <rect x="0" y="54" width="525" height="28" fill="#183326"/>
+    <text x="20" y="72" fill="#d5ff5f" font-size="10" font-family="monospace" font-weight="700">🛡️ GUARDRAIL: Audits claims only · Rejects Buy/Sell/Hold tips</text>
 
-    <!-- Quick Prompt Chips Tray -->
-    <g transform="translate(16, 92)">
+    <!-- Quick Prompt Chips -->
+    <g transform="translate(16, 90)">
       <rect x="0" y="0" width="165" height="24" rx="12" fill="#162c23" stroke="#3b6e5c" stroke-width="1"/>
       <text x="82" y="16" fill="#e5e7eb" font-size="9.5" text-anchor="middle">Why was Hard Gate triggered?</text>
 
-      <rect x="173" y="0" width="145" height="24" rx="12" fill="#162c23" stroke="#3b6e5c" stroke-width="1"/>
-      <text x="245" y="16" fill="#e5e7eb" font-size="9.5" text-anchor="middle">Explain P1 Price-Move σ</text>
+      <rect x="173" y="0" width="155" height="24" rx="12" fill="#162c23" stroke="#3b6e5c" stroke-width="1"/>
+      <text x="250" y="16" fill="#e5e7eb" font-size="9.5" text-anchor="middle">Explain P1 Price-Move σ</text>
 
-      <rect x="326" y="0" width="142" height="24" rx="12" fill="#162c23" stroke="#3b6e5c" stroke-width="1"/>
-      <text x="397" y="16" fill="#e5e7eb" font-size="9.5" text-anchor="middle">Check SEBI Registration</text>
+      <rect x="336" y="0" width="155" height="24" rx="12" fill="#162c23" stroke="#3b6e5c" stroke-width="1"/>
+      <text x="413" y="16" fill="#e5e7eb" font-size="9.5" text-anchor="middle">Show Regulation 33 SWOT</text>
     </g>
 
-    <!-- Chat Messages Area -->
-    <!-- User Message 1 (Out of bounds Buy/Sell query) -->
-    <g transform="translate(150, 130)">
-      <rect width="330" height="36" rx="10" fill="#1d3e32" stroke="#3b6e5c" stroke-width="1"/>
-      <text x="14" y="22" fill="#fbf8ef" font-size="11.5">Should I buy Coforge right now or sell it?</text>
+    <!-- Chat Messages Stack -->
+    <!-- Message 1: Out-of-bounds user query -->
+    <g transform="translate(160, 126)">
+      <rect width="345" height="34" rx="10" fill="#1d3e32" stroke="#3b6e5c" stroke-width="1"/>
+      <text x="14" y="21" fill="#fbf8ef" font-size="11">Should I buy Coforge right now or sell it?</text>
     </g>
 
-    <!-- Guardrail Refusal Bubble -->
-    <g transform="translate(20, 178)">
-      <rect width="460" height="54" rx="8" fill="#3b1614" stroke="#ff6b5b" stroke-width="1.2"/>
-      <text x="230" y="21" fill="#ff9b91" font-size="10" font-family="monospace" font-weight="800" text-anchor="middle">⚠️ DOMAIN GUARDRAIL TRIGGERED (BUY/SELL BLOCKED)</text>
-      <text x="230" y="39" fill="#fecaca" font-size="10" font-family="monospace" text-anchor="middle">InvestPI rates specific claims against public data and does not</text>
-      <text x="230" y="50" fill="#fecaca" font-size="10" font-family="monospace" text-anchor="middle">issue personal buy, sell, or hold investment recommendations.</text>
+    <!-- Guardrail Refusal -->
+    <g transform="translate(20, 168)">
+      <rect width="485" height="52" rx="8" fill="#3b1614" stroke="#ff6b5b" stroke-width="1.2"/>
+      <text x="242" y="20" fill="#ff9b91" font-size="9.5" font-family="monospace" font-weight="800" text-anchor="middle">⚠️ DOMAIN GUARDRAIL TRIGGERED (PERSONAL ADVICE REFUSED)</text>
+      <text x="242" y="36" fill="#fecaca" font-size="9.5" font-family="monospace" text-anchor="middle">InvestPI rates claims against public disclosures and does not issue</text>
+      <text x="242" y="47" fill="#fecaca" font-size="9.5" font-family="monospace" text-anchor="middle">personal buy, sell, or hold recommendations (SEBI PFUTP &amp; RA Act).</text>
     </g>
 
-    <!-- User Message 2 (Valid Forensic Question) -->
-    <g transform="translate(190, 244)">
-      <rect width="290" height="34" rx="10" fill="#1d3e32" stroke="#3b6e5c" stroke-width="1"/>
-      <text x="14" y="21" fill="#fbf8ef" font-size="11.5">Why did Parameter 1 and Parameter 8 fail?</text>
+    <!-- Message 2: Grounded Technical Query -->
+    <g transform="translate(195, 230)">
+      <rect width="310" height="34" rx="10" fill="#1d3e32" stroke="#3b6e5c" stroke-width="1"/>
+      <text x="14" y="21" fill="#fbf8ef" font-size="11">Why did Parameter 1 and Parameter 8 fail?</text>
     </g>
 
-    <!-- Assistant Grounded Response Bubble -->
-    <g transform="translate(20, 290)">
-      <rect width="435" height="96" rx="10" fill="#fbf8ef" stroke="#c9c2b3" stroke-width="1"/>
-      <text x="14" y="22" fill="#17201b" font-size="11" font-weight="700">Forensic Dossier Finding (#IP-76D8):</text>
-      <text x="14" y="42" fill="#17201b" font-size="11">• <tspan font-weight="700">P1 (1.5/10):</tspan> A +38.8% move in 60 days is a 3.4σ outlier</text>
-      <text x="24" y="58" fill="#5c5548" font-size="10.5">against Coforge's 5-year rolling 60-day return distribution.</text>
-      <text x="14" y="78" fill="#17201b" font-size="11">• <tspan font-weight="700">P8 (0.0/10):</tspan> Creator @ProfitMasterFintech is not registered</text>
-      <text x="24" y="91" fill="#5c5548" font-size="10.5">in the official SEBI Research Analyst (RA/IA) registry.</text>
+    <!-- Multi-Agent Assistant Answer -->
+    <g transform="translate(20, 274)">
+      <rect width="485" height="145" rx="10" fill="#fbf8ef" stroke="#c9c2b3" stroke-width="1"/>
+
+      <!-- Invoked Micro-Agents Pills -->
+      <g transform="translate(14, 12)">
+        <rect x="0" y="0" width="130" height="18" rx="3" fill="#132c24"/>
+        <text x="65" y="13" fill="#d5ff5f" font-size="8.5" font-family="monospace" text-anchor="middle">historic_price_agent</text>
+
+        <rect x="136" y="0" width="125" height="18" rx="3" fill="#132c24"/>
+        <text x="198" y="13" fill="#d5ff5f" font-size="8.5" font-family="monospace" text-anchor="middle">fundamentals_agent</text>
+
+        <rect x="267" y="0" width="135" height="18" rx="3" fill="#133d34"/>
+        <text x="334" y="13" fill="#2dd4bf" font-size="8.5" font-family="monospace" text-anchor="middle">quarterly_report_agent</text>
+      </g>
+
+      <text x="14" y="48" fill="#17201b" font-size="11" font-weight="700">Forensic Case Findings (#IP-8842):</text>
+      <text x="14" y="68" fill="#17201b" font-size="10.5">• <tspan font-weight="700">P1 Price-Move (1.5/10):</tspan> A +38.8% upside in 60 days represents a 3.4σ outlier</text>
+      <text x="24" y="82" fill="#5c5548" font-size="10">against Coforge's 5-year rolling return distribution (&gt;99.8th percentile).</text>
+      <text x="14" y="100" fill="#17201b" font-size="10.5">• <tspan font-weight="700">P8 Creator Licensing (0.0/10):</tspan> Channel @WealthGuruOfficial is not registered</text>
+      <text x="24" y="114" fill="#5c5548" font-size="10">under the official SEBI Research Analyst (INH00000...) or IA registries.</text>
+      <text x="14" y="132" fill="#a93a2d" font-size="10" font-family="monospace" font-weight="700">Conclusion: Tip exhibits classic pump-and-dump characteristics.</text>
     </g>
 
     <!-- Bottom Chat Input Bar -->
-    <g transform="translate(0, 400)">
-      <rect width="500" height="55" rx="10" fill="#0d1a15"/>
-      <rect x="16" y="11" width="385" height="34" rx="6" fill="#162920" stroke="#3b6e5c" stroke-width="1"/>
-      <text x="28" y="32" fill="#8fa89c" font-size="11">Ask about this forensic report...</text>
+    <g transform="translate(0, 445)">
+      <rect width="525" height="60" rx="10" fill="#0d1a15"/>
+      <rect x="16" y="12" width="410" height="36" rx="6" fill="#162920" stroke="#3b6e5c" stroke-width="1"/>
+      <text x="28" y="35" fill="#8fa89c" font-size="11">Ask about this forensic audit or quarterly SWOT...</text>
 
-      <rect x="412" y="11" width="72" height="34" rx="6" fill="#d5ff5f"/>
-      <text x="448" y="32" fill="#132c24" font-size="11" font-family="monospace" font-weight="800" text-anchor="middle">SEND →</text>
+      <rect x="436" y="12" width="75" height="36" rx="6" fill="#d5ff5f"/>
+      <text x="473" y="35" fill="#132c24" font-size="11" font-family="monospace" font-weight="800" text-anchor="middle">SEND →</text>
     </g>
   </g>
 </svg>
