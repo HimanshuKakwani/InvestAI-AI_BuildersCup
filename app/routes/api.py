@@ -242,6 +242,21 @@ def create_app():
             return jsonify({"status": "error", "message": "Missing required 'market' parameter (e.g. IN, SG, AU)"}), 400
 
         force_param = request.args.get("force", "").lower() in ("1", "true", "yes")
+        is_async = request.args.get("async", "").lower() in ("1", "true", "yes") or (request.get_json(silent=True) or {}).get("async") is True
+
+        if is_async:
+            from app.pubsub.events import MarketSyncEvent
+            from app.pubsub.publisher import publisher
+            event = MarketSyncEvent(market=market.upper(), force_refresh=force_param)
+            msg_id = publisher.publish_market_sync(event)
+            return jsonify({
+                "status": "queued",
+                "mode": "async_pubsub",
+                "market": market.upper(),
+                "message": f"End-of-day market sync for {market.upper()} queued via Pub/Sub fan-out.",
+                "msg_id": msg_id
+            }), 202
+
         from app.data.market_sync import MarketSyncService
         service = MarketSyncService(analysis_service.loader)
         result = service.sync_market(market, force=force_param)

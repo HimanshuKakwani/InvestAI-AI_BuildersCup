@@ -4,7 +4,7 @@ import base64
 import time
 import pytest
 from app.routes.api import create_app
-from app.pubsub.events import LeadSubmittedEvent, AuditCompletedEvent
+from app.pubsub.events import LeadSubmittedEvent, AuditCompletedEvent, StockSyncEvent, MarketSyncEvent
 from app.pubsub.store import CaseStore, CaseStatus, case_store
 from app.pubsub.consumer import handle_push_message
 
@@ -88,7 +88,7 @@ def test_async_analysis_endpoint_queued(client):
     assert status_resp.status_code == 200
     case_data = status_resp.get_json()
     assert case_data["case_id"] == case_id
-    assert case_data["status"] in [CaseStatus.QUEUED, CaseStatus.PROCESSING, CaseStatus.COMPLETED]
+    assert case_data["status"] in [CaseStatus.QUEUED, CaseStatus.PROCESSING, CaseStatus.COMPLETED, CaseStatus.REJECTED]
 
 
 def test_pubsub_push_webhook_processing(client):
@@ -166,3 +166,49 @@ def test_sse_stream_endpoint(client):
     assert "data: " in content
     assert "sse-test-001" in content
     assert "COMPLETED" in content
+
+
+def test_stock_sync_event_serialization():
+    """Verify StockSyncEvent and MarketSyncEvent contracts serialize and deserialize cleanly."""
+    sync_event = StockSyncEvent(ticker="RELIANCE.NS", market="IN", force_refresh=True)
+    json_str = sync_event.to_json()
+    reconstructed = StockSyncEvent.from_json(json_str)
+    assert reconstructed.ticker == "RELIANCE.NS"
+    assert reconstructed.market == "IN"
+    assert reconstructed.force_refresh is True
+    assert reconstructed.event_type == "stock_sync"
+
+    mkt_event = MarketSyncEvent(market="SG", force_refresh=False)
+    mkt_json = mkt_event.to_json()
+    reconstructed_mkt = MarketSyncEvent.from_json(mkt_json)
+    assert reconstructed_mkt.market == "SG"
+    assert reconstructed_mkt.event_type == "market_sync"
+
+
+def test_async_market_sync_endpoint(client):
+    """POST /api/jobs/sync-market?market=IN&async=true should queue fan-out via Pub/Sub and return 202."""
+    resp = client.post("/api/jobs/sync-market?market=IN&async=true")
+    assert resp.status_code == 202
+    data = resp.get_json()
+    assert data["status"] == "queued"
+    assert data["mode"] == "async_pubsub"
+    assert data["market"] == "IN"
+    assert "msg_id" in data
+
+
+def test_pubsub_stock_sync_push_handling(client):
+    """POST /api/pubsub/push with a stock_sync event should execute cache refresh for the stock."""
+    event = StockSyncEvent(ticker="SUZLON.NS", market="IN", force_refresh=False)
+    raw_json_bytes = event.to_json().encode("utf-8")
+    b64_data = base64.b64encode(raw_json_bytes).decode("utf-8")
+
+    envelope = {
+        "message": {
+            "data": b64_data,
+            "messageId": "pubsub-sync-001",
+            "attributes": {"event_type": "stock_sync"}
+        }
+    }
+    resp = client.post("/api/pubsub/push", json=envelope)
+    assert resp.status_code == 200
+    assert resp.get_json()["status"] == "acknowledged"

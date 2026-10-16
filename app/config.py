@@ -46,6 +46,7 @@ class Config:
     GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID", "")
     PUBSUB_TOPIC_LEADS = os.getenv("PUBSUB_TOPIC_LEADS", "investpi-leads-inbound")
     PUBSUB_TOPIC_AUDITS = os.getenv("PUBSUB_TOPIC_AUDITS", "investpi-audits-completed")
+    PUBSUB_TOPIC_SYNC = os.getenv("PUBSUB_TOPIC_SYNC", "investpi-market-sync")
     PUBSUB_PUSH_TOKEN = os.getenv("PUBSUB_PUSH_TOKEN", "")
     PUBSUB_EMULATOR_HOST = os.getenv("PUBSUB_EMULATOR_HOST", "")
 
@@ -63,5 +64,6 @@ class Config:
     FIREBASE_PROJECT_ID = os.getenv("FIREBASE_PROJECT_ID", os.getenv("GOOGLE_CLOUD_PROJECT", ""))
     FIREBASE_CREDENTIALS_PATH = os.getenv("FIREBASE_CREDENTIALS_PATH", "")
     FIREBASE_COLLECTION = os.getenv("FIREBASE_COLLECTION", "investpi_reports")
+    FIREBASE_CASES_COLLECTION = os.getenv("FIREBASE_CASES_COLLECTION", "investpi_cases")
     CRON_SECRET = os.getenv("CRON_SECRET", "")
 

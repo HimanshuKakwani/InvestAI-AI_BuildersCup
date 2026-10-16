@@ -4,7 +4,7 @@ import json
 import logging
 from typing import Dict, Any
 
-from app.pubsub.events import LeadSubmittedEvent, AuditCompletedEvent
+from app.pubsub.events import LeadSubmittedEvent, AuditCompletedEvent, StockSyncEvent, MarketSyncEvent
 from app.pubsub.store import case_store, CaseStatus
 from app.reporting.chart_generator import generate_price_target_chart
 
@@ -51,6 +51,9 @@ def process_lead_event(event: LeadSubmittedEvent) -> Dict[str, Any]:
                 region_override=event.region
             )
 
+        # Ensure modality is retained on output
+        result["modality"] = event.modality
+
         # Check if rejected as non-financial material
         if result.get("is_financial_advice") is False:
             logger.info(f"Case {case_id} classified as non-financial advice. Forensic audit skipped.")
@@ -64,9 +67,10 @@ def process_lead_event(event: LeadSubmittedEvent) -> Dict[str, Any]:
             )
             return result
 
-        # Financial tip: Generate charts, build PDF link, and cache reports
+        # Financial tip: Generate charts, build PDF link, and cache reports in Firestore
         all_reports = result.get("reports", [result])
         for rep in all_reports:
+            rep["modality"] = event.modality
             ticker = rep.get("resolved_stock", {}).get("ticker")
             prices_df = analysis_service.loader.get_price_history(ticker)
             chart_b64 = generate_price_target_chart(
@@ -76,6 +80,7 @@ def process_lead_event(event: LeadSubmittedEvent) -> Dict[str, Any]:
                 current_price=rep.get("current_price")
             )
             rep_id = rep.get("report_id")
+            # Persists to L1 memory cache and Firebase Firestore L2
             reports_cache[rep_id] = {"data": rep, "chart_b64": chart_b64}
             rep["pdf_url"] = f"/api/report/{rep_id}.pdf"
             rep["chart_b64"] = chart_b64
@@ -109,8 +114,91 @@ def process_lead_event(event: LeadSubmittedEvent) -> Dict[str, Any]:
         return {"error": error_msg, "case_id": case_id, "status": "FAILED"}
 
 
+def process_stock_sync_event(event: StockSyncEvent) -> Dict[str, Any]:
+    """
+    Executes asynchronous historical prices and company fundamentals caching for a single stock.
+    Saves price series to Firestore 'investpi_prices' and valuation snapshot to 'investpi_fundamentals'.
+    """
+    from app.routes.api import analysis_service
+
+    ticker = event.ticker
+    logger.info(f"[PubSub Sync] Synchronizing prices & fundamentals for {ticker} (market={event.market}, force={event.force_refresh})...")
+
+    try:
+        # 1. Increment/fetch 5-year price series (persists to Firestore 'investpi_prices')
+        df = analysis_service.loader.get_price_history(ticker, force_refresh=event.force_refresh)
+        candles_count = len(df) if df is not None and not df.empty else 0
+
+        # 2. Fetch/update company valuation fundamentals (persists to Firestore 'investpi_fundamentals')
+        fund = analysis_service.loader.get_fundamentals(ticker, force_refresh=event.force_refresh)
+        has_fund = fund is not None
+
+        logger.info(f"[PubSub Sync] Successfully synced {ticker}: {candles_count} candles, fundamentals={has_fund}")
+        return {
+            "status": "success",
+            "ticker": ticker,
+            "market": event.market,
+            "candles_count": candles_count,
+            "fundamentals_cached": has_fund
+        }
+    except Exception as e:
+        logger.error(f"[PubSub Sync] Error syncing data for {ticker}: {e}", exc_info=True)
+        return {
+            "status": "error",
+            "ticker": ticker,
+            "error": str(e)
+        }
+
+
+def process_market_sync_event(event: MarketSyncEvent) -> Dict[str, Any]:
+    """
+    Executes asynchronous market-wide fan-out sync across all onboarded stocks in a jurisdiction.
+    Publishes individual StockSyncEvents to Pub/Sub to parallelize price and fundamentals caching.
+    """
+    from app.routes.api import analysis_service
+    from app.pubsub.publisher import publisher
+
+    m_code = event.market.upper()
+    logger.info(f"[PubSub Market Sync] Initiating fan-out sync for market {m_code} (force={event.force_refresh})...")
+
+    # 1. Discover all tickers in curated universe
+    universe_stocks = analysis_service.loader.universe.get(m_code, [])
+    tickers = [s["ticker"] for s in universe_stocks if "ticker" in s]
+
+    # 2. Add dynamically discovered stocks from Firestore
+    storage = analysis_service.loader._get_storage()
+    if storage and storage.is_firestore_connected():
+        try:
+            docs = storage.db.collection("investpi_fundamentals").where("market", "==", m_code).stream()
+            for doc in docs:
+                t = doc.id
+                if t and t not in tickers:
+                    tickers.append(t)
+        except Exception as e:
+            logger.debug(f"Could not load Firestore dynamic stocks for market sync: {e}")
+
+    # 3. Fan-out individual StockSyncEvents via Pub/Sub
+    dispatched = []
+    for ticker in tickers:
+        stock_event = StockSyncEvent(
+            ticker=ticker,
+            market=m_code,
+            force_refresh=event.force_refresh
+        )
+        msg_id = publisher.publish_stock_sync(stock_event)
+        dispatched.append({"ticker": ticker, "msg_id": msg_id})
+
+    logger.info(f"[PubSub Market Sync] Dispatched {len(dispatched)} parallel stock sync jobs for {m_code}.")
+    return {
+        "status": "dispatched",
+        "market": m_code,
+        "total_stocks": len(tickers),
+        "dispatched_tasks": dispatched
+    }
+
+
 def handle_push_message(push_envelope: Dict[str, Any]) -> Dict[str, Any]:
-    """Parse Google Cloud Pub/Sub HTTP Push message format and invoke the forensic worker."""
+    """Parse Google Cloud Pub/Sub HTTP Push message format and invoke the appropriate task worker."""
     if not isinstance(push_envelope, dict) or "message" not in push_envelope:
         raise ValueError("Invalid Pub/Sub push envelope format. Missing 'message' field.")
 
@@ -123,7 +211,21 @@ def handle_push_message(push_envelope: Dict[str, Any]) -> Dict[str, Any]:
 
     decoded_json_str = base64.b64decode(data_b64).decode("utf-8")
     event_dict = json.loads(decoded_json_str)
-    event = LeadSubmittedEvent.from_dict(event_dict)
 
-    logger.info(f"Received Pub/Sub Push message: msg_id={message_id}, case_id={event.case_id}")
-    return process_lead_event(event)
+    # Route based on event type or attributes
+    event_type = event_dict.get("event_type", "")
+    attrs = message_obj.get("attributes", {})
+    if attrs.get("event_type"):
+        event_type = attrs["event_type"]
+
+    logger.info(f"Received Pub/Sub Push message: msg_id={message_id}, event_type={event_type or 'lead'}")
+
+    if event_type == "stock_sync" or ("ticker" in event_dict and "modality" not in event_dict):
+        stock_event = StockSyncEvent.from_dict(event_dict)
+        return process_stock_sync_event(stock_event)
+    elif event_type == "market_sync":
+        market_event = MarketSyncEvent.from_dict(event_dict)
+        return process_market_sync_event(market_event)
+    else:
+        lead_event = LeadSubmittedEvent.from_dict(event_dict)
+        return process_lead_event(lead_event)
