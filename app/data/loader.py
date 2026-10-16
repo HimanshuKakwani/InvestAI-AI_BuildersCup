@@ -83,10 +83,11 @@ class DataLoader:
                     return res
 
         # 2. Dynamic live ticker resolution fallback
-        candidates = [q]
+        candidates = []
         if "." not in q:
             suffix = ".NS" if (market_hint == "IN" or not market_hint) else (".AX" if market_hint == "AU" else ".SI")
             candidates.append(f"{q}{suffix}")
+        candidates.append(q)
 
         for cand in candidates:
             try:

@@ -42,6 +42,13 @@ class Config:
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10 MB uploads
     TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 
+    # Google Cloud Pub/Sub & Serverless Worker Configuration
+    GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID", "")
+    PUBSUB_TOPIC_LEADS = os.getenv("PUBSUB_TOPIC_LEADS", "investpi-leads-inbound")
+    PUBSUB_TOPIC_AUDITS = os.getenv("PUBSUB_TOPIC_AUDITS", "investpi-audits-completed")
+    PUBSUB_PUSH_TOKEN = os.getenv("PUBSUB_PUSH_TOKEN", "")
+    PUBSUB_EMULATOR_HOST = os.getenv("PUBSUB_EMULATOR_HOST", "")
+
     # Environment detection: True when running on Cloud Run / GCP runtime
     IS_CLOUD = bool(os.getenv("K_SERVICE") or os.getenv("K_REVISION") or os.getenv("GAE_SERVICE"))
 

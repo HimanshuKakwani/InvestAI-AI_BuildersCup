@@ -16,3 +16,5 @@ pillow>=10.0.0
 firebase-admin>=6.5.0
 google-cloud-firestore>=2.14.0
 pytest>=8.0.0
+youtube-transcript-api>=1.2.0
+google-cloud-pubsub>=2.20.0

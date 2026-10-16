@@ -33,6 +33,7 @@ def calculate_verdict(
         logger.warning(f"[HARD_GATE_TRIGGERED] Instant 🔴 High Risk activated! Gates: {hard_gates_triggered} | Capped Score: {final_score}")
         return {
             "flag": "HIGH_RISK",
+            "flag_color": "RED",
             "flag_label": "High Risk",
             "flag_badge": "🔴",
             "score": final_score,
@@ -49,6 +50,7 @@ def calculate_verdict(
         logger.info(f"[DATA_SUFFICIENCY] Fewer than 4 parameters evaluable ({len(valid_scores)} evaluated). Flag -> ⚪ NOT_ENOUGH_DATA.")
         return {
             "flag": "NOT_ENOUGH_DATA",
+            "flag_color": "GRAY",
             "flag_label": "Not Enough Data",
             "flag_badge": "⚪",
             "score": avg_score,
@@ -65,21 +67,25 @@ def calculate_verdict(
 
     if pos_ratio < 0.40:
         flag = "HIGH_RISK"
+        flag_color = "RED"
         flag_label = "High Risk"
         flag_badge = "🔴"
     elif pos_ratio <= 0.70:
         flag = "CAUTION"
+        flag_color = "ORANGE"
         flag_label = "Caution"
         flag_badge = "🟠"
     else:
         # > 70% positive ratio: Source Cap rule applies!
         if is_source_registered:
             flag = "CONSISTENT"
+            flag_color = "GREEN"
             flag_label = "Consistent with Public Data"
             flag_badge = "🟢"
         else:
             # Capped at Caution if source is unregistered!
             flag = "CAUTION"
+            flag_color = "ORANGE"
             flag_label = "Caution (Unregistered Source)"
             flag_badge = "🟠"
             logger.info(f"[SOURCE_CAP_APPLIED] Score qualified for 🟢 CONSISTENT ({round(pos_ratio*100)}% positive), but source is unregistered. Capped at 🟠 CAUTION.")
@@ -88,6 +94,7 @@ def calculate_verdict(
 
     return {
         "flag": flag,
+        "flag_color": flag_color,
         "flag_label": flag_label,
         "flag_badge": flag_badge,
         "score": avg_score,
