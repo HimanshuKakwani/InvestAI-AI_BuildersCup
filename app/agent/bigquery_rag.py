@@ -262,7 +262,6 @@ class BigQueryFinancialRAG:
                 SELECT report_data 
                 FROM `{self.project_id}.{self.dataset_id}.quarterly_reports` 
                 WHERE ticker = @target_ticker 
-                ORDER BY ingested_at DESC 
                 LIMIT 1
                 """
                 job_config = bigquery.QueryJobConfig(
