@@ -6,8 +6,8 @@
   "sector": "Utilities",
   "trailing_eps": -0.77,
   "forward_eps": 4.51,
-  "market_cap": 82012340224,
-  "current_price": 19.83,
+  "market_cap": 77297557504,
+  "current_price": 18.69,
   "annual": [
     {
       "period_end": "2022-03-31",
@@ -83,5 +83,5 @@
     }
   ],
   "source": "Yahoo Finance (yfinance live)",
-  "as_of": "2026-10-14"
+  "as_of": "2026-10-16"
 }

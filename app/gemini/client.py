@@ -19,7 +19,11 @@ FINANCIAL_KEYWORDS = {
     "quarterly", "upper circuit", "lower circuit", "jackpot", "operator", "bull", "bear", "rally", "dump",
     "pump", "circuit", "target price", "tp", "sl", "stoploss", "stop loss",
     # Hindi / Devanagari financial terminology
-    "खरीदारी", "बिकवाली", "मुनाफा", "स्टॉप", "टारगेट", "शेयर", "स्टॉक", "तेजी", "मंदी"
+    "खरीदारी", "बिकवाली", "मुनाफा", "स्टॉप", "टारगेट", "शेयर", "स्टॉक", "तेजी", "मंदी",
+    # Mandarin / Chinese financial terminology
+    "股票", "买入", "卖出", "目标价", "目标", "暴涨", "翻倍", "稳赚", "必赚", "保证", "收益",
+    "分红", "股息", "内幕", "庄家", "突破", "止损", "建仓", "加仓", "新交所", "星展", "新航",
+    "新电信", "华侨", "大华", "扬子江", "海庭", "评级", "研报"
 }
 
 
@@ -34,8 +38,10 @@ def is_likely_financial_text(text: str, universe_stocks: Optional[List[Dict[str,
             nm = s.get("name", "").lower()
             aliases = [a.lower() for a in s.get("aliases", [])]
             for term in [t, nm] + aliases:
-                if len(term) >= 3 and term in lower:
+                if (len(term) >= 3 or any('\u4e00' <= ch <= '\u9fff' for ch in term)) and term in lower:
                     return True
+    if any(kw in lower for kw in FINANCIAL_KEYWORDS if any('\u4e00' <= ch <= '\u9fff' for ch in kw)):
+        return True
     words = set(re.findall(r'[a-zA-Z\u0900-\u097F]+', lower))
     return bool(words.intersection(FINANCIAL_KEYWORDS))
 

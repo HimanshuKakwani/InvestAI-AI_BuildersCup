@@ -3,18 +3,18 @@
     "name": "DBS Bank Ltd",
     "reg_number": "MAS-FID-001",
     "entity_type": "Licensed Bank / Financial Adviser",
-    "aliases": ["dbs bank", "dbs vickers"]
+    "aliases": ["dbs bank", "dbs vickers", "dbs vickers securities", "cms100025", "星展银行", "星展唯高达", "星展唯高达证券"]
   },
   {
     "name": "Phillip Securities Pte Ltd",
     "reg_number": "MAS-FID-042",
     "entity_type": "Capital Markets Services Licensee",
-    "aliases": ["phillip securities", "poems"]
+    "aliases": ["phillip securities", "poems", "辉立证券"]
   },
   {
     "name": "OCBC Securities Private Limited",
     "reg_number": "MAS-FID-018",
     "entity_type": "Capital Markets Services Licensee",
-    "aliases": ["ocbc securities", "iocbc"]
+    "aliases": ["ocbc securities", "iocbc", "cms100112", "华侨证券", "华侨银行证券"]
   }
 ]

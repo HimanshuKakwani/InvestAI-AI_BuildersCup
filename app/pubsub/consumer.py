@@ -4,7 +4,13 @@ import json
 import logging
 from typing import Dict, Any
 
-from app.pubsub.events import LeadSubmittedEvent, AuditCompletedEvent, StockSyncEvent, MarketSyncEvent
+from app.pubsub.events import (
+    LeadSubmittedEvent,
+    AuditCompletedEvent,
+    StockSyncEvent,
+    MarketSyncEvent,
+    SubAgentTaskEvent
+)
 from app.pubsub.store import case_store, CaseStatus
 from app.reporting.chart_generator import generate_price_target_chart
 
@@ -197,6 +203,59 @@ def process_market_sync_event(event: MarketSyncEvent) -> Dict[str, Any]:
     }
 
 
+def process_subagent_task_event(event: SubAgentTaskEvent) -> Dict[str, Any]:
+    """
+    Executes the specialized Chatbot Sub-Agents (Historic Price, Price Target / EMA-200,
+    Fundamentals, and Simple Explainer) asynchronously via the Pub/Sub worker pipeline.
+    """
+    from app.routes.api import analysis_service
+    from app.agent.subagents import SubAgentCoordinator
+
+    ticker = event.ticker
+    task_id = event.task_id or event.case_id or f"subagent-{ticker}"
+    logger.info(
+        f"[PubSub SubAgent Worker] Executing sub-agents for {ticker} "
+        f"(task_id={task_id}, agents={event.agents_requested})..."
+    )
+
+    try:
+        coordinator = SubAgentCoordinator(loader=analysis_service.loader)
+        report_ctx = {
+            "resolved_stock": {"ticker": ticker},
+            "claim": {"target_price": event.claimed_target}
+        }
+        bundle = coordinator.execute_all(
+            ticker=ticker,
+            report_context=report_ctx,
+            message=event.query
+        )
+
+        # Persist result into CaseStore if tracked as an async case/task
+        if event.task_id:
+            case_store.save_result(event.task_id, bundle, is_financial=True)
+
+        logger.info(
+            f"[PubSub SubAgent Worker] Completed sub-agents for {ticker} "
+            f"in {bundle.get('total_latency_ms')}ms."
+        )
+        return {
+            "status": "success",
+            "task_id": task_id,
+            "ticker": ticker,
+            "bundle": bundle
+        }
+    except Exception as e:
+        logger.error(f"[PubSub SubAgent Worker] Error running sub-agents for {ticker}: {e}", exc_info=True)
+        if event.task_id:
+            case_store.mark_failed(event.task_id, str(e))
+        return {
+            "status": "error",
+            "task_id": task_id,
+            "ticker": ticker,
+            "error": str(e)
+        }
+
+
 def handle_push_message(push_envelope: Dict[str, Any]) -> Dict[str, Any]:
     """Parse Google Cloud Pub/Sub HTTP Push message format and invoke the appropriate task worker."""
     if not isinstance(push_envelope, dict) or "message" not in push_envelope:
@@ -220,7 +279,10 @@ def handle_push_message(push_envelope: Dict[str, Any]) -> Dict[str, Any]:
 
     logger.info(f"Received Pub/Sub Push message: msg_id={message_id}, event_type={event_type or 'lead'}")
 
-    if event_type == "stock_sync" or ("ticker" in event_dict and "modality" not in event_dict):
+    if event_type == "subagent_task" or "agents_requested" in event_dict:
+        subagent_event = SubAgentTaskEvent.from_dict(event_dict)
+        return process_subagent_task_event(subagent_event)
+    elif event_type == "stock_sync" or ("ticker" in event_dict and "modality" not in event_dict):
         stock_event = StockSyncEvent.from_dict(event_dict)
         return process_stock_sync_event(stock_event)
     elif event_type == "market_sync":
@@ -229,3 +291,4 @@ def handle_push_message(push_envelope: Dict[str, Any]) -> Dict[str, Any]:
     else:
         lead_event = LeadSubmittedEvent.from_dict(event_dict)
         return process_lead_event(lead_event)
+

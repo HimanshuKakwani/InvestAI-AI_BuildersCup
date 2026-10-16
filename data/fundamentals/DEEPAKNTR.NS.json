@@ -1,0 +1,92 @@
+{
+  "ticker": "DEEPAKNTR.NS",
+  "name": "Deepak Nitrite Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Basic Materials",
+  "trailing_eps": 57.44,
+  "forward_eps": 62.05367,
+  "market_cap": 218024280064,
+  "current_price": 1598.5,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 78825800000.0,
+      "net_income": 8520000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 76099200000.0,
+      "net_income": 8108900000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 80914800000.0,
+      "net_income": 6972400000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 77612500000.0,
+      "net_income": 5505300000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 18898800000.0,
+      "net_income": 1122000000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 19018900000.0,
+      "net_income": 1187100000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 19749700000.0,
+      "net_income": 997900000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 21203300000.0,
+      "net_income": 2197400000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 25776000000.0,
+      "net_income": 3450200000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 27.23,
+    "median": 34.81,
+    "max": 48.66,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 1872.8889,
+    "target_high": 2200.0,
+    "target_low": 1300.0,
+    "num_analysts": 18,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 49.85,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-16"
+}

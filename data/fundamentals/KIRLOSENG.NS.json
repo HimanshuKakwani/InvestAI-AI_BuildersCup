@@ -1,0 +1,87 @@
+{
+  "ticker": "KIRLOSENG.NS",
+  "name": "Kirloskar Oil Engines Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Industrials",
+  "trailing_eps": 37.48,
+  "forward_eps": 57.05,
+  "market_cap": 294858948608,
+  "current_price": 2025.6,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 49683400000.0,
+      "net_income": 3324000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 58411900000.0,
+      "net_income": 4418700000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 62770900000.0,
+      "net_income": 4891500000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 76412900000.0,
+      "net_income": 5743200000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 17617900000.0,
+      "net_income": 1418800000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 19483800000.0,
+      "net_income": 1624600000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 18726000000.0,
+      "net_income": 1113800000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 21162300000.0,
+      "net_income": 1586000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 19995300000.0,
+      "net_income": 1137100000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 3.66,
+    "median": 19.74,
+    "max": 56.81,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 2539.5,
+    "target_high": 2800.0,
+    "target_low": 2056.0,
+    "num_analysts": 6,
+    "recommendation": "strong_buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 42.82,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-16"
+}

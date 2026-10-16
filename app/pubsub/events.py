@@ -2,7 +2,7 @@
 import json
 import time
 from dataclasses import dataclass, asdict, field
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 
 
 @dataclass
@@ -129,3 +129,52 @@ class MarketSyncEvent:
     @classmethod
     def from_json(cls, json_str: str) -> "MarketSyncEvent":
         return cls.from_dict(json.loads(json_str))
+
+
+@dataclass
+class SubAgentTaskEvent:
+    """Event emitted to execute or pre-warm chatbot sub-agents asynchronously via Pub/Sub."""
+    task_id: str
+    ticker: str
+    case_id: Optional[str] = None
+    market: str = "IN"
+    query: str = ""
+    claimed_target: Optional[float] = None
+    agents_requested: List[str] = field(default_factory=lambda: [
+        "historic_price_agent",
+        "price_target_agent",
+        "fundamentals_agent",
+        "explainer_agent"
+    ])
+    triggered_at: float = field(default_factory=time.time)
+    event_type: str = "subagent_task"
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+    def to_json(self) -> str:
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "SubAgentTaskEvent":
+        return cls(
+            task_id=data.get("task_id", ""),
+            ticker=data.get("ticker", ""),
+            case_id=data.get("case_id"),
+            market=data.get("market", "IN"),
+            query=data.get("query", ""),
+            claimed_target=data.get("claimed_target"),
+            agents_requested=data.get("agents_requested") or [
+                "historic_price_agent",
+                "price_target_agent",
+                "fundamentals_agent",
+                "explainer_agent"
+            ],
+            triggered_at=data.get("triggered_at", time.time()),
+            event_type=data.get("event_type", "subagent_task")
+        )
+
+    @classmethod
+    def from_json(cls, json_str: str) -> "SubAgentTaskEvent":
+        return cls.from_dict(json.loads(json_str))
+

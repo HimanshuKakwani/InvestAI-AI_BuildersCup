@@ -1,0 +1,82 @@
+{
+  "ticker": "DMART.NS",
+  "name": "Avenue Supermarts Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Consumer Defensive",
+  "trailing_eps": 47.82,
+  "forward_eps": 66.68769,
+  "market_cap": 2180018339840,
+  "current_price": 3342.0,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 427353800000.0,
+      "net_income": 23785100000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 507006700000.0,
+      "net_income": 25361700000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 592331500000.0,
+      "net_income": 27080200000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 686845000000.0,
+      "net_income": 29704900000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 148718600000.0,
+      "net_income": 5509000000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 163597000000.0,
+      "net_income": 7729700000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 181008800000.0,
+      "net_income": 8559200000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 176838600000.0,
+      "net_income": 6565900000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 187945300000.0,
+      "net_income": 8606100000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 72.58,
+    "median": 83.77,
+    "max": 102.78,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 3909.4375,
+    "target_high": 5723.0,
+    "target_low": 2800.0,
+    "num_analysts": 32,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 78.91,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-16"
+}

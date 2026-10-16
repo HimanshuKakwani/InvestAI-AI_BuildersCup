@@ -1,0 +1,87 @@
+{
+  "ticker": "DALBHARAT.NS",
+  "name": "Dalmia Bharat Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Basic Materials",
+  "trailing_eps": 49.88,
+  "forward_eps": 71.62569,
+  "market_cap": 316210380800,
+  "current_price": 1684.4,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 132370000000.0,
+      "net_income": 10350000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 143340000000.0,
+      "net_income": 8260000000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 135680000000.0,
+      "net_income": 6830000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 144670000000.0,
+      "net_income": 11390000000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 40910000000.0,
+      "net_income": 4350000000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 36360000000.0,
+      "net_income": 3930000000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 35060000000.0,
+      "net_income": 1220000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 42450000000.0,
+      "net_income": 3870000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 38900000000.0,
+      "net_income": 1880000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 28.44,
+    "median": 37.33,
+    "max": 45.7,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 2127.4707,
+    "target_high": 2500.0,
+    "target_low": 1800.0,
+    "num_analysts": 34,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 60.46,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-16"
+}

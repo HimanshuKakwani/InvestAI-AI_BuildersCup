@@ -1,0 +1,82 @@
+{
+  "ticker": "CDSL.NS",
+  "name": "Central Depository Services (India) Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Financial Services",
+  "trailing_eps": 22.55,
+  "forward_eps": 30.02798,
+  "market_cap": 268962103296,
+  "current_price": 1286.9,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 5550868000.0,
+      "net_income": 2759390000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 8122566000.0,
+      "net_income": 4191058000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 10822826000.0,
+      "net_income": 5266412000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 11449187000.0,
+      "net_income": 4561318000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 2244895000.0,
+      "net_income": 1003059000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 2588400000.0,
+      "net_income": 1023600000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 3043550000.0,
+      "net_income": 1333274000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 2628480000.0,
+      "net_income": 802196000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 2927600000.0,
+      "net_income": 1175100000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 21.32,
+    "median": 42.66,
+    "max": 72.81,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 1318.8667,
+    "target_high": 1620.0,
+    "target_low": 1140.0,
+    "num_analysts": 15,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 50.0,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-16"
+}

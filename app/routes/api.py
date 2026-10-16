@@ -775,9 +775,9 @@ def create_app():
             report_context = reports_cache[report_id].get("data")
 
         # Fallback if no context provided: look up most recently cached report
-        if not report_context and reports_cache:
-            latest_key = list(reports_cache.keys())[-1]
-            report_context = reports_cache[latest_key].get("data")
+        if not report_context and hasattr(reports_cache, "l1_cache") and len(reports_cache.l1_cache._store) > 0:
+            latest_key = list(reports_cache.l1_cache._store.keys())[-1]
+            report_context = reports_cache.get(latest_key, {}).get("data")
 
         history = data.get("history", [])
 
@@ -788,14 +788,123 @@ def create_app():
         )
 
         ticker = report_context.get("resolved_stock", {}).get("ticker") if report_context else None
+        bundle = forensic_agent.last_subagent_bundle or {}
 
         return jsonify({
             "reply": reply,
             "in_scope": in_scope,
-            "ticker": ticker
+            "ticker": ticker,
+            "subagents_invoked": bundle.get("subagents_invoked", []) if in_scope else [],
+            "sources": bundle.get("sources", []) if in_scope else []
         })
 
+    @app.route("/api/agent/subagents/<ticker>", methods=["GET"])
+    def run_subagents_sync(ticker):
+        """
+        Execute Chatbot Sub-Agents Synchronously for a Security
+        ---
+        tags:
+          - Forensic Engine
+        parameters:
+          - name: ticker
+            in: path
+            type: string
+            required: true
+            description: Stock ticker symbol (e.g. RELIANCE.NS, PASHUPATI.NS, DBS.SI)
+          - name: query
+            in: query
+            type: string
+            required: false
+            description: Optional natural language query to filter relevant sub-agents
+          - name: claimed_target
+            in: query
+            type: number
+            required: false
+            description: Optional claimed price target for comparison
+        responses:
+          200:
+            description: Complete intelligence bundle from Historic Price, Price Target (Analyst/EMA-200), Fundamentals, and Simple Explainer sub-agents.
+        """
+        query = request.args.get("query", "")
+        claimed_target = request.args.get("claimed_target", type=float)
+        resolved = analysis_service.loader.resolve_ticker(ticker) or {"ticker": ticker.upper(), "name": ticker.upper()}
+        norm_ticker = resolved.get("ticker", ticker.upper())
+
+        report_ctx = {
+            "resolved_stock": resolved,
+            "claim": {"target_price": claimed_target}
+        }
+        bundle = forensic_agent.coordinator.execute_all(
+            ticker=norm_ticker,
+            report_context=report_ctx,
+            message=query
+        )
+        return jsonify(bundle), 200
+
+    @app.route("/api/agent/subagents/async", methods=["POST"])
+    def run_subagents_async():
+        """
+        Dispatch Chatbot Sub-Agents Asynchronously via Google Cloud Pub/Sub
+        ---
+        tags:
+          - Forensic Engine
+        parameters:
+          - in: body
+            name: body
+            required: true
+            schema:
+              type: object
+              properties:
+                ticker:
+                  type: string
+                  example: PASHUPATI.NS
+                market:
+                  type: string
+                  example: IN
+                query:
+                  type: string
+                  example: Predict future price target and explain fundamentals simply
+                claimed_target:
+                  type: number
+                  example: 140.0
+        responses:
+          202:
+            description: Sub-agent task published to Pub/Sub and queued in CaseStore.
+        """
+        from app.pubsub.events import SubAgentTaskEvent
+        body = request.get_json(silent=True) or {}
+        raw_ticker = (body.get("ticker") or "").strip()
+        if not raw_ticker:
+            return jsonify({"error": "Missing required 'ticker' field"}), 400
+
+        market = (body.get("market") or "IN").upper()
+        resolved = analysis_service.loader.resolve_ticker(raw_ticker, market_hint=market) or {"ticker": raw_ticker.upper()}
+        norm_ticker = resolved.get("ticker", raw_ticker.upper())
+
+        task_id = f"subagent-{uuid.uuid4().hex[:12]}"
+        case_store.create_case(task_id, modality="subagent_task", region=market, meta={"ticker": norm_ticker})
+
+        event = SubAgentTaskEvent(
+            task_id=task_id,
+            ticker=norm_ticker,
+            market=market,
+            query=body.get("query", ""),
+            claimed_target=body.get("claimed_target")
+        )
+        msg_id = publisher.publish_subagent_task(event)
+
+        return jsonify({
+            "task_id": task_id,
+            "ticker": norm_ticker,
+            "status": CaseStatus.QUEUED,
+            "mode": "async_pubsub",
+            "msg_id": msg_id,
+            "status_url": f"/api/cases/{task_id}",
+            "stream_url": f"/api/cases/{task_id}/stream"
+        }), 202
+
     return app
+
 
 if __name__ == "__main__":
     app = create_app()

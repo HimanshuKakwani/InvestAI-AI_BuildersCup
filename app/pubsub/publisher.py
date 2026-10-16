@@ -3,7 +3,13 @@ import logging
 import concurrent.futures
 from typing import Optional, Callable
 from app.config import Config
-from app.pubsub.events import LeadSubmittedEvent, AuditCompletedEvent, StockSyncEvent, MarketSyncEvent
+from app.pubsub.events import (
+    LeadSubmittedEvent,
+    AuditCompletedEvent,
+    StockSyncEvent,
+    MarketSyncEvent,
+    SubAgentTaskEvent
+)
 
 logger = logging.getLogger("InvestPI.PubSub.Publisher")
 
@@ -150,6 +156,40 @@ class PubSubPublisher:
         _fallback_executor.submit(process_market_sync_event, event)
         return f"local-market-sync-{event.market}"
 
+    def publish_subagent_task(self, event: SubAgentTaskEvent) -> str:
+        """Publishes a chatbot sub-agent execution or cache-warming task to Pub/Sub."""
+        topic_name = getattr(Config, "PUBSUB_TOPIC_LEADS", "investpi-leads-inbound")
+        payload_bytes = event.to_json().encode("utf-8")
+
+        if self.is_gcp_active and self.client:
+            try:
+                topic_path = self.client.topic_path(self.project_id, topic_name)
+                future = self.client.publish(
+                    topic_path,
+                    payload_bytes,
+                    task_id=event.task_id,
+                    ticker=event.ticker,
+                    market=event.market,
+                    event_type=event.event_type
+                )
+                msg_id = future.result(timeout=10.0)
+                logger.info(
+                    f"Published SubAgentTaskEvent to GCP topic '{topic_name}' for {event.ticker}: "
+                    f"msg_id={msg_id}, task_id={event.task_id}"
+                )
+                return str(msg_id)
+            except Exception as e:
+                logger.warning(
+                    f"Could not publish SubAgentTaskEvent to GCP Pub/Sub ({e}). "
+                    "Executing via local thread pool."
+                )
+
+        # Local Fallback Dispatch
+        from app.pubsub.consumer import process_subagent_task_event
+        _fallback_executor.submit(process_subagent_task_event, event)
+        return f"local-subagent-{event.task_id}"
+
 
 # Global publisher instance
 publisher = PubSubPublisher()
+

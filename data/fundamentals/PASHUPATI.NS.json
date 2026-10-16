@@ -1,0 +1,92 @@
+{
+  "ticker": "PASHUPATI.NS",
+  "name": "Pashupati Cotspin Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Consumer Cyclical",
+  "trailing_eps": 0.9,
+  "forward_eps": null,
+  "market_cap": 13430604800,
+  "current_price": 85.09,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 3678075000.0,
+      "net_income": 38786000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 6529167000.0,
+      "net_income": 83040000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 6315525000.0,
+      "net_income": 141102000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 6765524000.0,
+      "net_income": 103891000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 1184961000.0,
+      "net_income": 19849000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 2402060000.0,
+      "net_income": 40898000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 1588415000.0,
+      "net_income": 26459000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 1702685000.0,
+      "net_income": 16686000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 1300116000.0,
+      "net_income": 72449000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 9.16,
+    "median": 68.26,
+    "max": 106.36,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": null,
+    "target_high": null,
+    "target_low": null,
+    "num_analysts": 0,
+    "recommendation": "none"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 87.15,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-16"
+}

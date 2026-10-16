@@ -26,14 +26,14 @@ IN:
   - {ticker: PASHUPATI.NS, name: Pashupati Cotspin, aliases: [pashupati cotspin, pashupati, pashupati cotspin ltd]}
 
 SG:
-  - {ticker: D05.SI, name: DBS Group Holdings, aliases: [dbs]}
-  - {ticker: O39.SI, name: OCBC Bank, aliases: [ocbc]}
-  - {ticker: U11.SI, name: United Overseas Bank (UOB), aliases: [uob]}
-  - {ticker: Z74.SI, name: Singtel, aliases: [singtel, singapore telecommunications]}
-  - {ticker: C6L.SI, name: Singapore Airlines, aliases: [sia, singapore airlines]}
-  - {ticker: 5E2.SI, name: Seatrium, aliases: [seatrium, sembcorp marine]}
-  - {ticker: S68.SI, name: Singapore Exchange (SGX), aliases: [sgx]}
-  - {ticker: BS6.SI, name: Yangzijiang Shipbuilding, aliases: [yzj, yangzijiang]}
+  - {ticker: D05.SI, name: DBS Group Holdings, aliases: [dbs, 星展银行, 星展集团, 星展]}
+  - {ticker: O39.SI, name: OCBC Bank, aliases: [ocbc, 华侨银行, 华侨]}
+  - {ticker: U11.SI, name: United Overseas Bank (UOB), aliases: [uob, 大华银行, 大华]}
+  - {ticker: Z74.SI, name: Singtel, aliases: [singtel, singapore telecommunications, 新电信, 新加坡电信]}
+  - {ticker: C6L.SI, name: Singapore Airlines, aliases: [sia, singapore airlines, 新航, 新加坡航空]}
+  - {ticker: 5E2.SI, name: Seatrium, aliases: [seatrium, sembcorp marine, 海庭, 胜科海事]}
+  - {ticker: S68.SI, name: Singapore Exchange (SGX), aliases: [sgx, 新交所, 新加坡交易所]}
+  - {ticker: BS6.SI, name: Yangzijiang Shipbuilding, aliases: [yzj, yangzijiang, 扬子江船业, 扬子江]}
 
 AU:
   - {ticker: BHP.AX, name: BHP Group, aliases: [bhp]}

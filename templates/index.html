@@ -726,6 +726,7 @@
     .marker-tally { display: grid; grid-template-columns: repeat(9, 24px); gap: 4px; }
     .marker-tally span { height: 24px; display: grid; place-items: center; border: 1px solid #b9b4a8; color: #908e86; font: 600 8px 'DM Mono', monospace; }
     .marker-tally span.passed { background: var(--forest); color: var(--acid); border-color: var(--forest); }
+    .marker-tally span.warned { background: var(--orange); color: #fff; border-color: var(--orange); }
     .marker-tally span.failed { background: var(--red); color: #fff; border-color: var(--red); }
     
     .marker-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; row-gap: 4px; }
@@ -733,7 +734,7 @@
     .marker-check { width: 22px; height: 22px; border-radius: 50%; background: var(--forest); color: var(--acid); display: grid; place-items: center; font-size: 10px; font-weight: 800; margin-top: 2px; }
     .marker.status-FAIL .marker-check { background: var(--red); color: white; }
     .marker.status-WARN .marker-check { background: var(--orange); color: white; }
-    .marker.status-INFO .marker-check { background: #64748b; color: white; }
+    .marker.status-INFO .marker-check, .marker.status-NA .marker-check { background: #64748b; color: white; }
     
     .marker > span:nth-child(2) { display: flex; flex-direction: column; gap: 3px; }
     .marker strong { font-size: 11px; color: var(--ink); }
@@ -742,6 +743,7 @@
     .marker em { font-style: normal; color: var(--green); font: 700 8px 'DM Mono', monospace; padding: 2px 6px; }
     .marker.status-FAIL em { color: var(--red); }
     .marker.status-WARN em { color: var(--orange); }
+    .marker.status-INFO em, .marker.status-NA em { color: #64748b; }
 
     .analyst-signoff { border-top: 3px double #565a53; padding-top: 22px; margin-top: 36px; display: flex; align-items: center; justify-content: space-between; }
     .analyst-signoff > div { display: flex; flex-direction: column; gap: 3px; }
@@ -1460,10 +1462,11 @@
         </div>
 
         <div class="chat-chips-tray">
-          <button class="chat-chip" onclick="sendSuggestedQuestion('Explain the confidence score and verdict')">Explain Confidence Score</button>
-          <button class="chat-chip" onclick="sendSuggestedQuestion('Why did Parameter 1 (Price Move) trigger?')">Parameter 1 Breakdown</button>
-          <button class="chat-chip" onclick="sendSuggestedQuestion('Is the creator or entity SEBI registered?')">SEBI / Licensing Status</button>
-          <button class="chat-chip" onclick="sendSuggestedQuestion('Explain the valuation multiples and P/E overshoot')">Valuation Multiple Check</button>
+          <button class="chat-chip" onclick="sendSuggestedQuestion('How was this stock\'s historic price performance in the last 1 month and 1 year?')">Historic Price Agent</button>
+          <button class="chat-chip" onclick="sendSuggestedQuestion('What is the predicted future price target based on analysts or EMA200?')">Price Target / EMA200 Agent</button>
+          <button class="chat-chip" onclick="sendSuggestedQuestion('What are the company fundamentals, P/E valuation, and earnings?')">Fundamentals Agent</button>
+          <button class="chat-chip" onclick="sendSuggestedQuestion('Explain all findings, price target, and fundamentals in simple terms')">Explain in Simple Terms</button>
+          <button class="chat-chip" onclick="sendSuggestedQuestion('Explain the confidence score and verdict')">Confidence Score</button>
         </div>
 
         <div id="chat-messages" class="chat-messages">
@@ -1759,21 +1762,22 @@
       const stamp = document.getElementById('verdict-stamp');
       const badge = document.getElementById('subject-verdict-badge');
       const stampText = document.getElementById('stamp-verdict-text');
-      const flag = verdict.flag || 'RED';
+      const flagColor = (verdict.flag_color || verdict.flag || 'RED').toUpperCase();
+      const flagCode = (verdict.flag || '').toUpperCase();
 
       stamp.className = 'report-stamp';
       badge.className = '';
 
-      if (flag === 'GREEN') {
+      if (flagColor === 'GREEN' || flagCode === 'CONSISTENT') {
         stamp.classList.add('stamp-green');
         badge.classList.add('badge-green');
         stampText.innerText = "VERIFIED CONSISTENT";
-        badge.innerText = "CONSISTENT WITH DATA";
-      } else if (flag === 'ORANGE') {
+        badge.innerText = verdict.flag_label ? verdict.flag_label.toUpperCase() : "CONSISTENT WITH DATA";
+      } else if (flagColor === 'ORANGE' || flagCode === 'CAUTION' || flagColor === 'GRAY' || flagCode === 'NOT_ENOUGH_DATA') {
         stamp.classList.add('stamp-orange');
         badge.classList.add('badge-orange');
-        stampText.innerText = "CAUTION ADVISED";
-        badge.innerText = "CAUTION / UNLICENSED";
+        stampText.innerText = flagCode === 'NOT_ENOUGH_DATA' ? "INSUFFICIENT DATA" : "CAUTION ADVISED";
+        badge.innerText = verdict.flag_label ? verdict.flag_label.toUpperCase() : "CAUTION / UNLICENSED";
       } else {
         stamp.classList.add('stamp-red');
         badge.classList.add('badge-red');
@@ -1834,20 +1838,36 @@
       gridEl.innerHTML = "";
 
       params.forEach((p, idx) => {
+        const statusUpper = (p.status || 'INFO').toUpperCase();
         // Tally box
         const tBox = document.createElement('span');
         tBox.innerText = String(idx + 1);
-        if (p.status === 'PASS') tBox.className = 'passed';
-        else if (p.status === 'FAIL') tBox.className = 'failed';
+        if (statusUpper === 'PASS') tBox.className = 'passed';
+        else if (statusUpper === 'FAIL') tBox.className = 'failed';
+        else if (statusUpper === 'WARN') tBox.className = 'warned';
         tallyEl.appendChild(tBox);
 
         // Grid Card
+        const safeStatusClass = statusUpper.replace(/[^A-Z0-9]/g, '');
         const card = document.createElement('div');
-        card.className = `marker status-${p.status || 'INFO'}`;
+        card.className = `marker status-${safeStatusClass}`;
+        if (p.explanation) {
+          card.title = p.explanation;
+        }
         
         let iconHtml = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg>`;
-        if (p.status === 'FAIL') iconHtml = `!`;
-        else if (p.status === 'WARN') iconHtml = `?`;
+        if (statusUpper === 'FAIL') iconHtml = `!`;
+        else if (statusUpper === 'WARN') iconHtml = `?`;
+        else if (statusUpper !== 'PASS') iconHtml = `–`;
+
+        let statusSubtitle = "No anomaly detected.";
+        if (statusUpper === 'FAIL') {
+          statusSubtitle = "Serious risks detected.";
+        } else if (statusUpper === 'WARN') {
+          statusSubtitle = "Anomaly detected.";
+        } else if (statusUpper !== 'PASS') {
+          statusSubtitle = "Insufficient data.";
+        }
 
         let sourcesText = "";
         if (p.sources && p.sources.length > 0) {
@@ -1858,7 +1878,7 @@
           <span class="marker-check">${iconHtml}</span>
           <span>
             <strong>${p.name || `P${idx+1}`}</strong>
-            <small>${p.findings || 'No anomalies detected.'}</small>
+            <small>${statusSubtitle}</small>
             ${sourcesText}
           </span>
           <em>${p.status || 'INFO'}</em>
@@ -1990,15 +2010,30 @@
           respBubble.innerHTML = `⚠️ <strong>${replyText}</strong>`;
         } else {
           respBubble.className = 'chat-bubble chat-bubble-assistant';
-          // Convert simple markdown formatting to clean HTML
+          const invoked = Array.isArray(data.subagents_invoked) ? data.subagents_invoked : [];
+          let agentBadgeHtml = '';
+          if (invoked.length > 0) {
+            const labelMap = {
+              historic_price_agent: '📈 Historic Price Agent',
+              price_target_agent: '🎯 Price Target / EMA200 Agent',
+              fundamentals_agent: '📊 Fundamentals Agent',
+              explainer_agent: '💡 Simple Explainer'
+            };
+            const pills = invoked.map(a => `<span style="display:inline-block;background:#e8e2d2;color:#11221b;font:600 9.5px 'DM Mono',monospace;padding:2px 6px;border-radius:4px;margin:0 4px 4px 0;">${labelMap[a] || a}</span>`).join('');
+            agentBadgeHtml = `<div style="margin-bottom:6px;border-bottom:1px solid rgba(0,0,0,.08);padding-bottom:4px;">${pills}</div>`;
+          }
+          // Convert markdown formatting to clean HTML
           const formatted = replyText
+            .replace(/^###\s+(.*)$/gm, '<strong>$1</strong>')
+            .replace(/^##\s+(.*)$/gm, '<strong>$1</strong>')
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`([^`]+)`/g, '<code style="background:rgba(0,0,0,.07);padding:1px 4px;border-radius:3px;font-family:\'DM Mono\',monospace;font-size:11px;">$1</code>')
             .replace(/\n\n/g, '</p><p>')
             .replace(/\n\* /g, '<br />• ')
             .replace(/\n- /g, '<br />• ')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
             .replace(/\n/g, '<br />');
-          respBubble.innerHTML = `<p>${formatted}</p>`;
+          respBubble.innerHTML = `${agentBadgeHtml}<p>${formatted}</p>`;
         }
 
         messagesContainer.appendChild(respBubble);
