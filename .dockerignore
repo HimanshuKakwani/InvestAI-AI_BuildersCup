@@ -22,6 +22,7 @@ reports_out/
 
 # Markdown Docs & Architecture Analysis
 *.md
+!data/quarterly_reports/*.md
 .DS_Store
 .idea/
 .vscode/

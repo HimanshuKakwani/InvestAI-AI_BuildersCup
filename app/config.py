@@ -70,3 +70,7 @@ class Config:
     FIREBASE_CASES_COLLECTION = os.getenv("FIREBASE_CASES_COLLECTION", "investpi_cases")
     CRON_SECRET = os.getenv("CRON_SECRET", "")
 
+    # BigQuery Vector Search & RAG Configuration
+    BIGQUERY_PROJECT_ID = os.getenv("BIGQUERY_PROJECT_ID", os.getenv("GCP_PROJECT_ID", ""))
+    BIGQUERY_DATASET = os.getenv("BIGQUERY_DATASET", "financial_intelligence")
+

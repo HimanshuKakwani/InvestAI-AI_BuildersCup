@@ -56,6 +56,16 @@ CLUSTER BY ticker, quarter;
 CREATE VECTOR INDEX IF NOT EXISTS quarterly_chunks_vector_idx
 ON `{{PROJECT_ID}}.financial_intelligence.quarterly_report_chunks`(embedding)
 OPTIONS(distance_type = 'COSINE', index_type = 'IVF');
+
+-- 6. Create Structured Quarterly Reports Master Table
+CREATE TABLE IF NOT EXISTS `{{PROJECT_ID}}.financial_intelligence.quarterly_reports` (
+    ticker STRING NOT NULL,
+    quarter STRING NOT NULL,
+    company_name STRING NOT NULL,
+    report_data JSON,
+    ingested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+)
+CLUSTER BY ticker, quarter;
 """
 
 BIGQUERY_VECTOR_SEARCH_SQL = """
@@ -93,8 +103,8 @@ class BigQueryFinancialRAG:
 
     def __init__(self, project_id: Optional[str] = None, dataset_id: Optional[str] = None):
         from app.config import Config
-        self.project_id = project_id or getattr(Config, "BIGQUERY_PROJECT_ID", None) or os.getenv("BIGQUERY_PROJECT_ID")
-        self.dataset_id = dataset_id or getattr(Config, "BIGQUERY_DATASET", BBQ_DATASET_DEFAULT) if "BBQ_DATASET_DEFAULT" in locals() else BQ_DATASET_DEFAULT
+        self.project_id = project_id or getattr(Config, "BIGQUERY_PROJECT_ID", None) or os.getenv("BIGQUERY_PROJECT_ID") or os.getenv("GCP_PROJECT_ID")
+        self.dataset_id = dataset_id or getattr(Config, "BIGQUERY_DATASET", None) or os.getenv("BIGQUERY_DATASET") or BQ_DATASET_DEFAULT
         self._bq_client = None
         self._init_client()
 
@@ -114,7 +124,11 @@ class BigQueryFinancialRAG:
 
     @property
     def is_cloud_enabled(self) -> bool:
-        return self._bq_client is not None and bool(self.project_id)
+        from app.config import Config
+        # When running in Cloud (Cloud Run), strictly use BigQuery.
+        # When running in Local development, use local data/ folder.
+        cloud_active = Config.IS_CLOUD or os.getenv("FORCE_BIGQUERY_LOCAL", "0").lower() in ("1", "true", "yes")
+        return bool(cloud_active and self._bq_client is not None and self.project_id)
 
     def search_chunks(
         self,
@@ -220,6 +234,65 @@ class BigQueryFinancialRAG:
 
         chunks.sort(key=lambda x: x["distance"])
         return chunks[:top_k]
+
+    def get_quarterly_report(self, ticker: str) -> Optional[Dict[str, Any]]:
+        """
+        Retrieves full structured quarterly report (headline metrics, segments, SWOT, 5 pointers)
+        from Google Cloud BigQuery financial_intelligence.quarterly_reports table.
+        Falls back to local file if BigQuery is unavailable.
+        """
+        norm_ticker = ticker.strip().upper()
+        if not norm_ticker.endswith(".NS") and "." not in norm_ticker:
+            norm_ticker = f"{norm_ticker}.NS"
+
+        if self.is_cloud_enabled:
+            try:
+                from google.cloud import bigquery
+                query = f"""
+                SELECT report_data 
+                FROM `{self.project_id}.{self.dataset_id}.quarterly_reports` 
+                WHERE ticker = @target_ticker 
+                ORDER BY ingested_at DESC 
+                LIMIT 1
+                """
+                job_config = bigquery.QueryJobConfig(
+                    query_parameters=[
+                        bigquery.ScalarQueryParameter("target_ticker", "STRING", norm_ticker),
+                    ]
+                )
+                query_job = self._bq_client.query(query, job_config=job_config)
+                for row in query_job:
+                    raw = row.report_data
+                    if isinstance(raw, str):
+                        data = json.loads(raw)
+                    elif isinstance(raw, dict):
+                        data = raw
+                    else:
+                        continue
+                    data["source_engine"] = "Google BigQuery (financial_intelligence.quarterly_reports)"
+                    logger.info(f"Retrieved quarterly report for {norm_ticker} from BigQuery.")
+                    return data
+            except Exception as e:
+                logger.warning(f"BigQuery fetch of quarterly_reports for {norm_ticker} failed: {e}. Falling back to local file.")
+
+        return self._get_quarterly_report_local(norm_ticker)
+
+    def _get_quarterly_report_local(self, ticker: str) -> Optional[Dict[str, Any]]:
+        from app.config import DATA_DIR
+        q_dir = DATA_DIR / "quarterly_reports"
+        matches = list(q_dir.glob(f"{ticker}*.json"))
+        if not matches:
+            base = ticker.replace(".NS", "")
+            matches = list(q_dir.glob(f"{base}*.json"))
+        if matches:
+            try:
+                with open(matches[0], "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    data["source_engine"] = "Local Filing Document Parser"
+                    return data
+            except Exception:
+                pass
+        return None
 
     @classmethod
     def export_seed_data_for_bigquery(cls, output_jsonl: Optional[Path] = None) -> Path:

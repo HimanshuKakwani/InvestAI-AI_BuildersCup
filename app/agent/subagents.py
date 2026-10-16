@@ -785,20 +785,13 @@ class QuarterlyReportSummarizerSubAgent:
                 "latency_ms": round((time.time() - start_ts) * 1000, 2)
             }
 
+        rag_engine = BigQueryFinancialRAG()
+        q_data = rag_engine.get_quarterly_report(norm_ticker) or {}
+
         file_stem = self.SUPPORTED_DEMO_TICKERS[norm_ticker]
         q_dir = DATA_DIR / "quarterly_reports"
-        json_path = q_dir / f"{file_stem}.json"
         md_doc_path = q_dir / f"{file_stem}.md"
-
-        q_data: Dict[str, Any] = {}
         raw_doc_text = ""
-        if json_path.exists():
-            try:
-                with open(json_path, "r", encoding="utf-8") as f:
-                    q_data = json.load(f)
-            except Exception as e:
-                logger.warning(f"Failed to read quarterly JSON {json_path}: {e}")
-
         if md_doc_path.exists():
             try:
                 with open(md_doc_path, "r", encoding="utf-8") as f:
@@ -814,7 +807,7 @@ class QuarterlyReportSummarizerSubAgent:
         segments = q_data.get("segment_performance", [])
         pointers = list(q_data.get("simple_pointers", []))
         swot = q_data.get("swot", {"strengths": [], "weaknesses": [], "opportunities": [], "threats": []})
-        analysis_engine_used = "Deterministic Filing Document Parser (Primary Fast-Path)"
+        analysis_engine_used = q_data.get("source_engine", "Google BigQuery Financial Intelligence")
 
         # Optional live Gemini document reading & enhancement over the raw quarterly filing (.md)
         if analyze_with_gemini and raw_doc_text and getattr(Config, "GEMINI_API_KEY", None) and not getattr(Config, "DEMO_MODE", False):
@@ -879,7 +872,6 @@ class QuarterlyReportSummarizerSubAgent:
         )
 
         # Query BigQuery Financial RAG for semantic verification chunks
-        rag_engine = BigQueryFinancialRAG()
         rag_chunks = rag_engine.search_chunks(norm_ticker, query_text="revenue EBITDA net profit PAT growth segments and SWOT analysis", top_k=3)
         rag_source_tag = "Google BigQuery Vector Search (text-embedding-004)" if rag_engine.is_cloud_enabled else "BigQuery Vector RAG Store (text-embedding-004)"
 
