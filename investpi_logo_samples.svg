@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgOliveDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3A4826" />
+      <stop offset="50%" stop-color="#2D3A1D" />
+      <stop offset="100%" stop-color="#1F2813" />
+    </linearGradient>
+
+    <linearGradient id="bgOliveSatin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4B5C32" />
+      <stop offset="100%" stop-color="#263118" />
+    </linearGradient>
+
+    <radialGradient id="bgOliveRadial" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#46572E" />
+      <stop offset="70%" stop-color="#293519" />
+      <stop offset="100%" stop-color="#18200E" />
+    </radialGradient>
+
+    <!-- Metallic Gold Gradients -->
+    <linearGradient id="goldGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFEAA5" />
+      <stop offset="25%" stop-color="#E7C269" />
+      <stop offset="50%" stop-color="#FDF1B8" />
+      <stop offset="75%" stop-color="#C59637" />
+      <stop offset="100%" stop-color="#9E6D18" />
+    </linearGradient>
+
+    <linearGradient id="goldGradient2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D4AF37" />
+      <stop offset="35%" stop-color="#FFF3C4" />
+      <stop offset="70%" stop-color="#C8972E" />
+      <stop offset="100%" stop-color="#875E14" />
+    </linearGradient>
+
+    <linearGradient id="goldRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE89A" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#C99B36" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#8F6317" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <!-- Glass Lens Reflections -->
+    <linearGradient id="lensReflect" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55" />
+      <stop offset="40%" stop-color="#CBE5D8" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#1A2814" stop-opacity="0.4" />
+    </linearGradient>
+
+    <!-- Shadow Filters -->
+    <filter id="goldDropShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1600" height="700" fill="#12160E" />
+
+  <!-- Showcase Header -->
+  <text x="800" y="65" text-anchor="middle" font-family="'Montserrat', 'Cinzel', 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#E8C97A" letter-spacing="6">INVEST PI • BRAND IDENTITY SAMPLES</text>
+  <text x="800" y="95" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" fill="#8E9C7E" letter-spacing="2">OLIVE GREEN PALETTE WITH METALLIC GOLD TYPOGRAPHY &amp; MAGNIFYING GLASS "I"</text>
+
+  <!-- ========================================== -->
+  <!-- SAMPLE 1: THE PRESTIGE CIRCULAR CREST      -->
+  <!-- ========================================== -->
+  <g transform="translate(130, 140)">
+    <!-- Label -->
+    <text x="180" y="470" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="600" fill="#DFBF6A" letter-spacing="2">OPTION 1 : CIRCULAR EMBLEM</text>
+    <text x="180" y="495" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#7C8B6B">Prestige Asset Management &amp; Due Diligence</text>
+
+    <!-- Outer Glow / Rim -->
+    <circle cx="180" cy="200" r="172" fill="none" stroke="url(#goldRim)" stroke-width="2.5" />
+    <circle cx="180" cy="200" r="162" fill="url(#bgOliveRadial)" stroke="url(#goldGradient1)" stroke-width="4" filter="url(#goldDropShadow)" />
+    
+    <!-- Concentric Inner Accent Ring -->
+    <circle cx="180" cy="200" r="148" fill="none" stroke="#D7A942" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+
+    <!-- Arch Text: INVEST -->
+    <path id="investArch" d="M 105 125 A 110 110 0 0 1 255 125" fill="none"/>
+    <text font-family="'Montserrat', 'Cinzel', sans-serif" font-size="16" font-weight="700" fill="url(#goldGradient1)" letter-spacing="8">
+      <textPath href="#investArch" startOffset="50%" text-anchor="middle">INVEST</textPath>
+    </text>
+
+    <!-- Main Monogram: PI in Gold -->
+    <!-- Letter P -->
+    <g filter="url(#goldDropShadow)">
+      <!-- P Stem -->
+      <path d="M 108 160 L 128 160 L 128 260 L 108 260 Z" fill="url(#goldGradient1)" />
+      <!-- P Loop -->
+      <path d="M 126 160 L 165 160 C 188 160 200 172 200 195 C 200 218 188 230 165 230 L 126 230 Z M 128 178 L 160 178 C 174 178 180 184 180 195 C 180 206 174 212 160 212 L 128 212 Z" fill="url(#goldGradient1)" />
+      <!-- P Top & Bottom Serif Details -->
+      <path d="M 102 160 L 134 160 L 128 167 L 108 167 Z" fill="#FFEAA5"/>
+      <path d="M 102 260 L 134 260 L 128 253 L 108 253 Z" fill="#FFEAA5"/>
+
+      <!-- Letter I (Magnifying Glass) -->
+      <!-- Glass Rim Outer -->
+      <circle cx="236" cy="188" r="32" fill="none" stroke="url(#goldGradient1)" stroke-width="9" />
+      <!-- Glass Lens Fill -->
+      <circle cx="236" cy="188" r="27" fill="url(#lensReflect)" />
+      <!-- Glass Glare / Arc -->
+      <path d="M 220 172 A 20 20 0 0 1 250 172" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+      <!-- Reticle / Target Accent inside lens -->
+      <circle cx="236" cy="188" r="4" fill="#FFEAA5" opacity="0.9"/>
+      <line x1="236" y1="178" x2="236" y2="183" stroke="#FFEAA5" stroke-width="1.5" opacity="0.8"/>
+      <line x1="236" y1="193" x2="236" y2="198" stroke="#FFEAA5" stroke-width="1.5" opacity="0.8"/>
+      <line x1="226" y1="188" x2="231" y2="188" stroke="#FFEAA5" stroke-width="1.5" opacity="0.8"/>
+      <line x1="241" y1="188" x2="246" y2="188" stroke="#FFEAA5" stroke-width="1.5" opacity="0.8"/>
+
+      <!-- Magnifying Glass Handle forming the stem of I -->
+      <path d="M 230 220 L 242 220 L 242 260 L 230 260 Z" fill="url(#goldGradient1)" />
+      <!-- Handle Base Base Serif -->
+      <path d="M 222 260 L 250 260 L 244 253 L 228 253 Z" fill="#FFEAA5"/>
+      <!-- Gold Connector Ring -->
+      <rect x="227" y="217" width="18" height="5" rx="1.5" fill="url(#goldGradient2)"/>
+    </g>
+
+    <!-- Subtitle Arch: INTELLIGENCE -->
+    <path id="piSubArch" d="M 100 295 A 110 110 0 0 0 260 295" fill="none"/>
+    <text font-family="'Montserrat', 'Cinzel', sans-serif" font-size="11" font-weight="600" fill="#DFC275" letter-spacing="4">
+      <textPath href="#piSubArch" startOffset="50%" text-anchor="middle">FINANCIAL AGENT</textPath>
+    </text>
+  </g>
+
+
+  <!-- ========================================== -->
+  <!-- SAMPLE 2: MODERN LUXURY SQUIRCLE           -->
+  <!-- ========================================== -->
+  <g transform="translate(620, 140)">
+    <!-- Label -->
+    <text x="180" y="470" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="600" fill="#DFBF6A" letter-spacing="2">OPTION 2 : MODERN SQUIRCLE</text>
+    <text x="180" y="495" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#7C8B6B">FinTech App Icon &amp; Corporate Identity</text>
+
+    <!-- Rounded Rect (Squircle) -->
+    <rect x="15" y="35" width="330" height="330" rx="64" fill="url(#bgOliveDark)" stroke="url(#goldRim)" stroke-width="3" filter="url(#goldDropShadow)"/>
+    
+    <!-- Subtle Inner Border -->
+    <rect x="25" y="45" width="310" height="310" rx="54" fill="none" stroke="#688048" stroke-width="1.2" opacity="0.3"/>
+
+    <!-- Subtle Geometric Chart / Insight Glow in BG -->
+    <path d="M 50 300 Q 130 270 180 230 T 310 140" fill="none" stroke="#D4AF37" stroke-width="1" stroke-dasharray="4,6" opacity="0.25"/>
+
+    <!-- Top Tagline -->
+    <text x="180" y="105" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="15" font-weight="800" fill="url(#goldGradient1)" letter-spacing="9">INVEST</text>
+
+    <!-- PI Monogram -->
+    <g filter="url(#goldDropShadow)">
+      <!-- Geometric Modern Bold "P" -->
+      <path d="M 95 145 L 140 145 C 168 145 186 160 186 188 C 186 216 168 231 140 231 L 119 231 L 119 270 L 95 270 Z M 119 166 L 138 166 C 153 166 162 174 162 188 C 162 202 153 210 138 210 L 119 210 Z" fill="url(#goldGradient1)" />
+
+      <!-- Magnifying Glass "I" seamlessly paired -->
+      <!-- Lens Body -->
+      <circle cx="230" cy="180" r="35" fill="none" stroke="url(#goldGradient1)" stroke-width="10" />
+      <circle cx="230" cy="180" r="30" fill="url(#lensReflect)" />
+      
+      <!-- Lens Reflections & Analysis Beam -->
+      <path d="M 212 165 A 22 22 0 0 1 248 165" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
+      <path d="M 212 195 A 22 22 0 0 0 228 205" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+
+      <!-- Magnifying Glass Handle (Vertical Stem of I) -->
+      <path d="M 223 215 L 237 215 L 237 270 L 223 270 Z" fill="url(#goldGradient1)" />
+      
+      <!-- Modern Diagonal Angle Slice accent on the handle base -->
+      <path d="M 216 270 L 244 270 L 237 263 L 223 263 Z" fill="#FFEAA5" />
+    </g>
+
+    <!-- Subtle divider line and sub-brand -->
+    <line x1="120" y1="298" x2="240" y2="298" stroke="url(#goldGradient1)" stroke-width="1.5" opacity="0.6"/>
+    <text x="180" y="322" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#EAD48F" letter-spacing="3.5">INTELLIGENCE PLATFORM</text>
+  </g>
+
+
+  <!-- ========================================== -->
+  <!-- SAMPLE 3: SLEEK MINIMALIST ROUNDED SHIELD  -->
+  <!-- ========================================== -->
+  <g transform="translate(1110, 140)">
+    <!-- Label -->
+    <text x="180" y="470" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="600" fill="#DFBF6A" letter-spacing="2">OPTION 3 : MINIMALIST CREST</text>
+    <text x="180" y="495" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#7C8B6B">Sophisticated Private Investigation / Wealth</text>
+
+    <!-- Rounded Diamond / Shield Background -->
+    <rect x="25" y="45" width="310" height="310" rx="75" transform="rotate(45 180 200)" fill="url(#bgOliveSatin)" stroke="url(#goldRim)" stroke-width="3.5" filter="url(#goldDropShadow)"/>
+    
+    <!-- Inner Accent -->
+    <rect x="37" y="57" width="286" height="286" rx="65" transform="rotate(45 180 200)" fill="none" stroke="#DFC275" stroke-width="1" opacity="0.4"/>
+
+    <!-- Central Graphics -->
+    <g filter="url(#goldDropShadow)">
+      <!-- Word "INVEST" Arch or Top banner -->
+      <text x="180" y="132" text-anchor="middle" font-family="'Montserrat', 'Cinzel', sans-serif" font-size="14" font-weight="700" fill="url(#goldGradient2)" letter-spacing="7">INVEST</text>
+      
+      <!-- Monogram PI -->
+      <!-- P with sleek high-fashion cuts -->
+      <path d="M 112 165 L 152 165 C 176 165 190 178 190 200 C 190 222 176 235 152 235 L 132 235 L 132 268 L 112 268 Z M 132 182 L 148 182 C 163 182 170 190 170 200 C 170 210 163 218 148 218 L 132 218 Z" fill="url(#goldGradient2)" />
+
+      <!-- Stylized Magnifying Glass "I" with angled discovery stance -->
+      <g transform="translate(228, 200)">
+        <!-- Outer Golden Bezel -->
+        <circle cx="0" cy="-12" r="28" fill="none" stroke="url(#goldGradient2)" stroke-width="8" />
+        <!-- Inner Lens -->
+        <circle cx="0" cy="-12" r="24" fill="url(#lensReflect)" />
+        <ellipse cx="-7" cy="-20" rx="9" ry="4" transform="rotate(-30 -7 -20)" fill="#FFFFFF" opacity="0.7"/>
+        
+        <!-- Crosshairs for Investigative Precision -->
+        <line x1="-12" y1="-12" x2="-4" y2="-12" stroke="#DFC275" stroke-width="1.5" />
+        <line x1="4" y1="-12" x2="12" y2="-12" stroke="#DFC275" stroke-width="1.5" />
+        <line x1="0" y1="-24" x2="0" y2="-16" stroke="#DFC275" stroke-width="1.5" />
+        <line x1="0" y1="-8" x2="0" y2="0" stroke="#DFC275" stroke-width="1.5" />
+
+        <!-- Vertical Handle forming the stem of I -->
+        <path d="M -6 16 L 6 16 L 6 68 L -6 68 Z" fill="url(#goldGradient2)" />
+        <rect x="-9" y="16" width="18" height="4" rx="1" fill="#FFEAA5" />
+        <circle cx="0" cy="68" r="6" fill="url(#goldGradient1)"/>
+      </g>
+    </g>
+
+    <!-- Subtitle -->
+    <text x="180" y="300" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="11" font-weight="600" fill="#D5BE7C" letter-spacing="3.5">EQUITY RESEARCH</text>
+  </g>
+
+  <!-- Bottom Brand Standards / Details Bar -->
+  <g transform="translate(250, 600)">
+    <rect x="0" y="0" width="1100" height="60" rx="12" fill="#181F13" stroke="#2F3E1F" stroke-width="1.5"/>
+    <text x="40" y="35" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="#DFC275">PALETTE:</text>
+    <circle cx="120" cy="30" r="12" fill="#2E3A1D" stroke="#FFEAA5" stroke-width="1"/>
+    <text x="140" y="35" font-family="'Segoe UI', sans-serif" font-size="12" fill="#99A887">Deep Olive (#2E3A1D)</text>
+    
+    <circle cx="310" cy="30" r="12" fill="#4B5C32" stroke="#FFEAA5" stroke-width="1"/>
+    <text x="330" y="35" font-family="'Segoe UI', sans-serif" font-size="12" fill="#99A887">Moss Olive (#4B5C32)</text>
+    
+    <circle cx="500" cy="30" r="12" fill="#D4AF37" stroke="#FFFFFF" stroke-width="1"/>
+    <text x="520" y="35" font-family="'Segoe UI', sans-serif" font-size="12" fill="#99A887">Metallic Gold (#D4AF37)</text>
+
+    <text x="730" y="35" font-family="'Segoe UI', sans-serif" font-size="12" fill="#C2D1B2">✨ Concept: <tspan fill="#FFE599">"PI" (Private Investigator + Principal / Portfolio Intelligence)</tspan></text>
+  </g>
+</svg>

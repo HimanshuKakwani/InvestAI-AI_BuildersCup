@@ -1,0 +1,82 @@
+{
+  "ticker": "JINDALSAW.NS",
+  "name": "Jindal Saw Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Basic Materials",
+  "trailing_eps": 8.59,
+  "forward_eps": 23.3,
+  "market_cap": 192274644992,
+  "current_price": 301.55,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 170929070000.0,
+      "net_income": 6439469000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 200922097000.0,
+      "net_income": 16770326000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 200396241000.0,
+      "net_income": 17383664000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 172763777000.0,
+      "net_income": 9733523000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 50465900000.0,
+      "net_income": 2912800000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 40846800000.0,
+      "net_income": 4240400000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 49434100000.0,
+      "net_income": 2579900000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 46334800000.0,
+      "net_income": 1394300000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 44523100000.0,
+      "net_income": 1041700000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 4.59,
+    "median": 22.85,
+    "max": 36.47,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 360.0,
+    "target_high": 418.0,
+    "target_low": 302.0,
+    "num_analysts": 2,
+    "recommendation": "strong_buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 63.55,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-17"
+}

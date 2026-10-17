@@ -1,0 +1,87 @@
+{
+  "ticker": "TATAELXSI.NS",
+  "name": "Tata Elxsi Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Technology",
+  "trailing_eps": 107.57,
+  "forward_eps": 142.68564,
+  "market_cap": 239859548160,
+  "current_price": 3850.1,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 31447225000.0,
+      "net_income": 7551932000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 35521457000.0,
+      "net_income": 7922379000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 37290483000.0,
+      "net_income": 7849368000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 37574237000.0,
+      "net_income": 6284303000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 9083356000.0,
+      "net_income": 1724185000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 8920959000.0,
+      "net_income": 1443677000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 9534743000.0,
+      "net_income": 1088922000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 9937512000.0,
+      "net_income": 2203513000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 10211075000.0,
+      "net_income": 1705987000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 34.47,
+    "median": 59.48,
+    "max": 77.28,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 3663.0625,
+    "target_high": 5135.0,
+    "target_low": 2840.0,
+    "num_analysts": 16,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 44.85,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-17"
+}

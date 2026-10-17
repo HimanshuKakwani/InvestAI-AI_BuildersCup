@@ -4,10 +4,10 @@
   "market": "IN",
   "currency": "INR",
   "sector": "Energy",
-  "trailing_eps": 62.04,
-  "forward_eps": 64.832,
-  "market_cap": 3685645287424,
-  "current_price": 2722.6,
+  "trailing_eps": 62.05,
+  "forward_eps": 59.925,
+  "market_cap": 3644221292544,
+  "current_price": 2692.0,
   "annual": [
     {
       "period_end": "2023-03-31",
@@ -64,14 +64,14 @@
   ],
   "pe_band_5y": {
     "min": 27.3,
-    "median": 39.91,
-    "max": 57.72,
+    "median": 39.92,
+    "max": 57.7,
     "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
   "analyst": {
-    "target_mean": 3773.0,
+    "target_mean": 3684.0,
     "target_high": 3880.0,
-    "target_low": 3638.0,
+    "target_low": 3282.0,
     "num_analysts": 4,
     "recommendation": "strong_buy"
   },
@@ -83,5 +83,5 @@
     }
   ],
   "source": "Yahoo Finance (yfinance live)",
-  "as_of": "2026-10-14"
+  "as_of": "2026-10-17"
 }

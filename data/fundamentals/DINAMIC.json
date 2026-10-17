@@ -1,0 +1,30 @@
+{
+  "ticker": "DINAMIC",
+  "name": "DINAMIC",
+  "market": "GLOBAL",
+  "currency": "INR",
+  "sector": "General",
+  "trailing_eps": null,
+  "forward_eps": null,
+  "market_cap": null,
+  "current_price": null,
+  "annual": [],
+  "quarterly": [],
+  "pe_band_5y": null,
+  "analyst": {
+    "target_mean": null,
+    "target_high": null,
+    "target_low": null,
+    "num_analysts": 0,
+    "recommendation": "N/A"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 50.0,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-17"
+}

@@ -4,10 +4,10 @@
   "market": "IN",
   "currency": "INR",
   "sector": "Consumer Cyclical",
-  "trailing_eps": 33.98,
-  "forward_eps": 50.44158,
-  "market_cap": 1584233185280,
-  "current_price": 2971.0,
+  "trailing_eps": 33.92,
+  "forward_eps": 50.40478,
+  "market_cap": 1577674342400,
+  "current_price": 2958.7,
   "annual": [
     {
       "period_end": "2022-03-31",
@@ -68,13 +68,13 @@
     }
   ],
   "pe_band_5y": {
-    "min": 31.07,
-    "median": 81.9,
-    "max": 205.54,
+    "min": 31.12,
+    "median": 82.09,
+    "max": 205.9,
     "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
   "analyst": {
-    "target_mean": 3391.4321,
+    "target_mean": 3377.5432,
     "target_high": 4455.0,
     "target_low": 2950.0,
     "num_analysts": 27,
@@ -88,5 +88,5 @@
     }
   ],
   "source": "Yahoo Finance (yfinance live)",
-  "as_of": "2026-10-14"
+  "as_of": "2026-10-17"
 }

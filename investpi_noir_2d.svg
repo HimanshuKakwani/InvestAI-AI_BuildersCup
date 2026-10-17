@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Sharp Venetian Blind Shadow Slats Clip Path -->
+    <clipPath id="squircleClip">
+      <rect x="24" y="24" width="464" height="464" rx="96" />
+    </clipPath>
+    
+    <!-- Mask for high-contrast noir lighting cuts -->
+    <linearGradient id="noirContrast" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+
+    <linearGradient id="amberAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas Base -->
+  <rect width="512" height="512" fill="#08090B" />
+
+  <!-- 2D Squircle Container -->
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="#101216" stroke="#FFFFFF" stroke-width="6" />
+  <rect x="36" y="36" width="440" height="440" rx="84" fill="none" stroke="#252A33" stroke-width="2" />
+
+  <!-- Group with Squircle Clip -->
+  <g clip-path="url(#squircleClip)">
+    
+    <!-- Sharp 2D Diagonal Venetian Blind Slats (True Hard-Edged Film Noir Shadow) -->
+    <g fill="#08090C" opacity="0.45">
+      <polygon points="-50,60 560,-60 560,-20 -50,100" />
+      <polygon points="-50,140 560,20 560,60 -50,180" />
+      <polygon points="-50,220 560,100 560,140 -50,260" />
+      <polygon points="-50,300 560,180 560,220 -50,340" />
+      <polygon points="-50,380 560,260 560,300 -50,420" />
+      <polygon points="-50,460 560,340 560,380 -50,500" />
+      <polygon points="-50,540 560,420 560,460 -50,580" />
+    </g>
+
+    <!-- Hard-Edged Noir Streetlight Beam (2D Flat Graphic) -->
+    <polygon points="360,20 480,20 280,490 160,490" fill="#FFFFFF" opacity="0.04" />
+
+    <!-- ============================================== -->
+    <!-- 2D MONOGRAM "PI" IN GRAPHIC NOIR STYLE         -->
+    <!-- ============================================== -->
+    <g transform="translate(10, 16)">
+      
+      <!-- 2D Detective Fedora Hat Resting Atop "P" -->
+      <g transform="translate(142, 114) rotate(-12)">
+        <!-- Fedora Brim -->
+        <path d="M -16 46 Q 55 28 132 44 Q 55 58 -16 46 Z" fill="#FFFFFF" />
+        <!-- Fedora Crown (Stark silhouette with crease) -->
+        <path d="M 12 43 C 10 22 24 5 50 3 C 65 2 78 8 86 13 C 98 20 102 30 98 43 Z" fill="#FFFFFF" />
+        <!-- Crown Crease in Negative Space (Black) -->
+        <path d="M 42 7 Q 56 20 72 11" fill="none" stroke="#101216" stroke-width="4.5" stroke-linecap="round" />
+        <!-- Hat Ribbon Band (Noir Gold/Amber Accent) -->
+        <path d="M 12 37 Q 55 33 98 37 L 98 43 Q 55 39 12 43 Z" fill="url(#amberAccent)" />
+      </g>
+
+      <!-- 2D LETTER "P" -->
+      <!-- Clean, Bold, Geometric Silhouette -->
+      <path d="M 130 175 L 180 175 C 228 175 258 202 258 245 C 258 288 228 315 180 315 L 165 315 L 165 385 L 130 385 Z M 165 208 L 176 208 C 205 208 222 221 222 245 C 222 269 205 282 176 282 L 165 282 Z" 
+            fill="#FFFFFF" />
+
+      <!-- Minimalist Trenchcoat Collar Flap Cut in Negative Space -->
+      <polygon points="130,225 152,245 130,265" fill="#101216" />
+
+      <!-- 2D LETTER "I" (MINIMALIST GRAPHIC NOIR MAGNIFYING GLASS) -->
+      <g transform="translate(335, 240)">
+        
+        <!-- Outer Magnifying Glass Bezel (Flat 2D Heavy Line) -->
+        <circle cx="0" cy="0" r="52" fill="none" stroke="#FFFFFF" stroke-width="12" />
+
+        <!-- Lens Negative Space Fill -->
+        <circle cx="0" cy="0" r="46" fill="#101216" />
+
+        <!-- Minimalist High-Contrast Noir Reflection Slices -->
+        <path d="M -32 -26 A 40 40 0 0 1 24 -26" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" />
+        <path d="M -30 20 A 40 40 0 0 0 -12 32" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" />
+
+        <!-- Sharp 2D Noir Crosshair Reticle -->
+        <circle cx="0" cy="0" r="8" fill="none" stroke="url(#amberAccent)" stroke-width="2.5" />
+        <circle cx="0" cy="0" r="2.5" fill="url(#amberAccent)" />
+        <line x1="0" y1="-26" x2="0" y2="-12" stroke="url(#amberAccent)" stroke-width="2" />
+        <line x1="0" y1="12" x2="0" y2="26" stroke="url(#amberAccent)" stroke-width="2" />
+        <line x1="-26" y1="0" x2="-12" y2="0" stroke="url(#amberAccent)" stroke-width="2" />
+        <line x1="12" y1="0" x2="26" y2="0" stroke="url(#amberAccent)" stroke-width="2" />
+
+        <!-- Connector Ferrule -->
+        <rect x="-10" y="52" width="20" height="8" rx="2" fill="#FFFFFF" />
+
+        <!-- Upright 2D Handle (Forms the Stem of "I") -->
+        <path d="M -7 60 L 7 60 L 7 140 L -7 140 Z" fill="#FFFFFF" />
+        
+        <!-- Graphic Grip Notches / Horizontal Slits -->
+        <line x1="-5" y1="78" x2="5" y2="78" stroke="#101216" stroke-width="2" />
+        <line x1="-5" y1="92" x2="5" y2="92" stroke="#101216" stroke-width="2" />
+        <line x1="-5" y1="106" x2="5" y2="106" stroke="#101216" stroke-width="2" />
+        <line x1="-5" y1="120" x2="5" y2="120" stroke="#101216" stroke-width="2" />
+
+        <!-- Pommel Base -->
+        <rect x="-12" y="140" width="24" height="6" rx="2" fill="url(#amberAccent)" />
+        <circle cx="0" cy="149" r="4" fill="#FFFFFF" />
+      </g>
+
+    </g>
+
+    <!-- Diagonal Venetian Blind Shadows Re-cast Over the Logo for Integrated Cut Effect -->
+    <g fill="#08090C" opacity="0.35" style="mix-blend-mode: multiply;">
+      <polygon points="-50,140 560,20 560,60 -50,180" />
+      <polygon points="-50,220 560,100 560,140 -50,260" />
+      <polygon points="-50,300 560,180 560,220 -50,340" />
+      <polygon points="-50,380 560,260 560,300 -50,420" />
+    </g>
+
+    <!-- Stealth Corner Marks -->
+    <g stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.5">
+      <path d="M 60 85 L 60 65 L 85 65" />
+      <path d="M 452 85 L 452 65 L 427 65" />
+      <path d="M 60 427 L 60 447 L 85 447" />
+      <path d="M 452 427 L 452 447 L 427 447" />
+    </g>
+
+  </g>
+</svg>

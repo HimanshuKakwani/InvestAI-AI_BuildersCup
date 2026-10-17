@@ -1,0 +1,895 @@
+{
+  "video_id": "2bksc51nZLs",
+  "data": {
+    "report_id": "rep_fbdb51b9",
+    "region": "IN",
+    "market_name": "India",
+    "flag_emoji": "🇮🇳",
+    "regulator": "SEBI",
+    "reporting_url": "https://cybercrime.gov.in",
+    "reporting_name": "National Cybercrime Portal / 1930",
+    "claim": {
+      "is_financial_advice": true,
+      "ticker": "TRANSFORMERS",
+      "company_name": "TRANSFORMERS AND RECTIFIERS",
+      "direction": "BUY",
+      "target_price": 380.0,
+      "claimed_percentage_move": 8.7,
+      "time_horizon_days": 7,
+      "exact_quote": "इसे आप बाय कर सकते हैं 349.60 पर स्टॉपलॉस 330 लगा सकते हैं एंड टारगेट 380.",
+      "quote_timestamp": "00:14",
+      "creator_claimed_name": "5paisa",
+      "guaranteed_return_language_detected": false,
+      "manipulative_phrases": [
+        {
+          "phrase": "इस स्टॉक ने एक्सेप्शनली हैवी वॉल्यूम के साथ शार्प गैप अप ब्रेकआउट दिया है",
+          "category": "High-risk trading terminology",
+          "timestamp": "00:20"
+        }
+      ],
+      "transcript": "ट्रांसफॉर्मर्स एंड रेक्टिफायर्स को ₹349.60 पर खरीदें, ₹330 का स्टॉपलॉस और ₹380 का टारगेट रखें।"
+    },
+    "resolved_stock": {
+      "ticker": "TRANSFORMERS",
+      "name": "TRANSFORMERS AND RECTIFIERS"
+    },
+    "current_price": null,
+    "verdict": {
+      "flag": "CONSISTENT",
+      "flag_color": "GREEN",
+      "flag_label": "Consistent with Public Data",
+      "flag_badge": "🟢",
+      "score": 8.3,
+      "hard_gate_triggered": false,
+      "hard_gate_reasons": [],
+      "evaluated_count": 5,
+      "positive_ratio": 1.0
+    },
+    "parameters": [
+      {
+        "id": "price_move_realism",
+        "name": "Price-Move Realism",
+        "score": null,
+        "status": "N/A",
+        "explanation": "Insufficient price history or missing time horizon to calculate historical distribution.",
+        "hard_gate": false
+      },
+      {
+        "id": "valuation_range",
+        "name": "Valuation-Implied Envelope",
+        "score": null,
+        "status": "N/A",
+        "explanation": "Fundamental P/E band or target price not available.",
+        "hard_gate": false
+      },
+      {
+        "id": "earnings_trajectory",
+        "name": "Earnings Trajectory",
+        "score": null,
+        "status": "N/A",
+        "explanation": "Insufficient quarters/years to compute revenue or net income trajectory.",
+        "hard_gate": false
+      },
+      {
+        "id": "analyst_consensus",
+        "name": "Analyst Consensus Alignment",
+        "score": null,
+        "status": "N/A",
+        "explanation": "Missing price target or fundamental consensus data.",
+        "hard_gate": false
+      },
+      {
+        "id": "promoter_holding",
+        "name": "Promoter & Insider Stability",
+        "score": 7.0,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "Pledged shares negligible or low",
+        "facts": {
+          "promoter_pct": 50.0,
+          "pledged_pct": 0.0
+        }
+      },
+      {
+        "id": "regulatory_orders",
+        "name": "Legal & Regulatory Sanctions",
+        "score": 8.5,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+        "facts": {
+          "has_order": false
+        }
+      },
+      {
+        "id": "surveillance_volume",
+        "name": "Surveillance & Volume Anomalies",
+        "score": 7.5,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "No abnormal surveillance or operator volume spikes detected.",
+        "facts": {
+          "surveillance_flagged": false
+        }
+      },
+      {
+        "id": "licensing_check",
+        "name": "SEBI Registration",
+        "score": 9.5,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "Source verified as registered entity with SEBI (5paisa Capital Limited, INH000025188).",
+        "facts": {
+          "is_registered": true,
+          "on_alert_list": false,
+          "reg_number": "INH000025188"
+        }
+      },
+      {
+        "id": "hype_language",
+        "name": "Manipulative & Hype Language",
+        "score": 9.0,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+        "facts": {
+          "match_count": 0,
+          "matches": []
+        }
+      }
+    ],
+    "reports": [
+      {
+        "report_id": "rep_fbdb51b9",
+        "region": "IN",
+        "market_name": "India",
+        "flag_emoji": "🇮🇳",
+        "regulator": "SEBI",
+        "reporting_url": "https://cybercrime.gov.in",
+        "reporting_name": "National Cybercrime Portal / 1930",
+        "claim": {
+          "is_financial_advice": true,
+          "ticker": "TRANSFORMERS",
+          "company_name": "TRANSFORMERS AND RECTIFIERS",
+          "direction": "BUY",
+          "target_price": 380.0,
+          "claimed_percentage_move": 8.7,
+          "time_horizon_days": 7,
+          "exact_quote": "इसे आप बाय कर सकते हैं 349.60 पर स्टॉपलॉस 330 लगा सकते हैं एंड टारगेट 380.",
+          "quote_timestamp": "00:14",
+          "creator_claimed_name": "5paisa",
+          "guaranteed_return_language_detected": false,
+          "manipulative_phrases": [
+            {
+              "phrase": "इस स्टॉक ने एक्सेप्शनली हैवी वॉल्यूम के साथ शार्प गैप अप ब्रेकआउट दिया है",
+              "category": "High-risk trading terminology",
+              "timestamp": "00:20"
+            }
+          ],
+          "transcript": "ट्रांसफॉर्मर्स एंड रेक्टिफायर्स को ₹349.60 पर खरीदें, ₹330 का स्टॉपलॉस और ₹380 का टारगेट रखें।"
+        },
+        "resolved_stock": {
+          "ticker": "TRANSFORMERS",
+          "name": "TRANSFORMERS AND RECTIFIERS"
+        },
+        "current_price": null,
+        "verdict": {
+          "flag": "CONSISTENT",
+          "flag_color": "GREEN",
+          "flag_label": "Consistent with Public Data",
+          "flag_badge": "🟢",
+          "score": 8.3,
+          "hard_gate_triggered": false,
+          "hard_gate_reasons": [],
+          "evaluated_count": 5,
+          "positive_ratio": 1.0
+        },
+        "parameters": [
+          {
+            "id": "price_move_realism",
+            "name": "Price-Move Realism",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Insufficient price history or missing time horizon to calculate historical distribution.",
+            "hard_gate": false
+          },
+          {
+            "id": "valuation_range",
+            "name": "Valuation-Implied Envelope",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Fundamental P/E band or target price not available.",
+            "hard_gate": false
+          },
+          {
+            "id": "earnings_trajectory",
+            "name": "Earnings Trajectory",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Insufficient quarters/years to compute revenue or net income trajectory.",
+            "hard_gate": false
+          },
+          {
+            "id": "analyst_consensus",
+            "name": "Analyst Consensus Alignment",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Missing price target or fundamental consensus data.",
+            "hard_gate": false
+          },
+          {
+            "id": "promoter_holding",
+            "name": "Promoter & Insider Stability",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Pledged shares negligible or low",
+            "facts": {
+              "promoter_pct": 50.0,
+              "pledged_pct": 0.0
+            }
+          },
+          {
+            "id": "regulatory_orders",
+            "name": "Legal & Regulatory Sanctions",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+            "facts": {
+              "has_order": false
+            }
+          },
+          {
+            "id": "surveillance_volume",
+            "name": "Surveillance & Volume Anomalies",
+            "score": 7.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No abnormal surveillance or operator volume spikes detected.",
+            "facts": {
+              "surveillance_flagged": false
+            }
+          },
+          {
+            "id": "licensing_check",
+            "name": "SEBI Registration",
+            "score": 9.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Source verified as registered entity with SEBI (5paisa Capital Limited, INH000025188).",
+            "facts": {
+              "is_registered": true,
+              "on_alert_list": false,
+              "reg_number": "INH000025188"
+            }
+          },
+          {
+            "id": "hype_language",
+            "name": "Manipulative & Hype Language",
+            "score": 9.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+            "facts": {
+              "match_count": 0,
+              "matches": []
+            }
+          }
+        ]
+      },
+      {
+        "report_id": "rep_85948388",
+        "region": "IN",
+        "market_name": "India",
+        "flag_emoji": "🇮🇳",
+        "regulator": "SEBI",
+        "reporting_url": "https://cybercrime.gov.in",
+        "reporting_name": "National Cybercrime Portal / 1930",
+        "claim": {
+          "is_financial_advice": true,
+          "ticker": "AGISLOG",
+          "company_name": "AGES LOGISTICS",
+          "direction": "BUY",
+          "target_price": 1600.0,
+          "claimed_percentage_move": 7.45,
+          "time_horizon_days": 7,
+          "exact_quote": "इसे आप बाय कर सकते हैं 1489.10 पर स्टॉपलॉस 1425 एंड टारगेट 1600 पर रख सकते हैं.",
+          "quote_timestamp": "00:35",
+          "creator_claimed_name": "5paisa",
+          "guaranteed_return_language_detected": false,
+          "manipulative_phrases": [
+            {
+              "phrase": "आफ्टर अ स्ट्रांग बाउंस फ्रॉम द राइजिंग 20 डे EMA ऑन हैवी वॉल्यूम",
+              "category": "High-risk trading terminology",
+              "timestamp": "00:44"
+            }
+          ],
+          "transcript": "एजिस लॉजिस्टिक्स को ₹1489.10 पर खरीदें, ₹1425 का स्टॉपलॉस और ₹1600 का टारगेट रखें।"
+        },
+        "resolved_stock": {
+          "ticker": "AGISLOG",
+          "name": "AGES LOGISTICS"
+        },
+        "current_price": null,
+        "verdict": {
+          "flag": "CONSISTENT",
+          "flag_color": "GREEN",
+          "flag_label": "Consistent with Public Data",
+          "flag_badge": "🟢",
+          "score": 8.3,
+          "hard_gate_triggered": false,
+          "hard_gate_reasons": [],
+          "evaluated_count": 5,
+          "positive_ratio": 1.0
+        },
+        "parameters": [
+          {
+            "id": "price_move_realism",
+            "name": "Price-Move Realism",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Insufficient price history or missing time horizon to calculate historical distribution.",
+            "hard_gate": false
+          },
+          {
+            "id": "valuation_range",
+            "name": "Valuation-Implied Envelope",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Fundamental P/E band or target price not available.",
+            "hard_gate": false
+          },
+          {
+            "id": "earnings_trajectory",
+            "name": "Earnings Trajectory",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Insufficient quarters/years to compute revenue or net income trajectory.",
+            "hard_gate": false
+          },
+          {
+            "id": "analyst_consensus",
+            "name": "Analyst Consensus Alignment",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Missing price target or fundamental consensus data.",
+            "hard_gate": false
+          },
+          {
+            "id": "promoter_holding",
+            "name": "Promoter & Insider Stability",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Pledged shares negligible or low",
+            "facts": {
+              "promoter_pct": 50.0,
+              "pledged_pct": 0.0
+            }
+          },
+          {
+            "id": "regulatory_orders",
+            "name": "Legal & Regulatory Sanctions",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+            "facts": {
+              "has_order": false
+            }
+          },
+          {
+            "id": "surveillance_volume",
+            "name": "Surveillance & Volume Anomalies",
+            "score": 7.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No abnormal surveillance or operator volume spikes detected.",
+            "facts": {
+              "surveillance_flagged": false
+            }
+          },
+          {
+            "id": "licensing_check",
+            "name": "SEBI Registration",
+            "score": 9.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Source verified as registered entity with SEBI (5paisa Capital Limited, INH000025188).",
+            "facts": {
+              "is_registered": true,
+              "on_alert_list": false,
+              "reg_number": "INH000025188"
+            }
+          },
+          {
+            "id": "hype_language",
+            "name": "Manipulative & Hype Language",
+            "score": 9.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+            "facts": {
+              "match_count": 0,
+              "matches": []
+            }
+          }
+        ]
+      },
+      {
+        "report_id": "rep_936c1f6b",
+        "region": "IN",
+        "market_name": "India",
+        "flag_emoji": "🇮🇳",
+        "regulator": "SEBI",
+        "reporting_url": "https://cybercrime.gov.in",
+        "reporting_name": "National Cybercrime Portal / 1930",
+        "claim": {
+          "is_financial_advice": true,
+          "ticker": "TATAELXSI",
+          "company_name": "TATA ELXSI",
+          "direction": "BUY",
+          "target_price": 4000.0,
+          "claimed_percentage_move": 10.4,
+          "time_horizon_days": 7,
+          "exact_quote": "इसे आप बाय कर सकते हैं 3623.10 पर स्टॉपलॉस 3450 एंड टारगेट 4000 पर रख सकते हैं.",
+          "quote_timestamp": "00:55",
+          "creator_claimed_name": "5paisa",
+          "guaranteed_return_language_detected": false,
+          "manipulative_phrases": [
+            {
+              "phrase": "ये स्टॉक रीसेंट लो से शार्प हाई वॉल्यूम रिवर्सल दिखा रहा है",
+              "category": "High-risk trading terminology",
+              "timestamp": "01:00"
+            }
+          ],
+          "transcript": "टाटा एलेक्सी को ₹3623.10 पर खरीदें, ₹3450 का स्टॉपलॉस और ₹4000 का टारगेट रखें।"
+        },
+        "resolved_stock": {
+          "ticker": "TATAELXSI.NS",
+          "name": "Tata Elxsi Limited",
+          "market": "IN",
+          "aliases": [
+            "tataelxsi"
+          ]
+        },
+        "current_price": 3850.1,
+        "verdict": {
+          "flag": "CONSISTENT",
+          "flag_color": "GREEN",
+          "flag_label": "Consistent with Public Data",
+          "flag_badge": "🟢",
+          "score": 7.0,
+          "hard_gate_triggered": false,
+          "hard_gate_reasons": [],
+          "evaluated_count": 9,
+          "positive_ratio": 0.78
+        },
+        "parameters": [
+          {
+            "id": "price_move_realism",
+            "name": "Price-Move Realism",
+            "score": 0.4,
+            "status": "FAIL",
+            "hard_gate": false,
+            "explanation": "Claimed move (+10.4% in 7d) is at the 96th historical percentile. 5-Yr max was +31.9%.",
+            "facts": {
+              "claimed_pct": 10.4,
+              "horizon_days": 7,
+              "max_5y_move": 31.9,
+              "percentile": 96.3
+            }
+          },
+          {
+            "id": "valuation_range",
+            "name": "Valuation-Implied Envelope",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target implies P/E of 37.2x, which is within historical 5-Yr band (34.5x - 77.3x).",
+            "facts": {
+              "target_implied_pe": 37.2,
+              "pe_5y_median": 59.48,
+              "pe_5y_max": 77.28
+            }
+          },
+          {
+            "id": "earnings_trajectory",
+            "name": "Earnings Trajectory",
+            "score": 6.0,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Recent QoQ Revenue: +2.8%; Profitable operations",
+            "facts": {
+              "rev_growth_qoq": 2.8,
+              "rev_growth_cagr": null,
+              "profitable": true
+            }
+          },
+          {
+            "id": "analyst_consensus",
+            "name": "Analyst Consensus Alignment",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target price (4000.0) is within consensus high range (5135.0) across 16 covering analysts.",
+            "facts": {
+              "consensus_mean": 3663.1,
+              "consensus_high": 5135.0,
+              "num_analysts": 16,
+              "recommendation": "hold",
+              "deviation_pct": 9.2
+            }
+          },
+          {
+            "id": "promoter_holding",
+            "name": "Promoter & Insider Stability",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Pledged shares negligible or low",
+            "facts": {
+              "promoter_pct": 44.85,
+              "pledged_pct": 0.0
+            }
+          },
+          {
+            "id": "regulatory_orders",
+            "name": "Legal & Regulatory Sanctions",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+            "facts": {
+              "has_order": false
+            }
+          },
+          {
+            "id": "surveillance_volume",
+            "name": "Surveillance & Volume Anomalies",
+            "score": 7.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Trading volume within normal 20-day band",
+            "facts": {
+              "surveillance_flagged": false
+            }
+          },
+          {
+            "id": "licensing_check",
+            "name": "SEBI Registration",
+            "score": 9.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Source verified as registered entity with SEBI (5paisa Capital Limited, INH000025188).",
+            "facts": {
+              "is_registered": true,
+              "on_alert_list": false,
+              "reg_number": "INH000025188"
+            }
+          },
+          {
+            "id": "hype_language",
+            "name": "Manipulative & Hype Language",
+            "score": 9.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+            "facts": {
+              "match_count": 0,
+              "matches": []
+            }
+          }
+        ]
+      },
+      {
+        "report_id": "rep_ee80440c",
+        "region": "IN",
+        "market_name": "India",
+        "flag_emoji": "🇮🇳",
+        "regulator": "SEBI",
+        "reporting_url": "https://cybercrime.gov.in",
+        "reporting_name": "National Cybercrime Portal / 1930",
+        "claim": {
+          "is_financial_advice": true,
+          "ticker": "JINDALSAW",
+          "company_name": "JINDAL SAW LTD",
+          "direction": "BUY",
+          "target_price": 320.0,
+          "claimed_percentage_move": 7.71,
+          "time_horizon_days": 7,
+          "exact_quote": "इसे आप बाय कर सकते हैं 297.10 पर स्टॉपलॉस 280 एंड टारगेट 320 पर रख सकते हैं.",
+          "quote_timestamp": "01:17",
+          "creator_claimed_name": "5paisa",
+          "guaranteed_return_language_detected": false,
+          "manipulative_phrases": [
+            {
+              "phrase": "स्टॉक 100 डे EMA ज़ोन से रिबाउंड कर चुका है",
+              "category": "High-risk trading terminology",
+              "timestamp": "01:21"
+            }
+          ],
+          "transcript": "जिंदल सॉ लिमिटेड को ₹297.10 पर खरीदें, ₹280 का स्टॉपलॉस और ₹320 का टारगेट रखें।"
+        },
+        "resolved_stock": {
+          "ticker": "JINDALSAW.NS",
+          "name": "Jindal Saw Limited",
+          "market": "IN",
+          "aliases": [
+            "jindalsaw"
+          ]
+        },
+        "current_price": 301.55,
+        "verdict": {
+          "flag": "CAUTION",
+          "flag_color": "ORANGE",
+          "flag_label": "Caution",
+          "flag_badge": "🟠",
+          "score": 6.9,
+          "hard_gate_triggered": false,
+          "hard_gate_reasons": [],
+          "evaluated_count": 9,
+          "positive_ratio": 0.56
+        },
+        "parameters": [
+          {
+            "id": "price_move_realism",
+            "name": "Price-Move Realism",
+            "score": 1.8,
+            "status": "FAIL",
+            "hard_gate": false,
+            "explanation": "Claimed move (+7.7% in 7d) is at the 82th historical percentile. 5-Yr max was +30.0%.",
+            "facts": {
+              "claimed_pct": 7.71,
+              "horizon_days": 7,
+              "max_5y_move": 30.0,
+              "percentile": 82.1
+            }
+          },
+          {
+            "id": "valuation_range",
+            "name": "Valuation-Implied Envelope",
+            "score": 5.5,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Target implies slightly elevated P/E of 37.3x near historical peak (36.5x).",
+            "facts": {
+              "target_implied_pe": 37.3,
+              "pe_5y_median": 22.85,
+              "pe_5y_max": 36.47
+            }
+          },
+          {
+            "id": "earnings_trajectory",
+            "name": "Earnings Trajectory",
+            "score": 6.0,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Recent QoQ Revenue: -3.9%; Multi-Year CAGR: +0.4%; Profitable operations",
+            "facts": {
+              "rev_growth_qoq": -3.9,
+              "rev_growth_cagr": 0.4,
+              "profitable": true
+            }
+          },
+          {
+            "id": "analyst_consensus",
+            "name": "Analyst Consensus Alignment",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target price (320.0) is conservative compared to consensus mean target (360.0, 2 analysts).",
+            "facts": {
+              "consensus_mean": 360.0,
+              "consensus_high": 418.0,
+              "num_analysts": 2,
+              "recommendation": "strong_buy",
+              "deviation_pct": -11.1
+            }
+          },
+          {
+            "id": "promoter_holding",
+            "name": "Promoter & Insider Stability",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Pledged shares negligible or low",
+            "facts": {
+              "promoter_pct": 63.55,
+              "pledged_pct": 0.0
+            }
+          },
+          {
+            "id": "regulatory_orders",
+            "name": "Legal & Regulatory Sanctions",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+            "facts": {
+              "has_order": false
+            }
+          },
+          {
+            "id": "surveillance_volume",
+            "name": "Surveillance & Volume Anomalies",
+            "score": 6.0,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Elevated volume (2.6x average)",
+            "facts": {
+              "surveillance_flagged": false
+            }
+          },
+          {
+            "id": "licensing_check",
+            "name": "SEBI Registration",
+            "score": 9.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Source verified as registered entity with SEBI (5paisa Capital Limited, INH000025188).",
+            "facts": {
+              "is_registered": true,
+              "on_alert_list": false,
+              "reg_number": "INH000025188"
+            }
+          },
+          {
+            "id": "hype_language",
+            "name": "Manipulative & Hype Language",
+            "score": 9.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+            "facts": {
+              "match_count": 0,
+              "matches": []
+            }
+          }
+        ]
+      },
+      {
+        "report_id": "rep_a1480f5a",
+        "region": "IN",
+        "market_name": "India",
+        "flag_emoji": "🇮🇳",
+        "regulator": "SEBI",
+        "reporting_url": "https://cybercrime.gov.in",
+        "reporting_name": "National Cybercrime Portal / 1930",
+        "claim": {
+          "is_financial_advice": true,
+          "ticker": "DINAMIC",
+          "company_name": "DINAMATIC TECHNOLOGIES",
+          "direction": "BUY",
+          "target_price": 15500.0,
+          "claimed_percentage_move": 7.46,
+          "time_horizon_days": 7,
+          "exact_quote": "इसे आप बाय कर सकते हैं 14424 पर स्टॉपलॉस 13700 एंड टारगेट 15500 पर रख सकते हैं.",
+          "quote_timestamp": "01:34",
+          "creator_claimed_name": "5paisa",
+          "guaranteed_return_language_detected": false,
+          "manipulative_phrases": [
+            {
+              "phrase": "ये स्टॉक ब्रीफ पुलबैक के बाद 13700 रुपये के ऊपर फर्मली होल्ड करते हुए अपना अपट्रेंड फ्रेश मल्टी मंथ हाइस तक एक्सटेंड कर रहा है",
+              "category": "High-risk trading terminology",
+              "timestamp": "01:41"
+            }
+          ],
+          "transcript": "डायनामेटिक टेक्नोलॉजीज को ₹14424 पर खरीदें, ₹13700 का स्टॉपलॉस और ₹15500 का टारगेट रखें।"
+        },
+        "resolved_stock": {
+          "ticker": "DINAMIC",
+          "name": "DINAMATIC TECHNOLOGIES"
+        },
+        "current_price": null,
+        "verdict": {
+          "flag": "CONSISTENT",
+          "flag_color": "GREEN",
+          "flag_label": "Consistent with Public Data",
+          "flag_badge": "🟢",
+          "score": 8.3,
+          "hard_gate_triggered": false,
+          "hard_gate_reasons": [],
+          "evaluated_count": 5,
+          "positive_ratio": 1.0
+        },
+        "parameters": [
+          {
+            "id": "price_move_realism",
+            "name": "Price-Move Realism",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Insufficient price history or missing time horizon to calculate historical distribution.",
+            "hard_gate": false
+          },
+          {
+            "id": "valuation_range",
+            "name": "Valuation-Implied Envelope",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Fundamental P/E band or target price not available.",
+            "hard_gate": false
+          },
+          {
+            "id": "earnings_trajectory",
+            "name": "Earnings Trajectory",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Insufficient quarters/years to compute revenue or net income trajectory.",
+            "hard_gate": false
+          },
+          {
+            "id": "analyst_consensus",
+            "name": "Analyst Consensus Alignment",
+            "score": null,
+            "status": "N/A",
+            "explanation": "Missing price target or fundamental consensus data.",
+            "hard_gate": false
+          },
+          {
+            "id": "promoter_holding",
+            "name": "Promoter & Insider Stability",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Pledged shares negligible or low",
+            "facts": {
+              "promoter_pct": 50.0,
+              "pledged_pct": 0.0
+            }
+          },
+          {
+            "id": "regulatory_orders",
+            "name": "Legal & Regulatory Sanctions",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+            "facts": {
+              "has_order": false
+            }
+          },
+          {
+            "id": "surveillance_volume",
+            "name": "Surveillance & Volume Anomalies",
+            "score": 7.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No abnormal surveillance or operator volume spikes detected.",
+            "facts": {
+              "surveillance_flagged": false
+            }
+          },
+          {
+            "id": "licensing_check",
+            "name": "SEBI Registration",
+            "score": 9.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Source verified as registered entity with SEBI (5paisa Capital Limited, INH000025188).",
+            "facts": {
+              "is_registered": true,
+              "on_alert_list": false,
+              "reg_number": "INH000025188"
+            }
+          },
+          {
+            "id": "hype_language",
+            "name": "Manipulative & Hype Language",
+            "score": 9.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+            "facts": {
+              "match_count": 0,
+              "matches": []
+            }
+          }
+        ]
+      }
+    ],
+    "total_stocks_audited": 5
+  },
+  "cached_at": "2026-10-17T14:50:51.363096+00:00"
+}

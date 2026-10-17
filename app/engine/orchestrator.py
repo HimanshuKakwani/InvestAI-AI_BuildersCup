@@ -179,6 +179,23 @@ class AnalysisService:
         payload_summary = f"Binary ({len(payload)} bytes)" if modality == "screenshot" else str(payload)[:90].replace('\n', ' ')
         logger.info(f"[AUDIT_START] Modality: {modality} | Region: {region} | Payload: {payload_summary}")
 
+        # Check database video cache for YouTube queries
+        video_id = None
+        if modality == "youtube_url":
+            from app.gemini.client import extract_youtube_video_id
+            from app.data.storage import reports_cache
+            from app.config import Config
+            import time
+
+            video_id = extract_youtube_video_id(str(payload))
+            if video_id:
+                cached = reports_cache.get_video_cache(video_id)
+                if cached:
+                    logger.info(f"[VIDEO_CACHE_HIT] Found cached audit for video '{video_id}'. Enforcing {Config.VIDEO_CACHE_DELAY_SEC}s loading delay for UI investigation animation...")
+                    time.sleep(Config.VIDEO_CACHE_DELAY_SEC)
+                    cached["from_cache"] = True
+                    return cached
+
         # 1. Extraction via Gemini
         raw_text_for_p9 = ""
         if modality == "youtube_url":
@@ -195,11 +212,16 @@ class AnalysisService:
         # Check if classified as irrelevant or non-financial content
         if isinstance(claims_raw, dict) and claims_raw.get("is_financial_advice") is False:
             logger.info(f"[AUDIT_REJECTED] Input evaluated as NOT financial advice: {claims_raw.get('message')}")
-            return {
+            rejection_result = {
                 "is_financial_advice": False,
                 "message": claims_raw.get("message") or "Not a financial advice, kindly provide relevant input",
                 "error": claims_raw.get("message") or "Not a financial advice, kindly provide relevant input"
             }
+            if modality == "youtube_url" and video_id:
+                from app.data.storage import reports_cache
+                reports_cache.save_video_cache(video_id, rejection_result)
+                logger.info(f"[VIDEO_CACHE_SAVED] Persisted non-financial classification for video '{video_id}' into cache.")
+            return rejection_result
 
         # Normalize claims into a list of genuine securities claims
         claims_list = []
@@ -227,8 +249,8 @@ class AnalysisService:
 
         primary = evaluated_reports[0]
         logger.info(f"[AUDIT_FINISHED] Total stocks audited: {len(evaluated_reports)} | Primary: {primary['resolved_stock'].get('ticker')} -> Report: {primary['report_id']} ({primary['verdict']['flag']})")
-        # Return container without circular self-reference
-        return {
+        
+        final_result = {
             "report_id": primary["report_id"],
             "region": region,
             "market_name": market_cfg.get("name", region),
@@ -244,3 +266,11 @@ class AnalysisService:
             "reports": evaluated_reports,
             "total_stocks_audited": len(evaluated_reports)
         }
+
+        # Cache video results to multi-tier database cache
+        if modality == "youtube_url" and video_id:
+            from app.data.storage import reports_cache
+            reports_cache.save_video_cache(video_id, final_result)
+            logger.info(f"[VIDEO_CACHE_SAVED] Persisted audit results for YouTube video '{video_id}' into cache.")
+
+        return final_result

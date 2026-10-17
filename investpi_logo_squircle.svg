@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgOliveDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#46572E" />
+      <stop offset="50%" stop-color="#2D3A1D" />
+      <stop offset="100%" stop-color="#192210" />
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0B3" />
+      <stop offset="30%" stop-color="#E5BE64" />
+      <stop offset="60%" stop-color="#FDE89A" />
+      <stop offset="85%" stop-color="#C2902D" />
+      <stop offset="100%" stop-color="#8F6213" />
+    </linearGradient>
+    <linearGradient id="goldRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE792" />
+      <stop offset="50%" stop-color="#BC8A28" />
+      <stop offset="100%" stop-color="#734F0C" />
+    </linearGradient>
+    <linearGradient id="lensReflect" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55" />
+      <stop offset="40%" stop-color="#D7E8DC" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#141E10" stop-opacity="0.4" />
+    </linearGradient>
+    <filter id="goldDropShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <!-- Squircle Rounded Container -->
+  <rect x="25" y="25" width="450" height="450" rx="95" fill="url(#bgOliveDark)" stroke="url(#goldRim)" stroke-width="5" filter="url(#goldDropShadow)"/>
+  <rect x="40" y="40" width="420" height="420" rx="80" fill="none" stroke="#688048" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Top Brand Label -->
+  <text x="250" y="118" text-anchor="middle" font-family="'Montserrat', sans-serif" font-size="20" font-weight="800" fill="url(#goldGradient)" letter-spacing="12">INVEST</text>
+
+  <!-- PI Center Monogram -->
+  <g transform="translate(15, 8)" filter="url(#goldDropShadow)">
+    <!-- Modern Bold Geometric P -->
+    <path d="M 130 170 L 195 170 C 235 170 260 192 260 230 C 260 268 235 290 195 290 L 165 290 L 165 345 L 130 345 Z M 165 200 L 192 200 C 213 200 226 211 226 230 C 226 249 213 260 192 260 L 165 260 Z" fill="url(#goldGradient)" />
+
+    <!-- Magnifying Glass "I" -->
+    <g transform="translate(320, 220)">
+      <!-- Outer Lens Bezel -->
+      <circle cx="0" cy="0" r="48" fill="none" stroke="url(#goldGradient)" stroke-width="14" />
+      <circle cx="0" cy="0" r="41" fill="url(#lensReflect)" />
+      
+      <!-- Reflections -->
+      <path d="M -25 -20 A 30 30 0 0 1 25 -20" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" opacity="0.85"/>
+      <path d="M -25 22 A 30 30 0 0 0 -3 34" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+
+      <!-- Magnifying Glass Handle / Stem of I -->
+      <path d="M -10 48 L 10 48 L 10 125 L -10 125 Z" fill="url(#goldGradient)" />
+      <!-- Base Serif Accent -->
+      <path d="M -20 125 L 20 125 L 10 116 L -10 116 Z" fill="#FFF0B3" />
+      <rect x="-14" y="45" width="28" height="6" rx="2" fill="url(#goldGradient)"/>
+    </g>
+  </g>
+
+  <!-- Divider & Subtitle -->
+  <line x1="160" y1="388" x2="340" y2="388" stroke="url(#goldGradient)" stroke-width="2" opacity="0.6"/>
+  <text x="250" y="420" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="600" fill="#E8D596" letter-spacing="4.5">PORTFOLIO INTELLIGENCE</text>
+</svg>

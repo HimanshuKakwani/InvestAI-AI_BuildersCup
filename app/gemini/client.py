@@ -54,14 +54,59 @@ def extract_youtube_video_id(url: str) -> Optional[str]:
     return m.group(1) if m else None
 
 
-def fetch_youtube_transcript(video_id: str) -> Tuple[str, List[Dict[str, Any]]]:
+def fetch_youtube_transcript(video_id: str, youtube_url: Optional[str] = None) -> Tuple[str, List[Dict[str, Any]]]:
     """
-    Fetches full spoken video transcript with timestamps via youtube_transcript_api.
+    Fetches spoken video transcript with timestamps.
+    Strategy:
+    1. Alternative 1: Check SupaData Managed API if Config.SUPADATA_API_KEY is configured.
+    2. Local scraper fallback: youtube_transcript_api.
     Returns:
         (formatted_transcript_text, raw_snippets_list)
     """
     if not video_id:
         return "", []
+
+    target_url = youtube_url or f"https://www.youtube.com/watch?v={video_id}"
+
+    # 1. Alternative 1: Managed Transcript API (SupaData)
+    if Config.SUPADATA_API_KEY:
+        try:
+            import urllib.request
+            import urllib.parse
+            encoded_url = urllib.parse.quote(target_url, safe="")
+            api_endpoint = f"https://api.supadata.ai/v1/youtube/transcript?url={encoded_url}&text=false"
+            req = urllib.request.Request(
+                api_endpoint,
+                headers={
+                    "x-api-key": Config.SUPADATA_API_KEY,
+                    "User-Agent": "InvestPI/1.0"
+                }
+            )
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                data = json.loads(resp.read().decode("utf-8", errors="ignore"))
+                content = data.get("content", [])
+                if isinstance(content, list) and content:
+                    lines = []
+                    raw_snippets = []
+                    for item in content:
+                        start_sec = int(item.get("start", 0))
+                        mm = start_sec // 60
+                        ss = start_sec % 60
+                        txt = (item.get("text", "")).strip()
+                        if txt:
+                            timestamp_str = f"{mm:02d}:{ss:02d}"
+                            lines.append(f"[{timestamp_str}] {txt}")
+                            raw_snippets.append({"timestamp": timestamp_str, "text": txt})
+                    if lines:
+                        logger.info(f"[MANAGED_TRANSCRIPT] Successfully retrieved {len(lines)} transcript snippets via SupaData for video '{video_id}'")
+                        return "\n".join(lines), raw_snippets
+                elif isinstance(content, str) and content.strip():
+                    logger.info(f"[MANAGED_TRANSCRIPT] Successfully retrieved plain transcript text via SupaData for video '{video_id}'")
+                    return content.strip(), [{"timestamp": "00:00", "text": content.strip()}]
+        except Exception as e_supa:
+            logger.warning(f"[MANAGED_TRANSCRIPT_FAILED] SupaData transcript request failed: {e_supa}. Falling back to local scraper...")
+
+    # 2. Local scraper fallback (youtube_transcript_api)
     try:
         from youtube_transcript_api import YouTubeTranscriptApi
         api = YouTubeTranscriptApi()
@@ -85,9 +130,10 @@ def fetch_youtube_transcript(video_id: str) -> Tuple[str, List[Dict[str, Any]]]:
                     timestamp_str = f"{mm:02d}:{ss:02d}"
                     lines.append(f"[{timestamp_str}] {txt}")
                     raw_snippets.append({"timestamp": timestamp_str, "text": txt})
+            logger.info(f"[TRANSCRIPT_LOCAL] Successfully retrieved {len(lines)} transcript snippets via local scraper for video '{video_id}'")
             return "\n".join(lines), raw_snippets
     except Exception as e:
-        logger.debug(f"YouTube transcript retrieval note for {video_id}: {e}")
+        logger.debug(f"[TRANSCRIPT_LOCAL_NOTE] youtube_transcript_api note for {video_id}: {e}")
     return "", []
 
 
@@ -95,7 +141,33 @@ class GeminiAuditor:
     def __init__(self):
         self.api_key = Config.GEMINI_API_KEY
         self.model_name = Config.GEMINI_MODEL
-        self.client = genai.Client(api_key=self.api_key) if self.api_key else None
+        self.use_vertex = Config.USE_VERTEX_AI
+        self.client = self._init_client()
+
+    def _init_client(self):
+        """Initializes Google GenAI Client with Vertex AI (Cloud Run) or Developer API Key fallback."""
+        if self.use_vertex:
+            try:
+                client_kwargs = {"vertexai": True}
+                if Config.VERTEX_PROJECT_ID:
+                    client_kwargs["project"] = Config.VERTEX_PROJECT_ID
+                if Config.VERTEX_LOCATION:
+                    client_kwargs["location"] = Config.VERTEX_LOCATION
+                client = genai.Client(**client_kwargs)
+                logger.info(f"[VERTEX_AI_INIT] Successfully initialized Google Cloud Vertex AI client (Project: {Config.VERTEX_PROJECT_ID or 'default'}, Location: {Config.VERTEX_LOCATION})")
+                return client
+            except Exception as e:
+                logger.warning(f"[VERTEX_AI_INIT_FAILED] Vertex AI client initialization failed: {e}. Falling back to Developer API Key.")
+
+        if self.api_key:
+            try:
+                client = genai.Client(api_key=self.api_key)
+                logger.info("[GEMINI_INIT] Initialized Gemini Developer API client.")
+                return client
+            except Exception as e:
+                logger.error(f"[GEMINI_INIT_FAILED] Gemini Developer API client initialization failed: {e}")
+                return None
+        return None
 
     def analyze_youtube_claim(self, youtube_url: str, market_hint: str = "IN") -> Union[Dict[str, Any], List[Dict[str, Any]]]:
         """
@@ -149,20 +221,10 @@ class GeminiAuditor:
         from app.data.loader import DataLoader
         loader = DataLoader()
         universe_stocks = loader.universe.get(market_hint, []) or loader.universe.get("IN", [])
-        text_corpus = (video_title + " " + channel_name + " " + transcript_text + " " + youtube_url).lower()
-
-        # Instant relevance filter: reject obvious non-financial content (sports, cooking, music, etc.)
-        # immediately without waiting for slow LLM calls or wasting API quota
-        if not is_likely_financial_text(text_corpus, universe_stocks):
-            logger.info(f"[YOUTUBE_RELEVANCE] Rejected non-financial YouTube content: '{video_title}'")
-            return {
-                "is_financial_advice": False,
-                "message": NOT_FINANCIAL_ADVICE_MSG
-            }
 
         # Offline / Demo Mode Check
         if Config.DEMO_MODE or not self.client:
-            # Check if any known stock matches
+            text_corpus = (video_title + " " + channel_name + " " + youtube_url).lower()
             for s in universe_stocks:
                 t_clean = s["ticker"].lower().replace(".ns", "").replace(".si", "").replace(".ax", "")
                 if t_clean in text_corpus or any(a.lower() in text_corpus for a in s.get("aliases", [])):
@@ -179,7 +241,7 @@ class GeminiAuditor:
                         "creator_claimed_name": channel_name or "@MarketExpert",
                         "guaranteed_return_language_detected": False,
                         "manipulative_phrases": [],
-                        "transcript": transcript_text
+                        "transcript": f"Video title: {video_title}"
                     }
 
             return {
@@ -187,7 +249,124 @@ class GeminiAuditor:
                 "message": NOT_FINANCIAL_ADVICE_MSG
             }
 
-        # Prompt with strict Transcript-Driven Financial Advice Classification
+        # Helper to parse and normalize structured JSON claim responses from Gemini
+        def _process_gemini_claim_response(parsed_obj: Any, default_transcript: str = "") -> Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]:
+            if isinstance(parsed_obj, dict) and parsed_obj.get("is_financial_advice") is False:
+                logger.info("[GEMINI_DECISION] Video classified as NOT financial advice.")
+                return {
+                    "is_financial_advice": False,
+                    "message": NOT_FINANCIAL_ADVICE_MSG
+                }
+            if isinstance(parsed_obj, list):
+                if all(isinstance(c, dict) and c.get("is_financial_advice") is False for c in parsed_obj):
+                    logger.info("[GEMINI_DECISION] Video classified as NOT financial advice.")
+                    return {
+                        "is_financial_advice": False,
+                        "message": NOT_FINANCIAL_ADVICE_MSG
+                    }
+                valid = [c for c in parsed_obj if isinstance(c, dict) and (c.get("ticker") or c.get("company_name")) and c.get("is_financial_advice") is not False]
+                if valid:
+                    for c in valid:
+                        if not c.get("transcript") and default_transcript:
+                            c["transcript"] = default_transcript
+                        if not c.get("creator_claimed_name") and channel_name:
+                            c["creator_claimed_name"] = channel_name
+                    logger.info(f"[GEMINI_CLAIM] Extracted {len(valid)} multi-stock claim(s): {[c.get('ticker') for c in valid]}")
+                    return valid if len(valid) > 1 else valid[0]
+                return {
+                    "is_financial_advice": False,
+                    "message": NOT_FINANCIAL_ADVICE_MSG
+                }
+            if isinstance(parsed_obj, dict) and (parsed_obj.get("ticker") or parsed_obj.get("company_name")):
+                if not parsed_obj.get("transcript") and default_transcript:
+                    parsed_obj["transcript"] = default_transcript
+                if not parsed_obj.get("creator_claimed_name") and channel_name:
+                    parsed_obj["creator_claimed_name"] = channel_name
+                logger.info(f"[GEMINI_CLAIM] Extracted single claim: {parsed_obj.get('ticker')} ({parsed_obj.get('company_name')}) | Target: {parsed_obj.get('target_price')}")
+                return parsed_obj
+            return None
+
+        # =========================================================================
+        # OPTION 4: PRIMARY - Native Multimodal Video Ingestion via Vertex AI / GenAI
+        # =========================================================================
+        native_video_prompt = f"""
+Act as an institutional securities compliance auditor.
+You are forensically analyzing this YouTube video directly using native multimodal video and audio ingestion:
+Video Title: {video_title}
+Creator/Channel: {channel_name}
+URL: {youtube_url}
+Jurisdiction focus: {market_hint}.
+
+AUDITING INSTRUCTIONS:
+1. Carefully watch and listen to the entire video content, audio speech, charts, slides, and ticker overlays.
+2. Evaluate whether this video contains financial advice, stock recommendations, trading tips, or securities claims.
+- If the video is irrelevant or does NOT contain financial advice / stock recommendations / trading calls (e.g. formula 1, racing, gaming, music, cooking, comedy, entertainment, general news):
+  Return JSON with:
+  {{
+    "is_financial_advice": false,
+    "message": "Not a financial advice, kindly provide relevant input"
+  }}
+- If the video DOES contain financial advice, stock recommendations, or trading calls:
+  Extract every stock recommended or analyzed. If MULTIPLE stocks are recommended in the video, return a JSON array with one object for each stock.
+  For each stock, provide:
+  - "is_financial_advice": true
+  - "ticker": official exchange ticker (e.g. ADANIENT.NS, TRENT.NS for India; D05.SI for Singapore; BHP.AX for Australia)
+  - "company_name": company name
+  - "direction": "BUY" or "SELL"
+  - "target_price": float price target spoken or displayed in video, or null
+  - "claimed_percentage_move": float percentage return spoken or displayed in video, or null
+  - "time_horizon_days": integer trading horizon in days, or null
+  - "exact_quote": exact verbatim quote spoken by the creator or displayed on screen recommending the stock or stating the price target / stop loss
+  - "quote_timestamp": the MM:SS timestamp from the video where this recommendation occurred (e.g. "01:23")
+  - "creator_claimed_name": string channel/creator name
+  - "guaranteed_return_language_detected": boolean
+  - "manipulative_phrases": list of objects [{{"phrase": string, "category": string, "timestamp": string}}]
+  - "transcript": concise verbatim summary of the creator's spoken stock recommendation
+"""
+
+        video_models = [
+            "gemini-3.1-flash-lite",
+            "gemini-3.8-flash",
+            "gemini-2.5-flash-lite",
+            self.model_name
+        ]
+
+        logger.info(f"[VERTEX_AI_VIDEO] Attempting Option 4: Direct native multimodal video ingestion for '{youtube_url}'...")
+        try:
+            video_part = types.Part.from_uri(file_uri=youtube_url, mime_type="video/mp4")
+            for model in list(dict.fromkeys(video_models)):
+                try:
+                    logger.info(f"[VERTEX_AI_VIDEO] Ingesting video stream via model '{model}'...")
+                    response = self.client.models.generate_content(
+                        model=model,
+                        contents=[video_part, native_video_prompt],
+                        config=types.GenerateContentConfig(response_mime_type="application/json")
+                    )
+                    parsed = json.loads(response.text)
+                    logger.info(f"[VERTEX_AI_VIDEO] Model '{model}' successfully analyzed video multimodal stream!")
+                    res = _process_gemini_claim_response(parsed, default_transcript=f"Audited via native video stream ({model})")
+                    if res:
+                        return res
+                except Exception as e_v:
+                    logger.warning(f"[VERTEX_AI_VIDEO] Native video ingestion with '{model}' encountered issue: {e_v}")
+        except Exception as e_outer:
+            logger.warning(f"[VERTEX_AI_VIDEO] Part.from_uri initialization failed: {e_outer}")
+
+        # =========================================================================
+        # ALTERNATIVE 1: BACKUP - Managed Transcript API / Local Scraper
+        # =========================================================================
+        logger.info(f"[VERTEX_AI_FALLBACK] Native video ingestion unavailable. Activating Alternative 1: Managed Transcript API backup...")
+        transcript_text, raw_snippets = fetch_youtube_transcript(video_id, youtube_url) if video_id else ("", [])
+        text_corpus = (video_title + " " + channel_name + " " + transcript_text + " " + youtube_url).lower()
+
+        # Relevance heuristic filter
+        if not is_likely_financial_text(text_corpus, universe_stocks):
+            logger.info(f"[YOUTUBE_RELEVANCE] Rejected non-financial YouTube content: '{video_title}'")
+            return {
+                "is_financial_advice": False,
+                "message": NOT_FINANCIAL_ADVICE_MSG
+            }
+
         transcript_block = (
             f"=== VERBATIM SPOKEN AUDIO TRANSCRIPT (WITH TIMESTAMPS) ===\n{transcript_text}\n==========================================================="
             if transcript_text
@@ -195,56 +374,48 @@ class GeminiAuditor:
         )
 
         prompt = f"""
-        Act as an institutional securities compliance auditor.
-        You are forensically analyzing this YouTube video based on its VERBATIM SPOKEN AUDIO TRANSCRIPT and metadata:
-        Video Title: {video_title}
-        Creator/Channel: {channel_name}
-        URL: {youtube_url}
-        Jurisdiction focus: {market_hint}.
+Act as an institutional securities compliance auditor.
+You are forensically analyzing this YouTube video based on its VERBATIM SPOKEN AUDIO TRANSCRIPT and metadata:
+Video Title: {video_title}
+Creator/Channel: {channel_name}
+URL: {youtube_url}
+Jurisdiction focus: {market_hint}.
 
-        {transcript_block}
+{transcript_block}
 
-        CRITICAL AUDITING INSTRUCTIONS:
-        1. Base your answers directly on the complete and accurate information spoken in the video transcript above, not merely the metadata or title.
-        2. Evaluate whether this video contains financial advice, stock recommendations, trading tips, or securities claims.
-        - If the video is irrelevant or does NOT contain financial advice / stock recommendations / trading calls (e.g. formula 1, racing, gaming, music, cooking, comedy, entertainment, general news):
-          Return JSON with:
-          {{
-            "is_financial_advice": false,
-            "message": "Not a financial advice, kindly provide relevant input"
-          }}
-        - If the video DOES contain financial advice, stock recommendations, or trading calls:
-          Extract every stock recommended or analyzed. If MULTIPLE stocks are recommended in the video, return a JSON array with one object for each stock.
-          For each stock, provide:
-          - "is_financial_advice": true
-          - "ticker": official exchange ticker (e.g. ADANIENT.NS, TRENT.NS for India; D05.SI for Singapore; BHP.AX for Australia)
-          - "company_name": company name
-          - "direction": "BUY" or "SELL"
-          - "target_price": float price target spoken in transcript, or null
-          - "claimed_percentage_move": float percentage return spoken in transcript, or null
-          - "time_horizon_days": integer trading horizon in days, or null
-          - "exact_quote": exact verbatim quote spoken by the creator in the transcript recommending the stock or stating the price target / stop loss
-          - "quote_timestamp": the MM:SS timestamp from the transcript where this quote was spoken (e.g. "00:15")
-          - "creator_claimed_name": string channel/creator name
-          - "guaranteed_return_language_detected": boolean
-          - "manipulative_phrases": list of objects [{{"phrase": string, "category": string, "timestamp": string}}]
-        """
+CRITICAL AUDITING INSTRUCTIONS:
+1. Base your answers directly on the complete and accurate information spoken in the video transcript above, or the metadata/title if transcript is unavailable.
+2. Evaluate whether this video contains financial advice, stock recommendations, trading tips, or securities claims.
+- If the video is irrelevant or does NOT contain financial advice / stock recommendations / trading calls (e.g. formula 1, racing, gaming, music, cooking, comedy, entertainment, general news):
+  Return JSON with:
+  {{
+    "is_financial_advice": false,
+    "message": "Not a financial advice, kindly provide relevant input"
+  }}
+- If the video DOES contain financial advice, stock recommendations, or trading calls:
+  Extract every stock recommended or analyzed. If MULTIPLE stocks are recommended in the video, return a JSON array with one object for each stock.
+  For each stock, provide:
+  - "is_financial_advice": true
+  - "ticker": official exchange ticker (e.g. ADANIENT.NS, TRENT.NS for India; D05.SI for Singapore; BHP.AX for Australia)
+  - "company_name": company name
+  - "direction": "BUY" or "SELL"
+  - "target_price": float price target spoken in transcript, or null
+  - "claimed_percentage_move": float percentage return spoken in transcript, or null
+  - "time_horizon_days": integer trading horizon in days, or null
+  - "exact_quote": exact verbatim quote spoken by the creator in the transcript recommending the stock or stating the price target / stop loss
+  - "quote_timestamp": the MM:SS timestamp from the transcript where this quote was spoken (e.g. "00:15")
+  - "creator_claimed_name": string channel/creator name
+  - "guaranteed_return_language_detected": boolean
+  - "manipulative_phrases": list of objects [{{"phrase": string, "category": string, "timestamp": string}}]
+"""
 
-        # Primary model is gemini-3.1-flash-lite as requested for speed and cost efficiency
-        primary_model = "gemini-3.1-flash-lite"
         fallback_models = [
-            primary_model,
+            "gemini-3.1-flash-lite",
             "gemini-3.8-flash",
-            "gemini-3.1-flash-lite-preview",
             "gemini-2.5-flash-lite",
-            "gemini-3.5-flash-lite",
-            "models/gemini-3.1-flash-lite",
-            "models/gemini-3.8-flash",
-            "models/gemini-2.5-flash-lite",
             self.model_name
         ]
         last_error = None
-
 
         for model in list(dict.fromkeys(fallback_models)):
             try:
@@ -253,48 +424,17 @@ class GeminiAuditor:
                     contents.append(types.Part.from_bytes(data=thumbnail_bytes, mime_type="image/jpeg"))
                 contents.append(prompt)
 
-                logger.info(f"[GEMINI_REQUEST] Analyzing YouTube claim using model '{model}'...")
+                logger.info(f"[GEMINI_REQUEST] Analyzing YouTube claim using Alternative 1 model '{model}'...")
                 response = self.client.models.generate_content(
                     model=model,
                     contents=contents,
                     config=types.GenerateContentConfig(response_mime_type="application/json")
                 )
                 parsed = json.loads(response.text)
-                logger.info(f"[GEMINI_RESPONSE] Model '{model}' successfully evaluated video. Output: {parsed}")
-
-                # Check if marked as irrelevant / not financial advice
-                if isinstance(parsed, dict) and parsed.get("is_financial_advice") is False:
-                    logger.info(f"[GEMINI_DECISION] Video classified as NOT financial advice by {model}.")
-                    return {
-                        "is_financial_advice": False,
-                        "message": NOT_FINANCIAL_ADVICE_MSG
-                    }
-                if isinstance(parsed, list):
-                    if all(isinstance(c, dict) and c.get("is_financial_advice") is False for c in parsed):
-                        logger.info(f"[GEMINI_DECISION] Video classified as NOT financial advice by {model}.")
-                        return {
-                            "is_financial_advice": False,
-                            "message": NOT_FINANCIAL_ADVICE_MSG
-                        }
-                    valid = [c for c in parsed if isinstance(c, dict) and (c.get("ticker") or c.get("company_name")) and c.get("is_financial_advice") is not False]
-                    if valid:
-                        for c in valid:
-                            c["transcript"] = transcript_text
-                            if not c.get("creator_claimed_name") and channel_name:
-                                c["creator_claimed_name"] = channel_name
-                        logger.info(f"[GEMINI_CLAIM] Extracted {len(valid)} multi-stock claim(s): {[c.get('ticker') for c in valid]}")
-                        return valid if len(valid) > 1 else valid[0]
-                    return {
-                        "is_financial_advice": False,
-                        "message": NOT_FINANCIAL_ADVICE_MSG
-                    }
-
-                if isinstance(parsed, dict) and (parsed.get("ticker") or parsed.get("company_name")):
-                    parsed["transcript"] = transcript_text
-                    if not parsed.get("creator_claimed_name") and channel_name:
-                        parsed["creator_claimed_name"] = channel_name
-                    logger.info(f"[GEMINI_CLAIM] Extracted single claim: {parsed.get('ticker')} ({parsed.get('company_name')}) | Target: {parsed.get('target_price')}")
-                    return parsed
+                logger.info(f"[GEMINI_RESPONSE] Model '{model}' successfully evaluated video transcript. Output: {parsed}")
+                res = _process_gemini_claim_response(parsed, default_transcript=transcript_text)
+                if res:
+                    return res
             except Exception as e:
                 logger.warning(f"[GEMINI_FALLBACK] Model '{model}' failed: {e}. Attempting next model...")
                 last_error = e

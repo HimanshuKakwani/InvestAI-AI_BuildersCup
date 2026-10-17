@@ -1,0 +1,87 @@
+{
+  "ticker": "VEDL.NS",
+  "name": "Vedanta Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Basic Materials",
+  "trailing_eps": 23.77,
+  "forward_eps": 35.75217,
+  "market_cap": 960971735040,
+  "current_price": 246.1,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 1454040000000.0,
+      "net_income": 105740000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 1417930000000.0,
+      "net_income": 42390000000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 616050000000.0,
+      "net_income": 149880000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 766720000000.0,
+      "net_income": 173910000000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 164130000000.0,
+      "net_income": 34830000000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 155370000000.0,
+      "net_income": 31850000000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 229790000000.0,
+      "net_income": 57100000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 237310000000.0,
+      "net_income": 66980000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 234560000000.0,
+      "net_income": 54730000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 6.91,
+    "median": 10.57,
+    "max": 27.04,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 313.8889,
+    "target_high": 350.0,
+    "target_low": 235.0,
+    "num_analysts": 9,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 57.07,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-17"
+}

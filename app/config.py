@@ -74,3 +74,15 @@ class Config:
     BIGQUERY_PROJECT_ID = os.getenv("BIGQUERY_PROJECT_ID", os.getenv("GCP_PROJECT_ID", ""))
     BIGQUERY_DATASET = os.getenv("BIGQUERY_DATASET", "financial_intelligence")
 
+    # Google Cloud Vertex AI Configuration (Option 4)
+    USE_VERTEX_AI = os.getenv("USE_VERTEX_AI", "1" if IS_CLOUD else "0").lower() in ("1", "true", "yes")
+    VERTEX_LOCATION = os.getenv("VERTEX_LOCATION", "us-central1")
+    VERTEX_PROJECT_ID = os.getenv("VERTEX_PROJECT_ID", os.getenv("GCP_PROJECT_ID", os.getenv("GOOGLE_CLOUD_PROJECT", "")))
+
+    # Alternative 1 Backup: Managed Transcript API (SupaData / RapidAPI)
+    SUPADATA_API_KEY = os.getenv("SUPADATA_API_KEY", "")
+
+    # Video Database Cache & Presentation Delay
+    FIREBASE_VIDEO_CACHE_COLLECTION = os.getenv("FIREBASE_VIDEO_CACHE_COLLECTION", "investpi_video_cache")
+    VIDEO_CACHE_DELAY_SEC = float(os.getenv("VIDEO_CACHE_DELAY_SEC", "5.0"))
+

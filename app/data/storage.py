@@ -265,6 +265,79 @@ class ReportStorage:
 
 
 
+    def save_video_cache(self, video_id: str, data: Dict[str, Any]):
+        """Persists analyzed video audit data to L1 cache, Firestore (L2), and local disk."""
+        if not video_id:
+            return
+
+        record = {
+            "video_id": video_id,
+            "data": data,
+            "cached_at": datetime.now(timezone.utc).isoformat()
+        }
+
+        # 1. Store in L1 cache
+        self.l1_cache.set(f"video_{video_id}", record)
+
+        # 2. Persist to Firestore L2 if available
+        if self._firestore_available and self.db:
+            try:
+                coll = getattr(Config, "FIREBASE_VIDEO_CACHE_COLLECTION", "investpi_video_cache")
+                self.db.collection(coll).document(video_id).set(record)
+                logger.info(f"[VIDEO_CACHE_SAVED] Persisted video audit for '{video_id}' to Firestore collection '{coll}'.")
+            except Exception as e:
+                logger.warning(f"[VIDEO_CACHE_WARN] Could not persist video '{video_id}' to Firestore: {e}")
+
+        # 3. Always save to local data/video_cache/{video_id}.json as resilient offline safety net
+        try:
+            import json
+            local_dir = Path(__file__).resolve().parent.parent.parent / "data" / "video_cache"
+            local_dir.mkdir(parents=True, exist_ok=True)
+            with open(local_dir / f"{video_id}.json", "w", encoding="utf-8") as f:
+                json.dump(record, f, ensure_ascii=False, indent=2)
+            logger.info(f"[VIDEO_CACHE_SAVED] Persisted video audit for '{video_id}' to local disk cache.")
+        except Exception as e_local:
+            logger.debug(f"Local video cache write note for {video_id}: {e_local}")
+
+    def get_video_cache(self, video_id: str) -> Optional[Dict[str, Any]]:
+        """Retrieves cached video audit data from L1 cache, Firestore, or local disk."""
+        if not video_id:
+            return None
+
+        # 1. Check L1 in-memory cache
+        cached = self.l1_cache.get(f"video_{video_id}")
+        if cached:
+            logger.info(f"[VIDEO_CACHE_HIT] Retrieved video audit for '{video_id}' from L1 memory cache.")
+            return cached.get("data")
+
+        # 2. Check Firestore L2
+        if self._firestore_available and self.db:
+            try:
+                coll = getattr(Config, "FIREBASE_VIDEO_CACHE_COLLECTION", "investpi_video_cache")
+                doc = self.db.collection(coll).document(video_id).get()
+                if doc.exists:
+                    doc_dict = doc.to_dict() or {}
+                    self.l1_cache.set(f"video_{video_id}", doc_dict)
+                    logger.info(f"[VIDEO_CACHE_HIT] Retrieved video audit for '{video_id}' from Firestore collection '{coll}'.")
+                    return doc_dict.get("data")
+            except Exception as e:
+                logger.warning(f"[VIDEO_CACHE_WARN] Error querying Firestore video cache for '{video_id}': {e}")
+
+        # 3. Check local disk cache
+        try:
+            import json
+            local_file = Path(__file__).resolve().parent.parent.parent / "data" / "video_cache" / f"{video_id}.json"
+            if local_file.exists():
+                with open(local_file, "r", encoding="utf-8") as f:
+                    doc_dict = json.load(f)
+                self.l1_cache.set(f"video_{video_id}", doc_dict)
+                logger.info(f"[VIDEO_CACHE_HIT] Retrieved video audit for '{video_id}' from local disk cache.")
+                return doc_dict.get("data")
+        except Exception as e_local:
+            logger.debug(f"Local video cache read note for {video_id}: {e_local}")
+
+        return None
+
     # Dict-like interface for backward compatibility
     def __getitem__(self, key: str) -> Dict[str, Any]:
         item = self.get_report(key)
@@ -283,3 +356,7 @@ class ReportStorage:
 
     def __contains__(self, key: str) -> bool:
         return self.get_report(key) is not None
+
+
+# Global singleton storage instance
+reports_cache = ReportStorage()

@@ -1,0 +1,82 @@
+{
+  "ticker": "HINDZINC.NS",
+  "name": "Hindustan Zinc Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Basic Materials",
+  "trailing_eps": 40.39,
+  "forward_eps": 45.0,
+  "market_cap": 2281672278016,
+  "current_price": 540.0,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 332720000000.0,
+      "net_income": 105110000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 280820000000.0,
+      "net_income": 77590000000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 330410000000.0,
+      "net_income": 103530000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 391920000000.0,
+      "net_income": 138320000000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 88290000000.0,
+      "net_income": 30030000000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 75910000000.0,
+      "net_income": 22340000000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 106270000000.0,
+      "net_income": 39160000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 126920000000.0,
+      "net_income": 50330000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 130330000000.0,
+      "net_income": 54690000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 5.07,
+    "median": 9.14,
+    "max": 15.29,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 645.9286,
+    "target_high": 770.0,
+    "target_low": 480.0,
+    "num_analysts": 14,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 88.63,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-17"
+}

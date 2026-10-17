@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invest PI - Official Logo Concepts Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0F140D;
+      --bg-card: #171E13;
+      --card-border: #2C3922;
+      --gold-primary: #D4AF37;
+      --gold-light: #FCE69B;
+      --olive-accent: #5B7240;
+      --text-muted: #8E9F80;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: #E2E8DE;
+      font-family: 'Montserrat', sans-serif;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 999px;
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, #FFF0B5 0%, #D4AF37 50%, #9B701F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 15px;
+      letter-spacing: 1px;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.6), 0 0 20px rgba(212, 175, 55, 0.15);
+    }
+
+    .preview-container {
+      background: #0B0E09;
+      position: relative;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .preview-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .preview-container:hover img {
+      transform: scale(1.03);
+    }
+
+    .card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-bottom: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 14px;
+    }
+
+    .features-list li {
+      font-size: 12.5px;
+      color: #CAD5C0;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .features-list li span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      display: inline-block;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #D4AF37, #9B701F);
+      color: #0F140D;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #FFE382, #B88523);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #E2E8DE;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(212, 175, 55, 0.5);
+    }
+
+    .vector-section {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 40px;
+    }
+
+    .vector-section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+
+    .vector-section p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .svg-preview {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .svg-preview img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      color: #5F6E54;
+      font-size: 13px;
+      border-top: 1px solid #1F2817;
+      padding-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge-pill">BRAND ASSETS &amp; IDENTITY DESIGN</div>
+      <h1>INVEST PI LOGO SAMPLES</h1>
+      <p class="subtitle">Curated visual identity samples featuring royal olive green rounded backgrounds, rich metallic gold typography, and the signature "PI" monogram with a magnifying glass lens.</p>
+    </header>
+
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+      <!-- Website Matched Noir Edition -->
+      <div class="card" style="border-color: #bc955d; box-shadow: 0 0 30px rgba(19, 44, 36, 0.9);">
+        <div class="preview-container" style="background:#0b1a15;">
+          <img src="investpi_noir_website_matched_v1.jpg" alt="Website Matched Noir PI Mockup">
+        </div>
+        <div class="card-body">
+          <div class="card-tag" style="color: #bc955d;">★ PRIMARY BRAND • WEBSITE MATCHED</div>
+          <h2 class="card-title">Incognito Noir (Website Palette)</h2>
+          <p class="card-desc">Matches your platform's signature deep forest green (<code>#132c24</code>) desk surface and satin gold (<code>#bc955d</code>). Crisp venetian blind shadows across the beveled gold "P" and detective magnifying glass "I". Zero smoke.</p>
+          <ul class="features-list">
+            <li><span class="dot" style="background:#bc955d;"></span> Background: Forest Green (<code>#132c24</code>)</li>
+            <li><span class="dot" style="background:#bc955d;"></span> Typography: Warm Satin Gold (<code>#bc955d</code>)</li>
+            <li><span class="dot" style="background:#bc955d;"></span> Smoke Removed / Clean Venetian Shadow Slats</li>
+          </ul>
+          <div class="btn-row">
+            <a href="investpi_noir_website_matched_v1.jpg" target="_blank" class="btn btn-primary" style="background: linear-gradient(135deg, #e5c88b, #bc955d); color: #0b1a15;">View V1 (App Icon)</a>
+            <a href="investpi_noir_website_matched_v2.jpg" target="_blank" class="btn btn-secondary">View V2 (Executive)</a>
+            <a href="investpi_noir_website_matched.svg" target="_blank" class="btn btn-secondary">Vector SVG</a>
+          </div>
+        </div>
+      </div>
+      <!-- 2D Noir Edition -->
+      <div class="card" style="border-color: rgba(255, 255, 255, 0.4); box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);">
+        <div class="preview-container" style="background:#000;">
+          <img src="investpi_noir_2d_v3.jpg" alt="2D Noir Graphic Emblem">
+        </div>
+        <div class="card-body">
+          <div class="card-tag" style="color: #FCD34D;">★ FLAT 2D NOIR • VECTOR GRAPHIC</div>
+          <h2 class="card-title">2D Graphic Detective Silhouette</h2>
+          <p class="card-desc">Pure flat 2D graphic novel aesthetic inside a black squircle frame. Features a sharp negative-space detective silhouette (fedora &amp; popped collar) inside the "P", crosshair magnifying glass "I", and hard-edged diagonal venetian slats with zero smoke.</p>
+          <ul class="features-list">
+            <li><span class="dot" style="background:#FCD34D;"></span> 100% Flat 2D Graphic Design (No Smoke / Fog)</li>
+            <li><span class="dot" style="background:#FCD34D;"></span> Squircle Frame with Diagonal Shadow Cuts</li>
+            <li><span class="dot" style="background:#FCD34D;"></span> Detective Negative Space Silhouette in "P"</li>
+          </ul>
+          <div class="btn-row">
+            <a href="investpi_noir_2d_v3.jpg" target="_blank" class="btn btn-primary" style="background: #FFFFFF; color: #08090B;">View V3 (Silhouette)</a>
+            <a href="investpi_noir_2d_v2.jpg" target="_blank" class="btn btn-secondary">View V2 (Minimal)</a>
+            <a href="investpi_noir_2d.svg" target="_blank" class="btn btn-secondary">SVG</a>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 0 25px rgba(122, 18, 36, 0.4);">
+        <div class="preview-container">
+          <img src="investpi_royal_crimson_mockup.jpg" alt="Royal Crimson PI Mockup">
+        </div>
+        <div class="card-body">
+          <div class="card-tag" style="color: #FFD700;">★ SPECIAL EDITION • ROYAL CRIMSON</div>
+          <h2 class="card-title">Imperial Royal Crest</h2>
+          <p class="card-desc">Deep crimson leather backdrop with a 24k burnished antique gold heraldic crown crest, intricate filigree serif "P", and Victorian brass magnifying glass "I" with convex optical refraction. Strictly "PI" only.</p>
+          <ul class="features-list">
+            <li><span class="dot" style="background:#FFD700;"></span> Royal Crimson &amp; 24k Burnished Gold</li>
+            <li><span class="dot" style="background:#FFD700;"></span> Imperial Crown &amp; Baroque Laurel Frame</li>
+            <li><span class="dot" style="background:#FFD700;"></span> Standalone "PI" Monogram (No Subtext)</li>
+          </ul>
+          <div class="btn-row">
+            <a href="investpi_royal_crimson_mockup.jpg" target="_blank" class="btn btn-primary">View Full-Res</a>
+            <a href="investpi_royal_crimson_mockup.svg" target="_blank" class="btn btn-secondary">Vector SVG</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="preview-container">
+          <img src="investpi_logo_sample2_squircle.jpg" alt="Option 2: Modern Squircle">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">OPTION 02 • FINTECH APP ICON</div>
+          <h2 class="card-title">Modern Squircle Emblem</h2>
+          <p class="card-desc">A contemporary rounded-square (squircle) design engineered for app icons, mobile launchers, and modern web dashboards with bold brushed gold bevels and clean lines.</p>
+          <ul class="features-list">
+            <li><span class="dot"></span> Modern iOS/Android standard squircle frame</li>
+            <li><span class="dot"></span> Geometric bold P with balanced magnifying glass</li>
+            <li><span class="dot"></span> Clear "INVEST PI" brand signature</li>
+          </ul>
+          <div class="btn-row">
+            <a href="investpi_logo_sample2_squircle.jpg" target="_blank" class="btn btn-primary">View Full-Res</a>
+            <a href="investpi_logo_squircle.svg" target="_blank" class="btn btn-secondary">Vector SVG</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="preview-container">
+          <img src="investpi_logo_sample3_crest.jpg" alt="Option 3: Minimalist Luxury Crest">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">OPTION 03 • PRIVATE INVESTIGATOR CREST</div>
+          <h2 class="card-title">Heritage Shield Crest</h2>
+          <p class="card-desc">Contoured luxury badge with flowing filigree double gold borders, rich textured olive backdrop, high-contrast gold serif "P", and investigative glass "I".</p>
+          <ul class="features-list">
+            <li><span class="dot"></span> Elegant bespoke contoured silhouette</li>
+            <li><span class="dot"></span> Evokes Private Investigator ("PI") precision</li>
+            <li><span class="dot"></span> High-end financial advisory &amp; equity research feel</li>
+          </ul>
+          <div class="btn-row">
+            <a href="investpi_logo_sample3_crest.jpg" target="_blank" class="btn btn-primary">View Full-Res</a>
+            <a href="investpi_logo_samples.svg" target="_blank" class="btn btn-secondary">All Vectors</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vector Showcase Section -->
+    <div class="vector-section">
+      <h2>Scalable Vector Assets (SVG)</h2>
+      <p>Clean, infinite-resolution vector graphics ready for code embedding, favicons, reports, and UI design.</p>
+      <div class="svg-preview">
+        <img src="investpi_logo_samples.svg" alt="Invest PI Vector Comparison">
+      </div>
+    </div>
+
+    <footer>
+      Invest PI Branding Assets • Designed with Olive Green (#2E3A1D) &amp; Metallic Gold (#D4AF37)
+    </footer>
+  </div>
+</body>
+</html>

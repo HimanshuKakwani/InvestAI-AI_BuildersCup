@@ -1,0 +1,805 @@
+{
+  "video_id": "DivTA2Lz08s",
+  "data": {
+    "report_id": "rep_9e4f4a4c",
+    "region": "IN",
+    "market_name": "India",
+    "flag_emoji": "🇮🇳",
+    "regulator": "SEBI",
+    "reporting_url": "https://cybercrime.gov.in",
+    "reporting_name": "National Cybercrime Portal / 1930",
+    "claim": {
+      "is_financial_advice": true,
+      "ticker": "ADANIENT.NS",
+      "company_name": "Adani Enterprises",
+      "direction": "BUY",
+      "target_price": 3080.0,
+      "claimed_percentage_move": null,
+      "time_horizon_days": null,
+      "exact_quote": "Adani Enterprises yahan par 2920 ke stop loss se kharidari ke liye aayen agar neeche khule toh badhiya hai aur isliye stop loss thoda door ka hai 3000, 3030, 3080 ke target ke liye",
+      "quote_timestamp": "00:00",
+      "creator_claimed_name": "Zee Business",
+      "guaranteed_return_language_detected": false,
+      "manipulative_phrases": [],
+      "transcript": "The creator recommends buying Adani Enterprises at 2920, with target prices at 3000, 3030, and 3080."
+    },
+    "resolved_stock": {
+      "ticker": "ADANIENT.NS",
+      "name": "Adani Enterprises",
+      "aliases": [
+        "adani enterprises",
+        "adanient"
+      ],
+      "market": "IN"
+    },
+    "current_price": 2692.0,
+    "verdict": {
+      "flag": "CAUTION",
+      "flag_color": "ORANGE",
+      "flag_label": "Caution",
+      "flag_badge": "🟠",
+      "score": 5.7,
+      "hard_gate_triggered": false,
+      "hard_gate_reasons": [],
+      "evaluated_count": 9,
+      "positive_ratio": 0.67
+    },
+    "parameters": [
+      {
+        "id": "price_move_realism",
+        "name": "Price-Move Realism",
+        "score": 1.0,
+        "status": "FAIL",
+        "hard_gate": false,
+        "explanation": "Claimed move (+14.4% in 14d) is at the 90th historical percentile. 5-Yr max was +51.2%.",
+        "facts": {
+          "claimed_pct": 14.413075780089152,
+          "horizon_days": 14,
+          "max_5y_move": 51.2,
+          "percentile": 90.0
+        }
+      },
+      {
+        "id": "valuation_range",
+        "name": "Valuation-Implied Envelope",
+        "score": 7.0,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "Target implies P/E of 49.6x, which is within historical 5-Yr band (27.3x - 57.7x).",
+        "facts": {
+          "target_implied_pe": 49.6,
+          "pe_5y_median": 39.92,
+          "pe_5y_max": 57.7
+        }
+      },
+      {
+        "id": "earnings_trajectory",
+        "name": "Earnings Trajectory",
+        "score": 2.0,
+        "status": "FAIL",
+        "hard_gate": false,
+        "explanation": "Recent QoQ Revenue: +1.5%; Multi-Year CAGR: -7.7%; Company is currently loss-making",
+        "facts": {
+          "rev_growth_qoq": 1.5,
+          "rev_growth_cagr": -7.7,
+          "profitable": false
+        }
+      },
+      {
+        "id": "analyst_consensus",
+        "name": "Analyst Consensus Alignment",
+        "score": 8.5,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "Target price (3080.0) is conservative compared to consensus mean target (3684.0, 4 analysts).",
+        "facts": {
+          "consensus_mean": 3684.0,
+          "consensus_high": 3880.0,
+          "num_analysts": 4,
+          "recommendation": "strong_buy",
+          "deviation_pct": -16.4
+        }
+      },
+      {
+        "id": "promoter_holding",
+        "name": "Promoter & Insider Stability",
+        "score": 7.0,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "Pledged shares negligible or low",
+        "facts": {
+          "promoter_pct": 74.97,
+          "pledged_pct": 0.0
+        }
+      },
+      {
+        "id": "regulatory_orders",
+        "name": "Legal & Regulatory Sanctions",
+        "score": 8.5,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+        "facts": {
+          "has_order": false
+        }
+      },
+      {
+        "id": "surveillance_volume",
+        "name": "Surveillance & Volume Anomalies",
+        "score": 7.5,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "Trading volume within normal 20-day band",
+        "facts": {
+          "surveillance_flagged": false
+        }
+      },
+      {
+        "id": "licensing_check",
+        "name": "SEBI Registration",
+        "score": 1.0,
+        "status": "WARN",
+        "hard_gate": false,
+        "explanation": "Source not found in official SEBI Research Analyst directory (https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognisedFpi=yes&intmId=14). Subject to unlicensed advice restrictions.",
+        "facts": {
+          "is_registered": false,
+          "on_alert_list": false
+        }
+      },
+      {
+        "id": "hype_language",
+        "name": "Manipulative & Hype Language",
+        "score": 9.0,
+        "status": "PASS",
+        "hard_gate": false,
+        "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+        "facts": {
+          "match_count": 0,
+          "matches": []
+        }
+      }
+    ],
+    "reports": [
+      {
+        "report_id": "rep_9e4f4a4c",
+        "region": "IN",
+        "market_name": "India",
+        "flag_emoji": "🇮🇳",
+        "regulator": "SEBI",
+        "reporting_url": "https://cybercrime.gov.in",
+        "reporting_name": "National Cybercrime Portal / 1930",
+        "claim": {
+          "is_financial_advice": true,
+          "ticker": "ADANIENT.NS",
+          "company_name": "Adani Enterprises",
+          "direction": "BUY",
+          "target_price": 3080.0,
+          "claimed_percentage_move": null,
+          "time_horizon_days": null,
+          "exact_quote": "Adani Enterprises yahan par 2920 ke stop loss se kharidari ke liye aayen agar neeche khule toh badhiya hai aur isliye stop loss thoda door ka hai 3000, 3030, 3080 ke target ke liye",
+          "quote_timestamp": "00:00",
+          "creator_claimed_name": "Zee Business",
+          "guaranteed_return_language_detected": false,
+          "manipulative_phrases": [],
+          "transcript": "The creator recommends buying Adani Enterprises at 2920, with target prices at 3000, 3030, and 3080."
+        },
+        "resolved_stock": {
+          "ticker": "ADANIENT.NS",
+          "name": "Adani Enterprises",
+          "aliases": [
+            "adani enterprises",
+            "adanient"
+          ],
+          "market": "IN"
+        },
+        "current_price": 2692.0,
+        "verdict": {
+          "flag": "CAUTION",
+          "flag_color": "ORANGE",
+          "flag_label": "Caution",
+          "flag_badge": "🟠",
+          "score": 5.7,
+          "hard_gate_triggered": false,
+          "hard_gate_reasons": [],
+          "evaluated_count": 9,
+          "positive_ratio": 0.67
+        },
+        "parameters": [
+          {
+            "id": "price_move_realism",
+            "name": "Price-Move Realism",
+            "score": 1.0,
+            "status": "FAIL",
+            "hard_gate": false,
+            "explanation": "Claimed move (+14.4% in 14d) is at the 90th historical percentile. 5-Yr max was +51.2%.",
+            "facts": {
+              "claimed_pct": 14.413075780089152,
+              "horizon_days": 14,
+              "max_5y_move": 51.2,
+              "percentile": 90.0
+            }
+          },
+          {
+            "id": "valuation_range",
+            "name": "Valuation-Implied Envelope",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target implies P/E of 49.6x, which is within historical 5-Yr band (27.3x - 57.7x).",
+            "facts": {
+              "target_implied_pe": 49.6,
+              "pe_5y_median": 39.92,
+              "pe_5y_max": 57.7
+            }
+          },
+          {
+            "id": "earnings_trajectory",
+            "name": "Earnings Trajectory",
+            "score": 2.0,
+            "status": "FAIL",
+            "hard_gate": false,
+            "explanation": "Recent QoQ Revenue: +1.5%; Multi-Year CAGR: -7.7%; Company is currently loss-making",
+            "facts": {
+              "rev_growth_qoq": 1.5,
+              "rev_growth_cagr": -7.7,
+              "profitable": false
+            }
+          },
+          {
+            "id": "analyst_consensus",
+            "name": "Analyst Consensus Alignment",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target price (3080.0) is conservative compared to consensus mean target (3684.0, 4 analysts).",
+            "facts": {
+              "consensus_mean": 3684.0,
+              "consensus_high": 3880.0,
+              "num_analysts": 4,
+              "recommendation": "strong_buy",
+              "deviation_pct": -16.4
+            }
+          },
+          {
+            "id": "promoter_holding",
+            "name": "Promoter & Insider Stability",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Pledged shares negligible or low",
+            "facts": {
+              "promoter_pct": 74.97,
+              "pledged_pct": 0.0
+            }
+          },
+          {
+            "id": "regulatory_orders",
+            "name": "Legal & Regulatory Sanctions",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+            "facts": {
+              "has_order": false
+            }
+          },
+          {
+            "id": "surveillance_volume",
+            "name": "Surveillance & Volume Anomalies",
+            "score": 7.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Trading volume within normal 20-day band",
+            "facts": {
+              "surveillance_flagged": false
+            }
+          },
+          {
+            "id": "licensing_check",
+            "name": "SEBI Registration",
+            "score": 1.0,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Source not found in official SEBI Research Analyst directory (https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognisedFpi=yes&intmId=14). Subject to unlicensed advice restrictions.",
+            "facts": {
+              "is_registered": false,
+              "on_alert_list": false
+            }
+          },
+          {
+            "id": "hype_language",
+            "name": "Manipulative & Hype Language",
+            "score": 9.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+            "facts": {
+              "match_count": 0,
+              "matches": []
+            }
+          }
+        ]
+      },
+      {
+        "report_id": "rep_554a4951",
+        "region": "IN",
+        "market_name": "India",
+        "flag_emoji": "🇮🇳",
+        "regulator": "SEBI",
+        "reporting_url": "https://cybercrime.gov.in",
+        "reporting_name": "National Cybercrime Portal / 1930",
+        "claim": {
+          "is_financial_advice": true,
+          "ticker": "TRENT.NS",
+          "company_name": "Trent",
+          "direction": "BUY",
+          "target_price": 3245.0,
+          "claimed_percentage_move": null,
+          "time_horizon_days": null,
+          "exact_quote": "Trent ki kal hui hai AGM aur agar aaj bazaar kamzor khule toh yahan bhi kharidari ka mauka hai... 3090 par support hai 3200, 3245 oopri level",
+          "quote_timestamp": "00:15",
+          "creator_claimed_name": "Zee Business",
+          "guaranteed_return_language_detected": false,
+          "manipulative_phrases": [],
+          "transcript": "The creator suggests a buying opportunity for Trent if the market opens weak, noting support at 3090 and targets at 3200 and 3245."
+        },
+        "resolved_stock": {
+          "ticker": "TRENT.NS",
+          "name": "Trent Limited",
+          "aliases": [
+            "trent",
+            "trent limited"
+          ],
+          "market": "IN"
+        },
+        "current_price": 2958.7,
+        "verdict": {
+          "flag": "CAUTION",
+          "flag_color": "ORANGE",
+          "flag_label": "Caution",
+          "flag_badge": "🟠",
+          "score": 6.2,
+          "hard_gate_triggered": false,
+          "hard_gate_reasons": [],
+          "evaluated_count": 9,
+          "positive_ratio": 0.67
+        },
+        "parameters": [
+          {
+            "id": "price_move_realism",
+            "name": "Price-Move Realism",
+            "score": 1.7,
+            "status": "FAIL",
+            "hard_gate": false,
+            "explanation": "Claimed move (+9.7% in 14d) is at the 83th historical percentile. 5-Yr max was +34.6%.",
+            "facts": {
+              "claimed_pct": 9.67654713218644,
+              "horizon_days": 14,
+              "max_5y_move": 34.6,
+              "percentile": 82.8
+            }
+          },
+          {
+            "id": "valuation_range",
+            "name": "Valuation-Implied Envelope",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target implies P/E of 95.7x, which is within historical 5-Yr band (31.1x - 205.9x).",
+            "facts": {
+              "target_implied_pe": 95.7,
+              "pe_5y_median": 82.09,
+              "pe_5y_max": 205.9
+            }
+          },
+          {
+            "id": "earnings_trajectory",
+            "name": "Earnings Trajectory",
+            "score": 6.0,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Recent QoQ Revenue: +14.5%; Profitable operations",
+            "facts": {
+              "rev_growth_qoq": 14.5,
+              "rev_growth_cagr": null,
+              "profitable": true
+            }
+          },
+          {
+            "id": "analyst_consensus",
+            "name": "Analyst Consensus Alignment",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target price (3245.0) is conservative compared to consensus mean target (3377.5, 27 analysts).",
+            "facts": {
+              "consensus_mean": 3377.5,
+              "consensus_high": 4455.0,
+              "num_analysts": 27,
+              "recommendation": "buy",
+              "deviation_pct": -3.9
+            }
+          },
+          {
+            "id": "promoter_holding",
+            "name": "Promoter & Insider Stability",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Pledged shares negligible or low",
+            "facts": {
+              "promoter_pct": 41.86,
+              "pledged_pct": 0.0
+            }
+          },
+          {
+            "id": "regulatory_orders",
+            "name": "Legal & Regulatory Sanctions",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+            "facts": {
+              "has_order": false
+            }
+          },
+          {
+            "id": "surveillance_volume",
+            "name": "Surveillance & Volume Anomalies",
+            "score": 7.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Trading volume within normal 20-day band",
+            "facts": {
+              "surveillance_flagged": false
+            }
+          },
+          {
+            "id": "licensing_check",
+            "name": "SEBI Registration",
+            "score": 1.0,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Source not found in official SEBI Research Analyst directory (https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognisedFpi=yes&intmId=14). Subject to unlicensed advice restrictions.",
+            "facts": {
+              "is_registered": false,
+              "on_alert_list": false
+            }
+          },
+          {
+            "id": "hype_language",
+            "name": "Manipulative & Hype Language",
+            "score": 9.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+            "facts": {
+              "match_count": 0,
+              "matches": []
+            }
+          }
+        ]
+      },
+      {
+        "report_id": "rep_b70160d8",
+        "region": "IN",
+        "market_name": "India",
+        "flag_emoji": "🇮🇳",
+        "regulator": "SEBI",
+        "reporting_url": "https://cybercrime.gov.in",
+        "reporting_name": "National Cybercrime Portal / 1930",
+        "claim": {
+          "is_financial_advice": true,
+          "ticker": "HINDZINC.NS",
+          "company_name": "Hindustan Zinc",
+          "direction": "SELL",
+          "target_price": 528.0,
+          "claimed_percentage_move": null,
+          "time_horizon_days": null,
+          "exact_quote": "Hindustan Zinc mein bikwali karne ki raah hai 565 ka stop loss hai uchhal mein bechein 540, 535, 528",
+          "quote_timestamp": "00:27",
+          "creator_claimed_name": "Zee Business",
+          "guaranteed_return_language_detected": false,
+          "manipulative_phrases": [],
+          "transcript": "The creator advises selling Hindustan Zinc with a stop loss of 565, suggesting to sell on any rise to targets at 540, 535, and 528."
+        },
+        "resolved_stock": {
+          "ticker": "HINDZINC.NS",
+          "name": "Hindustan Zinc Limited",
+          "market": "IN",
+          "aliases": [
+            "hindzinc.ns"
+          ]
+        },
+        "current_price": 540.0,
+        "verdict": {
+          "flag": "CAUTION",
+          "flag_color": "ORANGE",
+          "flag_label": "Caution",
+          "flag_badge": "🟠",
+          "score": 6.5,
+          "hard_gate_triggered": false,
+          "hard_gate_reasons": [],
+          "evaluated_count": 9,
+          "positive_ratio": 0.67
+        },
+        "parameters": [
+          {
+            "id": "price_move_realism",
+            "name": "Price-Move Realism",
+            "score": 3.9,
+            "status": "FAIL",
+            "hard_gate": false,
+            "explanation": "Claimed move (+2.2% in 14d) is at the 61th historical percentile. 5-Yr max was +84.2%.",
+            "facts": {
+              "claimed_pct": 2.2222222222222223,
+              "horizon_days": 14,
+              "max_5y_move": 84.2,
+              "percentile": 60.8
+            }
+          },
+          {
+            "id": "valuation_range",
+            "name": "Valuation-Implied Envelope",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target implies P/E of 13.1x, which is within historical 5-Yr band (5.1x - 15.3x).",
+            "facts": {
+              "target_implied_pe": 13.1,
+              "pe_5y_median": 9.14,
+              "pe_5y_max": 15.29
+            }
+          },
+          {
+            "id": "earnings_trajectory",
+            "name": "Earnings Trajectory",
+            "score": 6.0,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Recent QoQ Revenue: +2.7%; Multi-Year CAGR: +5.6%; Profitable operations",
+            "facts": {
+              "rev_growth_qoq": 2.7,
+              "rev_growth_cagr": 5.6,
+              "profitable": true
+            }
+          },
+          {
+            "id": "analyst_consensus",
+            "name": "Analyst Consensus Alignment",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target price (528.0) is conservative compared to consensus mean target (645.9, 14 analysts).",
+            "facts": {
+              "consensus_mean": 645.9,
+              "consensus_high": 770.0,
+              "num_analysts": 14,
+              "recommendation": "buy",
+              "deviation_pct": -18.3
+            }
+          },
+          {
+            "id": "promoter_holding",
+            "name": "Promoter & Insider Stability",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Pledged shares negligible or low",
+            "facts": {
+              "promoter_pct": 88.63,
+              "pledged_pct": 0.0
+            }
+          },
+          {
+            "id": "regulatory_orders",
+            "name": "Legal & Regulatory Sanctions",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+            "facts": {
+              "has_order": false
+            }
+          },
+          {
+            "id": "surveillance_volume",
+            "name": "Surveillance & Volume Anomalies",
+            "score": 7.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Trading volume within normal 20-day band",
+            "facts": {
+              "surveillance_flagged": false
+            }
+          },
+          {
+            "id": "licensing_check",
+            "name": "SEBI Registration",
+            "score": 1.0,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Source not found in official SEBI Research Analyst directory (https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognisedFpi=yes&intmId=14). Subject to unlicensed advice restrictions.",
+            "facts": {
+              "is_registered": false,
+              "on_alert_list": false
+            }
+          },
+          {
+            "id": "hype_language",
+            "name": "Manipulative & Hype Language",
+            "score": 9.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+            "facts": {
+              "match_count": 0,
+              "matches": []
+            }
+          }
+        ]
+      },
+      {
+        "report_id": "rep_b1d5b5cf",
+        "region": "IN",
+        "market_name": "India",
+        "flag_emoji": "🇮🇳",
+        "regulator": "SEBI",
+        "reporting_url": "https://cybercrime.gov.in",
+        "reporting_name": "National Cybercrime Portal / 1930",
+        "claim": {
+          "is_financial_advice": true,
+          "ticker": "VEDL.NS",
+          "company_name": "Vedanta",
+          "direction": "SELL",
+          "target_price": 272.0,
+          "claimed_percentage_move": null,
+          "time_horizon_days": null,
+          "exact_quote": "Vedanta bhi oopar mein bechein 296 ka stop loss hai 276, 272 ka target",
+          "quote_timestamp": "00:36",
+          "creator_claimed_name": "Zee Business",
+          "guaranteed_return_language_detected": false,
+          "manipulative_phrases": [],
+          "transcript": "The creator advises selling Vedanta on the upside with a stop loss of 296 and targets at 276 and 272."
+        },
+        "resolved_stock": {
+          "ticker": "VEDL.NS",
+          "name": "Vedanta Limited",
+          "market": "IN",
+          "aliases": [
+            "vedl.ns"
+          ]
+        },
+        "current_price": 246.1,
+        "verdict": {
+          "flag": "CAUTION",
+          "flag_color": "ORANGE",
+          "flag_label": "Caution",
+          "flag_badge": "🟠",
+          "score": 6.2,
+          "hard_gate_triggered": false,
+          "hard_gate_reasons": [],
+          "evaluated_count": 9,
+          "positive_ratio": 0.67
+        },
+        "parameters": [
+          {
+            "id": "price_move_realism",
+            "name": "Price-Move Realism",
+            "score": 1.3,
+            "status": "FAIL",
+            "hard_gate": false,
+            "explanation": "Claimed move (+10.5% in 14d) is at the 87th historical percentile. 5-Yr max was +44.7%.",
+            "facts": {
+              "claimed_pct": 10.524177163754574,
+              "horizon_days": 14,
+              "max_5y_move": 44.7,
+              "percentile": 87.4
+            }
+          },
+          {
+            "id": "valuation_range",
+            "name": "Valuation-Implied Envelope",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target implies P/E of 11.4x, which is within historical 5-Yr band (6.9x - 27.0x).",
+            "facts": {
+              "target_implied_pe": 11.4,
+              "pe_5y_median": 10.57,
+              "pe_5y_max": 27.04
+            }
+          },
+          {
+            "id": "earnings_trajectory",
+            "name": "Earnings Trajectory",
+            "score": 6.0,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Recent QoQ Revenue: -1.2%; Profitable operations",
+            "facts": {
+              "rev_growth_qoq": -1.2,
+              "rev_growth_cagr": null,
+              "profitable": true
+            }
+          },
+          {
+            "id": "analyst_consensus",
+            "name": "Analyst Consensus Alignment",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Target price (272.0) is conservative compared to consensus mean target (313.9, 9 analysts).",
+            "facts": {
+              "consensus_mean": 313.9,
+              "consensus_high": 350.0,
+              "num_analysts": 9,
+              "recommendation": "buy",
+              "deviation_pct": -13.3
+            }
+          },
+          {
+            "id": "promoter_holding",
+            "name": "Promoter & Insider Stability",
+            "score": 7.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Pledged shares negligible or low",
+            "facts": {
+              "promoter_pct": 57.07,
+              "pledged_pct": 0.0
+            }
+          },
+          {
+            "id": "regulatory_orders",
+            "name": "Legal & Regulatory Sanctions",
+            "score": 8.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "No active debarred entity orders, insider trading bans, or SEBI penalties on record.",
+            "facts": {
+              "has_order": false
+            }
+          },
+          {
+            "id": "surveillance_volume",
+            "name": "Surveillance & Volume Anomalies",
+            "score": 7.5,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Trading volume within normal 20-day band",
+            "facts": {
+              "surveillance_flagged": false
+            }
+          },
+          {
+            "id": "licensing_check",
+            "name": "SEBI Registration",
+            "score": 1.0,
+            "status": "WARN",
+            "hard_gate": false,
+            "explanation": "Source not found in official SEBI Research Analyst directory (https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognisedFpi=yes&intmId=14). Subject to unlicensed advice restrictions.",
+            "facts": {
+              "is_registered": false,
+              "on_alert_list": false
+            }
+          },
+          {
+            "id": "hype_language",
+            "name": "Manipulative & Hype Language",
+            "score": 9.0,
+            "status": "PASS",
+            "hard_gate": false,
+            "explanation": "Neutral language observed; no high-risk scam or urgency patterns detected.",
+            "facts": {
+              "match_count": 0,
+              "matches": []
+            }
+          }
+        ]
+      }
+    ],
+    "total_stocks_audited": 4
+  },
+  "cached_at": "2026-10-17T14:46:37.717408+00:00"
+}
