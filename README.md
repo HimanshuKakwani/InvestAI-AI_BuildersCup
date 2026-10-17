@@ -468,10 +468,13 @@ InvestAI-AI_BuildersCup/
 │   ├── bigquery_quarterly_reports.jsonl # Seed dataset for BigQuery master table
 │   ├── bigquery_seed_chunks.jsonl       # 768-dim vector chunks for BigQuery Vector Search
 │   └── universe.yaml             # Tracked equities universe across IN, SG, and AU
-├── diagrams/                     # Architectural SVGs, process flows, and wireframes
-│   ├── investpi_architecture.svg # Complete multi-tier system architecture diagram
-│   ├── investpi_process_flow.svg # End-to-end data processing flowchart
-│   └── investpi_wireframe_mock.svg # UI/UX wireframe blueprint
+├── diagrams/                     # Architectural SVGs, high-res presentation PNGs, and wireframes
+│   ├── investpi_architecture.svg # Complete multi-tier system architecture diagram (Scalable Vector)
+│   ├── investpi_architecture.png # Ultra-high-resolution presentation PNG (3920×2560)
+│   ├── investpi_process_flow.svg # End-to-end data processing flowchart (Scalable Vector)
+│   ├── investpi_process_flow.png # Ultra-high-resolution presentation PNG (3200×2240)
+│   ├── investpi_wireframe_mock.svg # UI/UX wireframe blueprint (Scalable Vector)
+│   └── investpi_wireframe_mock.png # Ultra-high-resolution presentation PNG (3200×2300)
 ├── docs/                         # Extensive technical documentation & analysis
 │   ├── analysis/                 # Deep dives on BigQuery, Vertex, Pub/Sub, and sub-agents
 │   ├── demo-readiness/           # 3-minute pitch script, video recording guide & judging playbook

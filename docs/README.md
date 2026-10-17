@@ -48,7 +48,8 @@ Welcome to the **InvestPI** technical documentation directory. This repository c
 
 ## 🗺️ Architectural Diagrams (`diagrams/`)
 
-The repository also includes production-grade visual diagrams illustrating system workflows:
-- **[investpi_architecture.svg](file:///Users/chawadesharvari17gmail.com/Desktop/projects/InvestAI-AI_BuildersCup/diagrams/investpi_architecture.svg)**: Complete multi-tier architecture diagram.
-- **[investpi_process_flow.svg](file:///Users/chawadesharvari17gmail.com/Desktop/projects/InvestAI-AI_BuildersCup/diagrams/investpi_process_flow.svg)**: End-to-end data processing flowchart.
-- **[investpi_wireframe_mock.svg](file:///Users/chawadesharvari17gmail.com/Desktop/projects/InvestAI-AI_BuildersCup/diagrams/investpi_wireframe_mock.svg)**: UI/UX layout blueprint.
+The repository also includes production-grade visual diagrams illustrating system workflows (available in both scalable vector SVG and ultra-high-resolution 4K/Retina PNG for presentations):
+- **Architecture Diagram**: [SVG](file:///Users/chawadesharvari17gmail.com/Desktop/projects/InvestAI-AI_BuildersCup/diagrams/investpi_architecture.svg) · [High-Res PNG (3920×2560)](file:///Users/chawadesharvari17gmail.com/Desktop/projects/InvestAI-AI_BuildersCup/diagrams/investpi_architecture.png)
+- **Process Flow Diagram**: [SVG](file:///Users/chawadesharvari17gmail.com/Desktop/projects/InvestAI-AI_BuildersCup/diagrams/investpi_process_flow.svg) · [High-Res PNG (3200×2240)](file:///Users/chawadesharvari17gmail.com/Desktop/projects/InvestAI-AI_BuildersCup/diagrams/investpi_process_flow.png)
+- **Wireframe Blueprint**: [SVG](file:///Users/chawadesharvari17gmail.com/Desktop/projects/InvestAI-AI_BuildersCup/diagrams/investpi_wireframe_mock.svg) · [High-Res PNG (3200×2300)](file:///Users/chawadesharvari17gmail.com/Desktop/projects/InvestAI-AI_BuildersCup/diagrams/investpi_wireframe_mock.png)
+
