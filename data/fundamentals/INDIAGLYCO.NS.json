@@ -1,0 +1,92 @@
+{
+  "ticker": "INDIAGLYCO.NS",
+  "name": "India Glycols Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Basic Materials",
+  "trailing_eps": 49.39,
+  "forward_eps": null,
+  "market_cap": 22249535488,
+  "current_price": 331.95,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 25770184000.0,
+      "net_income": 1250844000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 32939700000.0,
+      "net_income": 1729931000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 36944524000.0,
+      "net_income": 2309245000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 41584653000.0,
+      "net_income": 2927618000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 10404600000.0,
+      "net_income": 732500000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 10922000000.0,
+      "net_income": 650600000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 11024000000.0,
+      "net_income": 675700000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 9763500000.0,
+      "net_income": 868800000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 11303900000.0,
+      "net_income": 968300000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 5.96,
+    "median": 8.99,
+    "max": 21.46,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": null,
+    "target_high": null,
+    "target_low": null,
+    "num_analysts": 0,
+    "recommendation": "none"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 63.84,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-17"
+}

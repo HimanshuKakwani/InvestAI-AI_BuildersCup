@@ -1665,67 +1665,6 @@
             </div>
           </div>
 
-          <!-- Section 04: Quarterly Financial Report Summarizer & SWOT Analysis (Demo: RELIANCE.NS & SBIN.NS) -->
-          <div id="quarterly-report-section" class="report-section quarterly-section">
-            <span class="section-no">04</span>
-            <div style="min-width: 0;">
-              <div class="quarterly-header-row">
-                <div>
-                  <p class="report-label">QUARTERLY REPORT SUMMARIZER AGENT · PAST QUARTER FILING &amp; SWOT</p>
-                  <h2 id="quarterly-section-title" style="margin-bottom: 4px;">Past-Quarter Financial Summary &amp; SWOT Matrix</h2>
-                </div>
-                <div class="quarterly-switch-group">
-                  <button id="btn-q-reliance" class="quarterly-switch-btn" onclick="loadQuarterlyReportSection('RELIANCE.NS')">Reliance (RELIANCE.NS)</button>
-                  <button id="btn-q-sbin" class="quarterly-switch-btn" onclick="loadQuarterlyReportSection('SBIN.NS')">State Bank of India (SBIN.NS)</button>
-                </div>
-              </div>
-
-              <div id="quarterly-meta-banner" class="quarterly-meta-banner">
-                <span id="quarterly-filing-label">Filing: Regulation 33 Unaudited Consolidated Results · Q1 FY2026-27</span>
-                <span id="quarterly-agent-badge">Agent: quarterly_report_agent</span>
-              </div>
-
-              <div class="quarterly-pointers-box">
-                <h3>Key Financial Takeaways (In Simple Pointers)</h3>
-                <ul id="quarterly-pointers-list" class="quarterly-pointers-list">
-                  <!-- Populated by QuarterlyReportSummarizerSubAgent -->
-                </ul>
-              </div>
-
-              <div class="swot-table-wrap">
-                <table class="swot-grid-table">
-                  <thead>
-                    <tr>
-                      <th colspan="2" id="swot-table-header">FINANCIAL STATEMENT SWOT ANALYSIS MATRIX · PAST QUARTER</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <span class="swot-quad-label swot-s">Strengths (Internal Financial Positives)</span>
-                        <ul id="swot-strengths-list" class="swot-list"></ul>
-                      </td>
-                      <td>
-                        <span class="swot-quad-label swot-w">Weaknesses (Internal Financial Challenges)</span>
-                        <ul id="swot-weaknesses-list" class="swot-list"></ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="swot-quad-label swot-o">Opportunities (External Growth Tailwinds)</span>
-                        <ul id="swot-opportunities-list" class="swot-list"></ul>
-                      </td>
-                      <td>
-                        <span class="swot-quad-label swot-t">Threats (External &amp; Regulatory Headwinds)</span>
-                        <ul id="swot-threats-list" class="swot-list"></ul>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
           <!-- Analyst Signoff -->
           <div class="analyst-signoff">
             <div>
@@ -1770,7 +1709,7 @@
         </div>
 
         <div class="chat-chips-tray">
-          <button class="chat-chip" onclick="sendSuggestedQuestion('Summarize the past quarter financial report in simple pointers and show the SWOT analysis table')">Quarterly Report &amp; SWOT</button>
+          <button class="chat-chip" onclick="sendSuggestedQuestion('Explain all 9-parameter compliance findings and why this score was assigned')">9-Parameter Audit</button>
           <button class="chat-chip" onclick="sendSuggestedQuestion('How was this stock\'s historic price performance in the last 1 month and 1 year?')">Historic Price Agent</button>
           <button class="chat-chip" onclick="sendSuggestedQuestion('What is the predicted future price target based on analysts or EMA200?')">Price Target / EMA200 Agent</button>
           <button class="chat-chip" onclick="sendSuggestedQuestion('What are the company fundamentals, P/E valuation, and earnings?')">Fundamentals Agent</button>
@@ -2682,67 +2621,8 @@
         gridEl.appendChild(card);
       });
 
-      // Load Quarterly Financial Report Summarizer & SWOT Section (Demo: RELIANCE.NS & SBIN.NS)
-      const activeTicker = (stock.ticker || '').toUpperCase();
-      if (activeTicker.includes('SBIN') || activeTicker === 'SBI') {
-        loadQuarterlyReportSection('SBIN.NS');
-      } else {
-        loadQuarterlyReportSection('RELIANCE.NS');
-      }
-
       // Initialize Forensic AI Assistant for active audited report
       initForensicChat(rep);
-    }
-
-    async function loadQuarterlyReportSection(targetTicker) {
-      const btnRel = document.getElementById('btn-q-reliance');
-      const btnSbi = document.getElementById('btn-q-sbin');
-      if (btnRel) btnRel.classList.toggle('active', targetTicker === 'RELIANCE.NS');
-      if (btnSbi) btnSbi.classList.toggle('active', targetTicker === 'SBIN.NS');
-
-      try {
-        const res = await fetch(`/api/agent/quarterly-report/${encodeURIComponent(targetTicker)}`);
-        if (!res.ok) return;
-        const qData = await res.json();
-        if (!qData || !qData.is_supported_demo_stock) return;
-
-        const titleEl = document.getElementById('quarterly-section-title');
-        if (titleEl) {
-          titleEl.innerText = `${qData.company_name} (${qData.ticker}) — Past Quarter Summary & SWOT`;
-        }
-        const filingLabelEl = document.getElementById('quarterly-filing-label');
-        if (filingLabelEl) {
-          filingLabelEl.innerText = `Filing: ${qData.filing_type} · ${qData.quarter_label}`;
-        }
-        const badgeEl = document.getElementById('quarterly-agent-badge');
-        if (badgeEl) {
-          const hm = qData.headline_metrics || {};
-          badgeEl.innerText = `Revenue: ${hm.gross_revenue_formatted || 'N/A'} | Net Profit (PAT): ${hm.net_profit_formatted || 'N/A'}`;
-        }
-        const swotHead = document.getElementById('swot-table-header');
-        if (swotHead) {
-          swotHead.innerText = `FINANCIAL STATEMENT SWOT ANALYSIS MATRIX · ${qData.company_name.toUpperCase()} (${qData.quarter_label.toUpperCase()})`;
-        }
-
-        const formatBold = (str) => String(str || '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-        const pList = document.getElementById('quarterly-pointers-list');
-        if (pList) {
-          pList.innerHTML = (qData.simple_pointers || []).map(p => `<li>${formatBold(p)}</li>`).join('');
-        }
-
-        const swot = qData.swot || {};
-        const renderList = (id, arr) => {
-          const el = document.getElementById(id);
-          if (el) el.innerHTML = (arr || []).map(item => `<li>${formatBold(item)}</li>`).join('');
-        };
-        renderList('swot-strengths-list', swot.strengths);
-        renderList('swot-weaknesses-list', swot.weaknesses);
-        renderList('swot-opportunities-list', swot.opportunities);
-        renderList('swot-threats-list', swot.threats);
-      } catch (e) {
-        console.warn("Failed to load quarterly report summary:", e);
-      }
     }
 
     function renderMarkdownTables(text) {
@@ -2829,7 +2709,7 @@
         <div class="chat-bubble chat-bubble-assistant">
           <p><strong>InvestPI Forensic Assistant Online</strong></p>
           <p>I am grounded in the 9-parameter compliance findings for <strong>${company} (${ticker})</strong> with an InvestPI Score of <strong>${score}/10</strong> (${flag}).</p>
-          <p>You can interrogate the empirical findings, price move plausibility, valuation envelopes, quarterly report SWOT analysis, or regulatory checks. <em>Guardrails are active to preserve focus on this case file.</em></p>
+          <p>You can interrogate the empirical findings, price move plausibility, valuation envelopes, or regulatory checks. <em>Guardrails are active to preserve focus on this case file.</em></p>
         </div>
       `;
     }
