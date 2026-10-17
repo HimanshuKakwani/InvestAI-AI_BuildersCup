@@ -1,0 +1,87 @@
+{
+  "ticker": "LAURUSLABS.NS",
+  "name": "Laurus Labs Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Healthcare",
+  "trailing_eps": 20.23,
+  "forward_eps": 29.99468,
+  "market_cap": 1113097240576,
+  "current_price": 2060.1,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 60142200000.0,
+      "net_income": 7901100000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 50018000000.0,
+      "net_income": 1605500000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 55078600000.0,
+      "net_income": 3583200000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 67212300000.0,
+      "net_income": 8887900000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 17203000000.0,
+      "net_income": 2336700000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 15695700000.0,
+      "net_income": 1630200000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 17782900000.0,
+      "net_income": 2516600000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 18115700000.0,
+      "net_income": 2791400000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 20263100000.0,
+      "net_income": 3676000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 16.22,
+    "median": 25.51,
+    "max": 77.26,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 1703.0714,
+    "target_high": 2520.0,
+    "target_low": 900.0,
+    "num_analysts": 14,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 32.03,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-17"
+}

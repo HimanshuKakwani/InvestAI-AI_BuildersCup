@@ -142,32 +142,63 @@ class GeminiAuditor:
         self.api_key = Config.GEMINI_API_KEY
         self.model_name = Config.GEMINI_MODEL
         self.use_vertex = Config.USE_VERTEX_AI
-        self.client = self._init_client()
+        
+        # Dual-client architecture: Vertex AI (GCP Cloud Run) + Developer API Key fallback (Google AI Studio)
+        self.vertex_client = self._init_vertex_client()
+        self.api_client = self._init_api_client()
+        self.client = self.vertex_client or self.api_client
 
-    def _init_client(self):
-        """Initializes Google GenAI Client with Vertex AI (Cloud Run) or Developer API Key fallback."""
-        if self.use_vertex:
-            try:
-                client_kwargs = {"vertexai": True}
-                if Config.VERTEX_PROJECT_ID:
-                    client_kwargs["project"] = Config.VERTEX_PROJECT_ID
-                if Config.VERTEX_LOCATION:
-                    client_kwargs["location"] = Config.VERTEX_LOCATION
-                client = genai.Client(**client_kwargs)
-                logger.info(f"[VERTEX_AI_INIT] Successfully initialized Google Cloud Vertex AI client (Project: {Config.VERTEX_PROJECT_ID or 'default'}, Location: {Config.VERTEX_LOCATION})")
-                return client
-            except Exception as e:
-                logger.warning(f"[VERTEX_AI_INIT_FAILED] Vertex AI client initialization failed: {e}. Falling back to Developer API Key.")
+    def _init_vertex_client(self):
+        """Initializes Vertex AI Client using Application Default Credentials on GCP."""
+        if not self.use_vertex:
+            return None
+        try:
+            client_kwargs = {"vertexai": True}
+            if Config.VERTEX_PROJECT_ID:
+                client_kwargs["project"] = Config.VERTEX_PROJECT_ID
+            if Config.VERTEX_LOCATION:
+                client_kwargs["location"] = Config.VERTEX_LOCATION
+            client = genai.Client(**client_kwargs)
+            logger.info(f"[VERTEX_AI_INIT] Successfully initialized Google Cloud Vertex AI client (Project: {Config.VERTEX_PROJECT_ID or 'default'}, Location: {Config.VERTEX_LOCATION})")
+            return client
+        except Exception as e:
+            logger.warning(f"[VERTEX_AI_INIT_FAILED] Vertex AI client initialization failed: {e}")
+            return None
 
-        if self.api_key:
-            try:
-                client = genai.Client(api_key=self.api_key)
-                logger.info("[GEMINI_INIT] Initialized Gemini Developer API client.")
-                return client
-            except Exception as e:
-                logger.error(f"[GEMINI_INIT_FAILED] Gemini Developer API client initialization failed: {e}")
-                return None
-        return None
+    def _init_api_client(self):
+        """Initializes Google AI Studio Developer API Client using GEMINI_API_KEY."""
+        if not self.api_key:
+            return None
+        try:
+            client = genai.Client(api_key=self.api_key)
+            logger.info("[GEMINI_INIT] Successfully initialized Gemini Developer API Client.")
+            return client
+        except Exception as e:
+            logger.error(f"[GEMINI_INIT_FAILED] Gemini Developer API client initialization failed: {e}")
+            return None
+
+    def _get_cascades(self):
+        """Returns ordered list of available clients and their compatible model names."""
+        cascades = []
+        if self.api_client:
+            cascades.append({
+                "client": self.api_client,
+                "label": "Developer API Key",
+                "models": ["gemini-3.1-flash-lite", "gemini-3.8-flash", "gemini-2.5-flash", self.model_name]
+            })
+        if self.vertex_client:
+            cascades.append({
+                "client": self.vertex_client,
+                "label": "Vertex AI",
+                "models": ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", self.model_name]
+            })
+        if not cascades and self.client:
+            cascades.append({
+                "client": self.client,
+                "label": "Default Client",
+                "models": ["gemini-3.1-flash-lite", "gemini-2.5-flash", self.model_name]
+            })
+        return cascades
 
     def analyze_youtube_claim(self, youtube_url: str, market_hint: str = "IN") -> Union[Dict[str, Any], List[Dict[str, Any]]]:
         """
@@ -324,31 +355,29 @@ AUDITING INSTRUCTIONS:
   - "transcript": concise verbatim summary of the creator's spoken stock recommendation
 """
 
-        video_models = [
-            "gemini-3.1-flash-lite",
-            "gemini-3.8-flash",
-            "gemini-2.5-flash-lite",
-            self.model_name
-        ]
+        video_cascades = self._get_cascades()
 
         logger.info(f"[VERTEX_AI_VIDEO] Attempting Option 4: Direct native multimodal video ingestion for '{youtube_url}'...")
         try:
             video_part = types.Part.from_uri(file_uri=youtube_url, mime_type="video/mp4")
-            for model in list(dict.fromkeys(video_models)):
-                try:
-                    logger.info(f"[VERTEX_AI_VIDEO] Ingesting video stream via model '{model}'...")
-                    response = self.client.models.generate_content(
-                        model=model,
-                        contents=[video_part, native_video_prompt],
-                        config=types.GenerateContentConfig(response_mime_type="application/json")
-                    )
-                    parsed = json.loads(response.text)
-                    logger.info(f"[VERTEX_AI_VIDEO] Model '{model}' successfully analyzed video multimodal stream!")
-                    res = _process_gemini_claim_response(parsed, default_transcript=f"Audited via native video stream ({model})")
-                    if res:
-                        return res
-                except Exception as e_v:
-                    logger.warning(f"[VERTEX_AI_VIDEO] Native video ingestion with '{model}' encountered issue: {e_v}")
+            for cascade in video_cascades:
+                c_inst = cascade["client"]
+                c_label = cascade["label"]
+                for model in list(dict.fromkeys(cascade["models"])):
+                    try:
+                        logger.info(f"[VERTEX_AI_VIDEO] Ingesting video stream via {c_label} model '{model}'...")
+                        response = c_inst.models.generate_content(
+                            model=model,
+                            contents=[video_part, native_video_prompt],
+                            config=types.GenerateContentConfig(response_mime_type="application/json")
+                        )
+                        parsed = json.loads(response.text)
+                        logger.info(f"[VERTEX_AI_VIDEO] Model '{model}' on {c_label} successfully analyzed video multimodal stream!")
+                        res = _process_gemini_claim_response(parsed, default_transcript=f"Audited via native video stream ({model})")
+                        if res:
+                            return res
+                    except Exception as e_v:
+                        logger.warning(f"[VERTEX_AI_VIDEO] Native video ingestion with {c_label} '{model}' encountered issue: {e_v}")
         except Exception as e_outer:
             logger.warning(f"[VERTEX_AI_VIDEO] Part.from_uri initialization failed: {e_outer}")
 
@@ -409,36 +438,33 @@ CRITICAL AUDITING INSTRUCTIONS:
   - "manipulative_phrases": list of objects [{{"phrase": string, "category": string, "timestamp": string}}]
 """
 
-        fallback_models = [
-            "gemini-3.1-flash-lite",
-            "gemini-3.8-flash",
-            "gemini-2.5-flash-lite",
-            self.model_name
-        ]
         last_error = None
 
-        for model in list(dict.fromkeys(fallback_models)):
-            try:
-                contents = []
-                if thumbnail_bytes:
-                    contents.append(types.Part.from_bytes(data=thumbnail_bytes, mime_type="image/jpeg"))
-                contents.append(prompt)
+        for cascade in video_cascades:
+            c_inst = cascade["client"]
+            c_label = cascade["label"]
+            for model in list(dict.fromkeys(cascade["models"])):
+                try:
+                    contents = []
+                    if thumbnail_bytes:
+                        contents.append(types.Part.from_bytes(data=thumbnail_bytes, mime_type="image/jpeg"))
+                    contents.append(prompt)
 
-                logger.info(f"[GEMINI_REQUEST] Analyzing YouTube claim using Alternative 1 model '{model}'...")
-                response = self.client.models.generate_content(
-                    model=model,
-                    contents=contents,
-                    config=types.GenerateContentConfig(response_mime_type="application/json")
-                )
-                parsed = json.loads(response.text)
-                logger.info(f"[GEMINI_RESPONSE] Model '{model}' successfully evaluated video transcript. Output: {parsed}")
-                res = _process_gemini_claim_response(parsed, default_transcript=transcript_text)
-                if res:
-                    return res
-            except Exception as e:
-                logger.warning(f"[GEMINI_FALLBACK] Model '{model}' failed: {e}. Attempting next model...")
-                last_error = e
-                continue
+                    logger.info(f"[GEMINI_REQUEST] Analyzing YouTube claim using Alternative 1 with {c_label} model '{model}'...")
+                    response = c_inst.models.generate_content(
+                        model=model,
+                        contents=contents,
+                        config=types.GenerateContentConfig(response_mime_type="application/json")
+                    )
+                    parsed = json.loads(response.text)
+                    logger.info(f"[GEMINI_RESPONSE] Model '{model}' on {c_label} successfully evaluated video transcript. Output: {parsed}")
+                    res = _process_gemini_claim_response(parsed, default_transcript=transcript_text)
+                    if res:
+                        return res
+                except Exception as e:
+                    logger.warning(f"[GEMINI_FALLBACK] {c_label} model '{model}' failed: {e}. Attempting next model...")
+                    last_error = e
+                    continue
 
         # If Gemini is unavailable, check if text has any valid financial claims
         logger.info(f"Gemini YouTube models unavailable ({last_error}), applying fallback relevance filter.")
@@ -655,70 +681,63 @@ CRITICAL AUDITING INSTRUCTIONS:
         }}
         If multiple stocks are recommended, return an array of these JSON objects.
         """
-        fallback_models = [
-            self.model_name,
-            "gemini-3.1-flash-lite",
-            "gemini-3.8-flash",
-            "gemini-2.5-flash-lite",
-            "gemini-3.5-flash-lite",
-            "models/gemini-3.1-flash-lite",
-            "models/gemini-3.8-flash",
-            "models/gemini-2.5-flash-lite",
-        ]
+        cascades = self._get_cascades()
         last_error = None
 
-
         logger.info(f"[OCR_START] Analyzing screenshot media ({len(image_bytes)} bytes, mime: {mime_type}, hint: {market_hint})")
-        for model in list(dict.fromkeys(fallback_models)):
-            try:
-                logger.info(f"[GEMINI_VISION_REQUEST] Querying model '{model}' with OCR media prompt...")
-                response = self.client.models.generate_content(
-                    model=model,
-                    contents=[
-                        types.Part.from_bytes(data=image_bytes, mime_type=mime_type),
-                        prompt
-                    ],
-                    config=types.GenerateContentConfig(response_mime_type="application/json")
-                )
-                parsed = json.loads(response.text)
-                logger.info(f"[GEMINI_VISION_RESPONSE] Model '{model}' parsed vision media: {parsed}")
+        for cascade in cascades:
+            c_inst = cascade["client"]
+            c_label = cascade["label"]
+            for model in list(dict.fromkeys(cascade["models"])):
+                try:
+                    logger.info(f"[GEMINI_VISION_REQUEST] Querying {c_label} model '{model}' with OCR media prompt...")
+                    response = c_inst.models.generate_content(
+                        model=model,
+                        contents=[
+                            types.Part.from_bytes(data=image_bytes, mime_type=mime_type),
+                            prompt
+                        ],
+                        config=types.GenerateContentConfig(response_mime_type="application/json")
+                    )
+                    parsed = json.loads(response.text)
+                    logger.info(f"[GEMINI_VISION_RESPONSE] Model '{model}' on {c_label} parsed vision media: {parsed}")
 
-                if isinstance(parsed, dict) and parsed.get("is_financial_advice") is False:
-                    logger.info(f"[GEMINI_DECISION] Media classified as NOT financial advice by {model}.")
-                    return {
-                        "is_financial_advice": False,
-                        "message": NOT_FINANCIAL_ADVICE_MSG
-                    }
-                if isinstance(parsed, list):
-                    if all(isinstance(c, dict) and c.get("is_financial_advice") is False for c in parsed):
+                    if isinstance(parsed, dict) and parsed.get("is_financial_advice") is False:
                         logger.info(f"[GEMINI_DECISION] Media classified as NOT financial advice by {model}.")
                         return {
                             "is_financial_advice": False,
                             "message": NOT_FINANCIAL_ADVICE_MSG
                         }
-                    valid = [c for c in parsed if isinstance(c, dict) and (c.get("ticker") or c.get("company_name")) and c.get("is_financial_advice") is not False]
-                    if valid:
-                        logger.info(f"[GEMINI_CLAIM] Extracted {len(valid)} multi-stock claims from media: {[c.get('ticker') for c in valid]}")
-                        return valid if len(valid) > 1 else valid[0]
+                    if isinstance(parsed, list):
+                        if all(isinstance(c, dict) and c.get("is_financial_advice") is False for c in parsed):
+                            logger.info(f"[GEMINI_DECISION] Media classified as NOT financial advice by {model}.")
+                            return {
+                                "is_financial_advice": False,
+                                "message": NOT_FINANCIAL_ADVICE_MSG
+                            }
+                        valid = [c for c in parsed if isinstance(c, dict) and (c.get("ticker") or c.get("company_name")) and c.get("is_financial_advice") is not False]
+                        if valid:
+                            logger.info(f"[GEMINI_CLAIM] Extracted {len(valid)} multi-stock claims from media: {[c.get('ticker') for c in valid]}")
+                            return valid if len(valid) > 1 else valid[0]
+                        return {
+                            "is_financial_advice": False,
+                            "message": NOT_FINANCIAL_ADVICE_MSG
+                        }
+
+                    if isinstance(parsed, dict) and (parsed.get("ticker") or parsed.get("company_name")):
+                        logger.info(f"[GEMINI_CLAIM] Extracted single claim from media: {parsed.get('ticker')} ({parsed.get('company_name')})")
+                        return parsed
+
+                    # Content parsed without valid securities claims
+                    logger.info(f"[GEMINI_DECISION] Media parsed without valid securities claims.")
                     return {
                         "is_financial_advice": False,
                         "message": NOT_FINANCIAL_ADVICE_MSG
                     }
-
-                if isinstance(parsed, dict) and (parsed.get("ticker") or parsed.get("company_name")):
-                    logger.info(f"[GEMINI_CLAIM] Extracted single claim from media: {parsed.get('ticker')} ({parsed.get('company_name')})")
-                    return parsed
-
-                # Content parsed without valid securities claims
-                logger.info(f"[GEMINI_DECISION] Media parsed without valid securities claims.")
-                return {
-                    "is_financial_advice": False,
-                    "message": NOT_FINANCIAL_ADVICE_MSG
-                }
-            except Exception as e:
-                logger.warning(f"[GEMINI_VISION_FALLBACK] Model '{model}' failed: {e}. Attempting next model...")
-                last_error = e
-                continue
+                except Exception as e:
+                    logger.warning(f"[GEMINI_VISION_FALLBACK] {c_label} model '{model}' failed: {e}. Attempting next model...")
+                    last_error = e
+                    continue
 
         logger.info(f"Vision API notice ({last_error}), media not verified as financial advice.")
         known_test_sizes = {71845, 44813, 77201, 78164, 1265021, 1079040, 1156630}
@@ -792,60 +811,53 @@ CRITICAL AUDITING INSTRUCTIONS:
           Return JSON with "is_financial_advice": true, and keys: ticker, company_name, direction, target_price, claimed_percentage_move, time_horizon_days, exact_quote, creator_claimed_name, guaranteed_return_language_detected, manipulative_phrases.
         """
 
-        fallback_models = [
-            self.model_name,
-            "gemini-3.1-flash-lite",
-            "gemini-3.8-flash",
-            "gemini-2.5-flash-lite",
-            "gemini-3.5-flash-lite",
-            "models/gemini-3.1-flash-lite",
-            "models/gemini-3.8-flash",
-            "models/gemini-2.5-flash-lite",
-        ]
+        cascades = self._get_cascades()
         last_error = None
 
-
         logger.info(f"[TEXT_START] Auditing forwarded text ({len(text_content)} chars): '{text_content[:80]}...' | hint: {market_hint}")
-        for model in list(dict.fromkeys(fallback_models)):
-            try:
-                logger.info(f"[GEMINI_TEXT_REQUEST] Calling Gemini model '{model}' for text audit...")
-                response = self.client.models.generate_content(
-                    model=model,
-                    contents=[prompt],
-                    config=types.GenerateContentConfig(response_mime_type="application/json")
-                )
-                parsed = json.loads(response.text)
-                logger.info(f"[GEMINI_TEXT_RESPONSE] Model '{model}' parsed text response: {parsed}")
+        for cascade in cascades:
+            c_inst = cascade["client"]
+            c_label = cascade["label"]
+            for model in list(dict.fromkeys(cascade["models"])):
+                try:
+                    logger.info(f"[GEMINI_TEXT_REQUEST] Calling {c_label} model '{model}' for text audit...")
+                    response = c_inst.models.generate_content(
+                        model=model,
+                        contents=[prompt],
+                        config=types.GenerateContentConfig(response_mime_type="application/json")
+                    )
+                    parsed = json.loads(response.text)
+                    logger.info(f"[GEMINI_TEXT_RESPONSE] Model '{model}' on {c_label} parsed text response: {parsed}")
 
-                if isinstance(parsed, dict) and parsed.get("is_financial_advice") is False:
-                    logger.info(f"[GEMINI_DECISION] Text evaluated as NOT financial advice by {model}.")
-                    return {
-                        "is_financial_advice": False,
-                        "message": NOT_FINANCIAL_ADVICE_MSG
-                    }
-                if isinstance(parsed, list):
-                    if all(isinstance(c, dict) and c.get("is_financial_advice") is False for c in parsed):
+                    if isinstance(parsed, dict) and parsed.get("is_financial_advice") is False:
                         logger.info(f"[GEMINI_DECISION] Text evaluated as NOT financial advice by {model}.")
                         return {
                             "is_financial_advice": False,
                             "message": NOT_FINANCIAL_ADVICE_MSG
                         }
-                    valid = [c for c in parsed if isinstance(c, dict) and (c.get("ticker") or c.get("company_name")) and c.get("is_financial_advice") is not False]
-                    if valid:
-                        logger.info(f"[GEMINI_CLAIM] Extracted {len(valid)} multi-stock claims from text: {[c.get('ticker') for c in valid]}")
-                        return valid if len(valid) > 1 else valid[0]
-                    return {
-                        "is_financial_advice": False,
-                        "message": NOT_FINANCIAL_ADVICE_MSG
-                    }
+                    if isinstance(parsed, list):
+                        if all(isinstance(c, dict) and c.get("is_financial_advice") is False for c in parsed):
+                            logger.info(f"[GEMINI_DECISION] Text evaluated as NOT financial advice by {model}.")
+                            return {
+                                "is_financial_advice": False,
+                                "message": NOT_FINANCIAL_ADVICE_MSG
+                            }
+                        valid = [c for c in parsed if isinstance(c, dict) and (c.get("ticker") or c.get("company_name")) and c.get("is_financial_advice") is not False]
+                        if valid:
+                            logger.info(f"[GEMINI_CLAIM] Extracted {len(valid)} multi-stock claims from text: {[c.get('ticker') for c in valid]}")
+                            return valid if len(valid) > 1 else valid[0]
+                        return {
+                            "is_financial_advice": False,
+                            "message": NOT_FINANCIAL_ADVICE_MSG
+                        }
 
-                if isinstance(parsed, dict) and (parsed.get("ticker") or parsed.get("company_name")):
-                    logger.info(f"[GEMINI_CLAIM] Extracted single claim from text: {parsed.get('ticker')} ({parsed.get('company_name')})")
-                    return parsed
-            except Exception as e:
-                logger.warning(f"[GEMINI_TEXT_FALLBACK] Model '{model}' failed: {e}. Attempting next model...")
-                last_error = e
-                continue
+                    if isinstance(parsed, dict) and (parsed.get("ticker") or parsed.get("company_name")):
+                        logger.info(f"[GEMINI_CLAIM] Extracted single claim from text: {parsed.get('ticker')} ({parsed.get('company_name')})")
+                        return parsed
+                except Exception as e:
+                    logger.warning(f"[GEMINI_TEXT_FALLBACK] {c_label} model '{model}' failed: {e}. Attempting next model...")
+                    last_error = e
+                    continue
 
         # If LLM unavailable, match universe if text is financial
         lower_t = text_content.lower()

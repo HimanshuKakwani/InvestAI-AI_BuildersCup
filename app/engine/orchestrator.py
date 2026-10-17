@@ -27,7 +27,8 @@ class AnalysisService:
         claim: Dict[str, Any],
         raw_text_for_p9: str,
         region: str,
-        market_cfg: Dict[str, Any]
+        market_cfg: Dict[str, Any],
+        modality: str = "text"
     ) -> Dict[str, Any]:
         """Audits a single extracted claim against empirical market data and regulatory registries."""
         # Ticker Resolution
@@ -149,6 +150,7 @@ class AnalysisService:
         return {
             "report_id": report_id,
             "region": region,
+            "modality": modality,
             "market_name": market_cfg.get("name", region),
             "flag_emoji": market_cfg.get("flag_emoji", ""),
             "regulator": market_cfg.get("regulator", ""),
@@ -191,10 +193,23 @@ class AnalysisService:
             if video_id:
                 cached = reports_cache.get_video_cache(video_id)
                 if cached:
-                    logger.info(f"[VIDEO_CACHE_HIT] Found cached audit for video '{video_id}'. Enforcing {Config.VIDEO_CACHE_DELAY_SEC}s loading delay for UI investigation animation...")
-                    time.sleep(Config.VIDEO_CACHE_DELAY_SEC)
-                    cached["from_cache"] = True
-                    return cached
+                    # Anti-degraded cache guard:
+                    # If cached entry only has 1 stock with unstated target price, or is from graphic thumbnail text
+                    total_stocks = cached.get("total_stocks_audited", 1)
+                    first_claim = cached.get("claim", {})
+                    target_p = first_claim.get("target_price")
+                    exact_q = (first_claim.get("exact_quote") or "").lower()
+
+                    is_degraded = total_stocks <= 1 and (target_p is None or "recommendation\nbuy" in exact_q)
+                    if is_degraded:
+                        logger.warning(f"[VIDEO_CACHE_BYPASS] Cached entry for '{video_id}' is degraded ({total_stocks} stock, no target). Purging & re-investigating fresh...")
+                    else:
+                        logger.info(f"[VIDEO_CACHE_HIT] Found cached audit for video '{video_id}'. Enforcing {Config.VIDEO_CACHE_DELAY_SEC}s loading delay for UI investigation animation...")
+                        time.sleep(Config.VIDEO_CACHE_DELAY_SEC)
+                        cached["from_cache"] = True
+                        if "modality" not in cached:
+                            cached["modality"] = modality
+                        return cached
 
         # 1. Extraction via Gemini
         raw_text_for_p9 = ""
@@ -214,6 +229,7 @@ class AnalysisService:
             logger.info(f"[AUDIT_REJECTED] Input evaluated as NOT financial advice: {claims_raw.get('message')}")
             rejection_result = {
                 "is_financial_advice": False,
+                "modality": modality,
                 "message": claims_raw.get("message") or "Not a financial advice, kindly provide relevant input",
                 "error": claims_raw.get("message") or "Not a financial advice, kindly provide relevant input"
             }
@@ -235,6 +251,7 @@ class AnalysisService:
             logger.info(f"[AUDIT_REJECTED] No actionable securities claims extracted from input.")
             return {
                 "is_financial_advice": False,
+                "modality": modality,
                 "message": "Not a financial advice, kindly provide relevant input",
                 "error": "Not a financial advice, kindly provide relevant input"
             }
@@ -244,7 +261,7 @@ class AnalysisService:
         # Audit each claim
         evaluated_reports = []
         for c in claims_list:
-            audit = self.evaluate_single_claim(c, raw_text_for_p9, region, market_cfg)
+            audit = self.evaluate_single_claim(c, raw_text_for_p9, region, market_cfg, modality=modality)
             evaluated_reports.append(audit)
 
         primary = evaluated_reports[0]
@@ -253,6 +270,7 @@ class AnalysisService:
         final_result = {
             "report_id": primary["report_id"],
             "region": region,
+            "modality": modality,
             "market_name": market_cfg.get("name", region),
             "flag_emoji": market_cfg.get("flag_emoji", ""),
             "regulator": market_cfg.get("regulator", ""),

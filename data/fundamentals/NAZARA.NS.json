@@ -1,0 +1,82 @@
+{
+  "ticker": "NAZARA.NS",
+  "name": "Nazara Technologies Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Communication Services",
+  "trailing_eps": -1.46,
+  "forward_eps": 6.41667,
+  "market_cap": 170846781440,
+  "current_price": 418.15,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 10910200000.0,
+      "net_income": 393900000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 11382800000.0,
+      "net_income": 565700000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 16239100000.0,
+      "net_income": 758200000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 18289800000.0,
+      "net_income": 958500000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-06-30",
+      "revenue": 4987700000.0,
+      "net_income": 534600000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 5264600000.0,
+      "net_income": -293500000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 4059700000.0,
+      "net_income": 98400000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 3977800000.0,
+      "net_income": 469600000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 4287700000.0,
+      "net_income": -799200000.0
+    }
+  ],
+  "pe_band_5y": null,
+  "analyst": {
+    "target_mean": 392.7,
+    "target_high": 720.0,
+    "target_low": 215.0,
+    "num_analysts": 10,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 38.22,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-17"
+}

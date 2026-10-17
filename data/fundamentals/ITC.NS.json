@@ -6,8 +6,8 @@
   "sector": "Consumer Defensive",
   "trailing_eps": 15.84,
   "forward_eps": 16.82939,
-  "market_cap": 3276730269696,
-  "current_price": 261.5,
+  "market_cap": 3301791236096,
+  "current_price": 263.5,
   "annual": [
     {
       "period_end": "2022-03-31",
@@ -64,7 +64,7 @@
   ],
   "pe_band_5y": {
     "min": 11.35,
-    "median": 23.01,
+    "median": 22.97,
     "max": 27.36,
     "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
   },
@@ -78,10 +78,10 @@
   "shareholding": [
     {
       "quarter": "Recent",
-      "promoter_pct": 29.49,
+      "promoter_pct": 29.48,
       "pledged_pct": 0.0
     }
   ],
   "source": "Yahoo Finance (yfinance live)",
-  "as_of": "2026-10-14"
+  "as_of": "2026-10-17"
 }

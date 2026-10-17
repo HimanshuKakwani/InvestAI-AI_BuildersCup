@@ -1,0 +1,87 @@
+{
+  "ticker": "INDHOTEL.NS",
+  "name": "The Indian Hotels Company Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Consumer Cyclical",
+  "trailing_eps": 15.07,
+  "forward_eps": 18.67664,
+  "market_cap": 1116924280832,
+  "current_price": 772.1,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 55820500000.0,
+      "net_income": 10025900000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 65042100000.0,
+      "net_income": 12590700000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 80411800000.0,
+      "net_income": 19075900000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 93066800000.0,
+      "net_income": 20843800000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 24251400000.0,
+      "net_income": 5223000000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 20410800000.0,
+      "net_income": 2963700000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 28419600000.0,
+      "net_income": 9032300000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 27652900000.0,
+      "net_income": 5998600000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 23391900000.0,
+      "net_income": 3579000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 13.4,
+    "median": 37.72,
+    "max": 52.25,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 834.2759,
+    "target_high": 960.0,
+    "target_low": 699.0,
+    "num_analysts": 29,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 39.35,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-17"
+}

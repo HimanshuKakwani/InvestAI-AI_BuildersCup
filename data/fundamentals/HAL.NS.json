@@ -1,0 +1,92 @@
+{
+  "ticker": "HAL.NS",
+  "name": "Hindustan Aeronautics Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Industrials",
+  "trailing_eps": 139.38,
+  "forward_eps": 172.72067,
+  "market_cap": 3336518238208,
+  "current_price": 4989.0,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 263605600000.0,
+      "net_income": 58277400000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 281619000000.0,
+      "net_income": 76210500000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 301046900000.0,
+      "net_income": 83641300000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 317917400000.0,
+      "net_income": 91156000000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 48190100000.0,
+      "net_income": 13837700000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 66286100000.0,
+      "net_income": 16690700000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 76988000000.0,
+      "net_income": 18666800000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 139424000000.0,
+      "net_income": 41960800000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 55151700000.0,
+      "net_income": 15896800000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 4.55,
+    "median": 24.12,
+    "max": 35.32,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 5582.407,
+    "target_high": 6800.0,
+    "target_low": 3200.0,
+    "num_analysts": 27,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 71.64,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-17"
+}
