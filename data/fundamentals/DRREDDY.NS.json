@@ -1,0 +1,92 @@
+{
+  "ticker": "DRREDDY.NS",
+  "name": "Dr. Reddy's Laboratories Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Healthcare",
+  "trailing_eps": 39.74,
+  "forward_eps": 58.81312,
+  "market_cap": 1027074949120,
+  "current_price": 1233.0,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 245879000000.0,
+      "net_income": 45067000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 279164000000.0,
+      "net_income": 55684000000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 325535000000.0,
+      "net_income": 56544000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 335933000000.0,
+      "net_income": 42850000000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 85452000000.0,
+      "net_income": 14178000000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 88051000000.0,
+      "net_income": 14372000000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 87268000000.0,
+      "net_income": 12098000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 75162000000.0,
+      "net_income": 2209000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 80705000000.0,
+      "net_income": 4435000000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 20.58,
+    "median": 29.02,
+    "max": 33.51,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 1283.6487,
+    "target_high": 1740.0,
+    "target_low": 1039.0,
+    "num_analysts": 37,
+    "recommendation": "hold"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 30.14,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-18"
+}

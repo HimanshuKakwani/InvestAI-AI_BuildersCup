@@ -1,0 +1,82 @@
+{
+  "ticker": "AVADHSUGAR.NS",
+  "name": "Avadh Sugar & Energy Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Consumer Defensive",
+  "trailing_eps": 32.95,
+  "forward_eps": null,
+  "market_cap": 19926335488,
+  "current_price": 995.4,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 27908478000.0,
+      "net_income": 1002394000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 26845740000.0,
+      "net_income": 1281110000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 26277343000.0,
+      "net_income": 879351000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 26898763000.0,
+      "net_income": 573053000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-06-30",
+      "revenue": 7166081000.0,
+      "net_income": -84138000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": 6681496000.0,
+      "net_income": -65903000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 6381471000.0,
+      "net_income": 166971000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 6706133000.0,
+      "net_income": 556123000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 7792506000.0,
+      "net_income": 2343000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 11.13,
+    "median": 15.12,
+    "max": 22.21,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": null,
+    "target_high": null,
+    "target_low": null,
+    "num_analysts": 0,
+    "recommendation": "none"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 71.4,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-18"
+}

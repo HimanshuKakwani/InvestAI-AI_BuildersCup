@@ -200,9 +200,16 @@ class AnalysisService:
                     target_p = first_claim.get("target_price")
                     exact_q = (first_claim.get("exact_quote") or "").lower()
 
-                    is_degraded = total_stocks <= 1 and (target_p is None or "recommendation\nbuy" in exact_q)
+                    is_degraded = (
+                        total_stocks <= 1 and (
+                            target_p is None
+                            or cached.get("modality") != "youtube_url"
+                            or "recommendation\nbuy" in exact_q
+                            or cached.get("current_price") is None
+                        )
+                    )
                     if is_degraded:
-                        logger.warning(f"[VIDEO_CACHE_BYPASS] Cached entry for '{video_id}' is degraded ({total_stocks} stock, no target). Purging & re-investigating fresh...")
+                        logger.warning(f"[VIDEO_CACHE_BYPASS] Cached entry for '{video_id}' is degraded ({total_stocks} stock, legacy cache or missing targets). Purging & re-investigating fresh...")
                     else:
                         logger.info(f"[VIDEO_CACHE_HIT] Found cached audit for video '{video_id}'. Enforcing {Config.VIDEO_CACHE_DELAY_SEC}s loading delay for UI investigation animation...")
                         time.sleep(Config.VIDEO_CACHE_DELAY_SEC)

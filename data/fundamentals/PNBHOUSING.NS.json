@@ -1,0 +1,87 @@
+{
+  "ticker": "PNBHOUSING.NS",
+  "name": "PNB Housing Finance Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Financial Services",
+  "trailing_eps": 89.89,
+  "forward_eps": 105.39607,
+  "market_cap": 304540712960,
+  "current_price": 1167.7,
+  "annual": [
+    {
+      "period_end": "2022-03-31",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2023-03-31",
+      "revenue": 25410700000.0,
+      "net_income": 10460000000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 27836300000.0,
+      "net_income": 15080100000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 29620600000.0,
+      "net_income": 19361400000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 36174400000.0,
+      "net_income": 22912400000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 8542200000.0,
+      "net_income": 5503800000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 8440600000.0,
+      "net_income": 5335000000.0
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 8644800000.0,
+      "net_income": 5203500000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 9217300000.0,
+      "net_income": 6558000000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 9234400000.0,
+      "net_income": 5573400000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 3.19,
+    "median": 8.59,
+    "max": 12.16,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 1305.0,
+    "target_high": 1425.0,
+    "target_low": 960.0,
+    "num_analysts": 13,
+    "recommendation": "strong_buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 28.01,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-18"
+}

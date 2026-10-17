@@ -1,0 +1,87 @@
+{
+  "ticker": "NUVAMA.NS",
+  "name": "Nuvama Wealth Management Limited",
+  "market": "IN",
+  "currency": "INR",
+  "sector": "Financial Services",
+  "trailing_eps": 57.99,
+  "forward_eps": 83.74198,
+  "market_cap": 314802208768,
+  "current_price": 1706.1,
+  "annual": [
+    {
+      "period_end": "2023-03-31",
+      "revenue": 13229530000.0,
+      "net_income": 3050910000.0
+    },
+    {
+      "period_end": "2024-03-31",
+      "revenue": 17384530000.0,
+      "net_income": 6253210000.0
+    },
+    {
+      "period_end": "2025-03-31",
+      "revenue": 21395400000.0,
+      "net_income": 9861700000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 22835200000.0,
+      "net_income": 10410400000.0
+    }
+  ],
+  "quarterly": [
+    {
+      "period_end": "2025-03-31",
+      "revenue": 5747600000.0,
+      "net_income": 2554100000.0
+    },
+    {
+      "period_end": "2025-06-30",
+      "revenue": 5279400000.0,
+      "net_income": 2639600000.0
+    },
+    {
+      "period_end": "2025-09-30",
+      "revenue": null,
+      "net_income": null
+    },
+    {
+      "period_end": "2025-12-31",
+      "revenue": 5483200000.0,
+      "net_income": 2538000000.0
+    },
+    {
+      "period_end": "2026-03-31",
+      "revenue": 6436400000.0,
+      "net_income": 2691500000.0
+    },
+    {
+      "period_end": "2026-06-30",
+      "revenue": 5775300000.0,
+      "net_income": 3057900000.0
+    }
+  ],
+  "pe_band_5y": {
+    "min": 10.37,
+    "median": 22.01,
+    "max": 30.7,
+    "method": "5-year daily close / trailing diluted EPS (5th-95th percentile)"
+  },
+  "analyst": {
+    "target_mean": 2038.3334,
+    "target_high": 2250.0,
+    "target_low": 1800.0,
+    "num_analysts": 9,
+    "recommendation": "buy"
+  },
+  "shareholding": [
+    {
+      "quarter": "Recent",
+      "promoter_pct": 57.12,
+      "pledged_pct": 0.0
+    }
+  ],
+  "source": "Yahoo Finance (yfinance live)",
+  "as_of": "2026-10-18"
+}

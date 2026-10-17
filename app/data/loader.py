@@ -57,6 +57,13 @@ class DataLoader:
         Checks curated universe first; dynamically verifies with live exchange if unknown.
         """
         q = query.strip().upper()
+        COMMON_ALIAS_MAP = {
+            "PNBHFL.NS": "PNBHOUSING.NS",
+            "PNBHFL": "PNBHOUSING.NS",
+            "AVADH.NS": "AVADHSUGAR.NS",
+            "AVADH": "AVADHSUGAR.NS",
+        }
+        q = COMMON_ALIAS_MAP.get(q, q)
         if not q or q.isdigit() or len(q) < 2:
             return None
 
@@ -118,6 +125,12 @@ class DataLoader:
             "ZOMATO.NS": "ETERNAL.NS",
             "ZOMATO.BO": "ETERNAL.BO",
             "ZOMATO": "ETERNAL.NS",
+            "PNBHFL.NS": "PNBHOUSING.NS",
+            "PNBHFL.BO": "PNBHOUSING.BO",
+            "PNBHFL": "PNBHOUSING.NS",
+            "AVADH.NS": "AVADHSUGAR.NS",
+            "AVADH.BO": "AVADHSUGAR.BO",
+            "AVADH": "AVADHSUGAR.NS",
         }
         return TICKER_YFINANCE_MAP.get(ticker.upper(), ticker)
 
