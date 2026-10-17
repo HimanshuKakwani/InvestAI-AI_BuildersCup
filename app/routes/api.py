@@ -142,6 +142,10 @@ def create_app():
     def index():
         return render_template("index.html")
 
+    @app.route("/favicon.ico")
+    def favicon():
+        return send_file(str(ROOT_DIR / "static" / "favicon.ico"), mimetype="image/vnd.microsoft.icon")
+
     @app.route("/healthz")
     def healthz():
         """

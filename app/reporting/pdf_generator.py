@@ -9,6 +9,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, KeepTogether, HRFlowable
 )
+from app.config import ROOT_DIR
 
 # Colors matching InvestPI theme
 DARK_BG = colors.HexColor("#0f172a")
@@ -105,9 +106,25 @@ def build_pdf_report(data: Dict[str, Any], chart_b64: str = None) -> io.BytesIO:
         alignment=2 # Right align
     )
 
+    logo_file = ROOT_DIR / "static" / "investpi_logo.png"
+    if logo_file.exists():
+        logo_img = Image(str(logo_file), width=0.52*inch, height=0.52*inch)
+        title_content = Table([
+            [logo_img, Paragraph(f"<b>InvestPI Forensic Audit Report</b><br/><font size=8 color='#64748b'>Retail Investor Scam Defense Shield · AI Builder Cup</font>", title_style)]
+        ], colWidths=[0.6*inch, 290])
+        title_content.setStyle(TableStyle([
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('LEFTPADDING', (0, 0), (-1, -1), 0),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+            ('TOPPADDING', (0, 0), (-1, -1), 0),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+        ]))
+    else:
+        title_content = Paragraph(f"<b>InvestPI Forensic Audit Report</b><br/><font size=8 color='#64748b'>Retail Investor Scam Defense Shield · AI Builder Cup</font>", title_style)
+
     header_table = Table([
         [
-            Paragraph(f"<b>InvestPI Forensic Audit Report</b><br/><font size=8 color='#64748b'>Retail Investor Scam Defense Shield · AI Builder Cup</font>", title_style),
+            title_content,
             Paragraph(f"<font size=8><b>Report ID:</b> {report_id}<br/><b>Jurisdiction:</b> {market_name} ({regulator})<br/><b>Generated:</b> Automated Engine</font>", right_style)
         ]
     ], colWidths=[350, 190])
