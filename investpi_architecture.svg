@@ -50,8 +50,8 @@
   <!-- ==================== TOP TITLE & FLOW LEGEND BAR ==================== -->
   <g transform="translate(40, 22)" filter="url(#shadow)">
     <rect width="1880" height="66" rx="8" fill="#202024" stroke="#3F3F46" stroke-width="1.5"/>
-    <text x="24" y="30" font-size="19" font-weight="800" fill="#FFFFFF">InvestPI — Cloud-Native Multi-Agent &amp; BigQuery Vector RAG Architecture</text>
-    <text x="24" y="51" font-size="12" fill="#A1A1AA" class="mono">Google Cloud Run (Scale-to-Zero) · BigQuery Vector Search (text-embedding-004) · Cloud Pub/Sub · Gemini 2.5 Flash</text>
+    <text x="24" y="30" font-size="19" font-weight="800" fill="#FFFFFF">InvestPI — Cloud-Native Multi-Agent, Vertex AI &amp; BigQuery Vector RAG Architecture</text>
+    <text x="24" y="51" font-size="12" fill="#A1A1AA" class="mono">Google Cloud Run · Vertex AI Native Video Stream (Option 4) · 3-Tier Video Cache (5s Delay) · BigQuery Vector RAG · Gemini 3.1 Flash-Lite</text>
 
     <!-- Service Color Legend Pills -->
     <g transform="translate(1080, 18)" font-size="11" font-weight="600">
@@ -71,7 +71,7 @@
       <text x="527" y="19" fill="#ffedd5" text-anchor="middle">Firestore L2</text>
 
       <rect x="590" y="0" width="105" height="30" rx="5" fill="#3b0764" stroke="#a855f7" stroke-width="1.5"/>
-      <text x="642" y="19" fill="#f3e8ff" text-anchor="middle">Gemini AI</text>
+      <text x="642" y="19" fill="#f3e8ff" text-anchor="middle">Vertex AI</text>
 
       <rect x="705" y="0" width="85" height="30" rx="5" fill="#713f12" stroke="#eab308" stroke-width="1.5"/>
       <text x="747" y="19" fill="#fef08a" text-anchor="middle">Cron</text>
@@ -136,7 +136,7 @@
       <text x="190" y="26" text-anchor="middle" font-size="12.5" font-weight="600" fill="#dbeafe">Flask Application Server (Werkzeug ProxyFix)</text>
 
       <rect x="400" y="0" width="450" height="42" rx="5" fill="#172554" stroke="#3b82f6" stroke-width="1.5"/>
-      <text x="625" y="26" text-anchor="middle" font-size="12.5" font-weight="600" fill="#dbeafe">L1 LRU Memory Cache &amp; Deterministic Fallback Store</text>
+      <text x="625" y="26" text-anchor="middle" font-size="12.5" font-weight="600" fill="#dbeafe">3-Tier Video Caching (L1/L2/L3) + 5.0s UX Investigation Delay</text>
 
       <rect x="870" y="0" width="460" height="42" rx="5" fill="#172554" stroke="#3b82f6" stroke-width="1.5"/>
       <text x="1100" y="26" text-anchor="middle" font-size="12.5" font-weight="600" fill="#dbeafe">SEBI / MAS / ASIC Cross-Registry Validator</text>
@@ -351,57 +351,61 @@
 
     <g transform="translate(20, 50)">
       <g transform="translate(0, 0)">
-        <path d="M 0,14 L 0,86 A 205,12 0 0,0 410,86 L 410,14 Z" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
-        <ellipse cx="205" cy="14" rx="205" ry="12" fill="#9a3412" stroke="#f97316" stroke-width="2"/>
-        <text x="205" y="48" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">investpi_cases</text>
-        <text x="205" y="68" text-anchor="middle" font-size="11.5" fill="#fed7aa">(QUEUED → PROCESSING → COMPLETED lifecycle)</text>
+        <path d="M 0,10 L 0,65 A 205,10 0 0,0 410,65 L 410,10 Z" fill="#7c2d12" stroke="#f97316" stroke-width="1.8"/>
+        <ellipse cx="205" cy="10" rx="205" ry="10" fill="#9a3412" stroke="#f97316" stroke-width="1.8"/>
+        <text x="205" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">investpi_video_cache</text>
+        <text x="205" y="54" text-anchor="middle" font-size="10.5" fill="#fed7aa">(Pre-audited YouTube verdicts · 5.0s UX delay)</text>
       </g>
 
-      <g transform="translate(0, 110)">
-        <path d="M 0,14 L 0,86 A 205,12 0 0,0 410,86 L 410,14 Z" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
-        <ellipse cx="205" cy="14" rx="205" ry="12" fill="#9a3412" stroke="#f97316" stroke-width="2"/>
-        <text x="205" y="48" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">investpi_reports</text>
-        <text x="205" y="68" text-anchor="middle" font-size="11.5" fill="#fed7aa">(9-Param scorecards, verdicts, and PDF bytes)</text>
+      <g transform="translate(0, 85)">
+        <path d="M 0,10 L 0,65 A 205,10 0 0,0 410,65 L 410,10 Z" fill="#7c2d12" stroke="#f97316" stroke-width="1.8"/>
+        <ellipse cx="205" cy="10" rx="205" ry="10" fill="#9a3412" stroke="#f97316" stroke-width="1.8"/>
+        <text x="205" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">investpi_cases &amp; investpi_reports</text>
+        <text x="205" y="54" text-anchor="middle" font-size="10.5" fill="#fed7aa">(QUEUED → PROCESSING → COMPLETED · 9-Param matrix)</text>
       </g>
 
-      <g transform="translate(0, 220)">
-        <path d="M 0,14 L 0,86 A 205,12 0 0,0 410,86 L 410,14 Z" fill="#7c2d12" stroke="#f97316" stroke-width="2"/>
-        <ellipse cx="205" cy="14" rx="205" ry="12" fill="#9a3412" stroke="#f97316" stroke-width="2"/>
-        <text x="205" y="48" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" class="mono">investpi_prices</text>
-        <text x="205" y="68" text-anchor="middle" font-size="11.5" fill="#fed7aa">(5-year OHLCV daily candle history across IN, SG, AU)</text>
+      <g transform="translate(0, 170)">
+        <path d="M 0,10 L 0,65 A 205,10 0 0,0 410,65 L 410,10 Z" fill="#7c2d12" stroke="#f97316" stroke-width="1.8"/>
+        <ellipse cx="205" cy="10" rx="205" ry="10" fill="#9a3412" stroke="#f97316" stroke-width="1.8"/>
+        <text x="205" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" class="mono">investpi_prices</text>
+        <text x="205" y="54" text-anchor="middle" font-size="10.5" fill="#fed7aa">(5-year OHLCV daily candle history across IN, SG, AU)</text>
       </g>
 
-      <rect x="0" y="325" width="410" height="40" rx="5" fill="#27272A" stroke="#52525B" stroke-width="1"/>
-      <text x="205" y="350" text-anchor="middle" font-size="11" fill="#a1a1aa" class="mono">Multi-instance persistence across container cold starts</text>
+      <rect x="0" y="260" width="410" height="95" rx="5" fill="#27272A" stroke="#52525B" stroke-width="1"/>
+      <text x="205" y="284" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fdba74">3-Tier Storage Strategy</text>
+      <text x="20" y="306" font-size="10" fill="#d4d4d8" class="mono">• L1: Bounded In-Memory LRU Cache (&lt;1ms access)</text>
+      <text x="20" y="324" font-size="10" fill="#d4d4d8" class="mono">• L2: Firestore Collections (Cross-instance cloud)</text>
+      <text x="20" y="342" font-size="10" fill="#d4d4d8" class="mono">• L3: Local Disk JSON Fallback (data/video_cache)</text>
     </g>
   </g>
 
 
-  <!-- SUBGRAPH 4: Google DeepMind Gemini & Registries (Right: x=1520) -->
+  <!-- SUBGRAPH 4: Google Cloud Vertex AI & Registries (Right: x=1520) -->
   <g class="subgraph" data-id="GCP_GEMINI" transform="translate(1520, 810)" filter="url(#shadow)">
     <rect width="400" height="420" rx="6" fill="#1F1F23" stroke="#a855f7" stroke-width="1.8"/>
     <rect width="400" height="32" rx="6" fill="#27272A" stroke="#a855f7" stroke-width="1.2"/>
-    <text x="18" y="21" font-size="13" font-weight="700" fill="#d8b4fe">Google Gemini &amp; Official Registries</text>
+    <text x="18" y="21" font-size="13" font-weight="700" fill="#d8b4fe">Google Cloud Vertex AI &amp; Registries</text>
 
     <g transform="translate(20, 50)">
-      <!-- Gemini 2.5 Flash -->
+      <!-- Gemini 3.1 Flash-Lite (Vertex AI) -->
       <g transform="translate(0, 0)">
-        <rect x="0" y="0" width="360" height="85" rx="6" fill="#3b0764" stroke="#a855f7" stroke-width="2"/>
-        <text x="180" y="25" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Gemini 2.5 Flash (Multimodal)</text>
-        <text x="15" y="46" font-size="11" fill="#e9d5ff">• Native YouTube, MP4 video, OCR perception</text>
-        <text x="15" y="65" font-size="11" fill="#e9d5ff">• Structured claim extraction in &lt;1.2s</text>
+        <rect x="0" y="0" width="360" height="90" rx="6" fill="#3b0764" stroke="#a855f7" stroke-width="2"/>
+        <text x="180" y="23" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Gemini 3.1 Flash-Lite (Vertex AI)</text>
+        <text x="15" y="42" font-size="10.5" fill="#e9d5ff">• Option 4: Native Video Multimodal (Part.from_uri)</text>
+        <text x="15" y="60" font-size="10.5" fill="#e9d5ff">• Alternative 1: Managed Transcript API (SupaData)</text>
+        <text x="15" y="78" font-size="10.5" fill="#e9d5ff">• High-speed multi-stock extraction in ~4.9s</text>
       </g>
 
-      <!-- Gemini 2.5 Pro -->
-      <g transform="translate(0, 98)">
-        <rect x="0" y="0" width="360" height="70" rx="6" fill="#3b0764" stroke="#c084fc" stroke-width="1.5"/>
-        <text x="180" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Gemini 2.5 Pro (Deep Reasoning)</text>
-        <text x="15" y="44" font-size="11" fill="#e9d5ff">• Synthesis of complex financial SWOT tables</text>
-        <text x="15" y="60" font-size="11" fill="#e9d5ff">• High-context corporate disclosure audits</text>
+      <!-- Gemini 3.8 Flash (Vertex AI) -->
+      <g transform="translate(0, 102)">
+        <rect x="0" y="0" width="360" height="64" rx="6" fill="#3b0764" stroke="#c084fc" stroke-width="1.5"/>
+        <text x="180" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Gemini 3.8 Flash (Vertex AI)</text>
+        <text x="15" y="40" font-size="10.5" fill="#e9d5ff">• Multimodal fallback &amp; forensic reasoning</text>
+        <text x="15" y="56" font-size="10.5" fill="#e9d5ff">• High-context corporate disclosure audits</text>
       </g>
 
       <!-- Registries -->
-      <g transform="translate(0, 180)">
+      <g transform="translate(0, 178)">
         <rect x="0" y="0" width="360" height="152" rx="6" fill="#27272A" stroke="#71717A" stroke-width="1.5"/>
         <text x="180" y="23" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Official Deterministic Registries</text>
         <line x1="15" y1="32" x2="345" y2="32" stroke="#3F3F46" stroke-width="1"/>

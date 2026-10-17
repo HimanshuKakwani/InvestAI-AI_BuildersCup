@@ -70,18 +70,18 @@
       <rect x="15" y="14" width="5" height="16" fill="#ffffff" opacity="0.8"/>
       <rect x="23" y="8" width="5" height="22" fill="#d5ff5f"/>
     </g>
-    <text x="74" y="38" fill="#ffffff" font-size="22" font-weight="800" letter-spacing="-0.5">Invest<tspan fill="#d5ff5f">PI</tspan> — End-to-End Forensic Audit &amp; BigQuery Vector RAG Process Flow</text>
-    <text x="74" y="58" fill="#9cb3a8" font-size="12" font-family="monospace">CORE DOCTRINE: "RATE THE CLAIM, NOT THE STOCK" · MULTIMODAL AI + 9-PARAMETER ENGINE + 5 SUB-AGENTS OVER PUB/SUB</text>
+    <text x="74" y="38" fill="#ffffff" font-size="22" font-weight="800" letter-spacing="-0.5">Invest<tspan fill="#d5ff5f">PI</tspan> — End-to-End Forensic Audit, Vertex AI Native Video &amp; BigQuery Vector RAG Process Flow</text>
+    <text x="74" y="58" fill="#9cb3a8" font-size="12" font-family="monospace">OPTION 4 VERTEX AI NATIVE VIDEO STREAM · 3-TIER VIDEO CACHE (5s UX DELAY) · 9-PARAMETER ENGINE · PUB/SUB MESH</text>
 
     <!-- Right Badges -->
     <rect x="1090" y="20" width="135" height="32" rx="6" fill="#18382d" stroke="#2dd4bf" stroke-width="1"/>
-    <text x="1157" y="40" fill="#2dd4bf" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">BIGQUERY RAG</text>
+    <text x="1157" y="40" fill="#2dd4bf" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">VERTEX AI VIDEO</text>
 
     <rect x="1235" y="20" width="135" height="32" rx="6" fill="#18382d" stroke="#d5ff5f" stroke-width="1"/>
-    <text x="1302" y="40" fill="#d5ff5f" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">&lt; 50ms INGEST</text>
+    <text x="1302" y="40" fill="#d5ff5f" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">3-TIER CACHE (5s)</text>
 
     <rect x="1380" y="20" width="120" height="32" rx="6" fill="#18382d" stroke="#34d399" stroke-width="1"/>
-    <text x="1440" y="40" fill="#34d399" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">0% HALLUCINATION</text>
+    <text x="1440" y="40" fill="#34d399" font-size="11" font-weight="700" font-family="monospace" text-anchor="middle">BIGQUERY RAG</text>
   </g>
 
 
@@ -112,7 +112,7 @@
       <g transform="translate(8, 30)">
         <rect x="0" y="0" width="243" height="32" rx="4" fill="#142e25" stroke="#356352" stroke-width="1"/>
         <text x="10" y="20" fill="#f87171" font-size="11" font-weight="700">▶ Video</text>
-        <text x="70" y="20" fill="#9cb3a8" font-size="9.5" font-family="monospace">YouTube Video / Shorts URL</text>
+        <text x="65" y="20" fill="#9cb3a8" font-size="9" font-family="monospace">Vertex AI Stream (Option 4 / &lt;5s)</text>
 
         <rect x="0" y="36" width="243" height="32" rx="4" fill="#142e25" stroke="#356352" stroke-width="1"/>
         <text x="10" y="56" fill="#34d399" font-size="11" font-weight="700">🖼 Image</text>
@@ -186,13 +186,14 @@
 
     <line x1="197" y1="116" x2="197" y2="128" stroke="#d5ff5f" stroke-width="1.8" marker-end="url(#arrowLime)"/>
 
-    <!-- Gemini 2.5 Flash Multimodal Extraction -->
-    <g transform="translate(16, 130)">
-      <rect width="363" height="66" rx="8" fill="url(#cardIvory)" stroke="#bc955d" stroke-width="1.5"/>
-      <text x="12" y="18" fill="#132c24" font-size="10.5" font-family="monospace" font-weight="800">GEMINI 2.5 FLASH MULTIMODAL EXTRACTION</text>
-      <text x="12" y="34" fill="#17201b" font-size="11" font-weight="700">• YouTube oEmbed &amp; Transcript Audio Analysis</text>
-      <text x="12" y="48" fill="#17201b" font-size="11" font-weight="700">• Vision OCR on Chat Bubbles, Chart Screengrabs &amp; PDFs</text>
-      <text x="12" y="61" fill="#5c5548" font-size="9.5" font-family="monospace">• Outputs Normalized JSON Claims: {ticker, target, horizon, return}</text>
+    <!-- Vertex AI Multimodal Video Ingestion & Caching -->
+    <g transform="translate(16, 126)">
+      <rect width="363" height="74" rx="8" fill="url(#cardIvory)" stroke="#bc955d" stroke-width="1.5"/>
+      <text x="12" y="16" fill="#132c24" font-size="10" font-family="monospace" font-weight="800">VERTEX AI NATIVE VIDEO STREAM &amp; MULTI-TIER CACHE</text>
+      <text x="12" y="31" fill="#17201b" font-size="10.5" font-weight="700">• Option 4: Direct Part.from_uri YouTube stream (Gemini 3.1 Flash-Lite)</text>
+      <text x="12" y="45" fill="#17201b" font-size="10.5" font-weight="700">• Backup: Alternative 1 Managed Transcript API (SupaData / Local)</text>
+      <text x="12" y="58" fill="#5c5548" font-size="9" font-family="monospace">• 3-Tier Cache: L1 Memory → L2 Firestore → L3 Disk (5.0s UX Delay)</text>
+      <text x="12" y="70" fill="#257849" font-size="8.5" font-family="monospace" font-weight="700">✓ Ingests Full 2-4 Min Shorts/Videos in ~4.9s with 0% Scraping Blocking</text>
     </g>
 
     <line x1="197" y1="196" x2="197" y2="208" stroke="#d5ff5f" stroke-width="1.8" marker-end="url(#arrowLime)"/>
