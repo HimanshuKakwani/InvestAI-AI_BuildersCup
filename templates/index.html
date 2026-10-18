@@ -6,6 +6,9 @@
   <title>InvestPI — AI Forensic Due-Diligence & Scam Defense Shield</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" sizes="64x64" href="{{ url_for('static', filename='favicon.png') }}" />
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -37,8 +40,19 @@
     /* Top Navigation Bar */
     .topbar { height: 82px; color: #f8f4e8; position: absolute; inset: 0 0 auto; z-index: 30; }
     .nav-wrap { max-width: 1320px; height: 100%; margin: auto; padding: 0 36px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.15); }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; letter-spacing: -.7px; color: #fff; cursor: pointer; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; font-size: 22px; letter-spacing: -.7px; color: #fff; cursor: pointer; text-decoration: none; user-select: none; }
     .brand > span:last-child > span { color: var(--acid); }
+    .brand-logo-img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+    .brand:hover .brand-logo-img {
+      transform: scale(1.08) rotate(-1deg);
+    }
     .brand-mark { width: 30px; height: 30px; border: 1.5px solid currentColor; display: flex; align-items: flex-end; justify-content: center; gap: 2.5px; padding: 6px; transform: rotate(-2deg); }
     .brand-mark span { width: 3.5px; background: currentColor; }
     .brand-mark span:nth-child(1) { height: 7px; opacity: .5; }
@@ -248,9 +262,28 @@
     /* Brand in middle */
     .card-center-brand {
       text-align: center;
-      margin: 2px 0 14px;
+      margin: 0 0 14px;
       position: relative;
       z-index: 2;
+    }
+    .card-emblem-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .card-emblem-img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 18px rgba(19, 44, 36, 0.3));
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+      cursor: pointer;
+    }
+    .card-emblem-img:hover {
+      transform: translateY(-2px) scale(1.05);
+      filter: drop-shadow(0 12px 24px rgba(19, 44, 36, 0.45));
     }
     .card-logo {
       font: 500 52px/1 'Newsreader', Georgia, serif;
@@ -1235,14 +1268,14 @@
       <header class="topbar">
         <div class="nav-wrap">
           <div class="brand" onclick="switchStage('input')">
-            <span class="brand-mark"><span></span><span></span><span></span></span>
+            <img src="{{ url_for('static', filename='investpi_logo.png') }}" alt="InvestPI" class="brand-logo-img" />
             <span>Invest<span>PI</span></span>
           </div>
 
           <nav class="nav-links">
             <a class="active" href="#" onclick="switchStage('input')">New Case</a>
-            <a href="/apidocs/" target="_blank">Swagger API</a>
-            <a href="/healthz" target="_blank">System Health</a>
+            <!-- <a href="/apidocs/" target="_blank">Swagger API</a>
+            <a href="/healthz" target="_blank">System Health</a> -->
           </nav>
 
           <div class="nav-actions">
@@ -1251,7 +1284,7 @@
               <option value="SG">🇸🇬 Singapore (MAS)</option>
               <option value="AU">🇦🇺 Australia (ASIC)</option>
             </select>
-            <span class="desk-status"><i></i> DESK ONLINE</span>
+            <!-- <span class="desk-status"><i></i> DESK ONLINE</span> -->
             <a href="/apidocs/" target="_blank" class="docs-btn">API DOCS</a>
           </div>
         </div>
@@ -1283,6 +1316,9 @@
 
               <!-- Center Brand -->
               <div class="card-center-brand">
+                <div class="card-emblem-badge">
+                  <img src="{{ url_for('static', filename='investpi_logo.png') }}" alt="InvestPI Official Emblem" class="card-emblem-img" onclick="switchStage('input')" />
+                </div>
                 <h1 class="card-logo">Invest<span>PI</span></h1>
                 <div class="card-brand-tag">BFSI FRAUD &amp; COMPLIANCE DEFENSE SHIELD</div>
               </div>
@@ -1453,7 +1489,7 @@
       <main class="loading-page">
         <div class="loading-brand">
           <div class="brand">
-            <span class="brand-mark"><span></span><span></span><span></span></span>
+            <img src="{{ url_for('static', filename='investpi_logo.png') }}" alt="InvestPI" class="brand-logo-img" />
             <span>Invest<span>PI</span></span>
           </div>
           <span id="loading-case-no">CASE INITIALIZING…</span>
@@ -1495,7 +1531,7 @@
       <!-- Header -->
       <header class="report-header">
         <div class="brand" onclick="switchStage('input')">
-          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <img src="{{ url_for('static', filename='investpi_logo.png') }}" alt="InvestPI" class="brand-logo-img" />
           <span>Invest<span>PI</span></span>
         </div>
 
@@ -1735,7 +1771,7 @@
       <!-- Header -->
       <header class="report-header">
         <div class="brand" onclick="switchStage('input')">
-          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <img src="{{ url_for('static', filename='investpi_logo.png') }}" alt="InvestPI" class="brand-logo-img" />
           <span>Invest<span>PI</span></span>
         </div>
 

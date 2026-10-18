@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logos/investpi_logo.png" alt="InvestPI Official Logo" width="130" />
+</p>
+
 # InvestPI — Securities Forensic Intelligence & Due-Diligence Shield
 ### *Autonomous Multimodal AI Agent Auditing Finfluencer Fraud, Illegal Stock Tips & Corporate Filings*
 

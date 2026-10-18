@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="../logos/investpi_logo.png" alt="InvestPI Logo" width="110" />
+</p>
+
 # InvestPI Documentation Hub
 
 Welcome to the **InvestPI** technical documentation directory. This repository contains the complete architectural, algorithmic, deployment, and evaluation records for the InvestPI Securities Forensic Intelligence Platform.
